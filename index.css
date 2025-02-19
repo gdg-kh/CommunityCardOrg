@@ -1,0 +1,39 @@
+body {
+  background-color: #f6f6f6;
+}
+
+.cardWrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.title .specialColor {
+  color: var(--bs-blue);
+}
+
+.divider {
+  margin: 0 0 16px;
+  border-bottom: 1px dashed #ccc;
+}
+
+.communitiesTitle {
+  margin-bottom: 16px;
+}
+
+.minorLink {
+  color: var(--bs-yellow);
+}
