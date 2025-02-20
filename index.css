@@ -32,8 +32,54 @@ body {
 
 .communitiesTitle {
   margin-bottom: 16px;
+  text-align: center; /* 文字置中 */
+}
+
+.communityItemTitle {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  text-align: center; /* 文字置中 */
 }
 
 .minorLink {
   color: var(--bs-yellow);
+}
+
+.communityItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 水平置中 */
+  padding-bottom: 10px; /* 增加 padding，讓虛線與內容有點間隔 */
+  border-bottom: 1px dashed #ccc; /* 底部虛線邊框 */
+  font-size: 18px; /* 預設字體大小 */
+}
+
+/* 移除最後一個 community-item 的虛線 */
+.communityItem:last-child {
+  border-bottom: none;
+}
+
+.communityItem img {
+  max-width: 100%; /* 圖片最大寬度為容器的 100% */
+  height: auto; /* 高度自動調整 */
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap; /* 允許項目換行 */
+  justify-content: center; /* 水平置中 */
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageContainer img {
+  max-width: 50%; /* 圖片最大寬度為容器的一半 */
+  height: auto; /* 圖片高度自動調整 */
+  margin: 10px;
 }
