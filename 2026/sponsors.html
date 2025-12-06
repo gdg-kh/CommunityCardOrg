@@ -38,12 +38,12 @@
             background-color: #4285f4;
             color: #fff;
         }
-        /* 2. 集章獎勵社群 */
+        /* 2. 集章獎勵 */
         .nav-item:nth-child(2) .nav-link.active {
             background-color: #34a853;
             color: #fff;
         }
-        /* 3. 一般社群 */
+        /* 3. 社群介紹 */
         .nav-item:nth-child(3) .nav-link.active {
             background-color: #f9ab00;
             color: #fff;
@@ -62,10 +62,10 @@
                 <a class="nav-link" href="index.html">2026 卡片與守則</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="rewards.html">集章獎勵社群</a>
+                <a class="nav-link" href="rewards.html">集章獎勵</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="communities.html">一般社群</a>
+                <a class="nav-link" href="communities.html">社群介紹</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="sponsors.html">贊助商</a>
@@ -77,16 +77,38 @@
             <p style="text-align: center;">感謝以下夥伴對高雄技術社群的支持！</p>
             <div class="divider"></div>
 
-            <li class="communityItem">
-                <a href="https://www.i-rocks.com.tw/" target="_blank">
-                    <img src="../assets/sponsor_irocks.png" alt="艾芮克 iRocks">
-                </a>
-                <a class="communityItemTitle" href="https://www.i-rocks.com.tw/" target="_blank">艾芮克 iRocks 官網</a>
-                <div class="description">
-                    介紹：<br>
-                    是位於台灣銷售全球的電腦周邊廠商，一直為代工與零售客戶提供高品質電腦周邊。<br><br>
-                    自成立以來，iRocks即不斷投注創新精神與研發努力，來滿足當下使用者對輸入裝置與人體工學座椅的期望。</div>
-            </li>
+            <div id="sponsors-list">
+                <!-- Data will be loaded here -->
+                <p style="text-align: center;">載入中...</p>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    fetch('data.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            const list = document.getElementById('sponsors-list');
+                            list.innerHTML = ''; // Clear loading text
+
+                            data.sponsors.forEach(item => {
+                                const li = document.createElement('div');
+                                li.className = 'communityItem';
+                                li.innerHTML = `
+                                    <a href="${item.link}" target="_blank">
+                                        <img src="${item.logo}" alt="${item.name}">
+                                    </a>
+                                    <a class="communityItemTitle" href="${item.link}" target="_blank">${item.name}</a>
+                                    <div class="description">${item.description}</div>
+                                `;
+                                list.appendChild(li);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error loading data:', error);
+                            document.getElementById('sponsors-list').innerHTML = '<p style="text-align: center; color: red;">無法載入資料</p>';
+                        });
+                });
+            </script>
             
             <div class="divider"></div>
             <p>想要成為贊助商嗎？歡迎來信聯絡 <a class="minorLink" href="mailto:gdgkaohsiung@gmail.com" target="_blank">gdgkaohsiung@gmail.com</a> 吧</p>

@@ -5,7 +5,7 @@
     <link href="../bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 高雄社群名牌卡 - 集章獎勵社群</title>
+    <title>2026 高雄社群名牌卡 - 集章獎勵</title>
     <style>
         /* 導覽列樣式調整 - 使用 Grid 強制四等分 */
         .nav-pills {
@@ -38,12 +38,12 @@
             background-color: #4285f4;
             color: #fff;
         }
-        /* 2. 集章獎勵社群 */
+        /* 2. 集章獎勵 */
         .nav-item:nth-child(2) .nav-link.active {
             background-color: #34a853;
             color: #fff;
         }
-        /* 3. 一般社群 */
+        /* 3. 社群介紹 */
         .nav-item:nth-child(3) .nav-link.active {
             background-color: #f9ab00;
             color: #fff;
@@ -62,10 +62,10 @@
                 <a class="nav-link" href="index.html">2026 卡片與守則</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="rewards.html">集章獎勵社群</a>
+                <a class="nav-link active" href="rewards.html">集章獎勵</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="communities.html">一般社群</a>
+                <a class="nav-link" href="communities.html">社群介紹</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="sponsors.html">贊助商</a>
@@ -73,12 +73,52 @@
         </ul>
 
         <div class="card">
-            <h1 class="title">集章獎勵社群</h1>
+            <h1 class="title">集章獎勵</h1>
+            <p style="text-align: center;">這裡匯集了高雄社群名牌卡有集章獎勵的社群</p>
             <div class="divider"></div>
-            <p style="text-align: center; padding: 40px 0; font-size: 1.2em; color: #666;">
-                🎁 2026 年集章獎勵活動規劃中...<br><br>
-                敬請期待！
-            </p>
+            
+            <div id="rewards-list">
+                 <!-- Data will be loaded here -->
+                 <p style="text-align: center;">載入中...</p>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    fetch('data.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            const list = document.getElementById('rewards-list');
+                            list.innerHTML = ''; // Clear loading text
+
+                            if (!data.rewards || data.rewards.length === 0) {
+                                list.innerHTML = `
+                                    <p style="text-align: center; padding: 40px 0; font-size: 1.2em; color: #666;">
+                                        🎁 2026 年集章獎勵活動規劃中...<br><br>
+                                        敬請期待！
+                                    </p>
+                                `;
+                                return;
+                            }
+
+                            data.rewards.forEach(item => {
+                                const li = document.createElement('div');
+                                li.className = 'communityItem';
+                                li.innerHTML = `
+                                    <a href="${item.link}" target="_blank">
+                                        <img src="${item.logo}" alt="${item.name}">
+                                    </a>
+                                    <a class="communityItemTitle" href="${item.link}" target="_blank">${item.name}</a>
+                                    <div class="description">${item.description}</div>
+                                `;
+                                list.appendChild(li);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error loading data:', error);
+                            document.getElementById('rewards-list').innerHTML = '<p style="text-align: center; color: red;">無法載入資料</p>';
+                        });
+                });
+            </script>
         </div>
     </div>
 </body>
