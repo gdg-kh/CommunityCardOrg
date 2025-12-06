@@ -156,8 +156,21 @@
         </ul>
 
         <div class="card">
-            <h1 class="title"><span class="specialColor">2026 高雄社群</span>名牌卡守則</h1>
-            
+            <h1 class="title"><span class="specialColor">高雄社群</span>名牌卡守則</h1>
+
+            <div class="divider"></div>
+
+            <p>這是一個基於有趣而誕生的活動，每一位參加社群活動的成員都可以依照自己的自由意志紀錄並收集今年的歷程。請應遵守以下守則：</p>
+            <ol>
+                <li>請保持愉悅的心情，使用本卡記錄 2026 年社群活動之歷程。</li>
+                <li>參加活動旨在有趣，記錄仍應遵守以下方法：活動名稱書寫在左側虛線欄位，活動日期紀錄於右側實線欄位。</li>
+                <li>加入任何社群請參考上方「社群」選單。</li>
+                <li>社群是一個互助合作的平台，凡曾參與之高雄社群活動，皆可登錄本卡，不需過問任何人意見。</li>
+                <li>群聚彼此的智慧與熱情，本卡持有人擁有隨時修訂本守則之能力。</li>
+            </ol>
+
+            <div class="divider"></div>
+
             <div class="imageContainer">
                 <!-- Stamp Toolbar -->
                 <div id="stamp-toolbar">
@@ -197,13 +210,13 @@
                         img.className = 'stamp-option';
                         img.title = src.split('/').pop().replace('logo_', '').replace(/_/g, ' ').replace('.png', '').replace('.jpg', '');
                         if (index === 0) img.classList.add('selected');
-                        
+
                         img.addEventListener('click', function() {
                             document.querySelectorAll('.stamp-option').forEach(el => el.classList.remove('selected'));
                             this.classList.add('selected');
                             currentStampSrc = src;
                         });
-                        
+
                         toolbar.appendChild(img);
                     });
 
@@ -221,16 +234,16 @@
                         const stamp = document.createElement('img');
                         stamp.src = currentStampSrc;
                         stamp.className = 'stamp-mark';
-                        
+
                         // Disable CSS animation to avoid conflict with Web Animations API
                         stamp.style.animation = 'none';
 
                         // Random rotation
                         const rotation = Math.floor(Math.random() * 41) - 20; // -20 to 20 deg
-                        
+
                         stamp.style.left = xPercent + '%';
                         stamp.style.top = yPercent + '%';
-                        
+
                         // Use Web Animations API for entrance with dynamic rotation
                         stamp.animate([
                             { transform: `translate(-50%, -50%) rotate(${rotation}deg) scale(2)`, opacity: 0 },
@@ -249,28 +262,67 @@
                         const marks = document.querySelectorAll('.stamp-mark');
                         marks.forEach(mark => mark.remove());
                     });
+
+                    // Easter Egg: Reveal Download Section
+                    const trigger = document.querySelector('.specialColor');
+                    const hiddenSection = document.getElementById('download-section');
+                    let clickCount = 0;
+                    let clickTimer;
+
+                    if (trigger && hiddenSection) {
+                        trigger.style.cursor = 'pointer';
+                        trigger.style.userSelect = 'none'; // Prevent text selection
+                        
+                        trigger.addEventListener('click', function() {
+                            clickCount++;
+                            
+                            clearTimeout(clickTimer);
+                            clickTimer = setTimeout(() => {
+                                clickCount = 0;
+                            }, 500); // Reset count if no click within 500ms
+
+                            if (clickCount === 5) {
+                                hiddenSection.style.display = 'block';
+                                alert('🎉 已開啟隱藏下載區！');
+                                clickCount = 0;
+                                // Smooth scroll to the section
+                                hiddenSection.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        });
+                    }
                 });
             </script>
 
             <div class="divider"></div>
 
-            <p>這是一個基於有趣而誕生的活動，每一位參加社群活動的成員都可以依照自己的自由意志紀錄並收集今年的歷程。請應遵守以下守則：</p>
-            <ol>
-                <li>請保持愉悅的心情，使用本卡記錄 2026 年社群活動之歷程。</li>
-                <li>參加活動旨在有趣，記錄仍應遵守以下方法：活動名稱書寫在左側虛線欄位，活動日期紀錄於右側實線欄位。</li>
-                <li>加入任何社群請參考上方「社群」選單。</li>
-                <li>社群是一個互助合作的平台，凡曾參與之高雄社群活動，皆可登錄本卡，不需過問任何人意見。</li>
-                <li>群聚彼此的智慧與熱情，本卡持有人擁有隨時修訂本守則之能力。</li>
-            </ol>
+            <div id="download-section" style="display: none;">
+                <div class="card">
+                    <h1 class="title">如何製作<span class="specialColor">高雄社群</span>名牌卡</h1>
+                    <p>建議列印規格，跟印刷店這樣說：</p>
+                    <ol>
+                        <li>紙張大小：A4</li>
+                        <li>紙張種類：象牙 230P</li>
+                        <li>列印方式：單面彩色</li>
+                        <li>裁切方式：十字裁切</li>
+                    </ol>
+                    <p>檔案下載：</p>
+                    <ol>
+                        <li>正面：<a href="../assets/print_community_card_forward_2026.pdf" target="_blank">點我下載</a></li>
+                    </ol>
+                    <p>印刷店：找自己常去的就好，我習慣去經典數位印刷，加 Line 後傳檔案給他，等印好再去拿，很方便。</p>
+                    <p>其他：</p>
+                    <ol>
+                        <li>可以自行購買「KW-triO 09772 證件打孔機」，把卡片打洞，方便夾吊牌。</li>
+                        <li>可以自行購買「Tomato RZ-3 三合一圓角器」把卡片的直角裁成圓角</li>
+                    </ol>
+                </div>
 
-            <div class="divider"></div>
+            </div>
 
-            <h2 class="communitiesTitle">檔案下載</h2>
-            <p>想要自己印嗎？以下是印刷規格與檔案：</p>
-            <ul style="display: block; padding-left: 40px;">
-                <li><strong>規格：</strong>A4 象牙卡 230P / 單面彩色列印 / 十字裁切</li>
-                <li><strong>正面檔案：</strong><a href="../assets/print_community_card_forward_2026.pdf" target="_blank">下載 2026 PDF</a></li>
-            </ul>
+            <p>想要在這裡顯示你的社群嗎？歡迎 <a class="minorLink" href="https://github.com/AndyAWD/CommunityCardOrg"
+                                               target="_blank">參與協作</a> 或 <a class="minorLink"
+                                                                                href="https://forms.gle/38EgveLNs8WdKT5v7"
+                                                                                target="_blank">填寫表單</a> 吧</p>
         </div>
     </div>
 </body>
