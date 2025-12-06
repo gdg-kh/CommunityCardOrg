@@ -30,9 +30,29 @@
             justify-content: center;
             padding: 10px 2px;
         }
-        .nav-pills .nav-link.active {
+        
+        /* 移除通用的 active 顏色，改用個別設定 */
+        /* .nav-pills .nav-link.active { ... } */
+
+        /* 1. 2026 卡片與守則 */
+        .nav-item:nth-child(1) .nav-link.active {
+            background-color: #4285f4;
             color: #fff;
-            background-color: var(--bs-blue);
+        }
+        /* 2. 集章獎勵社群 */
+        .nav-item:nth-child(2) .nav-link.active {
+            background-color: #34a853;
+            color: #fff;
+        }
+        /* 3. 一般社群 */
+        .nav-item:nth-child(3) .nav-link.active {
+            background-color: #f9ab00;
+            color: #fff;
+        }
+        /* 4. 贊助商 */
+        .nav-item:nth-child(4) .nav-link.active {
+            background-color: #ea4335;
+            color: #fff;
         }
     </style>
 </head>
@@ -58,7 +78,7 @@
             <h1 class="title"><span class="specialColor">2026 高雄社群</span>名牌卡守則</h1>
             
             <div class="imageContainer">
-                <img src="../assets/print_community_card_forward_2026.png" alt="2026 正面">
+                <img style="width: 75%;" src="../assets/print_community_card_forward_2026.png" alt="2026 正面">
             </div>
 
             <div class="divider"></div>
