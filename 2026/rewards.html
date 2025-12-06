@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 高雄社群名牌卡 - 集章獎勵社群</title>
+    <style>
+        /* 導覽列樣式調整 - 使用 Grid 強制四等分 */
+        .nav-pills {
+            margin-bottom: 20px;
+            display: grid !important; /* 強制使用 Grid */
+            grid-template-columns: repeat(4, 1fr); /* 嚴格四等分 */
+            gap: 10px; /* 按鈕間距 */
+            width: 100%;
+        }
+        .nav-item {
+            width: auto; /* 讓 Grid 控制寬度 */
+            text-align: center;
+        }
+        .nav-pills .nav-link {
+            color: #555;
+            background-color: #eee;
+            border-radius: 8px;
+            width: 100%;
+            height: 100%; /* 確保按鈕高度一致 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 2px;
+        }
+        .nav-pills .nav-link.active {
+            color: #fff;
+            background-color: var(--bs-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="cardWrapper">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">2026 卡片與守則</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="rewards.html">集章獎勵社群</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="communities.html">一般社群</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="sponsors.html">贊助商</a>
+            </li>
+        </ul>
+
+        <div class="card">
+            <h1 class="title">集章獎勵社群</h1>
+            <div class="divider"></div>
+            <p style="text-align: center; padding: 40px 0; font-size: 1.2em; color: #666;">
+                🎁 2026 年集章獎勵活動規劃中...<br><br>
+                敬請期待！
+            </p>
+        </div>
+    </div>
+</body>
+</html>

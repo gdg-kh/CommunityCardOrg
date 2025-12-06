@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 高雄社群名牌卡 - 卡片與守則</title>
+    <style>
+        /* 導覽列樣式調整 - 使用 Grid 強制四等分 */
+        .nav-pills {
+            margin-bottom: 20px;
+            display: grid !important; /* 強制使用 Grid */
+            grid-template-columns: repeat(4, 1fr); /* 嚴格四等分 */
+            gap: 10px; /* 按鈕間距 */
+            width: 100%;
+        }
+        .nav-item {
+            width: auto; /* 讓 Grid 控制寬度 */
+            text-align: center;
+        }
+        .nav-pills .nav-link {
+            color: #555;
+            background-color: #eee;
+            border-radius: 8px;
+            width: 100%;
+            height: 100%; /* 確保按鈕高度一致 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 2px;
+        }
+        .nav-pills .nav-link.active {
+            color: #fff;
+            background-color: var(--bs-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="cardWrapper">
+        <!-- 導覽列 -->
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link active" href="index.html">2026 卡片與守則</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="rewards.html">集章獎勵社群</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="communities.html">一般社群</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="sponsors.html">贊助商</a>
+            </li>
+        </ul>
+
+        <div class="card">
+            <h1 class="title"><span class="specialColor">2026 高雄社群</span>名牌卡守則</h1>
+            
+            <div class="imageContainer">
+                <img src="../assets/print_community_card_forward_2026.png" alt="2026 正面">
+                <img src="../assets/community_card_back.png" alt="背面">
+            </div>
+
+            <div class="divider"></div>
+
+            <p>這是一個基於有趣而誕生的活動，每一位參加社群活動的成員都可以依照自己的自由意志紀錄並收集今年的歷程。請應遵守以下守則：</p>
+            <ol>
+                <li>請保持愉悅的心情，使用本卡記錄 2026 年社群活動之歷程。</li>
+                <li>參加活動旨在有趣，記錄仍應遵守以下方法：活動名稱書寫在左側虛線欄位，活動日期紀錄於右側實線欄位。</li>
+                <li>加入任何社群請參考上方「社群」選單。</li>
+                <li>社群是一個互助合作的平台，凡曾參與之高雄社群活動，皆可登錄本卡，不需過問任何人意見。</li>
+                <li>群聚彼此的智慧與熱情，本卡持有人擁有隨時修訂本守則之能力。</li>
+            </ol>
+
+            <div class="divider"></div>
+
+            <h2 class="communitiesTitle">檔案下載</h2>
+            <p>想要自己印嗎？以下是印刷規格與檔案：</p>
+            <ul>
+                <li><strong>規格：</strong>A4 象牙卡 230P / 雙面列印 (正面彩色、背面黑白) / 十字裁切</li>
+                <li><strong>正面檔案：</strong><a href="../assets/print_community_card_forward_2026.pdf" target="_blank">下載 2026 正面 PDF</a></li>
+                <li><strong>背面檔案：</strong><a href="../assets/print_community_card_back.pdf" target="_blank">下載背面 PDF</a></li>
+            </ul>
+
+        </div>
+    </div>
+</body>
+</html>

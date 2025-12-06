@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 高雄社群名牌卡 - 贊助商</title>
+    <style>
+        /* 導覽列樣式調整 - 使用 Grid 強制四等分 */
+        .nav-pills {
+            margin-bottom: 20px;
+            display: grid !important; /* 強制使用 Grid */
+            grid-template-columns: repeat(4, 1fr); /* 嚴格四等分 */
+            gap: 10px; /* 按鈕間距 */
+            width: 100%;
+        }
+        .nav-item {
+            width: auto; /* 讓 Grid 控制寬度 */
+            text-align: center;
+        }
+        .nav-pills .nav-link {
+            color: #555;
+            background-color: #eee;
+            border-radius: 8px;
+            width: 100%;
+            height: 100%; /* 確保按鈕高度一致 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 2px;
+        }
+        .nav-pills .nav-link.active {
+            color: #fff;
+            background-color: var(--bs-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="cardWrapper">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">2026 卡片與守則</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="rewards.html">集章獎勵社群</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="communities.html">一般社群</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="sponsors.html">贊助商</a>
+            </li>
+        </ul>
+
+        <div class="card">
+            <h1 class="title">贊助夥伴</h1>
+            <p style="text-align: center;">感謝以下夥伴對高雄技術社群的支持！</p>
+            <div class="divider"></div>
+
+            <li class="communityItem">
+                <a href="https://www.i-rocks.com.tw/" target="_blank">
+                    <img src="../assets/sponsor_irocks.png" alt="艾芮克 iRocks">
+                </a>
+                <a class="communityItemTitle" href="https://www.i-rocks.com.tw/" target="_blank">艾芮克 iRocks 官網</a>
+                <div class="description">
+                    介紹：<br>
+                    是位於台灣銷售全球的電腦周邊廠商，一直為代工與零售客戶提供高品質電腦周邊。<br><br>
+                    自成立以來，iRocks即不斷投注創新精神與研發努力，來滿足當下使用者對輸入裝置與人體工學座椅的期望。</div>
+            </li>
+            
+            <div class="divider"></div>
+            <p>想要成為贊助商嗎？歡迎來信聯絡 <a class="minorLink" href="mailto:gdgkaohsiung@gmail.com" target="_blank">gdgkaohsiung@gmail.com</a> 吧</p>
+        </div>
+    </div>
+</body>
+</html>
