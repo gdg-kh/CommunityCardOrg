@@ -54,6 +54,87 @@
             background-color: #ea4335;
             color: #fff;
         }
+
+        /* Stamp Feature Styles */
+        #stamp-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px dashed #ccc;
+            width: 100%;
+        }
+        .stamp-option {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 4px;
+            background: white;
+            transition: all 0.2s;
+        }
+        .stamp-option:hover {
+            transform: scale(1.1);
+        }
+        .stamp-option.selected {
+            border-color: #4285f4;
+            box-shadow: 0 0 5px rgba(66, 133, 244, 0.5);
+            background-color: #e8f0fe;
+        }
+        #card-area {
+            position: relative;
+            display: block; 
+            cursor: crosshair; /* Indicate clickable */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden; /* Contains stamps */
+        }
+        #card-area img.base-card {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        /* Override inline style for wrapper */
+        .imageContainer {
+            flex-direction: column; /* Stack toolbar and card */
+            gap: 15px;
+        }
+        .stamp-mark {
+            position: absolute;
+            width: 60px; /* Adjust stamp size */
+            height: 60px;
+            object-fit: contain;
+            transform-origin: center center;
+            pointer-events: none; 
+            opacity: 0.9;
+            mix-blend-mode: multiply; /* Make it look like ink */
+            animation: stamp-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: contrast(1.2) brightness(0.9); /* Slight ink effect */
+        }
+        @keyframes stamp-pop {
+            0% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+        }
+        #clear-stamps {
+            padding: 8px 20px;
+            background-color: #ea4335;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            margin-bottom: 20px;
+        }
+        #clear-stamps:hover {
+            background-color: #c5221f;
+        }
     </style>
 </head>
 <body>
@@ -78,8 +159,98 @@
             <h1 class="title"><span class="specialColor">2026 高雄社群</span>名牌卡守則</h1>
             
             <div class="imageContainer">
-                <img style="width: 60%; max-width: 75%;" src="../assets/print_community_card_forward_300dpi_2026.png" alt="2026 正面">
+                <!-- Stamp Toolbar -->
+                <div id="stamp-toolbar">
+                    <!-- Stamps will be injected here via JS -->
+                </div>
+
+                <!-- Interactive Card Area -->
+                <div id="card-area" style="width: 100%;">
+                    <img class="base-card" src="../assets/print_community_card_forward_300dpi_2026.png" alt="2026 正面">
+                </div>
+
+                <button id="clear-stamps">清除印章</button>
             </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const stamps = [
+                        '../assets/logo_agile_south_taiwan.png',
+                        '../assets/logo_cdc_v2.png',
+                        '../assets/logo_developer_buffet.png',
+                        '../assets/logo_gdg_kaohsiung.png',
+                        '../assets/logo_kalug.jpg',
+                        '../assets/logo_kaohsiung_word_press.png',
+                        '../assets/logo_kimu.png',
+                        '../assets/logo_pyladies_kh.png',
+                        '../assets/logo_second_space.png'
+                    ];
+
+                    let currentStampSrc = stamps[0];
+                    const toolbar = document.getElementById('stamp-toolbar');
+                    const cardArea = document.getElementById('card-area');
+
+                    // Initialize Toolbar
+                    stamps.forEach((src, index) => {
+                        const img = document.createElement('img');
+                        img.src = src;
+                        img.className = 'stamp-option';
+                        img.title = src.split('/').pop().replace('logo_', '').replace(/_/g, ' ').replace('.png', '').replace('.jpg', '');
+                        if (index === 0) img.classList.add('selected');
+                        
+                        img.addEventListener('click', function() {
+                            document.querySelectorAll('.stamp-option').forEach(el => el.classList.remove('selected'));
+                            this.classList.add('selected');
+                            currentStampSrc = src;
+                        });
+                        
+                        toolbar.appendChild(img);
+                    });
+
+                    // Handle Stamping
+                    cardArea.addEventListener('click', function(e) {
+                        if (!currentStampSrc) return;
+
+                        const rect = cardArea.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        const xPercent = (x / rect.width) * 100;
+                        const yPercent = (y / rect.height) * 100;
+
+                        const stamp = document.createElement('img');
+                        stamp.src = currentStampSrc;
+                        stamp.className = 'stamp-mark';
+                        
+                        // Disable CSS animation to avoid conflict with Web Animations API
+                        stamp.style.animation = 'none';
+
+                        // Random rotation
+                        const rotation = Math.floor(Math.random() * 41) - 20; // -20 to 20 deg
+                        
+                        stamp.style.left = xPercent + '%';
+                        stamp.style.top = yPercent + '%';
+                        
+                        // Use Web Animations API for entrance with dynamic rotation
+                        stamp.animate([
+                            { transform: `translate(-50%, -50%) rotate(${rotation}deg) scale(2)`, opacity: 0 },
+                            { transform: `translate(-50%, -50%) rotate(${rotation}deg) scale(1)`, opacity: 0.9 }
+                        ], {
+                            duration: 300,
+                            easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                            fill: 'forwards'
+                        });
+
+                        cardArea.appendChild(stamp);
+                    });
+
+                    // Clear Stamps
+                    document.getElementById('clear-stamps').addEventListener('click', function() {
+                        const marks = document.querySelectorAll('.stamp-mark');
+                        marks.forEach(mark => mark.remove());
+                    });
+                });
+            </script>
 
             <div class="divider"></div>
 
