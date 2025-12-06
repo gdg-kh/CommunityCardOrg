@@ -1,0 +1,67 @@
+{
+    "communities": [
+        {
+            "name": "國泰 CDC 社群小聚",
+            "link": "https://cdckh.kktix.cc/",
+            "logo": "../assets/logo_cdc_v2.png",
+            "description": "介紹：<br>高雄國泰資訊開發中心 Cathay Development Center （CDC），位於亞灣區，面向無敵海景🌊，藏身著一座雲端開發基地☁️。<br><br>我們致力於推動在地金融科技與雲端技術的交流，邀請熱愛技術的你，加入南台灣金融科技新據點！"
+        },
+        {
+            "name": "Google Developer Groups Kaohsiung 臉書社團",
+            "link": "https://www.facebook.com/groups/GDGKaohsiung",
+            "logo": "../assets/logo_gdg_kaohsiung.png",
+            "description": "介紹：<br>Google Developer Groups Kaohsiung 前身是 Android 高雄開發者社群，誕生於 2014 年 3 月。<br><br>我們每年定期舉辦 Build with AI、 Google I/O Extended、DevFest 和 TOOCON 天黑黑月會，希望讓高雄對軟體開發有興趣的朋友能夠有實體交流的機會。<br><br>歡迎加入 Google Developer Groups Kaohsiung 粉絲專業頁和 GDG Kaohsiung 臉書社團，掌握最新活動資訊。"
+        },
+        {
+            "name": "開發者 Buffet 臉書社團",
+            "link": "https://www.facebook.com/groups/buffet.dev/",
+            "logo": "../assets/logo_developer_buffet.png",
+            "description": "介紹：<br>我們是一群在台灣科技研討會結識的夥伴，自疫情期間，我們所在的城市技術社群與聚會逐漸減少。希望能保持討論和交流的熱度，因此我們決定發起聚會。<br><br>在這裏會舉辦各種形式的活動，議題大致上包括但不限於前、後端、UI/UX、ML、軟體開發等，希望大家能在這裡找到並盡情享受自己感興趣的事物，因此取名為【開發者 Buffet】。"
+        },
+        {
+            "name": "KaLUG 官方網站",
+            "link": "https://kalug.tw/",
+            "logo": "../assets/logo_kalug.jpg",
+            "description": "介紹：<br>KaLUG - Kaohsiung Linux User Group: 由一群熱愛 Linux / open source 的高雄人所組成的社群"
+        },
+        {
+            "name": "高雄 WordPress 小聚 Kaohsiung WordPress Meetup",
+            "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/",
+            "logo": "../assets/logo_kaohsiung_word_press.png",
+            "description": "介紹：<br>我們是一群位於高雄的 WordPress 愛好者，我們之中包含了開發者、設計師、內容產製者以及各式各樣與 WordPress 相關的人。<br><br>藉由這個社群，我們希望能夠與同樣對 WordPress 有興趣的你，分享我們的想法與經驗。<br><br>這個 WordPress Meetup Group 竭誠歡迎所有喜愛 WordPress 的人們加入。"
+        },
+        {
+            "name": "南台灣敏捷社群 臉書社團",
+            "link": "https://www.facebook.com/groups/agile.south.taiwan/",
+            "logo": "../assets/logo_agile_south_taiwan.png",
+            "description": "介紹：<br>南台灣最大敏捷社群 (Agile South Taiwan) 是一個以敏捷的熱愛者所組成，期待藉由經驗分享和技術交流，希望促進高雄與台灣的產業改變。<br><br>1. 透過敏捷改變台南、高雄在地產業文化<br>2. 平衡南北知識的貧富不均"
+        },
+        {
+            "name": "Second Space by Cubeworks 臉書社團",
+            "link": "https://www.facebook.com/cubeworksx",
+            "logo": "../assets/logo_second_space.png",
+            "description": "介紹：<br>Second Space —  24/7 members club designed for active creators in tech and design industry.  It’s a workspace during the day and a social venue at night with events ranging from technical workshops, courses, hackathons and design meetups to leadership and personal development sessions. Second Space is a bilingual club with focus international tech talents, digital nomads and with local professional communities."
+        },
+        {
+            "name": "Pyladies Kaohsiung 官網",
+            "link": "https://kaohsiung.pyladies.com/",
+            "logo": "../assets/logo_pyladies_kh.png",
+            "description": "介紹：<br>PyLadies Kaohsiung 是 PyLadies 國際組織的一員，以高雄為基地推動女性技術社群的發展，致力於打造讓女性能安心、自信地學習、交流與成長的環境。舉辦各種工作坊、經驗分享等交流活動，讓女性能透過 Python 提升技術、拓展人脈與視野，進而在科技領域中成為主動的參與者與領導者。同時也積極與在地及全台社群建立連結、相互支持，讓整體技術社群更加茁壯。"
+        },
+        {
+            "name": "KIMU 高雄獨立遊戲開發者聚會 臉書社團",
+            "link": "https://www.facebook.com/groups/kimugroup/",
+            "logo": "../assets/logo_kimu.png",
+            "description": "介紹：<br>KIMU 高雄獨立遊戲開發者聚會為 IGDA Taiwan 所屬 SIG（Special Interesting Group)，以高雄為據點在南台灣推動獨立遊戲開發交流活動的非營利組織，我們長期舉辦工作坊、Game Jam 以及分享會，不管您是業界、教育界、學生或遊戲愛好者，只要您對獨立遊戲開發感興趣，都歡迎您來參加。"
+        }
+    ],
+    "sponsors": [
+        {
+            "name": "艾芮克 iRocks 官網",
+            "link": "https://www.i-rocks.com.tw/",
+            "logo": "../assets/sponsor_irocks.png",
+            "description": "介紹：<br>是位於台灣銷售全球的電腦周邊廠商，一直為代工與零售客戶提供高品質電腦周邊。<br><br>自成立以來，iRocks即不斷投注創新精神與研發努力，來滿足當下使用者對輸入裝置與人體工學座椅的期望。"
+        }
+    ],
+    "rewards": []
+}

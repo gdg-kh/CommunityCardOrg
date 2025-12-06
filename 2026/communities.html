@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 高雄社群名牌卡 - 社群介紹</title>
+    <style>
+        /* 導覽列樣式調整 - 使用 Grid 強制四等分 */
+        .nav-pills {
+            margin-bottom: 20px;
+            display: grid !important; /* 強制使用 Grid */
+            grid-template-columns: repeat(4, 1fr); /* 嚴格四等分 */
+            gap: 10px; /* 按鈕間距 */
+            width: 100%;
+        }
+        .nav-item {
+            width: auto; /* 讓 Grid 控制寬度 */
+            text-align: center;
+        }
+        .nav-pills .nav-link {
+            color: #555;
+            background-color: #eee;
+            border-radius: 8px;
+            width: 100%;
+            height: 100%; /* 確保按鈕高度一致 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 2px;
+        }
+        
+        /* 移除通用的 active 顏色，改用個別設定 */
+        
+        /* 1. 2026 卡片與守則 */
+        .nav-item:nth-child(1) .nav-link.active {
+            background-color: #4285f4;
+            color: #fff;
+        }
+        /* 2. 集章獎勵 */
+        .nav-item:nth-child(2) .nav-link.active {
+            background-color: #34a853;
+            color: #fff;
+        }
+        /* 3. 社群介紹 */
+        .nav-item:nth-child(3) .nav-link.active {
+            background-color: #f9ab00;
+            color: #fff;
+        }
+        /* 4. 贊助商 */
+        .nav-item:nth-child(4) .nav-link.active {
+            background-color: #ea4335;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="cardWrapper">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">2026 卡片與守則</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="rewards.html">集章獎勵</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="communities.html">社群介紹</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="sponsors.html">贊助商</a>
+            </li>
+        </ul>
+
+        <div class="card">
+            <h1 class="title">高雄在地社群</h1>
+            <p style="text-align: center;">這裡匯集了高雄活躍的技術與交流社群，歡迎參加！</p>
+            <div class="divider"></div>
+
+            <div id="communities-list">
+                <!-- Data will be loaded here -->
+                <p style="text-align: center;">載入中...</p>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    fetch('data.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            const list = document.getElementById('communities-list');
+                            list.innerHTML = ''; // Clear loading text
+
+                            data.communities.forEach(item => {
+                                const li = document.createElement('div'); // Using div instead of li to avoid validation errors if ul is missing, but kept class
+                                li.className = 'communityItem';
+                                li.innerHTML = `
+                                    <a href="${item.link}" target="_blank">
+                                        <img src="${item.logo}" alt="${item.name}">
+                                    </a>
+                                    <a class="communityItemTitle" href="${item.link}" target="_blank">${item.name}</a>
+                                    <div class="description">${item.description}</div>
+                                `;
+                                list.appendChild(li);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error loading data:', error);
+                            document.getElementById('communities-list').innerHTML = '<p style="text-align: center; color: red;">無法載入資料</p>';
+                        });
+                });
+            </script>
+            
+            <div class="divider"></div>
+        </div>
+    </div>
+</body>
+</html>
