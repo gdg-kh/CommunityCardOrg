@@ -135,6 +135,20 @@
         #clear-stamps:hover {
             background-color: #c5221f;
         }
+
+        /* Mobile scroll optimization */
+        .mobile-scroll-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            #card-area {
+                min-width: 800px; /* Force larger size on mobile for easier stamping */
+            }
+        }
     </style>
 </head>
 <body>
@@ -178,8 +192,10 @@
                 </div>
 
                 <!-- Interactive Card Area -->
-                <div id="card-area" style="width: 100%;">
-                    <img class="base-card" src="../assets/print_community_card_forward_300dpi_2026.png" alt="2026 正面">
+                <div class="mobile-scroll-wrapper">
+                    <div id="card-area" style="width: 100%;">
+                        <img class="base-card" src="../assets/print_community_card_forward_300dpi_2026.png" alt="2026 正面">
+                    </div>
                 </div>
 
                 <button id="clear-stamps">清除印章</button>
