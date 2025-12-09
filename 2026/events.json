@@ -1,0 +1,170 @@
+[
+  {
+    "date": "2025-12-02",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #36",
+    "description": "1. Codex 入門教學<br>2. 饅頭與他的快樂夥伴的腦洞巡禮",
+    "link": "https://www.facebook.com/share/p/1Ab34kEKmA/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2025-12-03",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2025-12-06",
+    "community": "UIUX Kaohsiung",
+    "title": "當設計師遇上國家級系統",
+    "description": "解析”勞保局 e 化服務系統”UIUX細節",
+    "link": "#",
+    "color": "#34A853"
+  },
+  {
+    "date": "2025-12-10",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2025-12-11",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "",
+    "link": "https://www.facebook.com/groups/kimugroup/",
+    "color": "#673AB7"
+  },
+  {
+    "date": "2025-12-13",
+    "community": "KaLUG",
+    "title": "2512 meetup",
+    "description": "第一次雄校聯聚會",
+    "link": "https://kalug.tw/",
+    "color": "#FF6D00"
+  },
+  {
+    "date": "2025-12-15",
+    "community": "GDG Kaohsiung",
+    "title": "拆解高薪賽道的原理",
+    "description": "科技工作講主持人、美商工程師主管抹布 Moboo 夜間開講",
+    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-chai-jie-gao-xin-sai-dao-de-yuan-li",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2025-12-16",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2025/12",
+    "description": "wordpress 的生成式 AI 應用 - 客服 QA - 葉期財",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/",
+    "color": "#0073AA"
+  },
+  {
+    "date": "2025-12-17",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2025-12-18",
+    "community": "Second Space",
+    "title": "測試試飛場：為你的專案收集回饋",
+    "description": "",
+    "link": "https://www.secondspace.dev/zh/",
+    "color": "#FBBC04"
+  },
+  {
+    "date": "2025-12-18",
+    "community": "PyLadies Kaohsiung",
+    "title": "PyLadies Kaohsiung 網站與社群媒體的零成本 AI 工具實務分享",
+    "description": "",
+    "link": "https://pyladies-kaohsiung.kktix.cc/events/pyladies-chat-202512",
+    "color": "#E91E63"
+  },
+  {
+    "date": "2025-12-19",
+    "community": "Second Space",
+    "title": "Digital Nomad Night",
+    "description": "",
+    "link": "https://www.secondspace.dev/zh/",
+    "color": "#FBBC04"
+  },
+  {
+    "date": "2025-12-24",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2025-12-27",
+    "community": "Second Space",
+    "title": "Cursor AI",
+    "description": "打造順暢的開發流程與舒服的 Issues 修正體驗",
+    "link": "https://www.secondspace.dev/zh/",
+    "color": "#FBBC04"
+  },
+  {
+    "date": "2025-12-30",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "12 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev/",
+    "color": "#795548"
+  },
+  {
+    "date": "2025-12-31",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2025-12-01",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2025-12-08",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2025-12-15",
+    "community": "K.NET",
+    "title": "企業自動化拆解",
+    "description": "從 LINE 到 n8n的逐步指南",
+    "link": "https://knet.kktix.cc/events/70260567",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2025-12-22",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2025-12-29",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#EA4335"
+  }
+]

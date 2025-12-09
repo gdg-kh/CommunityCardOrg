@@ -11,7 +11,7 @@
         .nav-pills {
             margin-bottom: 20px;
             display: grid !important; /* 強制使用 Grid */
-            grid-template-columns: repeat(4, 1fr); /* 嚴格四等分 */
+            grid-template-columns: repeat(5, 1fr); /* 嚴格五等分 */
             gap: 10px; /* 按鈕間距 */
             width: 100%;
         }
@@ -38,18 +38,23 @@
             background-color: #4285f4;
             color: #fff;
         }
-        /* 2. 集章獎勵 */
+        /* 2. 社群月曆 */
         .nav-item:nth-child(2) .nav-link.active {
+            background-color: #a142f4; /* Purple for calendar */
+            color: #fff;
+        }
+        /* 3. 集章獎勵 */
+        .nav-item:nth-child(3) .nav-link.active {
             background-color: #34a853;
             color: #fff;
         }
-        /* 3. 社群介紹 */
-        .nav-item:nth-child(3) .nav-link.active {
+        /* 4. 社群介紹 */
+        .nav-item:nth-child(4) .nav-link.active {
             background-color: #f9ab00;
             color: #fff;
         }
-        /* 4. 贊助商 */
-        .nav-item:nth-child(4) .nav-link.active {
+        /* 5. 贊助商 */
+        .nav-item:nth-child(5) .nav-link.active {
             background-color: #ea4335;
             color: #fff;
         }
@@ -60,6 +65,9 @@
         <ul class="nav nav-pills nav-fill">
             <li class="nav-item">
                 <a class="nav-link" href="index.html">2026 卡片與守則</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="calendar.html">社群月曆</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="rewards.html">集章獎勵</a>
