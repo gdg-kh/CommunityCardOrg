@@ -166,5 +166,29 @@
     "description": "星巴克常態聚會交流",
     "link": "https://www.facebook.com/k.net.io/",
     "color": "#EA4335"
+  },
+  {
+    "date": "2026-01-06",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #37",
+    "description": "1. 多 AI 協作的實踐方式<br>2. 還在找",
+    "link": "https://gdg.community.dev/e/mvr6kt/",
+    "color": "#4285f4"
+  },
+  {
+    "date": "2026-01-27",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "抽屜裡的舊硬碟復活了！用 Unraid 零門檻輕鬆駕馭 NAS",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#ea4335"
+  },
+  {
+    "date": "2026-01-25",
+    "community": "g0v 台灣零時政府",
+    "title": "台灣零時政府第柒拾壹次高雄黑客松（g0v KHH _ Kaohsiung Hackath71n）",
+    "description": "g0v 是一個草根式的公民社群，致力於加深公民對社會的貢獻以及彼此間的連結",
+    "link": "https://g0v-jothon.kktix.cc/events/g0v-hackath71n",
+    "color": "#9e9e9f"
   }
 ]
