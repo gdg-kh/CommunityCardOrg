@@ -120,14 +120,6 @@
     "color": "#795548"
   },
   {
-    "date": "2025-12-31",
-    "community": "氛圍工作者交流趴（粉鳥趴）",
-    "title": "",
-    "description": "",
-    "link": "https://www.facebook.com/groups/vscp.tw",
-    "color": "#EA4335"
-  },
-  {
     "date": "2025-12-01",
     "community": "K.NET",
     "title": "軟體開發‧雲端‧AI‧職涯",
@@ -171,7 +163,7 @@
     "date": "2026-01-06",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #37",
-    "description": "1. 多 AI 協作的實踐方式<br>2. 還在找",
+    "description": "1. 多 AI 協作的實踐方式<br>2. 如何與 Gemini AI 分工合作",
     "link": "https://gdg.community.dev/e/mvr6kt/",
     "color": "#4285f4"
   },
@@ -189,6 +181,30 @@
     "title": "台灣零時政府第柒拾壹次高雄黑客松（g0v KHH _ Kaohsiung Hackath71n）",
     "description": "g0v 是一個草根式的公民社群，致力於加深公民對社會的貢獻以及彼此間的連結",
     "link": "https://g0v-jothon.kktix.cc/events/g0v-hackath71n",
+    "color": "#9e9e9f"
+  },
+  {
+    "date": "2026-01-14",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#9e9e9f"
+  },
+  {
+    "date": "2026-01-21",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#9e9e9f"
+  },
+  {
+    "date": "2026-01-28",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
     "color": "#9e9e9f"
   }
 ]
