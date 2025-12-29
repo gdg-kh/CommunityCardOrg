@@ -7,10 +7,10 @@
       "description": "介紹：<br>Google Developer Groups Kaohsiung 前身是 Android 高雄開發者社群，誕生於 2014 年 3 月。<br><br>我們每年定期舉辦 Build with AI、 Google I/O Extended、DevFest 和 TOOCON 天黑黑月會，希望讓高雄對軟體開發有興趣的朋友能夠有實體交流的機會。<br><br>歡迎加入 Google Developer Groups Kaohsiung 粉絲專業頁和 GDG Kaohsiung 臉書社團，掌握最新活動資訊。"
     },
     {
-      "name": "開發者 Buffet 臉書社團",
-      "link": "https://www.facebook.com/groups/buffet.dev/",
-      "logo": "../assets/logo_developer_buffet.png",
-      "description": "介紹：<br>我們是一群在台灣科技研討會結識的夥伴，自疫情期間，我們所在的城市技術社群與聚會逐漸減少。希望能保持討論和交流的熱度，因此我們決定發起聚會。<br><br>在這裏會舉辦各種形式的活動，議題大致上包括但不限於前、後端、UI/UX、ML、軟體開發等，希望大家能在這裡找到並盡情享受自己感興趣的事物，因此取名為【開發者 Buffet】。"
+      "name": "開發者 Buffet Discord",
+      "link": "https://discord.gg/uRvhqpFeuG",
+      "logo": "../assets/logo_developer_buffet_v2.png",
+      "description": "介紹：<br>我們是一群在台灣科技研討會結識的夥伴，自疫情期間，我們所在的城市技術社群與聚會逐漸減少。希望能保持討論和交流的熱度，因此我們決定發起聚會。 在這裏會舉辦各種形式的活動，議題大致上包括但不限於前、後端、UI/UX、ML、軟體開發等，希望大家能在這裡找到並盡情享受自己感興趣的事物，因此取名為【開發者 Buffet】。<br><br>目前有線下活動【開發者 café】每月的最後一個周二晚上 19:00 - 21:00，在高雄的咖啡廳與最多 10 位左右的開發者們一起輕鬆聊聊天，歡迎任何主題 ☕<br><br>以及我們也有不定期舉辦線上讀書會，你可以在 Discord 找到更多詳細資訊，歡迎加入 \uD83D\uDE4C"
     },
     {
       "name": "國泰 CDC 小聚",
@@ -21,7 +21,7 @@
     {
       "name": "高雄 WordPress 小聚 Kaohsiung WordPress Meetup",
       "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/",
-      "logo": "../assets/logo_kaohsiung_word_press.png",
+      "logo": "../assets/logo_kaohsiung_word_press_v2.png",
       "description": "介紹：<br>我們是一群位於高雄的 WordPress 愛好者，我們之中包含了開發者、設計師、內容產製者以及各式各樣與 WordPress 相關的人。<br><br>藉由這個社群，我們希望能夠與同樣對 WordPress 有興趣的你，分享我們的想法與經驗。<br><br>這個 WordPress Meetup Group 竭誠歡迎所有喜愛 WordPress 的人們加入。"
     },
     {
@@ -53,6 +53,18 @@
       "link": "https://www.facebook.com/groups/agile.south.taiwan/",
       "logo": "../assets/logo_agile_south_taiwan.png",
       "description": "介紹：<br>南台灣最大敏捷社群 (Agile South Taiwan) 是一個以敏捷的熱愛者所組成，期待藉由經驗分享和技術交流，希望促進高雄與台灣的產業改變。<br><br>1. 透過敏捷改變台南、高雄在地產業文化<br>2. 平衡南北知識的貧富不均"
+    },
+    {
+      "name": "K.NET",
+      "link": "https://www.facebook.com/k.net.io",
+      "logo": "../assets/logo_k_net.png",
+      "description": "介紹：<br>從高雄發芽dot NET技術社群，有空歡迎您來坐坐，交流交流，<br>每週一晚上於星巴克聚會，有空可以來坐坐認識新朋友，<br>常態聚會地點：裕誠路台銀旁星巴克"
+    },
+    {
+      "name": "VSCP 粉鳥趴",
+      "link": "https://www.facebook.com/groups/vscp.tw",
+      "logo": "../assets/logo_vscp.png",
+      "description": "介紹：<br>核心理念：<br>像鴿子一樣，在都市環境中建立穩定、互助的工作者社群，透過輕鬆聚會，促進實質的知識交流、資源分享和協作機會。<br>目標參與者：<br>・主要群體：AI 時代的獨立工作者（無論是現職或是目標）<br>・共同特徵：<br>- 同時具備技術與商業思維<br>- 需要經營個人或工作室的實務知識<br>- 尋求協作夥伴和資源網絡<br>- 重視工作氛圍和生活品質"
     }
   ],
   "sponsors": [
