@@ -1,0 +1,17 @@
+{
+  "name": "community-card-org",
+  "version": "1.0.0",
+  "description": "高雄社群名牌卡 - 社群月曆 OG 圖生成",
+  "type": "module",
+  "scripts": {
+    "generate-og": "node scripts/generate-og-images.js"
+  },
+  "dependencies": {
+    "puppeteer": "^23.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
