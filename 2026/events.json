@@ -21,7 +21,7 @@
     "title": "當設計師遇上國家級系統",
     "description": "解析”勞保局 e 化服務系統”UIUX細節",
     "link": "#",
-    "color": "#9E9E9F"
+    "color": "#34A853"
   },
   {
     "date": "2025-12-10",
@@ -347,9 +347,25 @@
     "date": "2026-01-03",
     "community": "UIUX Kaohsiung",
     "title": "UI<>Dev 團隊分工與前端溝通",
-    "description": "",
+    "description": "大家一起討論踩過的坑！",
     "link": "https://luma.com/whqeko1i",
-    "color": "#9E9E9F"
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-02-07",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #5",
+    "description": "",
+    "link": "https://luma.com/0avbdv5w",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-03-06",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #6",
+    "description": "",
+    "link": "https://luma.com/sxng9fgs",
+    "color": "#34A853"
   },
   {
     "date": "2026-01-11",
@@ -358,13 +374,5 @@
     "description": "",
     "link": "https://www.secondspace.dev/zh/",
     "color": "#F9AB00"
-  },
-  {
-    "date": "2026-02-07",
-    "community": "UIUX Kaohsiung",
-    "title": "高雄設計師聚會 #5",
-    "description": "",
-    "link": "https://luma.com/0avbdv5w",
-    "color": "#9E9E9F"
   }
 ]
