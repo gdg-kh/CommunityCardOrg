@@ -63,46 +63,61 @@
         /* Stamp Feature Styles */
         #stamp-toolbar {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
+            flex-wrap: nowrap; /* 禁止換行，改為橫向捲動 */
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            gap: 15px;
             margin-bottom: 20px;
-            padding: 10px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            border: 1px dashed #ccc;
+            padding: 15px;
+            background: #f1f3f4;
+            border-radius: 12px;
+            border: 1px solid #dfe1e5;
             width: 100%;
+            /* 顯示細捲動條 */
+            scrollbar-width: thin;
+        }
+        #stamp-toolbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        #stamp-toolbar::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
         }
         .stamp-option {
-            width: 45px;
-            height: 45px;
+            flex: 0 0 auto; /* 防止被壓縮 */
+            width: 65px;
+            height: 65px;
             object-fit: contain;
             cursor: pointer;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            padding: 4px;
+            border: 3px solid transparent;
+            border-radius: 12px;
+            padding: 6px;
             background: white;
-            transition: all 0.2s;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .stamp-option:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
         .stamp-option.selected {
             border-color: #4285f4;
-            box-shadow: 0 0 5px rgba(66, 133, 244, 0.5);
+            box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
             background-color: #e8f0fe;
+            transform: translateY(-3px);
         }
         #card-area {
             position: relative;
-            display: block; 
+            display: inline-block; /* 改為 inline-block，寬度將由圖片決定 */
+            max-width: 100%; /* 確保在小螢幕不超出 */
             cursor: crosshair; /* Indicate clickable */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-radius: 12px;
             overflow: hidden; /* Contains stamps */
+            line-height: 0; /* 消除圖片下方的微小間隙 */
         }
         #card-area img.base-card {
             display: block;
-            width: 100%;
+            max-width: 100%; /* 讓圖片自適應容器寬度 */
             height: auto;
         }
         /* Override inline style for wrapper */
@@ -112,8 +127,9 @@
         }
         .stamp-mark {
             position: absolute;
-            width: 60px; /* Adjust stamp size */
-            height: 60px;
+            width: 16%; /* 16% of 800px = 128px */
+            height: auto;
+            aspect-ratio: 1/1; /* 確保印章維持正方形 */
             object-fit: contain;
             transform-origin: center center;
             pointer-events: none; 
@@ -147,11 +163,19 @@
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             border-radius: 8px;
+            text-align: center; /* 讓 inline-block 的 card-area 置中 */
+            padding: 10px 0;
         }
 
         @media (max-width: 768px) {
+            /* 移除強制寬度，讓卡片自適應 */
             #card-area {
-                min-width: 800px; /* Force larger size on mobile for easier stamping */
+                min-width: auto;
+            }
+            /* 手機版印章固定為 56px */
+            .stamp-mark {
+                width: 56px;
+                height: 56px;
             }
         }
     </style>
@@ -194,6 +218,7 @@
             <div class="divider"></div>
 
             <div class="imageContainer">
+                <p class="text-center mb-2" style="font-size: 0.9rem; color: #666;">操作指引：1. 選擇下方圖章 → 2. 點擊卡片蓋章</p>
                 <!-- Stamp Toolbar -->
                 <div id="stamp-toolbar">
                     <!-- Stamps will be injected here via JS -->
@@ -201,7 +226,7 @@
 
                 <!-- Interactive Card Area -->
                 <div class="mobile-scroll-wrapper">
-                    <div id="card-area" style="width: 100%;">
+                    <div id="card-area">
                         <img class="base-card" src="../assets/print_community_card_forward_300dpi_2026.png" alt="2026 正面">
                     </div>
                 </div>
