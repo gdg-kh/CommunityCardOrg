@@ -1,394 +1,517 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <link href="../bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../index.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="2026 高雄社群名牌卡，紀錄你的社群歷程。這是一個基於有趣而誕生的活動，每一位參加社群活動的成員都可以依照自己的自由意志紀錄並收集今年的歷程。" name="description">
-    <meta content="高雄社群, 名牌卡, 社群活動, 技術社群, 軟體社群, 高雄, Kaohsiung Community Card" name="keywords">
-    <meta content="高雄社群名牌卡" property="og:title">
-    <meta content="2026 高雄社群名牌卡，紀錄你的社群歷程。這是一個基於有趣而誕生的活動，每一位參加社群活動的成員都可以依照自己的自由意志紀錄並收集今年的歷程。" property="og:description">
-    <meta content="website" property="og:type">
-    <meta content="https://community-card.org/2026/index.html" property="og:url">
-    <meta content="https://community-card.org/assets/print_community_card_forward_300dpi_2026.png" property="og:image">
-    <meta content="高雄社群名牌卡" property="og:site_name">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="2026 高雄社群名牌卡，紀錄你的社群歷程。這是一個基於有趣而誕生的活動，每一位參加社群活動的成員都可以依照自己的自由意志紀錄並收集今年的歷程。"
+      name="description"
+    />
+    <meta content="高雄社群, 名牌卡, 社群活動, 技術社群, 軟體社群, 高雄, Kaohsiung Community Card" name="keywords" />
+    <meta content="高雄社群名牌卡" property="og:title" />
+    <meta
+      content="2026 高雄社群名牌卡，紀錄你的社群歷程。這是一個基於有趣而誕生的活動，每一位參加社群活動的成員都可以依照自己的自由意志紀錄並收集今年的歷程。"
+      property="og:description"
+    />
+    <meta content="website" property="og:type" />
+    <meta content="https://community-card.org/2026/index.html" property="og:url" />
+    <meta
+      content="https://community-card.org/assets/print_community_card_forward_300dpi_2026.png"
+      property="og:image"
+    />
+    <meta content="高雄社群名牌卡" property="og:site_name" />
     <title>高雄社群名牌卡</title>
+
     <style>
-        /* 導覽列樣式調整 - 使用 Grid 強制四等分 */
-        .nav-pills {
-            margin-bottom: 20px;
-            display: grid !important; /* 強制使用 Grid */
-            grid-template-columns: repeat(5, 1fr); /* 嚴格五等分 */
-            gap: 10px; /* 按鈕間距 */
-            width: 100%;
-        }
-        .nav-item {
-            width: auto; /* 讓 Grid 控制寬度 */
-            text-align: center;
-        }
-        .nav-pills .nav-link {
-            color: #555;
-            background-color: #eee;
-            border-radius: 8px;
-            width: 100%;
-            height: 100%; /* 確保按鈕高度一致 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 2px;
-        }
-        
-        /* 移除通用的 active 顏色，改用個別設定 */
-        /* .nav-pills .nav-link.active { ... } */
+      /* 導覽列樣式調整 - 使用 Grid 強制四等分 */
+      .nav-pills {
+        margin-bottom: 20px;
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        width: 100%;
+      }
 
-        /* 1. 2026 卡片與守則 */
-        .nav-item:nth-child(1) .nav-link.active {
-            background-color: #4285f4;
-            color: #fff;
-        }
-        /* 2. 社群月曆 */
-        .nav-item:nth-child(2) .nav-link.active {
-            background-color: #a142f4; /* Purple for calendar */
-            color: #fff;
-        }
-        /* 3. 集章獎勵 */
-        .nav-item:nth-child(3) .nav-link.active {
-            background-color: #34a853;
-            color: #fff;
-        }
-        /* 4. 社群介紹 */
-        .nav-item:nth-child(4) .nav-link.active {
-            background-color: #f9ab00;
-            color: #fff;
-        }
-        /* 5. 贊助商 */
-        .nav-item:nth-child(5) .nav-link.active {
-            background-color: #ea4335;
-            color: #fff;
-        }
+      .nav-item {
+        width: auto;
+        text-align: center;
+      }
 
-        /* Stamp Feature Styles */
-        #stamp-toolbar {
-            display: flex;
-            flex-wrap: nowrap; /* 禁止換行，改為橫向捲動 */
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #f1f3f4;
-            border-radius: 12px;
-            border: 1px solid #dfe1e5;
-            width: 100%;
-            /* 顯示細捲動條 */
-            scrollbar-width: thin;
-        }
-        #stamp-toolbar::-webkit-scrollbar {
-            height: 6px;
-        }
-        #stamp-toolbar::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 10px;
-        }
-        .stamp-option {
-            flex: 0 0 auto; /* 防止被壓縮 */
-            width: 65px;
-            height: 65px;
-            object-fit: contain;
-            cursor: pointer;
-            border: 3px solid transparent;
-            border-radius: 12px;
-            padding: 6px;
-            background: white;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .stamp-option:hover {
-            transform: scale(1.05);
-        }
-        .stamp-option.selected {
-            border-color: #4285f4;
-            box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
-            background-color: #e8f0fe;
-            transform: translateY(-3px);
-        }
+      .nav-pills .nav-link {
+        color: #555;
+        background-color: #eee;
+        border-radius: 8px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 2px;
+      }
+
+      /* 個別按鈕顏色 */
+      .nav-item:nth-child(1) .nav-link.active {
+        background-color: #4285f4;
+        color: #fff;
+      }
+      .nav-item:nth-child(2) .nav-link.active {
+        background-color: #a142f4;
+        color: #fff;
+      }
+      .nav-item:nth-child(3) .nav-link.active {
+        background-color: #34a853;
+        color: #fff;
+      }
+      .nav-item:nth-child(4) .nav-link.active {
+        background-color: #f9ab00;
+        color: #fff;
+      }
+      .nav-item:nth-child(5) .nav-link.active {
+        background-color: #ea4335;
+        color: #fff;
+      }
+
+      /* Stamp Feature Styles */
+      #stamp-toolbar {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 15px;
+        margin-bottom: 20px;
+        padding: 15px;
+        background: #f1f3f4;
+        border-radius: 12px;
+        border: 1px solid #dfe1e5;
+        width: 100%;
+        scrollbar-width: thin;
+      }
+
+      #stamp-toolbar::-webkit-scrollbar {
+        height: 6px;
+      }
+      #stamp-toolbar::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+      }
+
+      .stamp-option {
+        flex: 0 0 auto;
+        width: 65px;
+        height: 65px;
+        object-fit: contain;
+        cursor: pointer;
+        border: 3px solid transparent;
+        border-radius: 12px;
+        padding: 6px;
+        background: white;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .stamp-option:hover {
+        transform: scale(1.05);
+      }
+      .stamp-option.selected {
+        border-color: #4285f4;
+        box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+        background-color: #e8f0fe;
+        transform: translateY(-3px);
+      }
+
+      #card-area {
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+        cursor: crosshair;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        overflow: hidden;
+        line-height: 0;
+      }
+
+      #card-area img.base-card {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .imageContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .stamp-mark {
+        position: absolute;
+        width: 16%; /* 在 Canvas 繪圖邏輯中也會用到這個比例 */
+        height: auto;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+        transform-origin: center center;
+        pointer-events: none;
+        opacity: 0.9;
+        mix-blend-mode: multiply; /* 視覺上的混合模式 */
+        filter: contrast(1.2) brightness(0.9);
+      }
+
+      /* 按鈕樣式 */
+      #clear-stamps,
+      #download-btn {
+        padding: 8px 20px;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.2s;
+        margin-bottom: 20px;
+      }
+
+      #clear-stamps {
+        background-color: #ea4335;
+      }
+      #clear-stamps:hover {
+        background-color: #c5221f;
+      }
+
+      #download-btn {
+        background-color: #4285f4;
+        margin-left: 10px;
+      }
+      #download-btn:hover {
+        background-color: #3367d6;
+      }
+      #download-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      .mobile-scroll-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      @media (max-width: 768px) {
         #card-area {
-            position: relative;
-            display: inline-block; /* 改為 inline-block，寬度將由圖片決定 */
-            max-width: 100%; /* 確保在小螢幕不超出 */
-            cursor: crosshair; /* Indicate clickable */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border-radius: 12px;
-            overflow: hidden; /* Contains stamps */
-            line-height: 0; /* 消除圖片下方的微小間隙 */
-        }
-        #card-area img.base-card {
-            display: block;
-            max-width: 100%; /* 讓圖片自適應容器寬度 */
-            height: auto;
-        }
-        /* Override inline style for wrapper */
-        .imageContainer {
-            flex-direction: column; /* Stack toolbar and card */
-            gap: 15px;
+          min-width: auto;
         }
         .stamp-mark {
-            position: absolute;
-            width: 16%; /* 16% of 800px = 128px */
-            height: auto;
-            aspect-ratio: 1/1; /* 確保印章維持正方形 */
-            object-fit: contain;
-            transform-origin: center center;
-            pointer-events: none; 
-            opacity: 0.9;
-            mix-blend-mode: multiply; /* Make it look like ink */
-            animation: stamp-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: contrast(1.2) brightness(0.9); /* Slight ink effect */
+          width: 56px;
+          height: 56px;
         }
-        @keyframes stamp-pop {
-            0% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
-        }
-        #clear-stamps {
-            padding: 8px 20px;
-            background-color: #ea4335;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.2s;
-            margin-bottom: 20px;
-        }
-        #clear-stamps:hover {
-            background-color: #c5221f;
-        }
-
-        /* Mobile scroll optimization */
-        .mobile-scroll-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            border-radius: 8px;
-            text-align: center; /* 讓 inline-block 的 card-area 置中 */
-            padding: 10px 0;
-        }
-
-        @media (max-width: 768px) {
-            /* 移除強制寬度，讓卡片自適應 */
-            #card-area {
-                min-width: auto;
-            }
-            /* 手機版印章固定為 56px */
-            .stamp-mark {
-                width: 56px;
-                height: 56px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <div class="cardWrapper">
-        <!-- 導覽列 -->
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-                <a class="nav-link active" href="index.html">卡片與守則</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="calendar.html">社群月曆</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="rewards.html">集章獎勵</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="communities.html">社群介紹</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="sponsors.html">贊助商</a>
-            </li>
-        </ul>
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">卡片與守則</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="calendar.html">社群月曆</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="rewards.html">集章獎勵</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="communities.html">社群介紹</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sponsors.html">贊助商</a>
+        </li>
+      </ul>
 
-        <div class="card">
-            <h1 class="title"><span class="specialColor">高雄社群</span>名牌卡守則</h1>
+      <div class="card">
+        <h1 class="title"><span class="specialColor">高雄社群</span>名牌卡守則</h1>
 
-            <div class="divider"></div>
+        <div class="divider"></div>
 
-            <p>這是一個基於有趣而誕生的活動，每一位參加社群活動的成員都可以依照自己的自由意志紀錄並收集今年的歷程。請應遵守以下守則：</p>
-            <ol>
-                <li>請保持愉悅的心情，使用本卡記錄今年社群活動之歷程。</li>
-                <li>參加活動旨在有趣，可以蓋章或手寫活動名稱和日期。</li>
-                <li>加入任何社群請參考上方「社群介紹」列表</li>
-                <li>社群是一個互助合作的平台，凡曾參與之高雄社群活動，皆可登錄本卡，不需過問任何人意見。</li>
-                <li>群聚彼此的智慧與熱情，本卡持有人擁有隨時修訂本守則之能力。</li>
-            </ol>
+        <p>
+          這是一個基於有趣而誕生的活動，每一位參加社群活動的成員都可以依照自己的自由意志紀錄並收集今年的歷程。請應遵守以下守則：
+        </p>
+        <ol>
+          <li>請保持愉悅的心情，使用本卡記錄今年社群活動之歷程。</li>
+          <li>參加活動旨在有趣，可以蓋章或手寫活動名稱和日期。</li>
+          <li>加入任何社群請參考上方「社群介紹」列表</li>
+          <li>社群是一個互助合作的平台，凡曾參與之高雄社群活動，皆可登錄本卡，不需過問任何人意見。</li>
+          <li>群聚彼此的智慧與熱情，本卡持有人擁有隨時修訂本守則之能力。</li>
+        </ol>
 
-            <div class="divider"></div>
+        <div class="divider"></div>
 
-            <div class="imageContainer">
-                <p class="text-center mb-2" style="font-size: 0.9rem; color: #666;">操作指引：1. 選擇下方圖章 → 2. 點擊卡片蓋章</p>
-                <!-- Stamp Toolbar -->
-                <div id="stamp-toolbar">
-                    <!-- Stamps will be injected here via JS -->
-                </div>
+        <div class="imageContainer">
+          <p class="text-center mb-2" style="font-size: 0.9rem; color: #666">
+            操作指引：1. 選擇下方圖章 → 2. 點擊卡片蓋章
+          </p>
+          <div id="stamp-toolbar"></div>
 
-                <!-- Interactive Card Area -->
-                <div class="mobile-scroll-wrapper">
-                    <div id="card-area">
-                        <img class="base-card" src="../assets/print_community_card_forward_300dpi_2026.png" alt="2026 正面">
-                    </div>
-                </div>
-
-                <button id="clear-stamps">清除印章</button>
+          <div class="mobile-scroll-wrapper">
+            <div id="card-area">
+              <img class="base-card" src="../assets/print_community_card_forward_300dpi_2026.png" alt="2026 正面" />
             </div>
+          </div>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const stamps = [
-                        '../assets/seal_toocon.png',
-                        '../assets/seal_developer_buffet_blue.png',
-                        '../assets/seal_developer_buffet_black.png',
-                        '../assets/seal_developer_buffet_red.png',
-                        '../assets/logo_gdg_kaohsiung.png',
-                        '../assets/logo_second_space.png',
-                        '../assets/logo_kaohsiung_word_press_v2.png',
-                        '../assets/logo_pyladies_kh.png',
-                        '../assets/logo_developer_buffet_v2.png',
-                        '../assets/logo_cdc_v3.png',
-                        '../assets/logo_kimu.png',
-                        '../assets/logo_k_net.png',
-                        '../assets/logo_vscp.png',
-                        '../assets/logo_kalug.jpg',
-                        '../assets/logo_agile_south_taiwan.png',
-                        '../assets/logo_developer_buffet.png',
-                        '../assets/logo_kaohsiung_word_press.png'
-                    ];
-
-                    let currentStampSrc = stamps[0];
-                    const toolbar = document.getElementById('stamp-toolbar');
-                    const cardArea = document.getElementById('card-area');
-
-                    // Initialize Toolbar
-                    stamps.forEach((src, index) => {
-                        const img = document.createElement('img');
-                        img.src = src;
-                        img.className = 'stamp-option';
-                        img.title = src.split('/').pop().replace('logo_', '').replace(/_/g, ' ').replace('.png', '').replace('.jpg', '');
-                        if (index === 0) img.classList.add('selected');
-
-                        img.addEventListener('click', function() {
-                            document.querySelectorAll('.stamp-option').forEach(el => el.classList.remove('selected'));
-                            this.classList.add('selected');
-                            currentStampSrc = src;
-                        });
-
-                        toolbar.appendChild(img);
-                    });
-
-                    // Handle Stamping
-                    cardArea.addEventListener('click', function(e) {
-                        if (!currentStampSrc) return;
-
-                        const rect = cardArea.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-
-                        const xPercent = (x / rect.width) * 100;
-                        const yPercent = (y / rect.height) * 100;
-
-                        const stamp = document.createElement('img');
-                        stamp.src = currentStampSrc;
-                        stamp.className = 'stamp-mark';
-
-                        // Disable CSS animation to avoid conflict with Web Animations API
-                        stamp.style.animation = 'none';
-
-                        // Random rotation
-                        const rotation = Math.floor(Math.random() * 41) - 20; // -20 to 20 deg
-
-                        stamp.style.left = xPercent + '%';
-                        stamp.style.top = yPercent + '%';
-
-                        // Use Web Animations API for entrance with dynamic rotation
-                        stamp.animate([
-                            { transform: `translate(-50%, -50%) rotate(${rotation}deg) scale(2)`, opacity: 0 },
-                            { transform: `translate(-50%, -50%) rotate(${rotation}deg) scale(1)`, opacity: 0.9 }
-                        ], {
-                            duration: 300,
-                            easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                            fill: 'forwards'
-                        });
-
-                        cardArea.appendChild(stamp);
-                    });
-
-                    // Clear Stamps
-                    document.getElementById('clear-stamps').addEventListener('click', function() {
-                        const marks = document.querySelectorAll('.stamp-mark');
-                        marks.forEach(mark => mark.remove());
-                    });
-
-                    // Easter Egg: Reveal Download Section
-                    const trigger = document.querySelector('.specialColor');
-                    const hiddenSection = document.getElementById('download-section');
-                    let clickCount = 0;
-                    let clickTimer;
-
-                    if (trigger && hiddenSection) {
-                        trigger.style.cursor = 'pointer';
-                        trigger.style.userSelect = 'none'; // Prevent text selection
-                        
-                        trigger.addEventListener('click', function() {
-                            clickCount++;
-                            
-                            clearTimeout(clickTimer);
-                            clickTimer = setTimeout(() => {
-                                clickCount = 0;
-                            }, 500); // Reset count if no click within 500ms
-
-                            if (clickCount === 5) {
-                                hiddenSection.style.display = 'block';
-                                alert('🎉 已開啟隱藏下載區！');
-                                clickCount = 0;
-                                // Smooth scroll to the section
-                                hiddenSection.scrollIntoView({ behavior: 'smooth' });
-                            }
-                        });
-                    }
-                });
-            </script>
-
-            <div class="divider"></div>
-
-            <div id="download-section" style="display: none;">
-                <div class="card">
-                    <h1 class="title">如何製作<span class="specialColor">高雄社群</span>名牌卡</h1>
-                    <p>建議列印規格，跟印刷店這樣說：</p>
-                    <ol>
-                        <li>紙張大小：A4</li>
-                        <li>紙張種類：象牙 230P</li>
-                        <li>列印方式：單面彩色</li>
-                        <li>裁切方式：十字裁切</li>
-                    </ol>
-                    <p>檔案下載：</p>
-                    <ol>
-                        <li>正面：<a href="../assets/print_community_card_forward_2026.pdf" target="_blank">點我下載</a></li>
-                    </ol>
-                    <p>印刷店：找自己常去的就好，我習慣去經典數位印刷，加 Line 後傳檔案給他，等印好再去拿，很方便。</p>
-                    <p>其他：</p>
-                    <ol>
-                        <li>可以自行購買「KW-triO 09772 證件打孔機」，把卡片打洞，方便夾吊牌。</li>
-                        <li>可以自行購買「Tomato RZ-3 三合一圓角器」把卡片的直角裁成圓角</li>
-                    </ol>
-                </div>
-
-            </div>
-
-            <p>想要在這裡顯示你的社群嗎？歡迎 <a class="minorLink" href="https://github.com/AndyAWD/CommunityCardOrg"
-                                               target="_blank">參與協作</a> 或 <a class="minorLink"
-                                                                                href="https://forms.gle/38EgveLNs8WdKT5v7"
-                                                                                target="_blank">填寫表單</a> 吧</p>
+          <div style="text-align: center">
+            <button id="clear-stamps">清除印章</button>
+            <button id="download-btn">下載圖片</button>
+          </div>
         </div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            const stamps = [
+              '../assets/stamps/seal_toocon.png',
+              '../assets/stamps/seal_developer_buffet_blue.png',
+              '../assets/stamps/seal_developer_buffet_black.png',
+              '../assets/stamps/seal_developer_buffet_red.png',
+              '../assets/stamps/logo_gdg_kaohsiung.png',
+              '../assets/stamps/logo_second_space.png',
+              '../assets/stamps/logo_kaohsiung_word_press_v2.png',
+              '../assets/stamps/logo_pyladies_kh.png',
+              '../assets/stamps/logo_developer_buffet_v2.png',
+              '../assets/stamps/logo_cdc_v3.png',
+              '../assets/stamps/logo_kimu.png',
+              '../assets/stamps/logo_k_net.png',
+              '../assets/stamps/logo_vscp.png',
+              '../assets/stamps/logo_kalug.jpg',
+              '../assets/stamps/logo_agile_south_taiwan.png',
+              '../assets/stamps/logo_developer_buffet.png',
+              '../assets/stamps/logo_kaohsiung_word_press.png',
+            ]
+
+            let currentStampSrc = stamps[0]
+            const toolbar = document.getElementById('stamp-toolbar')
+            const cardArea = document.getElementById('card-area')
+
+            // 1. 初始化工具列
+            stamps.forEach((src, index) => {
+              const img = document.createElement('img')
+              img.src = src
+              img.className = 'stamp-option'
+              img.title = src
+                .split('/')
+                .pop()
+                .replace('logo_', '')
+                .replace(/_/g, ' ')
+                .replace('.png', '')
+                .replace('.jpg', '')
+              if (index === 0) img.classList.add('selected')
+
+              img.addEventListener('click', function () {
+                document.querySelectorAll('.stamp-option').forEach((el) => el.classList.remove('selected'))
+                this.classList.add('selected')
+                currentStampSrc = src
+              })
+
+              toolbar.appendChild(img)
+            })
+
+            // 2. 處理點擊蓋章 (網頁視覺效果)
+            cardArea.addEventListener('click', function (e) {
+              if (!currentStampSrc) return
+
+              const rect = cardArea.getBoundingClientRect()
+              const x = e.clientX - rect.left
+              const y = e.clientY - rect.top
+
+              const xPercent = (x / rect.width) * 100
+              const yPercent = (y / rect.height) * 100
+
+              const stamp = document.createElement('img')
+              stamp.src = currentStampSrc
+              stamp.className = 'stamp-mark'
+
+              // 隨機旋轉角度 (-20度 ~ 20度)
+              const rotation = Math.floor(Math.random() * 41) - 20
+
+              // ★ 關鍵：將旋轉角度存入 dataset，供下載功能讀取
+              stamp.dataset.rotation = rotation
+
+              // 設定位置
+              stamp.style.left = xPercent + '%'
+              stamp.style.top = yPercent + '%'
+
+              // 使用 Web Animations API 處理進場動畫
+              stamp.animate(
+                [
+                  { transform: `translate(-50%, -50%) rotate(${rotation}deg) scale(2)`, opacity: 0 },
+                  { transform: `translate(-50%, -50%) rotate(${rotation}deg) scale(1)`, opacity: 0.9 },
+                ],
+                {
+                  duration: 300,
+                  easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  fill: 'forwards', // 動畫結束後停留在最後狀態
+                }
+              )
+
+              cardArea.appendChild(stamp)
+            })
+
+            // 3. 清除印章
+            document.getElementById('clear-stamps').addEventListener('click', function () {
+              const marks = document.querySelectorAll('.stamp-mark')
+              marks.forEach((mark) => mark.remove())
+            })
+
+            // 4. 下載圖片功能 (使用原生 Canvas 重繪，支援 Mix-Blend-Mode 與高解析度)
+            document.getElementById('download-btn').addEventListener('click', async function () {
+              const btn = this
+              const originalText = btn.innerText
+              btn.innerText = '圖片生成中...'
+              btn.disabled = true
+
+              try {
+                // A. 取得底圖
+                const baseImgElement = document.querySelector('#card-area .base-card')
+
+                // 建立一個新的 Image 物件來獲取原始解析度
+                const originalBaseImg = new Image()
+                originalBaseImg.crossOrigin = 'anonymous'
+                originalBaseImg.src = baseImgElement.src
+
+                // 等待底圖載入
+                await new Promise((resolve, reject) => {
+                  originalBaseImg.onload = resolve
+                  originalBaseImg.onerror = reject
+                })
+
+                // B. 建立高解析度畫布
+                const canvas = document.createElement('canvas')
+                const ctx = canvas.getContext('2d')
+                const originalWidth = originalBaseImg.naturalWidth
+                const originalHeight = originalBaseImg.naturalHeight
+
+                canvas.width = originalWidth
+                canvas.height = originalHeight
+
+                // C. 繪製底圖
+                ctx.drawImage(originalBaseImg, 0, 0)
+
+                // D. 繪製印章 (開啟正片疊底模式)
+                ctx.globalCompositeOperation = 'multiply'
+
+                const stampElements = document.querySelectorAll('.stamp-mark')
+
+                // 依序處理每個印章
+                const drawPromises = Array.from(stampElements).map(async (stampEl) => {
+                  return new Promise((resolve) => {
+                    const img = new Image()
+                    img.crossOrigin = 'anonymous'
+                    img.src = stampEl.src
+
+                    img.onload = () => {
+                      // 讀取數據：角度、位置
+                      const rotation = parseFloat(stampEl.dataset.rotation || 0)
+                      const leftPercent = parseFloat(stampEl.style.left)
+                      const topPercent = parseFloat(stampEl.style.top)
+
+                      // 計算絕對座標
+                      const x = originalWidth * (leftPercent / 100)
+                      const y = originalHeight * (topPercent / 100)
+
+                      // 計算印章大小 (CSS設定寬度為容器的16%)
+                      const stampWidth = originalWidth * 0.16
+                      const stampHeight = stampWidth // 正方形
+
+                      // 繪圖變換矩陣
+                      ctx.save()
+                      ctx.translate(x, y)
+                      ctx.rotate((rotation * Math.PI) / 180)
+
+                      // 繪製印章 (居中繪製)
+                      ctx.drawImage(img, -stampWidth / 2, -stampHeight / 2, stampWidth, stampHeight)
+
+                      ctx.restore()
+                      resolve()
+                    }
+                    img.onerror = resolve // 失敗也繼續，避免卡住
+                  })
+                })
+
+                await Promise.all(drawPromises)
+
+                // E. 觸發下載
+                const link = document.createElement('a')
+                link.download = 'My_Community_Card_2026.png'
+                link.href = canvas.toDataURL('image/png')
+                link.click()
+              } catch (err) {
+                console.error('圖片生成失敗:', err)
+                alert('圖片生成失敗，請檢查 Console 錯誤。請確保您是在 Local Server 環境下執行。')
+              } finally {
+                btn.innerText = originalText
+                btn.disabled = false
+              }
+            })
+
+            // 5. 彩蛋：點擊標題開啟隱藏下載區
+            const trigger = document.querySelector('.specialColor')
+            const hiddenSection = document.getElementById('download-section')
+            let clickCount = 0
+            let clickTimer
+
+            if (trigger && hiddenSection) {
+              trigger.style.cursor = 'pointer'
+              trigger.style.userSelect = 'none'
+
+              trigger.addEventListener('click', function () {
+                clickCount++
+                clearTimeout(clickTimer)
+                clickTimer = setTimeout(() => {
+                  clickCount = 0
+                }, 500)
+
+                if (clickCount === 5) {
+                  hiddenSection.style.display = 'block'
+                  alert('🎉 已開啟隱藏下載區！')
+                  clickCount = 0
+                  hiddenSection.scrollIntoView({ behavior: 'smooth' })
+                }
+              })
+            }
+          })
+        </script>
+
+        <div class="divider"></div>
+
+        <div id="download-section" style="display: none">
+          <div class="card">
+            <h1 class="title">如何製作<span class="specialColor">高雄社群</span>名牌卡</h1>
+            <p>建議列印規格，跟印刷店這樣說：</p>
+            <ol>
+              <li>紙張大小：A4</li>
+              <li>紙張種類：象牙 230P</li>
+              <li>列印方式：單面彩色</li>
+              <li>裁切方式：十字裁切</li>
+            </ol>
+            <p>檔案下載：</p>
+            <ol>
+              <li>正面：<a href="../assets/print_community_card_forward_2026.pdf" target="_blank">點我下載</a></li>
+            </ol>
+            <p>印刷店：找自己常去的就好，我習慣去經典數位印刷，加 Line 後傳檔案給他，等印好再去拿，很方便。</p>
+            <p>其他：</p>
+            <ol>
+              <li>可以自行購買「KW-triO 09772 證件打孔機」，把卡片打洞，方便夾吊牌。</li>
+              <li>可以自行購買「Tomato RZ-3 三合一圓角器」把卡片的直角裁成圓角</li>
+            </ol>
+          </div>
+        </div>
+
+        <p>
+          想要在這裡顯示你的社群嗎？歡迎
+          <a class="minorLink" href="https://github.com/AndyAWD/CommunityCardOrg" target="_blank">參與協作</a> 或
+          <a class="minorLink" href="https://forms.gle/38EgveLNs8WdKT5v7" target="_blank">填寫表單</a> 吧
+        </p>
+      </div>
     </div>
-</body>
+  </body>
 </html>
