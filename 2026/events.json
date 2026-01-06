@@ -339,7 +339,7 @@
     "date": "2026-01-21",
     "community": "高雄 WordPress",
     "title": "高雄 WordPress 小聚 2025/12",
-    "description": "",
+    "description": "玩轉 WordPress 插件 + n8n by Honda",
     "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/312622012/",
     "color": "#4285F4"
   },
@@ -374,5 +374,13 @@
     "description": "",
     "link": "https://www.secondspace.dev/zh/",
     "color": "#F9AB00"
+  },
+  {
+    "date": "2026-01-15",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
+    "link": "https://www.facebook.com/share/p/1CUJk4RUnp/",
+    "color": "#34A853"
   }
 ]
