@@ -171,8 +171,8 @@
     "date": "2026-02-03",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #38",
-    "description": "",
-    "link": "https://www.facebook.com/groups/toocon",
+    "description": "1. 還在找<br>2. 用 AI 快速做出「能試、能改、能丟」的 MVP",
+    "link": "https://gdg.community.dev/e/mcvasn/",
     "color": "#EA4335"
   },
   {
@@ -180,7 +180,7 @@
     "community": "GDG Kaohsiung",
     "title": "TOOCON #39",
     "description": "",
-    "link": "https://www.facebook.com/groups/toocon",
+    "link": "https://gdg.community.dev/e/mwp8d8/",
     "color": "#EA4335"
   },
   {
@@ -188,7 +188,7 @@
     "community": "GDG Kaohsiung",
     "title": "TOOCON #40",
     "description": "",
-    "link": "https://www.facebook.com/groups/toocon/",
+    "link": "https://gdg.community.dev/e/mjmbpq/",
     "color": "#EA4335"
   },
   {
@@ -268,6 +268,94 @@
     "community": "開發者 Buffet",
     "title": "開發者 Café",
     "description": "抽屜裡的舊硬碟復活了！用 Unraid 零門檻輕鬆駕馭 NAS",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-02-24",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "2 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-03-31",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "3 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-04-28",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "4 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-05-26",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "5 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-06-30",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "6 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-07-28",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "7 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-08-25",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "8 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-09-29",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "9 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-10-27",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "10 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-11-24",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "11 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-12-29",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "12 月聚會",
     "link": "https://www.facebook.com/groups/buffet.dev",
     "color": "#4285F4"
   },
@@ -382,5 +470,53 @@
     "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
     "link": "https://www.facebook.com/share/p/1CUJk4RUnp/",
     "color": "#34A853"
+  },
+  {
+    "date": "2026-01-18",
+    "community": "Second Space",
+    "title": "測試試飛場：為你的專案收集回饋",
+    "description": "您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！",
+    "link": "https://www.secondspace.dev/zh/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-01-22",
+    "community": "Second Space",
+    "title": "AI 討論圈",
+    "description": "人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。",
+    "link": "https://www.secondspace.dev/zh/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-02-02",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-02-09",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-02-23",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-02-12",
+    "community": "Second Space",
+    "title": "AI 討論圈",
+    "description": "人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。",
+    "link": "https://www.secondspace.dev/zh/",
+    "color": "#F9AB00"
   }
 ]
