@@ -93,6 +93,30 @@
             background: #fcfcfc;
         }
 
+        /* Weekend borders */
+        .calendar-day.saturday {
+            border-left: 2px solid #f28b82;
+            border-right: 2px solid #f28b82;
+            border-bottom: 2px solid #f28b82;
+        }
+
+        .calendar-day.sunday {
+            border-left: 2px solid #f28b82;
+            border-right: 2px solid #f28b82;
+            border-bottom: 2px solid #f28b82;
+        }
+
+        /* Add top border only when needed */
+        .calendar-day.saturday.weekend-top,
+        .calendar-day.sunday.weekend-top {
+            border-top: 2px solid #f28b82;
+        }
+
+        /* Remove duplicate border between Saturday and Sunday */
+        .calendar-day.saturday + .calendar-day.sunday {
+            border-left: none;
+        }
+
         .date-number {
             font-weight: bold;
             font-size: 18px;
@@ -173,9 +197,34 @@
             // Days
             for (let day = 1; day <= daysInMonth; day++) {
                 const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+                // Calculate day of week (0=Sunday, 6=Saturday)
+                const currentDateObj = new Date(year, month - 1, day);
+                const dayOfWeek = currentDateObj.getDay();
+                const isSaturday = (dayOfWeek === 6);
+                const isSunday = (dayOfWeek === 0);
+                const isWeekend = isSaturday || isSunday;
+
+                // Check if we need top border
+                let needTopBorder = false;
+                if (isWeekend) {
+                    if (day <= 7) {
+                        needTopBorder = true;
+                    } else {
+                        const prevWeekDay = day - 7;
+                        const prevWeekDate = new Date(year, month - 1, prevWeekDay);
+                        const prevWeekDayOfWeek = prevWeekDate.getDay();
+                        const prevWeekIsWeekend = (prevWeekDayOfWeek === 0 || prevWeekDayOfWeek === 6);
+                        needTopBorder = !prevWeekIsWeekend;
+                    }
+                }
+
+                const weekendClass = isSaturday ? ' saturday' : (isSunday ? ' sunday' : '');
+                const topBorderClass = needTopBorder ? ' weekend-top' : '';
+
                 const dayEvents = events.filter(e => e.date === dateStr);
 
-                html += `<div class="calendar-day">
+                html += `<div class="calendar-day${weekendClass}${topBorderClass}">
                     <div class="date-number">${day}</div>`;
 
                 // If 2+ events on same day, only show community name

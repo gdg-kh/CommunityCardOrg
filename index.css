@@ -186,6 +186,30 @@ ul {
     background-color: #fcfcfc;
 }
 
+/* Weekend borders */
+.calendar-day.saturday {
+    border-left: 1px solid #f28b82;
+    border-right: 1px solid #f28b82;
+    border-bottom: 1px solid #f28b82;
+}
+
+.calendar-day.sunday {
+    border-left: 1px solid #f28b82;
+    border-right: 1px solid #f28b82;
+    border-bottom: 1px solid #f28b82;
+}
+
+/* Add top border only when needed (to avoid overlap with previous week) */
+.calendar-day.saturday.weekend-top,
+.calendar-day.sunday.weekend-top {
+    border-top: 1px solid #f28b82;
+}
+
+/* Remove duplicate border between Saturday and Sunday */
+.calendar-day.saturday + .calendar-day.sunday {
+    border-left: none;
+}
+
 .date-number {
     font-weight: bold;
     color: #333;

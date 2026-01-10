@@ -191,11 +191,37 @@
                         // Days
                         for (let day = 1; day <= daysInMonth; day++) {
                             const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                            
+
+                            // Calculate day of week (0=Sunday, 6=Saturday)
+                            const currentDateObj = new Date(currentYear, currentMonth, day);
+                            const dayOfWeek = currentDateObj.getDay();
+                            const isSaturday = (dayOfWeek === 6);
+                            const isSunday = (dayOfWeek === 0);
+                            const isWeekend = isSaturday || isSunday;
+
+                            // Check if we need top border (if previous week same day is not weekend or doesn't exist)
+                            let needTopBorder = false;
+                            if (isWeekend) {
+                                if (day <= 7) {
+                                    // First week, always need top border
+                                    needTopBorder = true;
+                                } else {
+                                    // Check previous week same day
+                                    const prevWeekDay = day - 7;
+                                    const prevWeekDate = new Date(currentYear, currentMonth, prevWeekDay);
+                                    const prevWeekDayOfWeek = prevWeekDate.getDay();
+                                    const prevWeekIsWeekend = (prevWeekDayOfWeek === 0 || prevWeekDayOfWeek === 6);
+                                    needTopBorder = !prevWeekIsWeekend;
+                                }
+                            }
+
+                            const weekendClass = isSaturday ? ' saturday' : (isSunday ? ' sunday' : '');
+                            const topBorderClass = needTopBorder ? ' weekend-top' : '';
+
                             // Find events for this day
                             const dayEvents = allEvents.filter(e => e.date === dateStr);
-                            
-                            html += `<div class="calendar-day">
+
+                            html += `<div class="calendar-day${weekendClass}${topBorderClass}">
                                 <span class="date-number">${day}</span>`;
                             
                             if (dayEvents.length > 0) {
