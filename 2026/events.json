@@ -547,7 +547,7 @@
     "date": "2026-02-12",
     "community": "PyLadies Kaohsiung",
     "title": "走進資料領域：資料科學家與分析師的工作日常與職涯選擇",
-    "description": "",
+    "description": "線上活動",
     "link": "https://pyladies-kaohsiung.kktix.cc/events/pyladies-journey-202602",
     "color": "#FA3C0A"
   },
@@ -555,48 +555,48 @@
     "date": "2026-05-23",
     "community": "PyLadies Kaohsiung",
     "title": "Python 入門工作坊",
-    "description": "",
-    "link": "",
+    "description": "實體活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
     "color": "#FA3C0A"
   },
   {
     "date": "2026-05-24",
     "community": "PyLadies Kaohsiung",
     "title": "Python 入門工作坊",
-    "description": "",
-    "link": "",
+    "description": "實體活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
     "color": "#FA3C0A"
   },
   {
     "date": "2026-03-21",
     "community": "PyLadies Kaohsiung",
     "title": "Python 金融數據工作坊",
-    "description": "",
-    "link": "",
+    "description": "實體+線上活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
     "color": "#FA3C0A"
   },
   {
     "date": "2026-04-25",
     "community": "PyLadies Kaohsiung",
     "title": "Python 金融數據工作坊",
-    "description": "",
-    "link": "",
+    "description": "實體+線上活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
     "color": "#FA3C0A"
   },
   {
     "date": "2026-06-27",
     "community": "PyLadies Kaohsiung",
     "title": "Python 金融數據工作坊",
-    "description": "",
-    "link": "",
+    "description": "實體+線上活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
     "color": "#FA3C0A"
   },
   {
     "date": "2026-07-25",
     "community": "PyLadies Kaohsiung",
     "title": "Python 金融數據工作坊",
-    "description": "",
-    "link": "",
+    "description": "實體+線上活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
     "color": "#FA3C0A"
   },
 ]
