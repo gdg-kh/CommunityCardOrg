@@ -85,7 +85,7 @@
     "title": "PyLadies Kaohsiung 網站與社群媒體的零成本 AI 工具實務分享",
     "description": "",
     "link": "https://pyladies-kaohsiung.kktix.cc/events/pyladies-chat-202512",
-    "color": "#EA4335"
+    "color": "#FA3C0A"
   },
   {
     "date": "2025-12-19",
@@ -542,5 +542,61 @@
     "description": "",
     "link": "https://www.facebook.com/groups/vscp.tw",
     "color": "#F9AB00"
-  }
+  },
+  {
+    "date": "2026-02-12",
+    "community": "PyLadies Kaohsiung",
+    "title": "走進資料領域：資料科學家與分析師的工作日常與職涯選擇",
+    "description": "",
+    "link": "https://pyladies-kaohsiung.kktix.cc/events/pyladies-journey-202602",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-05-23",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 入門工作坊",
+    "description": "",
+    "link": "",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-05-24",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 入門工作坊",
+    "description": "",
+    "link": "",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-03-21",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 金融數據工作坊",
+    "description": "",
+    "link": "",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-04-25",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 金融數據工作坊",
+    "description": "",
+    "link": "",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-06-27",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 金融數據工作坊",
+    "description": "",
+    "link": "",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-07-25",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 金融數據工作坊",
+    "description": "",
+    "link": "",
+    "color": "#FA3C0A"
+  },
 ]
