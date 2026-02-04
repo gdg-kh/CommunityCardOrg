@@ -256,7 +256,31 @@
     "color": "#EA4335"
   },
   {
-    "date": "2026-11-21",
+    "date": "2026-03-21",
+    "community": "GDG Kaohsiung",
+    "title": "Build with AI 2026 高雄場",
+    "description": "Vibe SQL 實戰分享（活動頁還沒開）",
+    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-04-24",
+    "community": "Build with AI 2026 高雄場",
+    "title": "Build with AI 2026 高雄場",
+    "description": "客製化你的 AI 指令集：利用 Gemini CLI Slash Commands 重構工作流（活動頁還沒開）",
+    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-05-16",
+    "community": "Build with AI 2026 高雄場",
+    "title": "Build with AI 2026 高雄場",
+    "description": "Vibe Coding 與 Nano Banana 的跨界實作（活動頁還沒開）",
+    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-11-14",
     "community": "GDG Kaohsiung",
     "title": "DevFest 2026 高雄場",
     "description": "",
@@ -473,6 +497,14 @@
   },
   {
     "date": "2026-01-15",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
+    "link": "https://www.facebook.com/share/p/1ByYFdxGE8/",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-02-09",
     "community": "KIMU - 高雄獨立遊戲開發者聚會",
     "title": "KIMU 之南部人下班來聊遊戲",
     "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
