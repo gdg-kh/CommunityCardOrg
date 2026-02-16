@@ -480,9 +480,17 @@
     "color": "#34A853"
   },
   {
-    "date": "2026-03-06",
+    "date": "2026-03-07",
     "community": "UIUX Kaohsiung",
     "title": "高雄設計師聚會 #6",
+    "description": "Design Token System",
+    "link": "https://luma.com/jc7upvkg",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-04-04",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #7",
     "description": "",
     "link": "https://luma.com/sxng9fgs",
     "color": "#34A853"
@@ -643,7 +651,7 @@
     "date": "2026-02-21",
     "community": "KaLUG",
     "title": "初五過年聚會",
-    "description": "地點還沒定 日期初五 應該是中午",
+    "description": "過年好久不見的北漂朋友們一起回來吃飯聊天",
     "link": "https://luma.com/84foqx9q?utm_source=kalug.tw/",
     "color": "#4285F4"
   },
@@ -653,6 +661,22 @@
     "title": "測試試飛場：為你的專案收集回饋",
     "description": "您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！",
     "link": "https://www.secondspace.dev/zh/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-02-28",
+    "community": "Second Space",
+    "title": "Pizza & Networking",
+    "description": "Great ideas deserve great company.",
+    "link": "https://luma.com/ktq1367v",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-02-28",
+    "community": "Second Space",
+    "title": "Creator x Creator",
+    "description": "What happens when creators share the room—not just the stage?",
+    "link": "https://luma.com/fex0e0vn",
     "color": "#F9AB00"
   }
 ]
