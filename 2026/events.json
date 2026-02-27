@@ -179,7 +179,7 @@
     "date": "2026-03-10",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #39",
-    "description": "",
+    "description": "1. AI 驅動的 API 開發實戰<br>2. Scaffold 自動化整合模板工具",
     "link": "https://gdg.community.dev/e/mwp8d8/",
     "color": "#EA4335"
   },
@@ -264,10 +264,34 @@
     "color": "#EA4335"
   },
   {
+    "date": "2026-03-25",
+    "community": "GDG Kaohsiung",
+    "title": "Build with AI 2026 高雄場",
+    "description": "Gemini CLI 入門工作坊：安環境巧佈八卦陣，定計畫初試空城計（活動頁還沒開）",
+    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-04-15",
+    "community": "GDG Kaohsiung",
+    "title": "Build with AI 2026 高雄場",
+    "description": "Gemini CLI 中階工作坊：設內鉤嚴查違法紀，自動修大敗亂碼軍（活動頁還沒開）",
+    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "color": "#EA4335"
+  },
+  {
     "date": "2026-04-24",
     "community": "Build with AI 2026 高雄場",
     "title": "Build with AI 2026 高雄場",
     "description": "客製化你的 AI 指令集：利用 Gemini CLI Slash Commands 重構工作流（活動頁還沒開）",
+    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-05-13",
+    "community": "GDG Kaohsiung",
+    "title": "Build with AI 2026 高雄場",
+    "description": "Gemini CLI 高級工作坊：立軍令巧寫單元測，全自動歸降慣例標（活動頁還沒開）",
     "link": "https://www.facebook.com/groups/GDGKaohsiung/",
     "color": "#EA4335"
   },
@@ -307,16 +331,16 @@
     "date": "2026-03-31",
     "community": "開發者 Buffet",
     "title": "開發者 Café",
-    "description": "3 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
+    "description": "饅頭我不寫程式了之 Plan Mode 是在 Plan 什麼？",
+    "link": "https://www.facebook.com/share/1BTZjDj9ew/",
     "color": "#4285F4"
   },
   {
     "date": "2026-04-28",
     "community": "開發者 Buffet",
     "title": "開發者 Café",
-    "description": "4 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
+    "description": "新年新希望(?)，讓社群活動紀錄自動化",
+    "link": "https://www.facebook.com/share/14Xq25meQzk/",
     "color": "#4285F4"
   },
   {
@@ -464,6 +488,14 @@
     "color": "#4285F4"
   },
   {
+    "date": "2026-03-17",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/03",
+    "description": "（活動頁還沒開）",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/",
+    "color": "#4285F4"
+  },
+  {
     "date": "2026-01-03",
     "community": "UIUX Kaohsiung",
     "title": "UI<>Dev 團隊分工與前端溝通",
@@ -568,6 +600,46 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-03-02",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-09",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-16",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-23",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-30",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2026-02-04",
     "community": "氛圍工作者交流趴（粉鳥趴）",
     "title": "",
@@ -584,7 +656,23 @@
     "color": "#F9AB00"
   },
   {
-    "date": "2026-02-25",
+    "date": "2026-03-11",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-18",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-25",
     "community": "氛圍工作者交流趴（粉鳥趴）",
     "title": "",
     "description": "",
