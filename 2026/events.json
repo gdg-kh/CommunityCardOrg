@@ -259,8 +259,8 @@
     "date": "2026-03-21",
     "community": "GDG Kaohsiung",
     "title": "Build with AI 2026 高雄場",
-    "description": "Vibe SQL 實戰分享（活動頁還沒開）",
-    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "description": "極致懶人學 — 從 Vibe SQL 到 AI 代理的生存策略",
+    "link": "https://www.accupass.com/event/2602230332571726015441",
     "color": "#EA4335"
   },
   {
@@ -766,5 +766,13 @@
     "description": "What happens when creators share the room—not just the stage?",
     "link": "https://luma.com/fex0e0vn",
     "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-21",
+    "community": "KaLUG",
+    "title": "2603 meetup",
+    "description": "畫電路/nextcloud...",
+    "link": "https://luma.com/awwlb7l0",
+    "color": "#4285F4"
   }
 ]
