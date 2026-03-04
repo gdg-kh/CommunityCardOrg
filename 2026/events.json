@@ -267,16 +267,16 @@
     "date": "2026-03-25",
     "community": "GDG Kaohsiung",
     "title": "Build with AI 2026 高雄場",
-    "description": "Gemini CLI 入門工作坊：安環境巧佈八卦陣，定計畫初試空城計（活動頁還沒開）",
-    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "description": "Gemini CLI 演義第一回：安環境巧佈八卦陣，定計畫初試空城計",
+    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026setup-the-base-plan-the-case/",
     "color": "#EA4335"
   },
   {
     "date": "2026-04-15",
     "community": "GDG Kaohsiung",
     "title": "Build with AI 2026 高雄場",
-    "description": "Gemini CLI 中階工作坊：設內鉤嚴查違法紀，自動修大敗亂碼軍（活動頁還沒開）",
-    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "description": "Gemini CLI 演義第二回：設內鉤嚴查違法紀，自動修大敗亂碼軍",
+    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026hook-the-flow-fix-the-show/",
     "color": "#EA4335"
   },
   {
@@ -291,8 +291,8 @@
     "date": "2026-05-13",
     "community": "GDG Kaohsiung",
     "title": "Build with AI 2026 高雄場",
-    "description": "Gemini CLI 高級工作坊：立軍令巧寫單元測，全自動歸降慣例標（活動頁還沒開）",
-    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "description": "Gemini CLI 演義第三回：立軍令巧寫單元測，全自動歸降慣例標",
+    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026skill-the-test-commit-the-best/",
     "color": "#EA4335"
   },
   {
