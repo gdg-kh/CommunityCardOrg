@@ -86,7 +86,8 @@
             position: relative;
             overflow: hidden;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: baseline;
         }
 
         .calendar-day.empty {
@@ -118,11 +119,24 @@
         }
 
         .date-number {
+            width: 20px;
+            font-size: 13px;
             font-weight: bold;
-            font-size: 18px;
             color: #333;
-            margin-bottom: 4px;
             flex-shrink: 0;
+            margin-left: -10px;
+            margin-right: 4px;
+            margin-bottom: 0;
+            text-align: right;
+            padding-top: 0;
+        }
+
+        .events-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 0;
         }
 
         .day-event {
@@ -225,10 +239,11 @@
                 const dayEvents = events.filter(e => e.date === dateStr);
 
                 html += `<div class="calendar-day${weekendClass}${topBorderClass}">
-                    <div class="date-number">${day}</div>`;
+                    <div class="date-number">${day}</div>
+                    <div class="events-container">`;
 
-                // If 2+ events on same day, only show community name
-                const showTitleOnly = dayEvents.length >= 2;
+                // If 3+ events on same day, only show community name
+                const showTitleOnly = dayEvents.length >= 3;
 
                 dayEvents.forEach(event => {
                     const colorStyle = event.color ? `color: ${event.color};` : '';
@@ -241,7 +256,7 @@
                     </div>`;
                 });
 
-                html += '</div>';
+                html += '</div></div>';
             }
 
             // Fill remaining grid
