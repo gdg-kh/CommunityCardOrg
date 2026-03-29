@@ -187,7 +187,7 @@
     "date": "2026-04-07",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #40",
-    "description": "",
+    "description": "1. 亞灣區的數位匯流：高雄智慧城市展<br>2. 可以幫我「想」個程式嗎？",
     "link": "https://gdg.community.dev/e/mjmbpq/",
     "color": "#EA4335"
   },
@@ -272,6 +272,14 @@
     "color": "#EA4335"
   },
   {
+    "date": "2026-04-01",
+    "community": "好的開發者社群",
+    "title": "好的開發者社群 X 兔 CON 2026 年會",
+    "description": "高雄最神秘的社群，好的開發者社群（Good Developer Group）和兔 CON 一起辦年會啦！",
+    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "color": "#EA4335"
+  },
+  {
     "date": "2026-04-15",
     "community": "GDG Kaohsiung",
     "title": "Build with AI 2026 高雄場",
@@ -281,9 +289,9 @@
   },
   {
     "date": "2026-04-24",
-    "community": "Build with AI 2026 高雄場",
+    "community": "GDG Kaohsiung",
     "title": "Build with AI 2026 高雄場",
-    "description": "客製化你的 AI 指令集：利用 Gemini CLI Slash Commands 重構工作流（活動頁還沒開）",
+    "description": "解構 AI 代理與穩定性工程的實戰進化論（活動頁還沒開）",
     "link": "https://www.facebook.com/groups/GDGKaohsiung/",
     "color": "#EA4335"
   },
@@ -293,14 +301,6 @@
     "title": "Build with AI 2026 高雄場",
     "description": "Gemini CLI 演義第三回：立軍令巧寫單元測，全自動歸降慣例標",
     "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026skill-the-test-commit-the-best/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-05-16",
-    "community": "Build with AI 2026 高雄場",
-    "title": "Build with AI 2026 高雄場",
-    "description": "Vibe Coding 與 Nano Banana 的跨界實作（活動頁還沒開）",
-    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
     "color": "#EA4335"
   },
   {
@@ -544,6 +544,14 @@
     "color": "#4285F4"
   },
   {
+    "date": "2026-04-21",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/04",
+    "description": "活動還沒開",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup//313647240/",
+    "color": "#4285F4"
+  },
+  {
     "date": "2026-01-03",
     "community": "UIUX Kaohsiung",
     "title": "UI<>Dev 團隊分工與前端溝通",
@@ -571,6 +579,14 @@
     "date": "2026-04-04",
     "community": "UIUX Kaohsiung",
     "title": "高雄設計師聚會 #7",
+    "description": "",
+    "link": "https://luma.com/v9lkn7yw",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-05-02",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #8",
     "description": "",
     "link": "https://luma.com/sxng9fgs",
     "color": "#34A853"
@@ -648,14 +664,6 @@
     "color": "#F9AB00"
   },
   {
-    "date": "2026-03-16",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io/",
-    "color": "#F9AB00"
-  },
-  {
     "date": "2026-03-23",
     "community": "K.NET",
     "title": "軟體開發‧雲端‧AI‧職涯",
@@ -665,6 +673,30 @@
   },
   {
     "date": "2026-03-30",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-04-13",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-04-20",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-04-27",
     "community": "K.NET",
     "title": "軟體開發‧雲端‧AI‧職涯",
     "description": "星巴克常態聚會交流",
@@ -789,6 +821,14 @@
     "title": "2603 meetup",
     "description": "畫電路/nextcloud...",
     "link": "https://luma.com/awwlb7l0",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-04-10",
+    "community": "vLAB Online",
+    "title": "OWASP Meetup 高雄實體",
+    "description": "這是2025第一場南部的聚會，本次活動除了分享最新 OWASP 動態更與台灣社群 vLAB Online 同好交流活動。",
+    "link": "https://csa.kktix.cc/events/owasp20260410",
     "color": "#4285F4"
   }
 ]
