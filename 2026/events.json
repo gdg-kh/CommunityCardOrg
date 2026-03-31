@@ -273,10 +273,10 @@
   },
   {
     "date": "2026-04-01",
-    "community": "好的開發者社群",
+    "community": "GDG Kaohsiung",
     "title": "好的開發者社群 X 兔 CON 2026 年會",
-    "description": "高雄最神秘的社群，好的開發者社群（Good Developer Group）和兔 CON 一起辦年會啦！",
-    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "description": "我們致力於推廣最高境界的工程師禪意，無論發生什麼事，先說「好的」，然後繼續工作",
+    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-good-developer-group-x-tu-con-annual-conf-2026",
     "color": "#EA4335"
   },
   {
@@ -291,8 +291,8 @@
     "date": "2026-04-24",
     "community": "GDG Kaohsiung",
     "title": "Build with AI 2026 高雄場",
-    "description": "解構 AI 代理與穩定性工程的實戰進化論（活動頁還沒開）",
-    "link": "https://www.facebook.com/groups/GDGKaohsiung/",
+    "description": "解構 AI 代理與穩定性工程的實戰進化論",
+    "link": "https://www.accupass.com/event/2603170317539828627210",
     "color": "#EA4335"
   },
   {
@@ -621,6 +621,14 @@
     "title": "KIMU 之南部人下班來聊遊戲",
     "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
     "link": "https://www.facebook.com/share/p/1GSLrBtqzt/",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-04-09",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "（活動還沒開）",
+    "link": "https://www.facebook.com/groups/kimugroup/",
     "color": "#34A853"
   },
   {
