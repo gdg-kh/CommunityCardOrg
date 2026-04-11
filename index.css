@@ -389,6 +389,27 @@ ul {
   border-left: none;
 }
 
+/* National holidays - same red border as weekends */
+.calendar-day.holiday {
+    border-left: 1px solid #f28b82;
+    border-right: 1px solid #f28b82;
+    border-bottom: 1px solid #f28b82;
+}
+
+.calendar-day.holiday.holiday-top {
+    border-top: 1px solid #f28b82;
+}
+
+/* Remove duplicate border between adjacent holidays */
+.calendar-day.holiday + .calendar-day.holiday {
+    border-left: none;
+}
+
+/* Remove duplicate border between holiday and Saturday */
+.calendar-day.holiday + .calendar-day.saturday {
+    border-left: none;
+}
+
 .date-number {
   font-weight: bold;
   color: #333;
