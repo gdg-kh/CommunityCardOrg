@@ -70,6 +70,61 @@
 
         /* Calendar Styles */
         /* Note: Calendar styles are in index.css */
+
+        /* 本月活動列表 */
+        #event-list-card {
+            padding: 16px;
+        }
+
+        #event-list-card .list-header {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #a142f4;
+        }
+
+        #event-list-card table {
+            font-size: 0.9rem;
+        }
+
+        #event-list-card .community-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        #event-list-card .btn-cal {
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 576px) {
+            #event-list-card th.col-weekday,
+            #event-list-card td.col-weekday {
+                display: none;
+            }
+
+            #event-list-card .weekday-mobile {
+                display: block;
+            }
+
+            #event-list-card .btn-cal-group {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+        }
+
+        @media (min-width: 577px) {
+            #event-list-card .weekday-mobile {
+                display: none;
+            }
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"></script>
@@ -255,9 +310,117 @@
 
                         html += '</div>';
                         calendarRoot.innerHTML = html;
+                        renderEventList();
                     }
+
+                    // ── 本月活動列表工具函式 ──────────────────────────
+
+                    let currentMonthEvents = [];
+
+                    function getGoogleCalendarURL(event) {
+                        const start = event.date.replace(/-/g, '');
+                        const nextDay = new Date(event.date + 'T00:00:00');
+                        nextDay.setDate(nextDay.getDate() + 1);
+                        const end = nextDay.toISOString().slice(0, 10).replace(/-/g, '');
+                        const text = encodeURIComponent(event.title ? `${event.community} - ${event.title}` : event.community);
+                        const descParts = [];
+                        if (event.description) descParts.push(event.description.replace(/<br\s*\/?>/gi, '\n'));
+                        if (event.link && event.link !== '#') descParts.push('活動連結：' + event.link);
+                        const details = encodeURIComponent(descParts.join('\n'));
+                        return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${end}&details=${details}`;
+                    }
+
+                    function downloadICS(index) {
+                        const event = currentMonthEvents[index];
+                        const start = event.date.replace(/-/g, '');
+                        const nextDay = new Date(event.date + 'T00:00:00');
+                        nextDay.setDate(nextDay.getDate() + 1);
+                        const end = nextDay.toISOString().slice(0, 10).replace(/-/g, '');
+                        const summary = event.title ? `${event.community} - ${event.title}` : event.community;
+                        const descParts = [];
+                        if (event.description) descParts.push(event.description.replace(/<br\s*\/?>/gi, '\\n'));
+                        if (event.link && event.link !== '#') descParts.push('活動連結：' + event.link);
+                        const lines = [
+                            'BEGIN:VCALENDAR',
+                            'VERSION:2.0',
+                            'PRODID:-//Community Card Org//高雄社群活動//ZH',
+                            'BEGIN:VEVENT',
+                            `UID:${event.date}-${encodeURIComponent(event.community)}@community-card.org`,
+                            `DTSTART;VALUE=DATE:${start}`,
+                            `DTEND;VALUE=DATE:${end}`,
+                            `SUMMARY:${summary}`,
+                        ];
+                        if (descParts.length) lines.push(`DESCRIPTION:${descParts.join('\\n')}`);
+                        if (event.link && event.link !== '#') lines.push(`URL:${event.link}`);
+                        lines.push('END:VEVENT', 'END:VCALENDAR');
+                        const blob = new Blob([lines.join('\r\n')], {type: 'text/calendar;charset=utf-8'});
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `${event.date}-${event.community}.ics`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                    }
+
+                    function renderEventList() {
+                        const listRoot = document.getElementById('event-list-root');
+                        const monthEvents = allEvents
+                            .filter(e => {
+                                const [y, m] = e.date.split('-').map(Number);
+                                return y === currentYear && m === currentMonth + 1;
+                            })
+                            .sort((a, b) => a.date.localeCompare(b.date));
+                        currentMonthEvents = monthEvents;
+
+                        if (monthEvents.length === 0) {
+                            listRoot.innerHTML = '<p class="text-muted text-center py-3">本月暫無活動資料</p>';
+                            return;
+                        }
+
+                        let html = `<div class="list-header">📅 ${currentMonth + 1} 月活動（共 ${monthEvents.length} 場）</div>`;
+                        html += '<p style="font-size:0.85rem;color:#666;margin-bottom:10px;">點擊按鈕可將活動加入手機行事曆</p>';
+                        html += '<div class="table-responsive"><table class="table table-sm table-hover mb-0">';
+                        html += '<thead><tr><th>#</th><th>日期</th><th class="col-weekday">星期</th><th>活動</th><th>加入行事曆</th></tr></thead>';
+                        html += '<tbody>';
+                        monthEvents.forEach((event, i) => {
+                            const [y, m, d] = event.date.split('-');
+                            const dayOfWeek = new Date(parseInt(y), parseInt(m) - 1, parseInt(d)).getDay();
+                            const weekNames = ['日', '一', '二', '三', '四', '五', '六'];
+                            const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+                            const dateColor = isWeekend ? 'color:#e53e3e;' : '';
+                            const dateLabel = `<span style="${dateColor}">${m}/${d}</span>`;
+                            const weekLabel = `<span style="${dateColor}">週${weekNames[dayOfWeek]}</span>`;
+                            const dot = `<span class="community-dot" style="background:${event.color || '#666'};"></span>`;
+                            const googleURL = getGoogleCalendarURL(event);
+                            html += `<tr>
+                                <td style="white-space:nowrap;color:#999;">${i + 1}</td>
+                                <td style="white-space:nowrap;">${dateLabel}<span class="weekday-mobile" style="${dateColor}">週${weekNames[dayOfWeek]}</span></td>
+                                <td class="col-weekday" style="white-space:nowrap;">${weekLabel}</td>
+                                <td><div style="display:flex;align-items:flex-start;gap:0;">${dot}<div><strong>${event.community}</strong>${event.title ? `<div style="color:#555;">${event.title}</div>` : ''}</div></div></td>
+                                <td style="white-space:nowrap;">
+                                    <div class="btn-cal-group">
+                                        <a href="${googleURL}" target="_blank" class="btn btn-outline-primary btn-cal">Google</a>
+                                        <button class="btn btn-outline-secondary btn-cal" onclick="downloadICS(${i})">下載</button>
+                                    </div>
+                                </td>
+                            </tr>`;
+                        });
+                        html += '</tbody></table></div>';
+                        listRoot.innerHTML = html;
+                    }
+
+                    // 將 downloadICS 暴露至全域，供 onclick 使用
+                    window.downloadICS = downloadICS;
                 });
             </script>
+        </div>
+
+        <div id="event-list-card" class="card" style="margin-bottom: 24px;">
+            <div id="event-list-root">
+                <div class="text-center p-3 text-muted">載入活動中...</div>
+            </div>
         </div>
     </div>
 </body>
