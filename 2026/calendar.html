@@ -103,6 +103,10 @@
             white-space: nowrap;
         }
 
+        #event-list-card thead th {
+            text-align: center;
+        }
+
         @media (max-width: 576px) {
             #event-list-card th.col-weekday,
             #event-list-card td.col-weekday {
@@ -118,11 +122,55 @@
                 flex-direction: column;
                 gap: 4px;
             }
+
+            /* 讓 #、日期、行事曆欄依內容自動收縮，活動欄填滿剩餘空間 */
+            #event-list-card th:nth-child(1),
+            #event-list-card td:nth-child(1),
+            #event-list-card th:nth-child(2),
+            #event-list-card td:nth-child(2),
+            #event-list-card th:last-child,
+            #event-list-card td:last-child {
+                width: 1%;
+                white-space: nowrap;
+            }
         }
 
         @media (min-width: 577px) {
             #event-list-card .weekday-mobile {
                 display: none;
+            }
+
+            .title-break {
+                display: none;
+            }
+        }
+
+        /* 版面排序：桌機月曆上條列下，手機條列上月曆下 */
+        #calendar-layout {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #calendar-layout > .card:first-child {
+            order: 1;
+        }
+
+        #event-list-card {
+            order: 2;
+        }
+
+        @media (max-width: 576px) {
+            #calendar-layout > .card:first-child {
+                order: 2;
+            }
+
+            #event-list-card {
+                order: 1;
+            }
+
+            #calendar-nav .d-flex {
+                padding: 12px 16px;
+                gap: 12px;
             }
         }
     </style>
@@ -157,15 +205,19 @@
             </li>
         </ul>
 
-        <div class="card" style="margin-bottom: 24px;">
-            <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 20px; padding: 0 10px;">
+        <div id="calendar-nav" class="card" style="margin-bottom: 12px;">
+            <div class="d-flex justify-content-between align-items-center" style="padding: 0 10px;">
                 <button id="prev-month" class="btn btn-outline-secondary btn-sm">&lt; 上個月</button>
                 <h2 class="title mb-0" style="margin: 0; font-size: 1.5rem;">
-                    <span id="calendar-title-date" class="specialColor"></span> 高雄軟體社群活動
+                    <span id="calendar-title-date" class="specialColor"></span><br class="title-break"> <span
+                        style="white-space: nowrap;">高雄軟體社群活動</span>
                 </h2>
                 <button id="next-month" class="btn btn-outline-secondary btn-sm">下個月 &gt;</button>
             </div>
-            
+        </div>
+
+        <div id="calendar-layout">
+            <div class="card" style="margin-bottom: 24px;">
             <div id="calendar-root" class="calendar-container">
                 <!-- Calendar will be rendered here -->
                 <div class="text-center p-3">載入活動中...</div>
@@ -382,7 +434,7 @@
                         let html = `<div class="list-header">📅 ${currentMonth + 1} 月活動（共 ${monthEvents.length} 場）</div>`;
                         html += '<p style="font-size:0.85rem;color:#666;margin-bottom:10px;">點擊按鈕可將活動加入手機行事曆</p>';
                         html += '<div class="table-responsive"><table class="table table-sm table-hover mb-0">';
-                        html += '<thead><tr><th>#</th><th>日期</th><th class="col-weekday">星期</th><th>活動</th><th>加入行事曆</th></tr></thead>';
+                        html += '<thead><tr><th>#</th><th>日期</th><th class="col-weekday">星期</th><th>活動</th><th><span class="d-none d-sm-inline">加入</span>行事曆</th></tr></thead>';
                         html += '<tbody>';
                         monthEvents.forEach((event, i) => {
                             const [y, m, d] = event.date.split('-');
@@ -422,6 +474,7 @@
                 <div class="text-center p-3 text-muted">載入活動中...</div>
             </div>
         </div>
+        </div><!-- /#calendar-layout -->
     </div>
 </body>
 </html>
