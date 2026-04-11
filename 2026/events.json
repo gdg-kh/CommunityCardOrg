@@ -744,6 +744,14 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-04-08",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2026-02-12",
     "community": "PyLadies Kaohsiung",
     "title": "走進資料領域：資料科學家與分析師的工作日常與職涯選擇",
@@ -837,6 +845,22 @@
     "title": "OWASP Meetup 高雄實體",
     "description": "這是2025第一場南部的聚會，本次活動除了分享最新 OWASP 動態更與台灣社群 vLAB Online 同好交流活動。",
     "link": "https://csa.kktix.cc/events/owasp20260410",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-05-29",
+    "community": "國泰 CDC 小聚",
+    "title": "啟動 PM 全面升級｜AI 浪潮下的敏捷實踐與團隊效能優化",
+    "description": "這場小聚會把視角從工程師切換成至產品經理，聊聊 AI 對 PM 在敏捷管理的衝擊與具體做法",
+    "link": "https://www.accupass.com/event/2603310918191420664682",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-04-18",
+    "community": "Global AI Kaohsiung",
+    "title": "GitHub Copilot Dev Days",
+    "description": "GitHub Copilot is more than a code completion tool — it's becoming every developer's AI-powered collaborator.",
+    "link": "https://luma.com/qa3rfmn9",
     "color": "#4285F4"
   }
 ]
