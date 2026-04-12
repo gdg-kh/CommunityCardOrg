@@ -640,9 +640,5 @@ ul {
 }
 
 #event-list-card {
-  order: 2;
-
-  @media (max-width: 576px) {
-    order: 1;
-  }
+  /* order property removed: toggling handles views now */
 }
