@@ -34,6 +34,29 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <style>
+        /* 假日名稱標籤 */
+        .date-row {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .date-row .date-number {
+            display: inline;
+            margin-bottom: 0;
+        }
+
+        .holiday-label {
+            font-size: 0.95em;
+            color: #e53e3e;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            min-width: 0;
+        }
+    </style>
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -152,12 +175,16 @@
               let currentYear = currentDate.getFullYear();
               let currentMonth = currentDate.getMonth(); // 0-indexed
               let allEvents = [];
+              let holidayMap = new Map(); // date → name
 
-              // Fetch events once
-              fetch("events.json")
-                .then((response) => response.json())
-                .then((events) => {
+              // Fetch events and holidays
+              Promise.all([
+                fetch("events.json").then((r) => r.json()),
+                fetch("holidays.json").then((r) => r.json()),
+              ])
+                .then(([events, holidays]) => {
                   allEvents = events;
+                  holidayMap = new Map(holidays.map((h) => [h.date, h.name]));
                   renderCalendar();
                 })
                 .catch((error) => {
@@ -309,11 +336,29 @@
                   const topBorderClass = needTopBorder ? " weekend-top" : "";
                   const rowClass = getEventDateClass(dateStr);
 
+                  // Holiday detection
+                  const holidayName = !isWeekend ? holidayMap.get(dateStr) : undefined;
+                  const isHoliday = !!holidayName;
+                  let holidayClass = "";
+                  if (isHoliday) {
+                    let needHolidayTop;
+                    if (day <= 7) {
+                      needHolidayTop = true;
+                    } else {
+                      const prevDateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day - 7).padStart(2, "0")}`;
+                      needHolidayTop = !holidayMap.has(prevDateStr);
+                    }
+                    holidayClass = " holiday" + (needHolidayTop ? " holiday-top" : "");
+                  }
+
                   // Find events for this day
                   const dayEvents = allEvents.filter((e) => e.date === dateStr);
 
-                  html += `<div class="calendar-day${weekendClass}${topBorderClass}${rowClass}">
-                                <span class="date-number">${day}</span>`;
+                  html += `<div class="calendar-day${weekendClass}${topBorderClass}${holidayClass}${rowClass}">
+                                ${isHoliday
+                                  ? `<div class="date-row"><span class="date-number">${day}</span><span class="holiday-label">${holidayName}</span></div>`
+                                  : `<span class="date-number">${day}</span>`
+                                }`;
 
                   if (dayEvents.length > 0) {
                     dayEvents.forEach((event) => {
@@ -470,7 +515,8 @@
                   ).getDay();
                   const weekNames = ["日", "一", "二", "三", "四", "五", "六"];
                   const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-                  const dateColor = isWeekend ? "color:#e53e3e;" : "";
+                  const isHoliday = !isWeekend && holidayMap.has(event.date);
+                  const dateColor = (isWeekend || isHoliday) ? "color:#e53e3e;" : "";
                   const dateLabel = `<span style="${dateColor}">${m}/${d}</span>`;
                   const weekLabel = `<span style="${dateColor}">週${weekNames[dayOfWeek]}</span>`;
                   const dot = `<span class="community-dot" style="background:${event.color || "#666"};"></span>`;

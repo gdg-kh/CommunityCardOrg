@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -23,6 +23,11 @@ async function generateOGImage() {
         const eventsData = JSON.parse(fs.readFileSync(eventsPath, 'utf-8'));
         console.log(`✅ 讀取活動數據: ${eventsData.length} 筆活動`);
 
+        // 2b. Read holidays.json
+        const holidaysPath = path.join(__dirname, '..', '2026', 'holidays.json');
+        const holidaysData = JSON.parse(fs.readFileSync(holidaysPath, 'utf-8'));
+        console.log(`✅ 讀取假日數據: ${holidaysData.length} 筆假日`);
+
         // 3. Filter current month events
         const monthStr = `${currentYear}-${String(currentMonth).padStart(2, '0')}`;
         const currentMonthEvents = eventsData.filter(event => event.date.startsWith(monthStr));
@@ -36,6 +41,7 @@ async function generateOGImage() {
         template = template.replace(/\{\{YEAR\}\}/g, currentYear);
         template = template.replace(/\{\{MONTH\}\}/g, currentMonth);
         template = template.replace(/\{\{EVENTS_JSON\}\}/g, JSON.stringify(currentMonthEvents));
+        template = template.replace(/\{\{HOLIDAYS_JSON\}\}/g, JSON.stringify(holidaysData));
 
         console.log('✅ 模板處理完成');
 

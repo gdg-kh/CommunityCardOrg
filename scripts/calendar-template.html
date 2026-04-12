@@ -118,6 +118,27 @@
             border-left: none;
         }
 
+        /* National holidays - same red border as weekends */
+        .calendar-day.holiday {
+            border-left: 2px solid #f28b82;
+            border-right: 2px solid #f28b82;
+            border-bottom: 2px solid #f28b82;
+        }
+
+        .calendar-day.holiday.holiday-top {
+            border-top: 2px solid #f28b82;
+        }
+
+        /* Remove duplicate border between adjacent holidays */
+        .calendar-day.holiday + .calendar-day.holiday {
+            border-left: none;
+        }
+
+        /* Remove right border on holiday when adjacent to Saturday (avoid double border) */
+        .calendar-day.holiday:has(+ .calendar-day.saturday) {
+            border-right: none;
+        }
+
         .date-number {
             width: 20px;
             font-size: 13px;
@@ -193,6 +214,13 @@
         const year = {{YEAR}};
         const month = {{MONTH}};
         const events = {{EVENTS_JSON}};
+        const holidays = {
+        {
+            HOLIDAYS_JSON
+        }
+        }
+        ;
+        const holidaySet = new Set(holidays.map(h => h.date));
 
         function renderCalendar() {
             const grid = document.getElementById('calendar-grid');
@@ -235,10 +263,22 @@
 
                 const weekendClass = isSaturday ? ' saturday' : (isSunday ? ' sunday' : '');
                 const topBorderClass = needTopBorder ? ' weekend-top' : '';
+                const isHoliday = holidaySet.has(dateStr) && !isWeekend;
+                let holidayClass = '';
+                if (isHoliday) {
+                    let needHolidayTop;
+                    if (day <= 7) {
+                        needHolidayTop = true;
+                    } else {
+                        const prevDateStr = `${year}-${String(month).padStart(2, '0')}-${String(day - 7).padStart(2, '0')}`;
+                        needHolidayTop = !holidaySet.has(prevDateStr);
+                    }
+                    holidayClass = ' holiday' + (needHolidayTop ? ' holiday-top' : '');
+                }
 
                 const dayEvents = events.filter(e => e.date === dateStr);
 
-                html += `<div class="calendar-day${weekendClass}${topBorderClass}">
+                html += `<div class="calendar-day${weekendClass}${topBorderClass}${holidayClass}">
                     <div class="date-number">${day}</div>
                     <div class="events-container">`;
 
