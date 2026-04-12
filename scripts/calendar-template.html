@@ -134,9 +134,14 @@
             border-left: none;
         }
 
-        /* Remove duplicate border between holiday and Saturday */
-        .calendar-day.holiday + .calendar-day.saturday {
+        /* Remove left border on Monday holiday (adjacent to Sunday in DOM) */
+        .calendar-day.sunday + .calendar-day.holiday {
             border-left: none;
+        }
+
+        /* Remove right border on holiday when adjacent to Saturday (avoid double border) */
+        .calendar-day.holiday:has(+ .calendar-day.saturday) {
+            border-right: none;
         }
 
         .date-number {
