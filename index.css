@@ -275,20 +275,43 @@ ul {
   line-height: 1.4;
 }
 
+.calendar-btn-group {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 240px;
+  margin: 0 auto 12px;
+  .btn {
+    min-height: 40px;
+    padding: 0 16px;
+    touch-action: manipulation;
+    font-size: 0.9rem;
+  }
+}
 .calendar-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   .title {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: bold;
+    text-align: center;
+    margin: 0;
   }
   .btn {
     flex: none;
-    /* 文字不要換行 */
+    font-size: 0.9rem;
+    min-height: 40px;
+    padding: 0 12px;
+    touch-action: manipulation;
     white-space: nowrap;
+    text-box-trim: trim-both;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
   }
 }
 

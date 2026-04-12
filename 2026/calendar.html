@@ -77,88 +77,26 @@
           </h1>
         </div>
 
+        <div class="btn-group calendar-btn-group" role="group">
+          <button id="view-calendar-btn" class="btn btn-outline-primary">
+            月曆顯示
+          </button>
+          <button id="view-list-btn" class="btn btn-outline-primary">
+            清單顯示
+          </button>
+        </div>
+
         <div id="calendar-layout">
           <div class="calendar-nav">
-            <h2
-              class="title mb-0"
-              id="calendar-title-date"
-              style="text-align: left; margin: 0"
-            ></h2>
-            <div style="display: flex; align-items: center; gap: 8px">
-              <span
-                id="event-count-text"
-                style="
-                  font-weight: bold;
-                  color: #666;
-                  font-size: 0.9rem;
-                  margin-right: 8px;
-                "
-              ></span>
-              <div class="btn-group" role="group">
-                <button
-                  id="view-calendar-btn"
-                  class="btn btn-outline-primary btn-sm"
-                  style="
-                    width: 32px;
-                    height: 32px;
-                    padding: 0;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                  "
-                  title="月曆檢視"
-                >
-                  <i class="fa-solid fa-calendar-days"></i>
-                </button>
-                <button
-                  id="view-list-btn"
-                  class="btn btn-outline-primary btn-sm"
-                  style="
-                    width: 32px;
-                    height: 32px;
-                    padding: 0;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                  "
-                  title="清單檢視"
-                >
-                  <i class="fa-solid fa-list"></i>
-                </button>
-              </div>
-              <div class="btn-group" role="group">
-                <button
-                  id="prev-month"
-                  class="btn btn-outline-secondary btn-sm"
-                  style="
-                    width: 32px;
-                    height: 32px;
-                    padding: 0;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                  "
-                  title="上個月"
-                >
-                  <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button
-                  id="next-month"
-                  class="btn btn-outline-secondary btn-sm"
-                  style="
-                    width: 32px;
-                    height: 32px;
-                    padding: 0;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                  "
-                  title="下個月"
-                >
-                  <i class="fa-solid fa-chevron-right"></i>
-                </button>
-              </div>
-            </div>
+            <button id="prev-month" class="btn btn-outline-secondary">
+              <i class="fa-solid fa-angle-left"></i>
+              上個月
+            </button>
+            <h2 class="title mb-0" id="calendar-title-date"></h2>
+            <button id="next-month" class="btn btn-outline-secondary">
+              下個月
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
           </div>
           <div id="calendar-root" class="calendar-container">
             <!-- Calendar will be rendered here -->
@@ -575,9 +513,25 @@
             </div>
           </div>
         </div>
-        <p style="text-align: right; font-size: 0.8rem; color: #666; margin: 0">
-          * 實際活動資訊依照主辦單位提供資訊為準
-        </p>
+
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 16px;
+          "
+        >
+          <span
+            id="event-count-text"
+            style="font-weight: bold; color: #666; font-size: 0.9rem"
+          ></span>
+          <p
+            style="text-align: right; font-size: 0.8rem; color: #666; margin: 0"
+          >
+            * 實際活動資訊依照主辦單位提供<br class="d-sm-none" />資訊為準
+          </p>
+        </div>
       </div>
     </div>
   </body>
