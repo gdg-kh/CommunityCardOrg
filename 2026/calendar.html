@@ -70,11 +70,14 @@
         </li>
       </ul>
 
-      <div class="card" id="calendar-nav" style="margin-bottom: 12px">
-        <div class="title-box" style="padding-bottom: 8px">
+      <div class="card" style="margin-bottom: 12px">
+        <div class="title-box">
           <h1 class="title">
             <span class="specialColor">高雄軟體社群活動</span>
           </h1>
+        </div>
+
+        <div id="calendar-layout">
           <div class="calendar-nav">
             <h2
               class="title mb-0"
@@ -157,9 +160,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <div id="calendar-layout">
           <div id="calendar-root" class="calendar-container">
             <!-- Calendar will be rendered here -->
             <div class="text-center p-3">載入活動中...</div>
@@ -247,7 +247,48 @@
                 renderCalendar();
               });
 
+              let closestUpcomingDate = null;
+              function getEventDateClass(dateStr) {
+                const now = new Date();
+                const today = new Date(
+                  now.getFullYear(),
+                  now.getMonth(),
+                  now.getDate(),
+                ).getTime();
+                const [y, m, d] = dateStr.split("-").map(Number);
+                const eventTime = new Date(y, m - 1, d).getTime();
+                const diffDays = Math.round(
+                  (eventTime - today) / (1000 * 3600 * 24),
+                );
+                if (diffDays === 0) return " bg-today";
+
+                // only the closest upcoming event date
+                if (diffDays > 0) {
+                  if (!closestUpcomingDate) {
+                    closestUpcomingDate = dateStr;
+                    return " bg-upcoming";
+                  } else if (dateStr === closestUpcomingDate) {
+                    return " bg-upcoming";
+                  }
+                }
+
+                return "";
+              }
+
               function renderCalendar() {
+                closestUpcomingDate = null; // Re-evaluate when rendering
+
+                // Pre-calculate nearest upcoming event to ensure both calendar grid and list view highlight the same date
+                const now = new Date();
+                const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+
+                const futureEvents = allEvents
+                  .filter((e) => e.date > todayStr)
+                  .sort((a, b) => a.date.localeCompare(b.date));
+                if (futureEvents.length > 0) {
+                  closestUpcomingDate = futureEvents[0].date;
+                }
+
                 // Update Title
                 titleDateSpan.textContent = `${currentYear} 年 ${currentMonth + 1} 月`;
 
@@ -328,11 +369,12 @@
                       ? " sunday"
                       : "";
                   const topBorderClass = needTopBorder ? " weekend-top" : "";
+                  const rowClass = getEventDateClass(dateStr);
 
                   // Find events for this day
                   const dayEvents = allEvents.filter((e) => e.date === dateStr);
 
-                  html += `<div class="calendar-day${weekendClass}${topBorderClass}">
+                  html += `<div class="calendar-day${weekendClass}${topBorderClass}${rowClass}">
                                 <span class="date-number">${day}</span>`;
 
                   if (dayEvents.length > 0) {
@@ -503,7 +545,9 @@
                   const eventLinkEnd =
                     event.link && event.link !== "#" ? `</a>` : "";
 
-                  html += `<tr>
+                  const rowClass = getEventDateClass(event.date);
+
+                  html += `<tr class="${rowClass.trim()}">
                                 <td style="white-space:nowrap;color:#999;">${i + 1}</td>
                                 <td style="white-space:nowrap;">${dateLabel}<span class="weekday-mobile" style="${dateColor}">週${weekNames[dayOfWeek]}</span></td>
                                 <td class="col-weekday" style="white-space:nowrap;">${weekLabel}</td>
@@ -531,14 +575,7 @@
             </div>
           </div>
         </div>
-        <p
-          style="
-            text-align: right;
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 8px;
-          "
-        >
+        <p style="text-align: right; font-size: 0.8rem; color: #666; margin: 0">
           * 實際活動資訊依照主辦單位提供資訊為準
         </p>
       </div>

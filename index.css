@@ -1,5 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+TC:wght@100..900&display=swap");
+
 body {
   background-color: #f6f6f6;
+}
+
+* {
+  font-family: "Inter", "Noto Sans TC", sans-serif;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+p,
+li,
+ul,
+ol {
+  font-size: 0.9rem;
 }
 
 .cardWrapper {
@@ -39,7 +56,7 @@ body {
   }
 
   .nav-item {
-    font-weight: 900;
+    font-weight: 700;
     min-width: 100px;
 
     .nav-link {
@@ -47,9 +64,7 @@ body {
       padding: 10px 0;
       /* 文字換行平衡 */
       text-wrap: balance;
-      @media (max-width: 600px) {
-        font-size: 0.9rem;
-      }
+      font-size: 0.9rem;
     }
   }
 }
@@ -122,7 +137,7 @@ body {
   padding-bottom: 20px;
   .title {
     text-align: center;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 1.6rem;
     margin-bottom: 0;
     .specialColor {
@@ -134,22 +149,6 @@ body {
     font-size: 1rem;
     color: #666;
     margin-bottom: 0;
-  }
-
-  .calendar-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    .title {
-      font-size: 1.4rem;
-      font-weight: bold;
-    }
-    .btn {
-      flex: none;
-      /* 文字不要換行 */
-      white-space: nowrap;
-    }
   }
 }
 
@@ -164,12 +163,6 @@ body {
   text-align: center; /* 文字置中 */
 }
 
-.communityItemTitle {
-  margin-top: 8px;
-  margin-bottom: 8px;
-  text-align: center; /* 文字置中 */
-}
-
 .minorLink {
   color: var(--bs-yellow);
 }
@@ -178,21 +171,29 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* 水平置中 */
-  padding-bottom: 10px; /* 增加 padding，讓虛線與內容有點間隔 */
+  padding: 40px 0;
   border-bottom: 1px dashed #ccc; /* 底部虛線邊框 */
-  font-size: 18px; /* 預設字體大小 */
-}
+  font-size: 1rem; /* 預設字體大小 */
 
-/* 移除最後一個 community-item 的虛線 */
-.communityItem:last-child {
-  border-bottom: none;
-}
+  .description {
+    width: 100%;
+  }
 
-.communityItem img {
-  max-width: 100%; /* 圖片最大寬度為容器的 100% */
-  height: auto; /* 高度自動調整 */
-  margin-top: 10px;
-  border-radius: 5px;
+  .communityItemTitle {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    text-align: center; /* 文字置中 */
+  }
+  /* 移除最後一個 community-item 的虛線 */
+  &:last-child {
+    border-bottom: none;
+  }
+  img {
+    max-width: 100%; /* 圖片最大寬度為容器的 100% */
+    height: auto; /* 高度自動調整 */
+    margin-top: 10px;
+    border-radius: 5px;
+  }
 }
 
 ul {
@@ -226,10 +227,9 @@ ul {
   display: flex;
   padding: 12px 0;
   border-bottom: 1px solid #eee;
-}
-
-.event-item:last-child {
-  border-bottom: none;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .event-date {
@@ -275,10 +275,27 @@ ul {
   line-height: 1.4;
 }
 
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+  .title {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+  .btn {
+    flex: none;
+    /* 文字不要換行 */
+    white-space: nowrap;
+  }
+}
+
 /* Calendar Styles */
 .calendar-container {
   width: 100%;
-  margin-bottom: 24px;
+  margin-bottom: 4px;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
@@ -292,11 +309,10 @@ ul {
   border-bottom: 1px solid #ddd;
   text-align: center;
   font-weight: bold;
-  padding: 10px 0;
 }
 
 .calendar-header div {
-  padding: 5px;
+  padding: 8px 4px;
   font-size: 0.9rem;
   color: #495057;
 }
@@ -304,6 +320,7 @@ ul {
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  min-width: 600px;
 
   /* grid-auto-rows: minmax(100px, auto); */
 }
@@ -312,7 +329,7 @@ ul {
   min-height: 100px;
   border-right: 1px solid #eee;
   border-bottom: 1px solid #eee;
-  padding: 8px;
+  padding: 4px;
   position: relative;
   background: #fff;
 }
@@ -352,7 +369,7 @@ ul {
 .date-number {
   font-weight: bold;
   color: #333;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   display: block;
   font-size: 1.1em;
 }
@@ -611,10 +628,10 @@ ul {
   .date-number {
     font-weight: bold;
     color: #333;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     display: block;
     font-size: 0.9rem;
-    font-weight: 900;
+    font-weight: 700;
   }
 
   .event-community {
@@ -641,4 +658,47 @@ ul {
 
 #event-list-card {
   /* order property removed: toggling handles views now */
+}
+
+/* 事件背景顏色 (今天 & 即將到來) */
+.bg-today {
+  background-color: #fff3cd !important;
+}
+
+/* 針對清單中的 tr > td，因為 Bootstrap 常常會覆蓋 tr 的 background-color */
+.table tr.bg-today > td {
+  background-color: #fff3cd !important;
+}
+
+@keyframes blink-pale-yellow {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #fff9e6;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* 用另一組沒有 transparent 的 keyframes 來確保能覆蓋 Bootstrap table bg */
+@keyframes blink-pale-yellow-td {
+  0% {
+    background-color: var(--bs-table-bg);
+  }
+  50% {
+    background-color: #fff9e6;
+  }
+  100% {
+    background-color: var(--bs-table-bg);
+  }
+}
+
+.bg-upcoming {
+  animation: blink-pale-yellow 2s infinite;
+}
+
+.table tr.bg-upcoming > td {
+  animation: blink-pale-yellow-td 2s infinite;
 }
