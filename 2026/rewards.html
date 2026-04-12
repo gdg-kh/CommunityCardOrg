@@ -1,151 +1,120 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <link href="../bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../index.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="2026 高雄社群名牌卡集章獎勵活動，參與社群活動集點兌換精美獎品。" name="description">
-    <meta content="高雄社群, 集章獎勵, 社群活動, 兌換獎品, Rewards" name="keywords">
-    <meta content="2026 高雄社群名牌卡 - 集章獎勵" property="og:title">
-    <meta content="2026 高雄社群名牌卡集章獎勵活動，參與社群活動集點兌換精美獎品。" property="og:description">
-    <meta content="website" property="og:type">
-    <meta content="https://community-card.org/2026/rewards.html" property="og:url">
-    <meta content="https://community-card.org/assets/print_community_card_forward_300dpi_2026.png" property="og:image">
-    <meta content="高雄社群名牌卡" property="og:site_name">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="2026 高雄社群名牌卡集章獎勵活動，參與社群活動集點兌換精美獎品。"
+      name="description"
+    />
+    <meta
+      content="高雄社群, 集章獎勵, 社群活動, 兌換獎品, Rewards"
+      name="keywords"
+    />
+    <meta content="2026 高雄社群名牌卡 - 集章獎勵" property="og:title" />
+    <meta
+      content="2026 高雄社群名牌卡集章獎勵活動，參與社群活動集點兌換精美獎品。"
+      property="og:description"
+    />
+    <meta content="website" property="og:type" />
+    <meta
+      content="https://community-card.org/2026/rewards.html"
+      property="og:url"
+    />
+    <meta
+      content="https://community-card.org/assets/print_community_card_forward_300dpi_2026.png"
+      property="og:image"
+    />
+    <meta content="高雄社群名牌卡" property="og:site_name" />
     <title>2026 高雄社群名牌卡 - 集章獎勵</title>
-    <style>
-        /* 導覽列樣式調整 - 使用 Grid 強制四等分 */
-        .nav-pills {
-            margin-bottom: 20px;
-            display: grid !important; /* 強制使用 Grid */
-            grid-template-columns: repeat(5, 1fr); /* 嚴格五等分 */
-            gap: 10px; /* 按鈕間距 */
-            width: 100%;
-        }
-        .nav-item {
-            width: auto; /* 讓 Grid 控制寬度 */
-            text-align: center;
-        }
-        .nav-pills .nav-link {
-            color: #555;
-            background-color: #eee;
-            border-radius: 8px;
-            width: 100%;
-            height: 100%; /* 確保按鈕高度一致 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 2px;
-        }
-        
-        /* 移除通用的 active 顏色，改用個別設定 */
-        
-        /* 1. 2026 卡片與守則 */
-        .nav-item:nth-child(1) .nav-link.active {
-            background-color: #4285f4;
-            color: #fff;
-        }
-        /* 2. 社群月曆 */
-        .nav-item:nth-child(2) .nav-link.active {
-            background-color: #a142f4; /* Purple for calendar */
-            color: #fff;
-        }
-        /* 3. 集章獎勵 */
-        .nav-item:nth-child(3) .nav-link.active {
-            background-color: #34a853;
-            color: #fff;
-        }
-        /* 4. 社群介紹 */
-        .nav-item:nth-child(4) .nav-link.active {
-            background-color: #f9ab00;
-            color: #fff;
-        }
-        /* 5. 贊助商 */
-        .nav-item:nth-child(5) .nav-link.active {
-            background-color: #ea4335;
-            color: #fff;
-        }
-    </style>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'G-KCNJBYW13R');
+      gtag("config", "G-KCNJBYW13R");
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="cardWrapper">
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">卡片<span class="d-none d-sm-inline">與</span><br
-                        class="d-sm-none">守則</a>
-            </li>
-             <li class="nav-item">
-                 <a class="nav-link" href="calendar.html">社群<br class="d-sm-none">月曆</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="rewards.html">集章<br class="d-sm-none">獎勵</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="communities.html">社群<br class="d-sm-none">介紹</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="sponsors.html">贊助商</a>
-            </li>
-        </ul>
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">卡片與守則</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="calendar.html">社群月曆</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="rewards.html">集章獎勵</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="communities.html">社群介紹</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sponsors.html">贊助商</a>
+        </li>
+      </ul>
 
-        <div class="card">
-            <h1 class="title">集章獎勵</h1>
-            <p style="text-align: center;">這裡匯集了高雄社群名牌卡有集章獎勵的社群</p>
-            <div class="divider"></div>
-            
-            <div id="rewards-list">
-                 <!-- Data will be loaded here -->
-                 <p style="text-align: center;">載入中...</p>
-            </div>
+      <div class="card">
+        <div class="title-box">
+          <h1 class="title">集章獎勵</h1>
+          <p class="subtitle">這裡匯集了高雄社群名牌卡有集章獎勵的社群</p>
+        </div>
+        <div class="divider"></div>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    fetch('data.json')
-                        .then(response => response.json())
-                        .then(data => {
-                            const list = document.getElementById('rewards-list');
-                            list.innerHTML = ''; // Clear loading text
+        <div id="rewards-list">
+          <!-- Data will be loaded here -->
+          <p style="text-align: center">載入中...</p>
+        </div>
 
-                            if (!data.rewards || data.rewards.length === 0) {
-                                list.innerHTML = `
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            fetch("data.json")
+              .then((response) => response.json())
+              .then((data) => {
+                const list = document.getElementById("rewards-list");
+                list.innerHTML = ""; // Clear loading text
+
+                if (!data.rewards || data.rewards.length === 0) {
+                  list.innerHTML = `
                                     <p style="text-align: center; padding: 40px 0; font-size: 1.2em; color: #666;">
                                         🎁 2026 年集章獎勵活動規劃中...<br><br>
                                         敬請期待！
                                     </p>
                                 `;
-                                return;
-                            }
+                  return;
+                }
 
-                            data.rewards.forEach(item => {
-                                const li = document.createElement('div');
-                                li.className = 'communityItem';
-                                li.innerHTML = `
+                data.rewards.forEach((item) => {
+                  const li = document.createElement("div");
+                  li.className = "communityItem";
+                  li.innerHTML = `
                                     <a href="${item.link}" target="_blank">
                                         <img src="${item.logo}" alt="${item.name}">
                                     </a>
                                     <a class="communityItemTitle" href="${item.link}" target="_blank">${item.name}</a>
                                     <div class="description">${item.description}</div>
                                 `;
-                                list.appendChild(li);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error loading data:', error);
-                            document.getElementById('rewards-list').innerHTML = '<p style="text-align: center; color: red;">無法載入資料</p>';
-                        });
+                  list.appendChild(li);
                 });
-            </script>
-        </div>
+              })
+              .catch((error) => {
+                console.error("Error loading data:", error);
+                document.getElementById("rewards-list").innerHTML =
+                  '<p style="text-align: center; color: red;">無法載入資料</p>';
+              });
+          });
+        </script>
+      </div>
     </div>
-</body>
+  </body>
 </html>
