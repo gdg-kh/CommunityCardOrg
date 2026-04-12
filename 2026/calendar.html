@@ -1,459 +1,387 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <link href="../bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../index.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="2026 高雄社群活動月曆，彙整高雄在地技術社群活動資訊，掌握最新社群動態。" name="description">
-    <meta content="高雄社群, 社群月曆, 活動行事曆, 技術講座, 高雄活動, Kaohsiung Events" name="keywords">
-    <meta content="高雄社群名牌卡 - 社群月曆" property="og:title">
-    <meta content="2026 高雄社群活動月曆，彙整高雄在地技術社群活動資訊，掌握最新社群動態。" property="og:description">
-    <meta content="website" property="og:type">
-    <meta content="https://community-card.org/2026/calendar.html" property="og:url">
-    <meta content="https://community-card.org/2026/og-images/calendar.png" property="og:image">
-    <meta content="高雄社群名牌卡" property="og:site_name">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="2026 高雄社群活動月曆，彙整高雄在地技術社群活動資訊，掌握最新社群動態。"
+      name="description"
+    />
+    <meta
+      content="高雄社群, 社群月曆, 活動行事曆, 技術講座, 高雄活動, Kaohsiung Events"
+      name="keywords"
+    />
+    <meta content="高雄社群名牌卡 - 社群月曆" property="og:title" />
+    <meta
+      content="2026 高雄社群活動月曆，彙整高雄在地技術社群活動資訊，掌握最新社群動態。"
+      property="og:description"
+    />
+    <meta content="website" property="og:type" />
+    <meta
+      content="https://community-card.org/2026/calendar.html"
+      property="og:url"
+    />
+    <meta
+      content="https://community-card.org/2026/og-images/calendar.png"
+      property="og:image"
+    />
+    <meta content="高雄社群名牌卡" property="og:site_name" />
     <title>高雄社群名牌卡 - 社群月曆</title>
-    <style>
-        /* 導覽列樣式調整 - 使用 Grid 強制四等分 */
-        .nav-pills {
-            margin-bottom: 20px;
-            display: grid !important; /* 強制使用 Grid */
-            grid-template-columns: repeat(5, 1fr); /* 嚴格五等分 */
-            gap: 10px; /* 按鈕間距 */
-            width: 100%;
-        }
-        .nav-item {
-            width: auto; /* 讓 Grid 控制寬度 */
-            text-align: center;
-        }
-        .nav-pills .nav-link {
-            color: #555;
-            background-color: #eee;
-            border-radius: 8px;
-            width: 100%;
-            height: 100%; /* 確保按鈕高度一致 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 2px;
-        }
-        
-        /* 移除通用的 active 顏色，改用個別設定 */
-        /* .nav-pills .nav-link.active { ... } */
-
-        /* 1. 2026 卡片與守則 */
-        .nav-item:nth-child(1) .nav-link.active {
-            background-color: #4285f4;
-            color: #fff;
-        }
-        /* 2. 社群月曆 */
-        .nav-item:nth-child(2) .nav-link.active {
-            background-color: #a142f4; /* Purple for calendar */
-            color: #fff;
-        }
-        /* 3. 集章獎勵 */
-        .nav-item:nth-child(3) .nav-link.active {
-            background-color: #34a853;
-            color: #fff;
-        }
-        /* 4. 社群介紹 */
-        .nav-item:nth-child(4) .nav-link.active {
-            background-color: #f9ab00;
-            color: #fff;
-        }
-        /* 5. 贊助商 */
-        .nav-item:nth-child(5) .nav-link.active {
-            background-color: #ea4335;
-            color: #fff;
-        }
-
-        /* Calendar Styles */
-        /* Note: Calendar styles are in index.css */
-
-        /* 本月活動列表 */
-        #event-list-card {
-            padding: 16px;
-        }
-
-        #event-list-card .list-header {
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-            color: #a142f4;
-        }
-
-        #event-list-card table {
-            font-size: 0.9rem;
-        }
-
-        #event-list-card .community-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 6px;
-            margin-top: 4px;
-            flex-shrink: 0;
-        }
-
-        #event-list-card .btn-cal {
-            padding: 2px 8px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
-
-        #event-list-card thead th {
-            text-align: center;
-        }
-
-        @media (max-width: 576px) {
-            #event-list-card th.col-weekday,
-            #event-list-card td.col-weekday {
-                display: none;
-            }
-
-            #event-list-card .weekday-mobile {
-                display: block;
-            }
-
-            #event-list-card .btn-cal-group {
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-            }
-
-            /* 讓 #、日期、行事曆欄依內容自動收縮，活動欄填滿剩餘空間 */
-            #event-list-card th:nth-child(1),
-            #event-list-card td:nth-child(1),
-            #event-list-card th:nth-child(2),
-            #event-list-card td:nth-child(2),
-            #event-list-card th:last-child,
-            #event-list-card td:last-child {
-                width: 1%;
-                white-space: nowrap;
-            }
-        }
-
-        @media (min-width: 577px) {
-            #event-list-card .weekday-mobile {
-                display: none;
-            }
-
-            .title-break {
-                display: none;
-            }
-        }
-
-        /* 版面排序：桌機月曆上條列下，手機條列上月曆下 */
-        #calendar-layout {
-            display: flex;
-            flex-direction: column;
-        }
-
-        #calendar-layout > .card:first-child {
-            order: 1;
-        }
-
-        #event-list-card {
-            order: 2;
-        }
-
-        @media (max-width: 576px) {
-            #calendar-layout > .card:first-child {
-                order: 2;
-            }
-
-            #event-list-card {
-                order: 1;
-            }
-
-            #calendar-nav .d-flex {
-                padding: 12px 16px;
-                gap: 12px;
-            }
-        }
-    </style>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'G-KCNJBYW13R');
+      gtag("config", "G-KCNJBYW13R");
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="cardWrapper">
-        <!-- 導覽列 -->
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">卡片<span class="d-none d-sm-inline">與</span><br
-                        class="d-sm-none">守則</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="calendar.html">社群<br class="d-sm-none">月曆</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="rewards.html">集章<br class="d-sm-none">獎勵</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="communities.html">社群<br class="d-sm-none">介紹</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="sponsors.html">贊助商</a>
-            </li>
-        </ul>
+      <!-- 導覽列 -->
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">卡片與守則</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="calendar.html">社群月曆</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="rewards.html">集章獎勵</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="communities.html">社群介紹</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sponsors.html">贊助商</a>
+        </li>
+      </ul>
 
-        <div id="calendar-nav" class="card" style="margin-bottom: 12px;">
-            <div class="d-flex justify-content-between align-items-center" style="padding: 0 10px;">
-                <button id="prev-month" class="btn btn-outline-secondary btn-sm">&lt;<br class="d-sm-none"> 上個月
-                </button>
-                <h2 class="title mb-0" style="margin: 0; font-size: 1.5rem;">
-                    <span id="calendar-title-date" class="specialColor"></span><br class="title-break"> <span
-                        style="white-space: nowrap;">高雄軟體社群活動</span>
-                </h2>
-                <button id="next-month" class="btn btn-outline-secondary btn-sm"><span
-                        class="d-none d-sm-inline">下個月 </span>&gt;<br class="d-sm-none"><span
-                        class="d-sm-none">下個月</span></button>
-            </div>
+      <div class="card" id="calendar-nav" style="margin-bottom: 12px">
+        <div class="title-box">
+          <h1 class="title">
+            <span class="specialColor">高雄軟體社群活動</span>
+          </h1>
+          <div class="calendar-nav">
+            <button id="prev-month" class="btn btn-outline-secondary btn-sm">
+              上個月
+            </button>
+            <h2 class="title mb-0" id="calendar-title-date"></h2>
+            <button id="next-month" class="btn btn-outline-secondary btn-sm">
+              下個月
+            </button>
+          </div>
         </div>
 
         <div id="calendar-layout">
-            <div class="card" style="margin-bottom: 24px;">
-            <div id="calendar-root" class="calendar-container">
-                <!-- Calendar will be rendered here -->
-                <div class="text-center p-3">載入活動中...</div>
-            </div>
+          <div id="calendar-root" class="calendar-container">
+            <!-- Calendar will be rendered here -->
+            <div class="text-center p-3">載入活動中...</div>
+          </div>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const calendarRoot = document.getElementById('calendar-root');
-                    const titleDateSpan = document.getElementById('calendar-title-date');
-                    const prevBtn = document.getElementById('prev-month');
-                    const nextBtn = document.getElementById('next-month');
-                    
-                    // Initialize with current date
-                    let currentDate = new Date();
-                    let currentYear = currentDate.getFullYear();
-                    let currentMonth = currentDate.getMonth(); // 0-indexed
-                    let allEvents = [];
-                    
-                    // Fetch events once
-                    fetch('events.json')
-                        .then(response => response.json())
-                        .then(events => {
-                            allEvents = events;
-                            renderCalendar();
-                        })
-                        .catch(error => {
-                            console.error('Error loading events:', error);
-                            calendarRoot.innerHTML = '<div class="text-center p-3 text-danger">無法載入活動資料</div>';
-                        });
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              const calendarRoot = document.getElementById("calendar-root");
+              const titleDateSpan = document.getElementById(
+                "calendar-title-date",
+              );
+              const prevBtn = document.getElementById("prev-month");
+              const nextBtn = document.getElementById("next-month");
 
-                    // Event Listeners for Navigation
-                    prevBtn.addEventListener('click', () => {
-                        currentMonth--;
-                        if (currentMonth < 0) {
-                            currentMonth = 11;
-                            currentYear--;
-                        }
-                        renderCalendar();
-                    });
+              // Initialize with current date
+              let currentDate = new Date();
+              let currentYear = currentDate.getFullYear();
+              let currentMonth = currentDate.getMonth(); // 0-indexed
+              let allEvents = [];
 
-                    nextBtn.addEventListener('click', () => {
-                        currentMonth++;
-                        if (currentMonth > 11) {
-                            currentMonth = 0;
-                            currentYear++;
-                        }
-                        renderCalendar();
-                    });
+              // Fetch events once
+              fetch("events.json")
+                .then((response) => response.json())
+                .then((events) => {
+                  allEvents = events;
+                  renderCalendar();
+                })
+                .catch((error) => {
+                  console.error("Error loading events:", error);
+                  calendarRoot.innerHTML =
+                    '<div class="text-center p-3 text-danger">無法載入活動資料</div>';
+                });
 
-                    function renderCalendar() {
-                        // Update Title
-                        titleDateSpan.textContent = `${currentYear} 年 ${currentMonth + 1} 月`;
+              // Event Listeners for Navigation
+              prevBtn.addEventListener("click", () => {
+                currentMonth--;
+                if (currentMonth < 0) {
+                  currentMonth = 11;
+                  currentYear--;
+                }
+                renderCalendar();
+              });
 
-                        const daysOfWeek = ['週一', '週二', '週三', '週四', '週五', '週六', '週日'];
-                        
-                        // First day of the month
-                        const firstDay = new Date(currentYear, currentMonth, 1);
-                        // Day of week for the 1st
-                        let startDay = firstDay.getDay();
-                        // Adjust for Monday start (0=Mon, 6=Sun)
-                        startDay = (startDay === 0) ? 6 : startDay - 1;
+              nextBtn.addEventListener("click", () => {
+                currentMonth++;
+                if (currentMonth > 11) {
+                  currentMonth = 0;
+                  currentYear++;
+                }
+                renderCalendar();
+              });
 
-                        // Days in month
-                        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+              function renderCalendar() {
+                // Update Title
+                titleDateSpan.textContent = `${currentYear} 年 ${currentMonth + 1} 月`;
 
-                        let html = '<div class="calendar-header">';
-                        daysOfWeek.forEach(day => {
-                            html += `<div>${day}</div>`;
-                        });
-                        html += '</div><div class="calendar-grid">';
+                const daysOfWeek = [
+                  "週一",
+                  "週二",
+                  "週三",
+                  "週四",
+                  "週五",
+                  "週六",
+                  "週日",
+                ];
 
-                        // Empty cells before start
-                        for (let i = 0; i < startDay; i++) {
-                            html += '<div class="calendar-day empty"></div>';
-                        }
+                // First day of the month
+                const firstDay = new Date(currentYear, currentMonth, 1);
+                // Day of week for the 1st
+                let startDay = firstDay.getDay();
+                // Adjust for Monday start (0=Mon, 6=Sun)
+                startDay = startDay === 0 ? 6 : startDay - 1;
 
-                        // Days
-                        for (let day = 1; day <= daysInMonth; day++) {
-                            const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                // Days in month
+                const daysInMonth = new Date(
+                  currentYear,
+                  currentMonth + 1,
+                  0,
+                ).getDate();
 
-                            // Calculate day of week (0=Sunday, 6=Saturday)
-                            const currentDateObj = new Date(currentYear, currentMonth, day);
-                            const dayOfWeek = currentDateObj.getDay();
-                            const isSaturday = (dayOfWeek === 6);
-                            const isSunday = (dayOfWeek === 0);
-                            const isWeekend = isSaturday || isSunday;
+                let html = '<div class="calendar-header">';
+                daysOfWeek.forEach((day) => {
+                  html += `<div>${day}</div>`;
+                });
+                html += '</div><div class="calendar-grid">';
 
-                            // Check if we need top border (if previous week same day is not weekend or doesn't exist)
-                            let needTopBorder = false;
-                            if (isWeekend) {
-                                if (day <= 7) {
-                                    // First week, always need top border
-                                    needTopBorder = true;
-                                } else {
-                                    // Check previous week same day
-                                    const prevWeekDay = day - 7;
-                                    const prevWeekDate = new Date(currentYear, currentMonth, prevWeekDay);
-                                    const prevWeekDayOfWeek = prevWeekDate.getDay();
-                                    const prevWeekIsWeekend = (prevWeekDayOfWeek === 0 || prevWeekDayOfWeek === 6);
-                                    needTopBorder = !prevWeekIsWeekend;
-                                }
-                            }
+                // Empty cells before start
+                for (let i = 0; i < startDay; i++) {
+                  html += '<div class="calendar-day empty"></div>';
+                }
 
-                            const weekendClass = isSaturday ? ' saturday' : (isSunday ? ' sunday' : '');
-                            const topBorderClass = needTopBorder ? ' weekend-top' : '';
+                // Days
+                for (let day = 1; day <= daysInMonth; day++) {
+                  const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
-                            // Find events for this day
-                            const dayEvents = allEvents.filter(e => e.date === dateStr);
+                  // Calculate day of week (0=Sunday, 6=Saturday)
+                  const currentDateObj = new Date(
+                    currentYear,
+                    currentMonth,
+                    day,
+                  );
+                  const dayOfWeek = currentDateObj.getDay();
+                  const isSaturday = dayOfWeek === 6;
+                  const isSunday = dayOfWeek === 0;
+                  const isWeekend = isSaturday || isSunday;
 
-                            html += `<div class="calendar-day${weekendClass}${topBorderClass}">
+                  // Check if we need top border (if previous week same day is not weekend or doesn't exist)
+                  let needTopBorder = false;
+                  if (isWeekend) {
+                    if (day <= 7) {
+                      // First week, always need top border
+                      needTopBorder = true;
+                    } else {
+                      // Check previous week same day
+                      const prevWeekDay = day - 7;
+                      const prevWeekDate = new Date(
+                        currentYear,
+                        currentMonth,
+                        prevWeekDay,
+                      );
+                      const prevWeekDayOfWeek = prevWeekDate.getDay();
+                      const prevWeekIsWeekend =
+                        prevWeekDayOfWeek === 0 || prevWeekDayOfWeek === 6;
+                      needTopBorder = !prevWeekIsWeekend;
+                    }
+                  }
+
+                  const weekendClass = isSaturday
+                    ? " saturday"
+                    : isSunday
+                      ? " sunday"
+                      : "";
+                  const topBorderClass = needTopBorder ? " weekend-top" : "";
+
+                  // Find events for this day
+                  const dayEvents = allEvents.filter((e) => e.date === dateStr);
+
+                  html += `<div class="calendar-day${weekendClass}${topBorderClass}">
                                 <span class="date-number">${day}</span>`;
-                            
-                            if (dayEvents.length > 0) {
-                                dayEvents.forEach(event => {
-                                    const linkStart = event.link && event.link !== '#' ? `<a href="${event.link}" target="_blank">` : '<div>';
-                                    const linkEnd = event.link && event.link !== '#' ? '</a>' : '</div>';
-                                    const colorStyle = event.color ? `style="color: ${event.color};"` : '';
-                                    const borderStyle = event.color ? `style="border-left-color: ${event.color};"` : '';
-                                    
-                                    html += `<div class="day-event" ${borderStyle}>
+
+                  if (dayEvents.length > 0) {
+                    dayEvents.forEach((event) => {
+                      const linkStart =
+                        event.link && event.link !== "#"
+                          ? `<a href="${event.link}" target="_blank">`
+                          : "<div>";
+                      const linkEnd =
+                        event.link && event.link !== "#" ? "</a>" : "</div>";
+                      const colorStyle = event.color
+                        ? `style="color: ${event.color};"`
+                        : "";
+                      const borderStyle = event.color
+                        ? `style="border-left-color: ${event.color};"`
+                        : "";
+
+                      html += `<div class="day-event" ${borderStyle}>
                                         ${linkStart}
                                             <div class="event-community" ${colorStyle}>${event.community}</div>
                                             <div class="event-name">${event.title}</div>
-                                            ${event.description ? `<div class="event-details-small">${event.description}</div>` : ''}
+                                            ${event.description ? `<div class="event-details-small">${event.description}</div>` : ""}
                                         ${linkEnd}
                                     </div>`;
-                                });
-                            }
-                            
-                            html += `</div>`;
-                        }
+                    });
+                  }
 
-                        // Fill remaining grid
-                        const totalCells = startDay + daysInMonth;
-                        const remaining = 7 - (totalCells % 7);
-                        if (remaining < 7) {
-                            for (let i = 0; i < remaining; i++) {
-                                html += '<div class="calendar-day empty"></div>';
-                            }
-                        }
+                  html += `</div>`;
+                }
 
-                        html += '</div>';
-                        calendarRoot.innerHTML = html;
-                        renderEventList();
-                    }
+                // Fill remaining grid
+                const totalCells = startDay + daysInMonth;
+                const remaining = 7 - (totalCells % 7);
+                if (remaining < 7) {
+                  for (let i = 0; i < remaining; i++) {
+                    html += '<div class="calendar-day empty"></div>';
+                  }
+                }
 
-                    // ── 本月活動列表工具函式 ──────────────────────────
+                html += "</div>";
+                calendarRoot.innerHTML = html;
+                renderEventList();
+              }
 
-                    let currentMonthEvents = [];
+              // ── 本月活動列表工具函式 ──────────────────────────
 
-                    function getGoogleCalendarURL(event) {
-                        const start = event.date.replace(/-/g, '');
-                        const nextDay = new Date(event.date + 'T00:00:00');
-                        nextDay.setDate(nextDay.getDate() + 1);
-                        const end = nextDay.toISOString().slice(0, 10).replace(/-/g, '');
-                        const text = encodeURIComponent(event.title ? `${event.community} - ${event.title}` : event.community);
-                        const descParts = [];
-                        if (event.description) descParts.push(event.description.replace(/<br\s*\/?>/gi, '\n'));
-                        if (event.link && event.link !== '#') descParts.push('活動連結：' + event.link);
-                        const details = encodeURIComponent(descParts.join('\n'));
-                        return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${end}&details=${details}`;
-                    }
+              let currentMonthEvents = [];
 
-                    function downloadICS(index) {
-                        const event = currentMonthEvents[index];
-                        const start = event.date.replace(/-/g, '');
-                        const nextDay = new Date(event.date + 'T00:00:00');
-                        nextDay.setDate(nextDay.getDate() + 1);
-                        const end = nextDay.toISOString().slice(0, 10).replace(/-/g, '');
-                        const summary = event.title ? `${event.community} - ${event.title}` : event.community;
-                        const descParts = [];
-                        if (event.description) descParts.push(event.description.replace(/<br\s*\/?>/gi, '\\n'));
-                        if (event.link && event.link !== '#') descParts.push('活動連結：' + event.link);
-                        const lines = [
-                            'BEGIN:VCALENDAR',
-                            'VERSION:2.0',
-                            'PRODID:-//Community Card Org//高雄社群活動//ZH',
-                            'BEGIN:VEVENT',
-                            `UID:${event.date}-${encodeURIComponent(event.community)}@community-card.org`,
-                            `DTSTART;VALUE=DATE:${start}`,
-                            `DTEND;VALUE=DATE:${end}`,
-                            `SUMMARY:${summary}`,
-                        ];
-                        if (descParts.length) lines.push(`DESCRIPTION:${descParts.join('\\n')}`);
-                        if (event.link && event.link !== '#') lines.push(`URL:${event.link}`);
-                        lines.push('END:VEVENT', 'END:VCALENDAR');
-                        const blob = new Blob([lines.join('\r\n')], {type: 'text/calendar;charset=utf-8'});
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = `${event.date}-${event.community}.ics`;
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        URL.revokeObjectURL(url);
-                    }
+              function getGoogleCalendarURL(event) {
+                const start = event.date.replace(/-/g, "");
+                const nextDay = new Date(event.date + "T00:00:00");
+                nextDay.setDate(nextDay.getDate() + 1);
+                const end = nextDay
+                  .toISOString()
+                  .slice(0, 10)
+                  .replace(/-/g, "");
+                const text = encodeURIComponent(
+                  event.title
+                    ? `${event.community} - ${event.title}`
+                    : event.community,
+                );
+                const descParts = [];
+                if (event.description)
+                  descParts.push(
+                    event.description.replace(/<br\s*\/?>/gi, "\n"),
+                  );
+                if (event.link && event.link !== "#")
+                  descParts.push("活動連結：" + event.link);
+                const details = encodeURIComponent(descParts.join("\n"));
+                return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${end}&details=${details}`;
+              }
 
-                    function renderEventList() {
-                        const listRoot = document.getElementById('event-list-root');
-                        const monthEvents = allEvents
-                            .filter(e => {
-                                const [y, m] = e.date.split('-').map(Number);
-                                return y === currentYear && m === currentMonth + 1;
-                            })
-                            .sort((a, b) => a.date.localeCompare(b.date));
-                        currentMonthEvents = monthEvents;
+              function downloadICS(index) {
+                const event = currentMonthEvents[index];
+                const start = event.date.replace(/-/g, "");
+                const nextDay = new Date(event.date + "T00:00:00");
+                nextDay.setDate(nextDay.getDate() + 1);
+                const end = nextDay
+                  .toISOString()
+                  .slice(0, 10)
+                  .replace(/-/g, "");
+                const summary = event.title
+                  ? `${event.community} - ${event.title}`
+                  : event.community;
+                const descParts = [];
+                if (event.description)
+                  descParts.push(
+                    event.description.replace(/<br\s*\/?>/gi, "\\n"),
+                  );
+                if (event.link && event.link !== "#")
+                  descParts.push("活動連結：" + event.link);
+                const lines = [
+                  "BEGIN:VCALENDAR",
+                  "VERSION:2.0",
+                  "PRODID:-//Community Card Org//高雄社群活動//ZH",
+                  "BEGIN:VEVENT",
+                  `UID:${event.date}-${encodeURIComponent(event.community)}@community-card.org`,
+                  `DTSTART;VALUE=DATE:${start}`,
+                  `DTEND;VALUE=DATE:${end}`,
+                  `SUMMARY:${summary}`,
+                ];
+                if (descParts.length)
+                  lines.push(`DESCRIPTION:${descParts.join("\\n")}`);
+                if (event.link && event.link !== "#")
+                  lines.push(`URL:${event.link}`);
+                lines.push("END:VEVENT", "END:VCALENDAR");
+                const blob = new Blob([lines.join("\r\n")], {
+                  type: "text/calendar;charset=utf-8",
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `${event.date}-${event.community}.ics`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+              }
 
-                        if (monthEvents.length === 0) {
-                            listRoot.innerHTML = '<p class="text-muted text-center py-3">本月暫無活動資料</p>';
-                            return;
-                        }
+              function renderEventList() {
+                const listRoot = document.getElementById("event-list-root");
+                const monthEvents = allEvents
+                  .filter((e) => {
+                    const [y, m] = e.date.split("-").map(Number);
+                    return y === currentYear && m === currentMonth + 1;
+                  })
+                  .sort((a, b) => a.date.localeCompare(b.date));
+                currentMonthEvents = monthEvents;
 
-                        let html = `<div class="list-header">📅 ${currentMonth + 1} 月活動（共 ${monthEvents.length} 場）</div>`;
-                        html += '<p style="font-size:0.85rem;color:#666;margin-bottom:10px;">點擊按鈕可將活動加入手機行事曆</p>';
-                        html += '<div class="table-responsive"><table class="table table-sm table-hover mb-0">';
-                        html += '<thead><tr><th>#</th><th>日期</th><th class="col-weekday">星期</th><th>活動</th><th><span class="d-none d-sm-inline">加入</span>行事曆</th></tr></thead>';
-                        html += '<tbody>';
-                        monthEvents.forEach((event, i) => {
-                            const [y, m, d] = event.date.split('-');
-                            const dayOfWeek = new Date(parseInt(y), parseInt(m) - 1, parseInt(d)).getDay();
-                            const weekNames = ['日', '一', '二', '三', '四', '五', '六'];
-                            const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-                            const dateColor = isWeekend ? 'color:#e53e3e;' : '';
-                            const dateLabel = `<span style="${dateColor}">${m}/${d}</span>`;
-                            const weekLabel = `<span style="${dateColor}">週${weekNames[dayOfWeek]}</span>`;
-                            const dot = `<span class="community-dot" style="background:${event.color || '#666'};"></span>`;
-                            const googleURL = getGoogleCalendarURL(event);
-                            html += `<tr>
+                if (monthEvents.length === 0) {
+                  listRoot.innerHTML =
+                    '<p class="text-muted text-center py-3">本月暫無活動資料</p>';
+                  return;
+                }
+
+                let html = `<div class="list-header">📅 ${currentMonth + 1} 月活動（共 ${monthEvents.length} 場）</div>`;
+                html +=
+                  '<p style="font-size:0.85rem;color:#666;margin-bottom:10px;">點擊按鈕可將活動加入手機行事曆</p>';
+                html +=
+                  '<div class="table-responsive"><table class="table table-sm table-hover mb-0">';
+                html +=
+                  '<thead><tr><th>#</th><th>日期</th><th class="col-weekday">星期</th><th>活動</th><th><span class="d-none d-sm-inline">加入</span>行事曆</th></tr></thead>';
+                html += "<tbody>";
+                monthEvents.forEach((event, i) => {
+                  const [y, m, d] = event.date.split("-");
+                  const dayOfWeek = new Date(
+                    parseInt(y),
+                    parseInt(m) - 1,
+                    parseInt(d),
+                  ).getDay();
+                  const weekNames = ["日", "一", "二", "三", "四", "五", "六"];
+                  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+                  const dateColor = isWeekend ? "color:#e53e3e;" : "";
+                  const dateLabel = `<span style="${dateColor}">${m}/${d}</span>`;
+                  const weekLabel = `<span style="${dateColor}">週${weekNames[dayOfWeek]}</span>`;
+                  const dot = `<span class="community-dot" style="background:${event.color || "#666"};"></span>`;
+                  const googleURL = getGoogleCalendarURL(event);
+                  html += `<tr>
                                 <td style="white-space:nowrap;color:#999;">${i + 1}</td>
                                 <td style="white-space:nowrap;">${dateLabel}<span class="weekday-mobile" style="${dateColor}">週${weekNames[dayOfWeek]}</span></td>
                                 <td class="col-weekday" style="white-space:nowrap;">${weekLabel}</td>
-                                <td><div style="display:flex;align-items:flex-start;gap:0;">${dot}<div><strong>${event.community}</strong>${event.title ? `<div style="color:#555;">${event.title}</div>` : ''}</div></div></td>
+                                <td><div style="display:flex;align-items:flex-start;gap:0;">${dot}<div><strong>${event.community}</strong>${event.title ? `<div style="color:#555;">${event.title}</div>` : ""}</div></div></td>
                                 <td style="white-space:nowrap;">
                                     <div class="btn-cal-group">
                                         <a href="${googleURL}" target="_blank" class="btn btn-outline-primary btn-cal">Google</a>
@@ -461,25 +389,33 @@
                                     </div>
                                 </td>
                             </tr>`;
-                        });
-                        html += '</tbody></table></div>';
-                        listRoot.innerHTML = html;
-                    }
-
-                    // 將 downloadICS 暴露至全域，供 onclick 使用
-                    window.downloadICS = downloadICS;
                 });
-            </script>
-        </div>
+                html += "</tbody></table></div>";
+                listRoot.innerHTML = html;
+              }
 
-        <div id="event-list-card" class="card" style="margin-bottom: 24px;">
+              // 將 downloadICS 暴露至全域，供 onclick 使用
+              window.downloadICS = downloadICS;
+            });
+          </script>
+
+          <div id="event-list-card">
             <div id="event-list-root">
-                <div class="text-center p-3 text-muted">載入活動中...</div>
+              <div class="text-center p-3 text-muted">載入活動中...</div>
             </div>
+          </div>
         </div>
-        </div><!-- /#calendar-layout -->
-        <p style="text-align: right; font-size: 0.8rem; color: #666; margin-top: 8px;">*
-            實際活動資訊依照主辦單位提供資訊為準</p>
+        <p
+          style="
+            text-align: right;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 8px;
+          "
+        >
+          * 實際活動資訊依照主辦單位提供資訊為準
+        </p>
+      </div>
     </div>
-</body>
+  </body>
 </html>

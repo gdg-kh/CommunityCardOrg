@@ -4,27 +4,156 @@ body {
 
 .cardWrapper {
   max-width: 800px;
+  min-height: 100vh;
   margin: 0 auto;
-  padding: 16px;
+  padding: 0px;
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 600px) {
+    padding: 0;
+  }
+}
+
+/* 上方導航列 */
+.nav.nav-pills {
+  margin: 0;
+  gap: 8px;
+  padding: 8px;
+  overflow-x: auto;
+  display: flex;
+  justify-content: start;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  /* 滾動條縮小 */
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+  }
+
+  .nav-item {
+    font-weight: 900;
+    min-width: 100px;
+
+    .nav-link {
+      border-radius: 8px;
+      padding: 10px 0;
+      /* 文字換行平衡 */
+      text-wrap: balance;
+      @media (max-width: 600px) {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+/* 導覽列樣式調整 - 使用 Grid 強制四等分 */
+.nav-pills {
+  margin-bottom: 20px;
+  display: grid !important; /* 強制使用 Grid */
+  grid-template-columns: repeat(5, 1fr); /* 嚴格五等分 */
+  gap: 10px; /* 按鈕間距 */
+  width: 100%;
+}
+.nav-item {
+  width: auto; /* 讓 Grid 控制寬度 */
+  text-align: center;
+  /* 1. 2026 卡片與守則 */
+  &:nth-child(1) .nav-link.active {
+    background-color: #4285f4;
+    color: #fff;
+  }
+  /* 2. 社群月曆 */
+  &:nth-child(2) .nav-link.active {
+    background-color: #a142f4; /* Purple for calendar */
+    color: #fff;
+  }
+  /* 3. 集章獎勵 */
+  &:nth-child(3) .nav-link.active {
+    background-color: #34a853;
+    color: #fff;
+  }
+  /* 4. 社群介紹 */
+  &:nth-child(4) .nav-link.active {
+    background-color: #f9ab00;
+    color: #fff;
+  }
+  /* 5. 贊助商 */
+  &:nth-child(5) .nav-link.active {
+    background-color: #ea4335;
+    color: #fff;
+  }
+}
+.nav-pills .nav-link {
+  color: #555;
+  background-color: #eee;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%; /* 確保按鈕高度一致 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 2px;
 }
 
 .card {
   border: 1px solid #ccc;
   padding: 16px;
-  border-radius: 16px;
+  border-radius: 8px;
+  margin: 0 8px;
+  margin-bottom: 8px;
 }
 
-.title {
-  text-align: center;
-  margin-bottom: 16px;
+/* 頁面標題 */
+.title-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+  padding-bottom: 20px;
+  .title {
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.6rem;
+    margin-bottom: 0;
+    .specialColor {
+      color: var(--bs-blue);
+    }
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0;
+  }
+
+  .calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .title {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    .btn {
+      flex: none;
+      /* 文字不要換行 */
+      white-space: nowrap;
+    }
+  }
 }
 
-.title .specialColor {
-  color: var(--bs-blue);
-}
-
+/* 分隔線 */
 .divider {
   margin: 0 0 16px;
   border-bottom: 1px dashed #ccc;
@@ -70,6 +199,15 @@ ul {
   display: flex;
   flex-wrap: wrap; /* 允許項目換行 */
   justify-content: center; /* 水平置中 */
+}
+
+/* 印章區域 */
+.stamp-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px; /* 印章之間的間距 */
 }
 
 .imageContainer {
@@ -121,7 +259,7 @@ ul {
 }
 
 .event-group {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .event-title {
@@ -139,126 +277,372 @@ ul {
 
 /* Calendar Styles */
 .calendar-container {
-    width: 100%;
-    margin-bottom: 24px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #fff;
+  width: 100%;
+  margin-bottom: 24px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
 }
 
 .calendar-header {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-    font-weight: bold;
-    padding: 10px 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
 }
 
 .calendar-header div {
-    padding: 5px;
-    font-size: 0.9rem;
-    color: #495057;
+  padding: 5px;
+  font-size: 0.9rem;
+  color: #495057;
 }
 
 .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    /* grid-auto-rows: minmax(100px, auto); */
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  /* grid-auto-rows: minmax(100px, auto); */
 }
 
 .calendar-day {
-    min-height: 100px;
-    border-right: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    padding: 8px;
-    position: relative;
-    background: #fff;
+  min-height: 100px;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 8px;
+  position: relative;
+  background: #fff;
 }
 
 .calendar-day:nth-child(7n) {
-    border-right: none;
+  border-right: none;
 }
 
 .calendar-day.empty {
-    background-color: #fcfcfc;
+  background-color: #fcfcfc;
 }
 
 /* Weekend borders */
 .calendar-day.saturday {
-    border-left: 1px solid #f28b82;
-    border-right: 1px solid #f28b82;
-    border-bottom: 1px solid #f28b82;
+  border-left: 1px solid #f28b82;
+  border-right: 1px solid #f28b82;
+  border-bottom: 1px solid #f28b82;
 }
 
 .calendar-day.sunday {
-    border-left: 1px solid #f28b82;
-    border-right: 1px solid #f28b82;
-    border-bottom: 1px solid #f28b82;
+  border-left: 1px solid #f28b82;
+  border-right: 1px solid #f28b82;
+  border-bottom: 1px solid #f28b82;
 }
 
 /* Add top border only when needed (to avoid overlap with previous week) */
 .calendar-day.saturday.weekend-top,
 .calendar-day.sunday.weekend-top {
-    border-top: 1px solid #f28b82;
+  border-top: 1px solid #f28b82;
 }
 
 /* Remove duplicate border between Saturday and Sunday */
 .calendar-day.saturday + .calendar-day.sunday {
-    border-left: none;
+  border-left: none;
 }
 
 .date-number {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 8px;
-    display: block;
-    font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+  font-size: 1.1em;
 }
 
 .day-event {
-    margin-bottom: 8px;
-    font-size: 0.85em;
-    line-height: 1.3;
-    border-left: 3px solid #0d6efd;
-    padding-left: 6px;
+  margin-bottom: 8px;
+  font-size: 0.85em;
+  line-height: 1.3;
+  border-left: 3px solid #0d6efd;
+  padding-left: 6px;
 }
 
 .day-event a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .day-event a:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .event-community {
-    font-weight: bold;
-    color: #d97706; /* Amber 600 */
-    margin-bottom: 2px;
+  font-weight: bold;
+  color: #d97706; /* Amber 600 */
+  margin-bottom: 2px;
 }
 
 .event-name {
-    color: #333;
-    font-weight: 500;
+  color: #333;
+  font-weight: 500;
 }
 
 .event-details-small {
-    color: #666;
-    font-size: 0.9em;
-    margin-top: 2px;
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 2px;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .calendar-container {
-        overflow-x: auto;
+  .calendar-container {
+    overflow-x: auto;
+  }
+}
+
+/* Stamp Feature Styles */
+#stamp-toolbar {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f1f3f4;
+  border-radius: 12px;
+  border: 1px solid #dfe1e5;
+  width: 100%;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+  }
+}
+
+.stamp-option {
+  flex: 0 0 auto;
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  cursor: pointer;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  padding: 6px;
+  background: white;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+  &.selected {
+    border-color: #4285f4;
+    box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+    background-color: #e8f0fe;
+    transform: translateY(-3px);
+  }
+}
+
+#card-area {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  cursor: crosshair;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
+
+  img.base-card {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    min-width: auto;
+  }
+}
+
+.imageContainer {
+  /* keep original definition */
+}
+
+.stamp-mark {
+  position: absolute;
+  width: 16%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  transform-origin: center center;
+  pointer-events: none;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+  filter: contrast(1.2) brightness(0.9);
+
+  @media (max-width: 768px) {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+#clear-stamps,
+#download-btn {
+  padding: 8px 20px;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  margin-bottom: 20px;
+}
+
+#clear-stamps {
+  background-color: #ea4335;
+  &:hover {
+    background-color: #c5221f;
+  }
+}
+
+#download-btn {
+  background-color: #4285f4;
+  margin-left: 10px;
+  &:hover {
+    background-color: #3367d6;
+  }
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.mobile-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* 行事曆清單 */
+#event-list-card {
+  .list-header {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #a142f4;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  .community-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .btn-cal {
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  thead th {
+    text-align: center;
+  }
+
+  @media (max-width: 576px) {
+    th.col-weekday,
+    td.col-weekday {
+      display: none;
     }
-    .calendar-header, .calendar-grid {
-        min-width: 700px; /* Force minimum width to maintain calendar shape on mobile */
+
+    .weekday-mobile {
+      display: block;
     }
+
+    .btn-cal-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    th:nth-child(1),
+    td:nth-child(1),
+    th:nth-child(2),
+    td:nth-child(2),
+    th:last-child,
+    td:last-child {
+      width: 1%;
+      white-space: nowrap;
+    }
+  }
+
+  @media (min-width: 577px) {
+    .weekday-mobile {
+      display: none;
+    }
+  }
+}
+
+/* 行事曆布局 */
+#calendar-layout {
+  display: flex;
+  flex-direction: column;
+
+  .calendar-header,
+  .calendar-grid {
+    min-width: 700px;
+  }
+
+  /* 日期數字 */
+  .date-number {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 900;
+  }
+
+  .event-community {
+    font-weight: bold;
+    font-size: 0.7rem;
+  }
+  .event-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  /* 日期內文字 */
+  .day-event {
+    .event-details-small {
+      font-size: 0.6rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
+#event-list-card {
+  order: 2;
+
+  @media (max-width: 576px) {
+    order: 1;
+  }
 }
