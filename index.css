@@ -637,7 +637,14 @@ ul {
     .btn-cal-group {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 8px;
+    }
+
+    .btn-cal {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      min-height: 40px;
+      width: 100%;
     }
 
     th:nth-child(1),

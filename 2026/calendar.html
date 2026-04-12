@@ -408,12 +408,9 @@
 
               function getGoogleCalendarURL(event) {
                 const start = event.date.replace(/-/g, "");
-                const nextDay = new Date(event.date + "T00:00:00");
-                nextDay.setDate(nextDay.getDate() + 1);
-                const end = nextDay
-                  .toISOString()
-                  .slice(0, 10)
-                  .replace(/-/g, "");
+                const [ey, em, ed] = event.date.split("-").map(Number);
+                const nextDay = new Date(ey, em - 1, ed + 1);
+                const end = `${nextDay.getFullYear()}${String(nextDay.getMonth() + 1).padStart(2, "0")}${String(nextDay.getDate()).padStart(2, "0")}`;
                 const text = encodeURIComponent(
                   event.title
                     ? `${event.community} - ${event.title}`
@@ -433,12 +430,9 @@
               function downloadICS(index) {
                 const event = currentMonthEvents[index];
                 const start = event.date.replace(/-/g, "");
-                const nextDay = new Date(event.date + "T00:00:00");
-                nextDay.setDate(nextDay.getDate() + 1);
-                const end = nextDay
-                  .toISOString()
-                  .slice(0, 10)
-                  .replace(/-/g, "");
+                const [ey, em, ed] = event.date.split("-").map(Number);
+                const nextDay = new Date(ey, em - 1, ed + 1);
+                const end = `${nextDay.getFullYear()}${String(nextDay.getMonth() + 1).padStart(2, "0")}${String(nextDay.getDate()).padStart(2, "0")}`;
                 const summary = event.title
                   ? `${event.community} - ${event.title}`
                   : event.community;
