@@ -152,6 +152,29 @@
             padding-top: 0;
         }
 
+        .date-row {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 0;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .date-row .date-number {
+            margin-bottom: 0;
+        }
+
+        .holiday-label {
+            font-size: 11px;
+            color: #e53e3e;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            min-width: 0;
+        }
+
         .events-container {
             flex: 1;
             display: flex;
@@ -220,7 +243,7 @@
         }
         }
         ;
-        const holidaySet = new Set(holidays.map(h => h.date));
+        const holidayMap = new Map(holidays.map(h => [h.date, h.name]));
 
         function renderCalendar() {
             const grid = document.getElementById('calendar-grid');
@@ -263,7 +286,8 @@
 
                 const weekendClass = isSaturday ? ' saturday' : (isSunday ? ' sunday' : '');
                 const topBorderClass = needTopBorder ? ' weekend-top' : '';
-                const isHoliday = holidaySet.has(dateStr) && !isWeekend;
+                const holidayName = !isWeekend ? holidayMap.get(dateStr) : undefined;
+                const isHoliday = !!holidayName;
                 let holidayClass = '';
                 if (isHoliday) {
                     let needHolidayTop;
@@ -271,7 +295,7 @@
                         needHolidayTop = true;
                     } else {
                         const prevDateStr = `${year}-${String(month).padStart(2, '0')}-${String(day - 7).padStart(2, '0')}`;
-                        needHolidayTop = !holidaySet.has(prevDateStr);
+                        needHolidayTop = !holidayMap.has(prevDateStr);
                     }
                     holidayClass = ' holiday' + (needHolidayTop ? ' holiday-top' : '');
                 }
@@ -279,7 +303,9 @@
                 const dayEvents = events.filter(e => e.date === dateStr);
 
                 html += `<div class="calendar-day${weekendClass}${topBorderClass}${holidayClass}">
-                    <div class="date-number">${day}</div>
+                    ${isHoliday
+                    ? `<div class="date-row"><span class="date-number">${day}</span><span class="holiday-label">${holidayName}</span></div>`
+                    : `<span class="date-number">${day}</span>`}
                     <div class="events-container">`;
 
                 // If 3+ events on same day, only show community name
