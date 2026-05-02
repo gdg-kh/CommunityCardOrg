@@ -195,7 +195,7 @@
     "date": "2026-05-05",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #41",
-    "description": "",
+    "description": "1. AI 在社福領域的應用<br>2. AI 智慧文件管理",
     "link": "https://www.facebook.com/groups/toocon/",
     "color": "#EA4335"
   },
@@ -347,8 +347,8 @@
     "date": "2026-05-26",
     "community": "開發者 Buffet",
     "title": "開發者 Café",
-    "description": "5 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
+    "description": "我為什麼做 ZeroSpec：先把專案整理到 AI 看得懂",
+    "link": "https://www.facebook.com/share/1Az2NKVbEb/",
     "color": "#4285F4"
   },
   {
@@ -548,7 +548,15 @@
     "community": "高雄 WordPress",
     "title": "高雄 WordPress 小聚 2026/04",
     "description": "未定",
-    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/314117651//",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/314117651/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-05-19",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/05",
+    "description": "網站做完卻沒人來、沒人買？問題不是功能不夠，而是缺流量與轉換策略。做好商品頁＋Facebook廣告，銷售自然發生",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/314485245/",
     "color": "#4285F4"
   },
   {
@@ -712,6 +720,38 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-05-04",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-05-11",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-05-18",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-05-25",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2026-02-04",
     "community": "氛圍工作者交流趴（粉鳥趴）",
     "title": "",
@@ -837,6 +877,14 @@
     "title": "2603 meetup",
     "description": "畫電路/nextcloud...",
     "link": "https://luma.com/awwlb7l0",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-05-16",
+    "community": "KaLUG",
+    "title": "Ubuntu 2604 +Fedora 44 Release Party",
+    "description": "一起來聊聊新版 Ubuntu & Fedora 有沒有什麼期待的新功能",
+    "link": "https://luma.com/ytanoy01",
     "color": "#4285F4"
   },
   {
