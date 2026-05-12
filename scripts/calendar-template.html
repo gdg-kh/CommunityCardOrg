@@ -237,13 +237,7 @@
         const year = {{YEAR}};
         const month = {{MONTH}};
         const events = {{EVENTS_JSON}};
-        // prettier-ignore
-        const holidays = {
-        {
-            HOLIDAYS_JSON
-        }
-        }
-        ;
+        const holidays = {{HOLIDAYS_JSON}};
         const holidayMap = new Map(holidays.map(h => [h.date, h.name]));
 
         function renderCalendar() {
