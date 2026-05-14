@@ -1,0 +1,24 @@
+{
+  "name": "community-card-mcp",
+  "version": "1.0.0",
+  "description": "社群名牌卡 MCP 伺服器：透過 stdio 提供社群、活動查詢與發 PR 新增活動的工具",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["mcp", "community", "kaohsiung"],
+  "author": "AndyAWD and contributors",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@octokit/rest": "^22.0.1",
+    "zod": "^4.4.3"
+  }
+}

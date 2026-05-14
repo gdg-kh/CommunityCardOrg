@@ -1,0 +1,106 @@
+openapi: 3.1.0
+info:
+  title: Kaohsiung Community API
+  description: 提供高雄在地技術社群的介紹與活動行事曆資料。
+  version: 1.0.0
+servers:
+  - url: https://your-github-pages-url.github.io/CommunityCardOrg
+    description: GitHub Pages Production Server（fork 後請改為自己的網址，例如 https://community-card.org）
+
+paths:
+  /2026/data.json:
+    get:
+      summary: 取得社群清單與介紹
+      description: 回傳 2026 年參與的高雄技術社群清單、贊助商與集點獎勵資訊。
+      operationId: getCommunities
+      responses:
+        '200':
+          description: 成功取得資料
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommunityData'
+
+  /2026/events.json:
+    get:
+      summary: 取得活動行事曆
+      description: 回傳各社群舉辦的活動清單。
+      operationId: getEvents
+      responses:
+        '200':
+          description: 成功取得活動資料
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+
+components:
+  schemas:
+    CommunityData:
+      type: object
+      properties:
+        communities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Community'
+        sponsors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+        rewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+
+    Entity:
+      type: object
+      properties:
+        name:
+          type: string
+        link:
+          type: string
+          format: uri
+        logo:
+          type: string
+        description:
+          type: string
+
+    Community:
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            color:
+              type: string
+              description: 該社群代表色的 Hex 色碼，例如 #EA4335
+
+    Event:
+      type: object
+      required:
+        - date
+        - title
+        - community
+        - color
+      properties:
+        date:
+          type: string
+          format: date
+          description: 活動日期 (YYYY-MM-DD)
+        community:
+          type: string
+          description: 主辦社群名稱
+        title:
+          type: string
+          description: 活動標題
+        description:
+          type: string
+          maxLength: 20
+          description: 活動介紹 (不超過 20 個字)
+        link:
+          type: string
+          description: 活動報名或宣傳連結
+        color:
+          type: string
+          description: 顯示在行事曆上的顏色，需對應該社群的代表色
