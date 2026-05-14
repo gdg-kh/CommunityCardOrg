@@ -5,7 +5,7 @@ info:
   version: 1.0.0
 servers:
   - url: https://your-github-pages-url.github.io/CommunityCardOrg
-    description: GitHub Pages Production Server (請替換為實際網址)
+    description: GitHub Pages Production Server（fork 後請改為自己的網址，例如 https://community-card.org）
 
 paths:
   /2026/data.json:
