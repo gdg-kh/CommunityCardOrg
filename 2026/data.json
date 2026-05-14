@@ -4,49 +4,57 @@
       "name": "Google Developer Groups Kaohsiung 臉書社團",
       "link": "https://www.facebook.com/groups/GDGKaohsiung",
       "logo": "../assets/logo_gdg_kaohsiung.png",
-      "description": "介紹：<br>Google Developer Groups Kaohsiung 前身是 Android 高雄開發者社群，誕生於 2014 年 3 月。<br><br>我們每年定期舉辦 Build with AI、 Google I/O Extended、DevFest 和 TOOCON 天黑黑月會，希望讓高雄對軟體開發有興趣的朋友能夠有實體交流的機會。<br><br>歡迎加入 Google Developer Groups Kaohsiung 粉絲專業頁和 GDG Kaohsiung 臉書社團，掌握最新活動資訊。"
+      "description": "介紹：<br>Google Developer Groups Kaohsiung 前身是 Android 高雄開發者社群，誕生於 2014 年 3 月。<br><br>我們每年定期舉辦 Build with AI、 Google I/O Extended、DevFest 和 TOOCON 天黑黑月會，希望讓高雄對軟體開發有興趣的朋友能夠有實體交流的機會。<br><br>歡迎加入 Google Developer Groups Kaohsiung 粉絲專業頁和 GDG Kaohsiung 臉書社團，掌握最新活動資訊。",
+      "color": "#EA4335"
     },
     {
       "name": "開發者 Buffet Discord",
       "link": "https://discord.gg/uRvhqpFeuG",
       "logo": "../assets/logo_developer_buffet_v2.png",
-      "description": "介紹：<br>我們是一群在台灣科技研討會結識的夥伴，自疫情期間，我們所在的城市技術社群與聚會逐漸減少。希望能保持討論和交流的熱度，因此我們決定發起聚會。 在這裏會舉辦各種形式的活動，議題大致上包括但不限於前、後端、UI/UX、ML、軟體開發等，希望大家能在這裡找到並盡情享受自己感興趣的事物，因此取名為【開發者 Buffet】。<br><br>目前有線下活動【開發者 café】每月的最後一個周二晚上 19:00 - 21:00，在高雄的咖啡廳與最多 10 位左右的開發者們一起輕鬆聊聊天，歡迎任何主題 ☕<br><br>以及我們也有不定期舉辦線上讀書會，你可以在 Discord 找到更多詳細資訊，歡迎加入 \uD83D\uDE4C"
+      "description": "介紹：<br>我們是一群在台灣科技研討會結識的夥伴，自疫情期間，我們所在的城市技術社群與聚會逐漸減少。希望能保持討論和交流的熱度，因此我們決定發起聚會。 在這裏會舉辦各種形式的活動，議題大致上包括但不限於前、後端、UI/UX、ML、軟體開發等，希望大家能在這裡找到並盡情享受自己感興趣的事物，因此取名為【開發者 Buffet】。<br><br>目前有線下活動【開發者 café】每月的最後一個周二晚上 19:00 - 21:00，在高雄的咖啡廳與最多 10 位左右的開發者們一起輕鬆聊聊天，歡迎任何主題 ☕<br><br>以及我們也有不定期舉辦線上讀書會，你可以在 Discord 找到更多詳細資訊，歡迎加入 🙌",
+      "color": "#4285F4"
     },
     {
       "name": "國泰 CDC 小聚",
       "link": "https://lit.link/zh-tw/cdc0413",
       "logo": "../assets/logo_cdc_v3.png",
-      "description": "介紹：<br>\uD83C\uDF1F 國泰 CDC 小聚<br>中南部領航 FinTech 新浪潮！<br><br>國泰 CDC 小聚是專注於金融科技（FinTech）與雲端技術的技術型社群。中南部雙據點致力於推動數位轉型與全球化佈局！<br><br>\uD83C\uDF1E 台中 CDC ✈\uFE0F 海外數位基地 ✈\uFE0F<br>打造中部首座金融科技新地標，進駐台灣中部首座國際物流產業基地。台中 CDC 目標是支援集團的國際化發展並負責負責資訊服務與基礎架構規劃。<br><br>\uD83D\uDEA2 高雄 CDC ☁\uFE0F 雲端轉型基地 ☁\uFE0F<br>坐落在高雄亞灣區黃金地段，面向一整面尊爵不凡的無敵海景。高雄 CDC 專注於雲端轉型任務，包含核心及周邊上雲架構及開發，以及雲端服務應用評估及導入。<br><br>國泰 CDC 小聚將於台中與高雄不定期舉辦實體技術 Meetup，未來也會有更多不同形式的交流活動。如果你是想要南漂、北漂或台中、高雄在地的工程師，或關注金融科技與雲端發展的朋友，那走過路過不要錯過！在這裡，你不僅可以學習成長，也可以找到無限的機會和發展前景，歡迎透過國泰 CDC 小聚與我們交流～"
+      "description": "介紹：<br>🌟 國泰 CDC 小聚<br>中南部領航 FinTech 新浪潮！<br><br>國泰 CDC 小聚是專注於金融科技（FinTech）與雲端技術的技術型社群。中南部雙據點致力於推動數位轉型與全球化佈局！<br><br>🌞 台中 CDC ✈️ 海外數位基地 ✈️<br>打造中部首座金融科技新地標，進駐台灣中部首座國際物流產業基地。台中 CDC 目標是支援集團的國際化發展並負責負責資訊服務與基礎架構規劃。<br><br>🚢 高雄 CDC ☁️ 雲端轉型基地 ☁️<br>坐落在高雄亞灣區黃金地段，面向一整面尊爵不凡的無敵海景。高雄 CDC 專注於雲端轉型任務，包含核心及周邊上雲架構及開發，以及雲端服務應用評估及導入。<br><br>國泰 CDC 小聚將於台中與高雄不定期舉辦實體技術 Meetup，未來也會有更多不同形式的交流活動。如果你是想要南漂、北漂或台中、高雄在地的工程師，或關注金融科技與雲端發展的朋友，那走過路過不要錯過！在這裡，你不僅可以學習成長，也可以找到無限的機會和發展前景，歡迎透過國泰 CDC 小聚與我們交流～",
+      "color": "#34a853"
     },
     {
       "name": "高雄 WordPress 小聚 Kaohsiung WordPress Meetup",
       "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/",
       "logo": "../assets/logo_kaohsiung_word_press_v2.png",
-      "description": "介紹：<br>我們是一群位於高雄的 WordPress 愛好者，我們之中包含了開發者、設計師、內容產製者以及各式各樣與 WordPress 相關的人。<br><br>藉由這個社群，我們希望能夠與同樣對 WordPress 有興趣的你，分享我們的想法與經驗。<br><br>這個 WordPress Meetup Group 竭誠歡迎所有喜愛 WordPress 的人們加入。"
+      "description": "介紹：<br>我們是一群位於高雄的 WordPress 愛好者，我們之中包含了開發者、設計師、內容產製者以及各式各樣與 WordPress 相關的人。<br><br>藉由這個社群，我們希望能夠與同樣對 WordPress 有興趣的你，分享我們的想法與經驗。<br><br>這個 WordPress Meetup Group 竭誠歡迎所有喜愛 WordPress 的人們加入。",
+      "color": "#4285F4"
     },
     {
       "name": "Second Space 臉書社團",
       "link": "https://www.facebook.com/cubeworksx",
       "logo": "../assets/logo_second_space.png",
-      "description": "介紹：<br>Second Space —  24/7 members club designed for active creators in tech and design industry.  It’s a workspace during the day and a social venue at night with events ranging from technical workshops, courses, hackathons and design meetups to leadership and personal development sessions. Second Space is a bilingual club with focus international tech talents, digital nomads and with local professional communities."
+      "description": "介紹：<br>Second Space —  24/7 members club designed for active creators in tech and design industry.  It’s a workspace during the day and a social venue at night with events ranging from technical workshops, courses, hackathons and design meetups to leadership and personal development sessions. Second Space is a bilingual club with focus international tech talents, digital nomads and with local professional communities.",
+      "color": "#F9AB00"
     },
     {
       "name": "KaLUG 官方網站",
       "link": "https://kalug.tw/",
       "logo": "../assets/logo_kalug.jpg",
-      "description": "介紹：<br>KaLUG - Kaohsiung Linux User Group: 由一群熱愛 Linux / open source 的高雄人所組成的社群"
+      "description": "介紹：<br>KaLUG - Kaohsiung Linux User Group: 由一群熱愛 Linux / open source 的高雄人所組成的社群",
+      "color": "#4285F4"
     },
     {
       "name": "Pyladies Kaohsiung 官網",
       "link": "https://kaohsiung.pyladies.com/",
       "logo": "../assets/logo_pyladies_kh.png",
-      "description": "介紹：<br>PyLadies Kaohsiung 是 PyLadies 國際組織的一員，以高雄為基地推動女性技術社群的發展，致力於打造讓女性能安心、自信地學習、交流與成長的環境。舉辦各種工作坊、經驗分享等交流活動，讓女性能透過 Python 提升技術、拓展人脈與視野，進而在科技領域中成為主動的參與者與領導者。同時也積極與在地及全台社群建立連結、相互支持，讓整體技術社群更加茁壯。"
+      "description": "介紹：<br>PyLadies Kaohsiung 是 PyLadies 國際組織的一員，以高雄為基地推動女性技術社群的發展，致力於打造讓女性能安心、自信地學習、交流與成長的環境。舉辦各種工作坊、經驗分享等交流活動，讓女性能透過 Python 提升技術、拓展人脈與視野，進而在科技領域中成為主動的參與者與領導者。同時也積極與在地及全台社群建立連結、相互支持，讓整體技術社群更加茁壯。",
+      "color": "#FA3C0A"
     },
     {
       "name": "KIMU 高雄獨立遊戲開發者聚會 臉書社團",
       "link": "https://www.facebook.com/groups/kimugroup/",
       "logo": "../assets/logo_kimu.png",
-      "description": "介紹：<br>KIMU 高雄獨立遊戲開發者聚會為 IGDA Taiwan 所屬 SIG（Special Interesting Group)，以高雄為據點在南台灣推動獨立遊戲開發交流活動的非營利組織，我們長期舉辦工作坊、Game Jam 以及分享會，不管您是業界、教育界、學生或遊戲愛好者，只要您對獨立遊戲開發感興趣，都歡迎您來參加。"
+      "description": "介紹：<br>KIMU 高雄獨立遊戲開發者聚會為 IGDA Taiwan 所屬 SIG（Special Interesting Group)，以高雄為據點在南台灣推動獨立遊戲開發交流活動的非營利組織，我們長期舉辦工作坊、Game Jam 以及分享會，不管您是業界、教育界、學生或遊戲愛好者，只要您對獨立遊戲開發感興趣，都歡迎您來參加。",
+      "color": "#34A853"
     },
     {
       "name": "南台灣敏捷社群 臉書社團",
@@ -58,25 +66,29 @@
       "name": "K.NET",
       "link": "https://www.facebook.com/k.net.io",
       "logo": "../assets/logo_k_net.png",
-      "description": "介紹：<br>從高雄發芽dot NET技術社群，有空歡迎您來坐坐，交流交流，<br>每週一晚上於星巴克聚會，有空可以來坐坐認識新朋友，<br>常態聚會地點：裕誠路台銀旁星巴克"
+      "description": "介紹：<br>從高雄發芽dot NET技術社群，有空歡迎您來坐坐，交流交流，<br>每週一晚上於星巴克聚會，有空可以來坐坐認識新朋友，<br>常態聚會地點：裕誠路台銀旁星巴克",
+      "color": "#F9AB00"
     },
     {
       "name": "VSCP 粉鳥趴",
       "link": "https://www.facebook.com/groups/vscp.tw",
       "logo": "../assets/logo_vscp.png",
-      "description": "介紹：<br>核心理念：<br>像鴿子一樣，在都市環境中建立穩定、互助的工作者社群，透過輕鬆聚會，促進實質的知識交流、資源分享和協作機會。<br>目標參與者：<br>・主要群體：AI 時代的獨立工作者（無論是現職或是目標）<br>・共同特徵：<br>- 同時具備技術與商業思維<br>- 需要經營個人或工作室的實務知識<br>- 尋求協作夥伴和資源網絡<br>- 重視工作氛圍和生活品質"
+      "description": "介紹：<br>核心理念：<br>像鴿子一樣，在都市環境中建立穩定、互助的工作者社群，透過輕鬆聚會，促進實質的知識交流、資源分享和協作機會。<br>目標參與者：<br>・主要群體：AI 時代的獨立工作者（無論是現職或是目標）<br>・共同特徵：<br>- 同時具備技術與商業思維<br>- 需要經營個人或工作室的實務知識<br>- 尋求協作夥伴和資源網絡<br>- 重視工作氛圍和生活品質",
+      "color": "#F9AB00"
     },
     {
       "name": "UIUX.Kaohsiung",
       "link": "https://luma.com/uiux.kaohsiung",
       "logo": "../assets/logo_uiux_kaohsiung.png",
-      "description": "介紹：<br>嗨！高雄的朋友們 \uD83D\uDC4B 我們是高雄 UIUX 社群，這是個輕鬆的設計師互助聚會。<br>每個月都有不同主題，會根據上次討論決定下個月的題目，鄰近活動會再更新題目與圖片，盡請期待"
+      "description": "介紹：<br>嗨！高雄的朋友們 👋 我們是高雄 UIUX 社群，這是個輕鬆的設計師互助聚會。<br>每個月都有不同主題，會根據上次討論決定下個月的題目，鄰近活動會再更新題目與圖片，盡請期待",
+      "color": "#34A853"
     },
     {
       "name": "vLAB Online 台灣路由網路實驗中心",
       "link": "http://www.vlab.tw",
       "logo": "../assets/logo_vlab.png",
-      "description": "介紹：<br>vLAB Online 自 2000 年創立以來，歷經網站、論壇到 Line 群組等不同型態的發展。第一代以網站型態奠定中文網路技術交流基礎；第二代透過論壇累積大量技術文章與社群能量；之後隨著交流模式轉變，逐步轉型為以 Line 群組為核心的即時互助社群。自 2024 年第三代重起以來，vLAB 除了持續經營社群交流，也陸續啟用社群資源平台、推出帶狀活動、建立臨時與正式官方網站、重啟多個社群媒體平台，並透過 Workshop、Meetup 及大型活動拓展社群影響力。2026 年 1 月正式啟用官方網站。"
+      "description": "介紹：<br>vLAB Online 自 2000 年創立以來，歷經網站、論壇到 Line 群組等不同型態的發展。第一代以網站型態奠定中文網路技術交流基礎；第二代透過論壇累積大量技術文章與社群能量；之後隨著交流模式轉變，逐步轉型為以 Line 群組為核心的即時互助社群。自 2024 年第三代重起以來，vLAB 除了持續經營社群交流，也陸續啟用社群資源平台、推出帶狀活動、建立臨時與正式官方網站、重啟多個社群媒體平台，並透過 Workshop、Meetup 及大型活動拓展社群影響力。2026 年 1 月正式啟用官方網站。",
+      "color": "#4285F4"
     }
   ],
   "sponsors": [
