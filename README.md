@@ -148,10 +148,10 @@ Fork 後若只是要定期維護自家社群的活動，建議流程：
 | 區塊 | 欄位 | 型別 | 必填 | 說明/約束 |
 |---|---|---|---|---|
 | `communities[]` | `name` | string | ✓ | 社群名稱 |
-| | `link` | string (URI) | – | 社群連結 |
-| | `logo` | string | – | Logo 圖檔路徑或 URL |
-| | `description` | string | – | 社群介紹 |
-| | `color` | string | – | hex 代表色，例如 `#EA4335` |
+| | `link` | string (URI) | ✓ | 社群連結 |
+| | `logo` | string | ✓ | Logo 圖檔路徑或 URL |
+| | `description` | string | ✓ | 社群介紹 |
+| | `color` | string | ✓ | hex 代表色，例如 `#EA4335` |
 | `sponsors[]` | `name` / `link` / `logo` / `description` | string | – | 贊助商（同上但無 `color`） |
 | `rewards[]` | `name` / `link` / `logo` / `description` | string | – | 集章獎勵項目 |
 
@@ -163,7 +163,7 @@ Fork 後若只是要定期維護自家社群的活動，建議流程：
 | `community` | string | ✓ | 主辦社群名稱（需對應 `communities[].name`） |
 | `title` | string | ✓ | 活動標題 |
 | `description` | string | – | **最多 20 個字**（與 MCP `propose_new_event` 限制一致） |
-| `link` | string | – | 報名/詳情連結 |
+| `link` | string | ✓ | 報名/詳情連結 |
 | `color` | string | ✓ | hex 顏色，應對應主辦社群代表色 |
 
 JSON 範例：
