@@ -1,5 +1,13 @@
 [
   {
+    "date": "2025-12-01",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2025-12-02",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #36",
@@ -22,6 +30,14 @@
     "description": "解析”勞保局 e 化服務系統”UIUX細節",
     "link": "#",
     "color": "#34A853"
+  },
+  {
+    "date": "2025-12-08",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
   },
   {
     "date": "2025-12-10",
@@ -54,6 +70,14 @@
     "description": "科技工作講主持人、美商工程師主管抹布 Moboo 夜間開講",
     "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-chai-jie-gao-xin-sai-dao-de-yuan-li",
     "color": "#EA4335"
+  },
+  {
+    "date": "2025-12-15",
+    "community": "K.NET",
+    "title": "企業自動化拆解",
+    "description": "從 LINE 到 n8n的逐步指南",
+    "link": "https://knet.kktix.cc/events/70260567",
+    "color": "#F9AB00"
   },
   {
     "date": "2025-12-16",
@@ -96,6 +120,14 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2025-12-22",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2025-12-24",
     "community": "氛圍工作者交流趴（粉鳥趴）",
     "title": "",
@@ -112,6 +144,14 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2025-12-29",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2025-12-30",
     "community": "開發者 Buffet",
     "title": "開發者 Café",
@@ -120,39 +160,15 @@
     "color": "#4285F4"
   },
   {
-    "date": "2025-12-01",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io/",
-    "color": "#F9AB00"
+    "date": "2026-01-03",
+    "community": "UIUX Kaohsiung",
+    "title": "UI<>Dev 團隊分工與前端溝通",
+    "description": "大家一起討論踩過的坑！",
+    "link": "https://luma.com/whqeko1i",
+    "color": "#34A853"
   },
   {
-    "date": "2025-12-08",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io/",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2025-12-15",
-    "community": "K.NET",
-    "title": "企業自動化拆解",
-    "description": "從 LINE 到 n8n的逐步指南",
-    "link": "https://knet.kktix.cc/events/70260567",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2025-12-22",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io/",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2025-12-29",
+    "date": "2026-01-05",
     "community": "K.NET",
     "title": "軟體開發‧雲端‧AI‧職涯",
     "description": "星巴克常態聚會交流",
@@ -168,331 +184,11 @@
     "color": "#EA4335"
   },
   {
-    "date": "2026-02-03",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #38",
-    "description": "1. 用 Windsurf 以及 Google Conduct 與多 coding agent 打造一人開發團隊<br>2. 團隊導入 Vibe Coding 失控到穩定生成經驗分享",
-    "link": "https://gdg.community.dev/e/mcvasn/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-03-10",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #39",
-    "description": "1. AI 驅動的 API 開發實戰<br>2. Scaffold 自動化整合模板工具",
-    "link": "https://gdg.community.dev/e/mwp8d8/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-04-07",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #40",
-    "description": "1. 亞灣區的數位匯流：高雄智慧城市展<br>2. 可以幫我「想」個程式嗎？",
-    "link": "https://gdg.community.dev/e/mjmbpq/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-05-05",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #41",
-    "description": "1. AI 在社福領域的應用<br>2. AI 智慧文件管理",
-    "link": "https://gdg.community.dev/e/mmp9xd/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-06-09",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #42",
-    "description": "1. 使用 Skills 打造 AI CLI 設定精靈<br>2. 我的 iPAS AI 備考方式",
-    "link": "https://gdg.community.dev/e/m8qd55/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-07-14",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #43",
-    "description": "",
-    "link": "https://gdg.community.dev/e/mcg3my/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-08-04",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #44",
-    "description": "",
-    "link": "https://gdg.community.dev/e/mw59ns/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-09-08",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #45",
-    "description": "",
-    "link": "https://www.facebook.com/groups/toocon/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-10-06",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #46",
-    "description": "",
-    "link": "https://www.facebook.com/groups/toocon/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-11-03",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #47",
-    "description": "",
-    "link": "https://www.facebook.com/groups/toocon/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-12-08",
-    "community": "GDG Kaohsiung",
-    "title": "TOOCON #48",
-    "description": "",
-    "link": "https://www.facebook.com/groups/toocon/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-03-21",
-    "community": "GDG Kaohsiung",
-    "title": "Build with AI 2026 高雄場",
-    "description": "極致懶人學 — 從 Vibe SQL 到 AI 代理的生存策略",
-    "link": "https://www.accupass.com/event/2602230332571726015441",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-03-25",
-    "community": "GDG Kaohsiung",
-    "title": "Build with AI 2026 高雄場",
-    "description": "Gemini CLI 演義第一回：安環境巧佈八卦陣，定計畫初試空城計",
-    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026setup-the-base-plan-the-case/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-04-01",
-    "community": "GDG Kaohsiung",
-    "title": "好的開發者社群 X 兔 CON 2026 年會",
-    "description": "我們致力於推廣最高境界的工程師禪意，無論發生什麼事，先說「好的」，然後繼續工作",
-    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-good-developer-group-x-tu-con-annual-conf-2026",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-04-15",
-    "community": "GDG Kaohsiung",
-    "title": "Build with AI 2026 高雄場",
-    "description": "Gemini CLI 演義第二回：設內鉤嚴查違法紀，自動修大敗亂碼軍",
-    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026hook-the-flow-fix-the-show/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-04-24",
-    "community": "GDG Kaohsiung",
-    "title": "Build with AI 2026 高雄場",
-    "description": "解構 AI 代理與穩定性工程的實戰進化論",
-    "link": "https://www.accupass.com/event/2603170317539828627210",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-05-13",
-    "community": "GDG Kaohsiung",
-    "title": "Build with AI 2026 高雄場",
-    "description": "Gemini CLI 演義第三回：立軍令巧寫單元測，全自動歸降慣例標",
-    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026skill-the-test-commit-the-best/",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-11-14",
-    "community": "GDG Kaohsiung",
-    "title": "DevFest 2026 高雄場",
-    "description": "",
-    "link": "https://www.facebook.com/groups/GDGKaohsiung",
-    "color": "#EA4335"
-  },
-  {
-    "date": "2026-01-27",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "抽屜裡的舊硬碟復活了！用 Unraid 零門檻輕鬆駕馭 NAS",
-    "link": "https://www.facebook.com/groups/buffet.dev",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-02-24",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "蘋果會拋棄你的舊筆電，但 OpenCore 不會",
-    "link": "https://www.facebook.com/share/17jQoqDXz5/",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-03-31",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "饅頭我不寫程式了之 Plan Mode 是在 Plan 什麼？",
-    "link": "https://www.facebook.com/share/1BTZjDj9ew/",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-04-28",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "新年新希望(?)，讓社群活動紀錄自動化",
-    "link": "https://www.facebook.com/share/14Xq25meQzk/",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-05-26",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "我為什麼做 ZeroSpec：先把專案整理到 AI 看得懂",
-    "link": "https://www.facebook.com/share/1Az2NKVbEb/",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-06-30",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "6 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-07-28",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "7 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-08-25",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "8 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-09-29",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "9 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-10-27",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "10 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-11-24",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "11 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-12-29",
-    "community": "開發者 Buffet",
-    "title": "開發者 Café",
-    "description": "12 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-01-22",
+    "date": "2026-01-11",
     "community": "Second Space",
-    "title": "AI 討論圈",
-    "description": "人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。",
+    "title": "AI 攝影工作坊",
+    "description": "",
     "link": "https://www.secondspace.dev/zh/",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-02-12",
-    "community": "Second Space",
-    "title": "AI 討論圈",
-    "description": "人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。",
-    "link": "https://www.secondspace.dev/zh/",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-03-20",
-    "community": "Second Space",
-    "title": "AI 討論圈",
-    "description": "人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。",
-    "link": "https://luma.com/38vuf7we",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-01-18",
-    "community": "Second Space",
-    "title": "測試試飛場：為你的專案收集回饋",
-    "description": "您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！",
-    "link": "https://www.secondspace.dev/zh/",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-02-18",
-    "community": "Second Space",
-    "title": "測試試飛場：為你的專案收集回饋",
-    "description": "您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！",
-    "link": "https://www.secondspace.dev/zh/",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-03-18",
-    "community": "Second Space",
-    "title": "測試試飛場：為你的專案收集回饋",
-    "description": "您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！",
-    "link": "https://luma.com/0yho08oq",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-01-25",
-    "community": "g0v 台灣零時政府",
-    "title": "台灣零時政府第柒拾壹次高雄黑客松（g0v KHH _ Kaohsiung Hackath71n）",
-    "description": "g0v 是一個草根式的公民社群，致力於加深公民對社會的貢獻以及彼此間的連結",
-    "link": "https://g0v-jothon.kktix.cc/events/g0v-hackath71n",
-    "color": "#9E9E9F"
-  },
-  {
-    "date": "2026-01-14",
-    "community": "氛圍工作者交流趴（粉鳥趴）",
-    "title": "",
-    "description": "",
-    "link": "https://www.facebook.com/groups/vscp.tw",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-01-21",
-    "community": "氛圍工作者交流趴（粉鳥趴）",
-    "title": "",
-    "description": "",
-    "link": "https://www.facebook.com/groups/vscp.tw",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-01-28",
-    "community": "氛圍工作者交流趴（粉鳥趴）",
-    "title": "",
-    "description": "",
-    "link": "https://www.facebook.com/groups/vscp.tw",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-01-05",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io/",
     "color": "#F9AB00"
   },
   {
@@ -504,107 +200,11 @@
     "color": "#F9AB00"
   },
   {
-    "date": "2026-01-19",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io/",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-01-26",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io/",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-01-21",
-    "community": "高雄 WordPress",
-    "title": "高雄 WordPress 小聚 2026/01",
-    "description": "玩轉 WordPress 插件 + n8n by Honda",
-    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/312622012/",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-02-25",
-    "community": "高雄 WordPress",
-    "title": "高雄 WordPress 小聚 2026/02",
-    "description": "如何用 Vibe Coding 建立客製化系統：塔羅抽卡系統 & 儲值結算系統 by 墨求彤",
-    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/313140106/",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-03-17",
-    "community": "高雄 WordPress",
-    "title": "高雄 WordPress 小聚 2026/03",
-    "description": "不止是部落格：用 WordPress 打造具備「贊助機制」的數據社群",
-    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/313647240/",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-04-21",
-    "community": "高雄 WordPress",
-    "title": "高雄 WordPress 小聚 2026/04",
-    "description": "未定",
-    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/314117651/",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-05-19",
-    "community": "高雄 WordPress",
-    "title": "高雄 WordPress 小聚 2026/05",
-    "description": "網站做完卻沒人來、沒人買？問題不是功能不夠，而是缺流量與轉換策略。做好商品頁＋Facebook廣告，銷售自然發生",
-    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/314485245/",
-    "color": "#4285F4"
-  },
-  {
-    "date": "2026-01-03",
-    "community": "UIUX Kaohsiung",
-    "title": "UI<>Dev 團隊分工與前端溝通",
-    "description": "大家一起討論踩過的坑！",
-    "link": "https://luma.com/whqeko1i",
-    "color": "#34A853"
-  },
-  {
-    "date": "2026-02-07",
-    "community": "UIUX Kaohsiung",
-    "title": "高雄設計師聚會 #5",
+    "date": "2026-01-14",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
     "description": "",
-    "link": "https://luma.com/0avbdv5w",
-    "color": "#34A853"
-  },
-  {
-    "date": "2026-03-07",
-    "community": "UIUX Kaohsiung",
-    "title": "高雄設計師聚會 #6",
-    "description": "Design Token System",
-    "link": "https://luma.com/jc7upvkg",
-    "color": "#34A853"
-  },
-  {
-    "date": "2026-04-04",
-    "community": "UIUX Kaohsiung",
-    "title": "高雄設計師聚會 #7",
-    "description": "",
-    "link": "https://luma.com/v9lkn7yw",
-    "color": "#34A853"
-  },
-  {
-    "date": "2026-05-02",
-    "community": "UIUX Kaohsiung",
-    "title": "高雄設計師聚會 #8",
-    "description": "",
-    "link": "https://luma.com/sxng9fgs",
-    "color": "#34A853"
-  },
-  {
-    "date": "2026-01-11",
-    "community": "Second Space",
-    "title": "AI 攝影工作坊",
-    "description": "",
-    "link": "https://www.secondspace.dev/zh/",
+    "link": "https://www.facebook.com/groups/vscp.tw",
     "color": "#F9AB00"
   },
   {
@@ -616,36 +216,76 @@
     "color": "#34A853"
   },
   {
-    "date": "2026-02-09",
-    "community": "KIMU - 高雄獨立遊戲開發者聚會",
-    "title": "KIMU 之南部人下班來聊遊戲",
-    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
-    "link": "https://www.facebook.com/share/p/1CUJk4RUnp/",
-    "color": "#34A853"
+    "date": "2026-01-18",
+    "community": "Second Space",
+    "title": "測試試飛場：為你的專案收集回饋",
+    "description": "您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！",
+    "link": "https://www.secondspace.dev/zh/",
+    "color": "#F9AB00"
   },
   {
-    "date": "2026-03-19",
-    "community": "KIMU - 高雄獨立遊戲開發者聚會",
-    "title": "KIMU 之南部人下班來聊遊戲",
-    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
-    "link": "https://www.facebook.com/share/p/1GSLrBtqzt/",
-    "color": "#34A853"
+    "date": "2026-01-19",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
   },
   {
-    "date": "2026-04-09",
-    "community": "KIMU - 高雄獨立遊戲開發者聚會",
-    "title": "KIMU 之南部人下班來聊遊戲",
-    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
-    "link": "https://www.facebook.com/share/p/1B82E6RSih/",
-    "color": "#34A853"
+    "date": "2026-01-21",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
   },
   {
-    "date": "2026-05-12",
-    "community": "KIMU - 高雄獨立遊戲開發者聚會",
-    "title": "KIMU 之南部人下班來聊遊戲",
-    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
-    "link": "https://www.facebook.com/share/p/17ZgAhaey3/",
-    "color": "#34A853"
+    "date": "2026-01-21",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/01",
+    "description": "玩轉 WordPress 插件 + n8n by Honda",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/312622012/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-01-22",
+    "community": "Second Space",
+    "title": "AI 討論圈",
+    "description": "人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。",
+    "link": "https://www.secondspace.dev/zh/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-01-25",
+    "community": "g0v 台灣零時政府",
+    "title": "台灣零時政府第柒拾壹次高雄黑客松（g0v KHH _ Kaohsiung Hackath71n）",
+    "description": "g0v 是一個草根式的公民社群，致力於加深公民對社會的貢獻以及彼此間的連結",
+    "link": "https://g0v-jothon.kktix.cc/events/g0v-hackath71n",
+    "color": "#9E9E9F"
+  },
+  {
+    "date": "2026-01-26",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-01-27",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "抽屜裡的舊硬碟復活了！用 Unraid 零門檻輕鬆駕馭 NAS",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-01-28",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
   },
   {
     "date": "2026-02-02",
@@ -656,108 +296,12 @@
     "color": "#F9AB00"
   },
   {
-    "date": "2026-02-09",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-02-23",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io/",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-03-02",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io/",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-03-09",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-03-23",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-03-30",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-04-13",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-04-20",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-04-27",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-05-04",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-05-11",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-05-18",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-05-25",
-    "community": "K.NET",
-    "title": "軟體開發‧雲端‧AI‧職涯",
-    "description": "星巴克常態聚會交流",
-    "link": "https://www.facebook.com/k.net.io",
-    "color": "#F9AB00"
+    "date": "2026-02-03",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #38",
+    "description": "1. 用 Windsurf 以及 Google Conduct 與多 coding agent 打造一人開發團隊<br>2. 團隊導入 Vibe Coding 失控到穩定生成經驗分享",
+    "link": "https://gdg.community.dev/e/mcvasn/",
+    "color": "#EA4335"
   },
   {
     "date": "2026-02-04",
@@ -765,6 +309,30 @@
     "title": "",
     "description": "",
     "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-02-07",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #5",
+    "description": "",
+    "link": "https://luma.com/0avbdv5w",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-02-09",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
+    "link": "https://www.facebook.com/share/p/1CUJk4RUnp/",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-02-09",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
     "color": "#F9AB00"
   },
   {
@@ -776,27 +344,11 @@
     "color": "#F9AB00"
   },
   {
-    "date": "2026-03-11",
-    "community": "氛圍工作者交流趴（粉鳥趴）",
-    "title": "",
-    "description": "",
-    "link": "https://www.facebook.com/groups/vscp.tw",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-03-18",
-    "community": "氛圍工作者交流趴（粉鳥趴）",
-    "title": "",
-    "description": "",
-    "link": "https://www.facebook.com/groups/vscp.tw",
-    "color": "#F9AB00"
-  },
-  {
-    "date": "2026-04-08",
-    "community": "氛圍工作者交流趴（粉鳥趴）",
-    "title": "",
-    "description": "",
-    "link": "https://www.facebook.com/groups/vscp.tw",
+    "date": "2026-02-12",
+    "community": "Second Space",
+    "title": "AI 討論圈",
+    "description": "人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。",
+    "link": "https://www.secondspace.dev/zh/",
     "color": "#F9AB00"
   },
   {
@@ -808,52 +360,12 @@
     "color": "#FA3C0A"
   },
   {
-    "date": "2026-05-23",
-    "community": "PyLadies Kaohsiung",
-    "title": "Python 入門工作坊",
-    "description": "實體活動",
-    "link": "https://kaohsiung.pyladies.com/#activity",
-    "color": "#FA3C0A"
-  },
-  {
-    "date": "2026-05-24",
-    "community": "PyLadies Kaohsiung",
-    "title": "Python 入門工作坊",
-    "description": "實體活動",
-    "link": "https://kaohsiung.pyladies.com/#activity",
-    "color": "#FA3C0A"
-  },
-  {
-    "date": "2026-03-21",
-    "community": "PyLadies Kaohsiung",
-    "title": "Python 金融數據工作坊",
-    "description": "實體+線上活動",
-    "link": "https://kaohsiung.pyladies.com/#activity",
-    "color": "#FA3C0A"
-  },
-  {
-    "date": "2026-04-25",
-    "community": "PyLadies Kaohsiung",
-    "title": "Python 金融數據工作坊",
-    "description": "實體+線上活動",
-    "link": "https://kaohsiung.pyladies.com/#activity",
-    "color": "#FA3C0A"
-  },
-  {
-    "date": "2026-06-27",
-    "community": "PyLadies Kaohsiung",
-    "title": "Python 金融數據工作坊",
-    "description": "實體+線上活動",
-    "link": "https://kaohsiung.pyladies.com/#activity",
-    "color": "#FA3C0A"
-  },
-  {
-    "date": "2026-07-25",
-    "community": "PyLadies Kaohsiung",
-    "title": "Python 金融數據工作坊",
-    "description": "實體+線上活動",
-    "link": "https://kaohsiung.pyladies.com/#activity",
-    "color": "#FA3C0A"
+    "date": "2026-02-18",
+    "community": "Second Space",
+    "title": "測試試飛場：為你的專案收集回饋",
+    "description": "您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！",
+    "link": "https://www.secondspace.dev/zh/",
+    "color": "#F9AB00"
   },
   {
     "date": "2026-02-21",
@@ -861,6 +373,30 @@
     "title": "初五過年聚會",
     "description": "過年好久不見的北漂朋友們一起回來吃飯聊天",
     "link": "https://luma.com/84foqx9q?utm_source=kalug.tw/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-02-23",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-02-24",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "蘋果會拋棄你的舊筆電，但 OpenCore 不會",
+    "link": "https://www.facebook.com/share/17jQoqDXz5/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-02-25",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/02",
+    "description": "如何用 Vibe Coding 建立客製化系統：塔羅抽卡系統 & 儲值結算系統 by 墨求彤",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/313140106/",
     "color": "#4285F4"
   },
   {
@@ -880,12 +416,316 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-03-02",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-07",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #6",
+    "description": "Design Token System",
+    "link": "https://luma.com/jc7upvkg",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-03-09",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-10",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #39",
+    "description": "1. AI 驅動的 API 開發實戰<br>2. Scaffold 自動化整合模板工具",
+    "link": "https://gdg.community.dev/e/mwp8d8/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-03-11",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-17",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/03",
+    "description": "不止是部落格：用 WordPress 打造具備「贊助機制」的數據社群",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/313647240/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-03-18",
+    "community": "Second Space",
+    "title": "測試試飛場：為你的專案收集回饋",
+    "description": "您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！",
+    "link": "https://luma.com/0yho08oq",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-18",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-19",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
+    "link": "https://www.facebook.com/share/p/1GSLrBtqzt/",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-03-20",
+    "community": "Second Space",
+    "title": "AI 討論圈",
+    "description": "人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。",
+    "link": "https://luma.com/38vuf7we",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-21",
+    "community": "GDG Kaohsiung",
+    "title": "Build with AI 2026 高雄場",
+    "description": "極致懶人學 — 從 Vibe SQL 到 AI 代理的生存策略",
+    "link": "https://www.accupass.com/event/2602230332571726015441",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-03-21",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 金融數據工作坊",
+    "description": "實體+線上活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
+    "color": "#FA3C0A"
+  },
+  {
     "date": "2026-03-21",
     "community": "KaLUG",
     "title": "2603 meetup",
     "description": "畫電路/nextcloud...",
     "link": "https://luma.com/awwlb7l0",
     "color": "#4285F4"
+  },
+  {
+    "date": "2026-03-23",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-25",
+    "community": "GDG Kaohsiung",
+    "title": "Build with AI 2026 高雄場",
+    "description": "Gemini CLI 演義第一回：安環境巧佈八卦陣，定計畫初試空城計",
+    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026setup-the-base-plan-the-case/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-03-30",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-03-31",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "饅頭我不寫程式了之 Plan Mode 是在 Plan 什麼？",
+    "link": "https://www.facebook.com/share/1BTZjDj9ew/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-04-01",
+    "community": "GDG Kaohsiung",
+    "title": "好的開發者社群 X 兔 CON 2026 年會",
+    "description": "我們致力於推廣最高境界的工程師禪意，無論發生什麼事，先說「好的」，然後繼續工作",
+    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-good-developer-group-x-tu-con-annual-conf-2026",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-04-04",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #7",
+    "description": "",
+    "link": "https://luma.com/v9lkn7yw",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-04-07",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #40",
+    "description": "1. 亞灣區的數位匯流：高雄智慧城市展<br>2. 可以幫我「想」個程式嗎？",
+    "link": "https://gdg.community.dev/e/mjmbpq/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-04-08",
+    "community": "氛圍工作者交流趴（粉鳥趴）",
+    "title": "",
+    "description": "",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-04-09",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
+    "link": "https://www.facebook.com/share/p/1B82E6RSih/",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-04-10",
+    "community": "vLAB Online",
+    "title": "OWASP Meetup 高雄實體",
+    "description": "這是2025第一場南部的聚會，本次活動除了分享最新 OWASP 動態更與台灣社群 vLAB Online 同好交流活動。",
+    "link": "https://csa.kktix.cc/events/owasp20260410",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-04-13",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-04-15",
+    "community": "GDG Kaohsiung",
+    "title": "Build with AI 2026 高雄場",
+    "description": "Gemini CLI 演義第二回：設內鉤嚴查違法紀，自動修大敗亂碼軍",
+    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026hook-the-flow-fix-the-show/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-04-18",
+    "community": "Global AI Kaohsiung",
+    "title": "GitHub Copilot Dev Days",
+    "description": "GitHub Copilot is more than a code completion tool — it's becoming every developer's AI-powered collaborator.",
+    "link": "https://luma.com/qa3rfmn9",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-04-20",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-04-21",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/04",
+    "description": "未定",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/314117651/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-04-24",
+    "community": "GDG Kaohsiung",
+    "title": "Build with AI 2026 高雄場",
+    "description": "解構 AI 代理與穩定性工程的實戰進化論",
+    "link": "https://www.accupass.com/event/2603170317539828627210",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-04-25",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 金融數據工作坊",
+    "description": "實體+線上活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-04-27",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-04-28",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "新年新希望(?)，讓社群活動紀錄自動化",
+    "link": "https://www.facebook.com/share/14Xq25meQzk/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-05-02",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #8",
+    "description": "",
+    "link": "https://luma.com/sxng9fgs",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-05-04",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-05-05",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #41",
+    "description": "1. AI 在社福領域的應用<br>2. AI 智慧文件管理",
+    "link": "https://gdg.community.dev/e/mmp9xd/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-05-11",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-05-12",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
+    "link": "https://www.facebook.com/share/p/17ZgAhaey3/",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-05-13",
+    "community": "GDG Kaohsiung",
+    "title": "Build with AI 2026 高雄場",
+    "description": "Gemini CLI 演義第三回：立軍令巧寫單元測，全自動歸降慣例標",
+    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026skill-the-test-commit-the-best/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-05-14",
+    "community": "KSDA 高雄市軟體開發者協會",
+    "title": "從 Prompt 到 Action - 掌握 Computer Use 實現全自動工作流",
+    "description": "掌握 AI 自動化的完整鏈條",
+    "link": "https://ksda.kktix.cc/events/computeruse",
+    "color": "#808080"
   },
   {
     "date": "2026-05-16",
@@ -896,11 +736,19 @@
     "color": "#4285F4"
   },
   {
-    "date": "2026-04-10",
-    "community": "vLAB Online",
-    "title": "OWASP Meetup 高雄實體",
-    "description": "這是2025第一場南部的聚會，本次活動除了分享最新 OWASP 動態更與台灣社群 vLAB Online 同好交流活動。",
-    "link": "https://csa.kktix.cc/events/owasp20260410",
+    "date": "2026-05-18",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-05-19",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/05",
+    "description": "網站做完卻沒人來、沒人買？問題不是功能不夠，而是缺流量與轉換策略。做好商品頁＋Facebook廣告，銷售自然發生",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/314485245/",
     "color": "#4285F4"
   },
   {
@@ -912,12 +760,60 @@
     "color": "#4285F4"
   },
   {
+    "date": "2026-05-23",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 入門工作坊",
+    "description": "實體活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-05-24",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 入門工作坊",
+    "description": "實體活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-05-25",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-05-26",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "我為什麼做 ZeroSpec：先把專案整理到 AI 看得懂",
+    "link": "https://www.facebook.com/share/1Az2NKVbEb/",
+    "color": "#4285F4"
+  },
+  {
     "date": "2026-05-29",
     "community": "國泰 CDC 小聚",
     "title": "啟動 PM 全面升級｜AI 浪潮下的敏捷實踐與團隊效能優化",
     "description": "這場小聚會把視角從工程師切換成至產品經理，聊聊 AI 對 PM 在敏捷管理的衝擊與具體做法",
     "link": "https://www.accupass.com/event/2603310918191420664682",
     "color": "#34a853"
+  },
+  {
+    "date": "2026-05-29",
+    "community": "KIMU",
+    "title": "跨區跨域媒合產業小聚 - ACG 主題專場",
+    "description": "文策院高市府 ACG 媒合專場",
+    "link": "https://forms.gle/SAxv68X8wmEqUL4i8",
+    "color": "#34A853"
+  },
+  {
+    "date": "2026-06-09",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #42",
+    "description": "1. 使用 Skills 打造 AI CLI 設定精靈<br>2. 我的 iPAS AI 備考方式",
+    "link": "https://gdg.community.dev/e/m8qd55/",
+    "color": "#EA4335"
   },
   {
     "date": "2026-06-24",
@@ -928,19 +824,131 @@
     "color": "#34a853"
   },
   {
-    "date": "2026-04-18",
-    "community": "Global AI Kaohsiung",
-    "title": "GitHub Copilot Dev Days",
-    "description": "GitHub Copilot is more than a code completion tool — it's becoming every developer's AI-powered collaborator.",
-    "link": "https://luma.com/qa3rfmn9",
+    "date": "2026-06-27",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 金融數據工作坊",
+    "description": "實體+線上活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-06-30",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "6 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
     "color": "#4285F4"
   },
   {
-    "date": "2026-05-14",
-    "community": "KSDA 高雄市軟體開發者協會",
-    "title": "從 Prompt 到 Action - 掌握 Computer Use 實現全自動工作流",
-    "description": "掌握 AI 自動化的完整鏈條",
-    "link": "https://ksda.kktix.cc/events/computeruse",
-    "color": "#808080"
+    "date": "2026-07-14",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #43",
+    "description": "",
+    "link": "https://gdg.community.dev/e/mcg3my/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-07-25",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 金融數據工作坊",
+    "description": "實體+線上活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-07-28",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "7 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-08-04",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #44",
+    "description": "",
+    "link": "https://gdg.community.dev/e/mw59ns/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-08-25",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "8 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-09-08",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #45",
+    "description": "",
+    "link": "https://www.facebook.com/groups/toocon/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-09-29",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "9 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-10-06",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #46",
+    "description": "",
+    "link": "https://www.facebook.com/groups/toocon/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-10-27",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "10 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-11-03",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #47",
+    "description": "",
+    "link": "https://www.facebook.com/groups/toocon/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-11-14",
+    "community": "GDG Kaohsiung",
+    "title": "DevFest 2026 高雄場",
+    "description": "",
+    "link": "https://www.facebook.com/groups/GDGKaohsiung",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-11-24",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "11 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-12-08",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON #48",
+    "description": "",
+    "link": "https://www.facebook.com/groups/toocon/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-12-29",
+    "community": "開發者 Buffet",
+    "title": "開發者 Café",
+    "description": "12 月聚會",
+    "link": "https://www.facebook.com/groups/buffet.dev",
+    "color": "#4285F4"
   }
 ]
