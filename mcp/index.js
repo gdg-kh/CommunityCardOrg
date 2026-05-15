@@ -64,6 +64,167 @@ server.tool(
 );
 
 server.tool(
+    "get_sponsors",
+    "取得贊助商清單",
+    {},
+    async () => {
+        try {
+            const data = await fetchData("data.json");
+            return {
+                content: [{ type: "text", text: JSON.stringify(data.sponsors, null, 2) }]
+            };
+        } catch (error) {
+            return {
+                content: [{ type: "text", text: `讀取贊助商資料失敗: ${error.message}` }],
+                isError: true,
+            };
+        }
+    }
+);
+
+server.tool(
+    "get_rewards",
+    "取得集章獎勵清單",
+    {},
+    async () => {
+        try {
+            const data = await fetchData("data.json");
+            return {
+                content: [{ type: "text", text: JSON.stringify(data.rewards, null, 2) }]
+            };
+        } catch (error) {
+            return {
+                content: [{ type: "text", text: `讀取集章獎勵資料失敗: ${error.message}` }],
+                isError: true,
+            };
+        }
+    }
+);
+
+async function proposeDataJsonPullRequest({ section, newItem, branchPrefix, prTitle, commitMessage, prBody }) {
+    const token = process.env.GITHUB_TOKEN;
+    if (!token) {
+        return {
+            content: [{ type: "text", text: "錯誤: 伺服器未設定 GITHUB_TOKEN，無法發送 Pull Request。" }],
+            isError: true,
+        };
+    }
+
+    const owner = process.env.GITHUB_REPO_OWNER;
+    const repo = process.env.GITHUB_REPO_NAME || "CommunityCardOrg";
+    if (!owner) {
+        return {
+            content: [{ type: "text", text: "請設定 GITHUB_REPO_OWNER 環境變數來指定發送 PR 的目標倉庫。" }],
+            isError: true,
+        };
+    }
+
+    try {
+        const octokit = new Octokit({ auth: token });
+
+        const fileContent = await octokit.repos.getContent({
+            owner,
+            repo,
+            path: "2026/data.json",
+            ref: "main"
+        });
+        if (!("content" in fileContent.data)) {
+            throw new Error("Unable to read 2026/data.json from repository");
+        }
+
+        const currentData = JSON.parse(Buffer.from(fileContent.data.content, "base64").toString("utf-8"));
+        if (!Array.isArray(currentData[section])) {
+            throw new Error(`data.json 中找不到 ${section} 陣列`);
+        }
+        currentData[section].push(newItem);
+
+        const updatedContentBase64 = Buffer.from(JSON.stringify(currentData, null, 2)).toString("base64");
+
+        const mainRef = await octokit.git.getRef({ owner, repo, ref: "heads/main" });
+        const mainSha = mainRef.data.object.sha;
+
+        const slug = (newItem.name || section).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || section;
+        const branchName = `${branchPrefix}-${slug}-${Date.now()}`;
+        await octokit.git.createRef({
+            owner,
+            repo,
+            ref: `refs/heads/${branchName}`,
+            sha: mainSha
+        });
+
+        await octokit.repos.createOrUpdateFileContents({
+            owner,
+            repo,
+            path: "2026/data.json",
+            message: commitMessage,
+            content: updatedContentBase64,
+            sha: fileContent.data.sha,
+            branch: branchName
+        });
+
+        const pr = await octokit.pulls.create({
+            owner,
+            repo,
+            title: prTitle,
+            head: branchName,
+            base: "main",
+            body: prBody
+        });
+
+        return {
+            content: [{ type: "text", text: `成功！已建立 Pull Request: ${pr.data.html_url}` }]
+        };
+    } catch (error) {
+        return {
+            content: [{ type: "text", text: `發送 PR 失敗: ${error.message}` }],
+            isError: true,
+        };
+    }
+}
+
+server.tool(
+    "propose_new_sponsor",
+    "建立一個 Pull Request 來新增一個贊助商",
+    {
+        name: z.string().min(1, "名稱不能為空").describe("贊助商名稱"),
+        link: z.string().url("必須是有效的 URL").describe("贊助商官網或介紹頁連結"),
+        logo: z.string().min(1, "logo 路徑不能為空").describe("贊助商 logo 相對路徑，例如 ../assets/sponsor_xxx.png"),
+        description: z.string().optional().default("").describe("贊助商簡介，可包含 <br> 換行"),
+    },
+    async ({ name, link, logo, description }) => {
+        return proposeDataJsonPullRequest({
+            section: "sponsors",
+            newItem: { name, link, logo, description },
+            branchPrefix: "add-sponsor",
+            prTitle: `[自動新增贊助商] ${name}`,
+            commitMessage: `Add sponsor: ${name}`,
+            prBody: `由 MCP AI 助理發起的贊助商新增請求：\n\n- 名稱：${name}\n- 連結：${link}\n- Logo：${logo}\n- 介紹：${description}`
+        });
+    }
+);
+
+server.tool(
+    "propose_new_reward",
+    "建立一個 Pull Request 來新增一個集章獎勵項目",
+    {
+        name: z.string().min(1, "名稱不能為空").describe("獎勵項目名稱"),
+        link: z.string().url("必須是有效的 URL").describe("獎勵說明或活動連結"),
+        logo: z.string().min(1, "logo 路徑不能為空").describe("獎勵 logo 相對路徑，例如 ../assets/rewards_xxx.png"),
+        description: z.string().optional().default("").describe("獎勵說明，可包含 <br> 換行"),
+    },
+    async ({ name, link, logo, description }) => {
+        return proposeDataJsonPullRequest({
+            section: "rewards",
+            newItem: { name, link, logo, description },
+            branchPrefix: "add-reward",
+            prTitle: `[自動新增集章獎勵] ${name}`,
+            commitMessage: `Add reward: ${name}`,
+            prBody: `由 MCP AI 助理發起的集章獎勵新增請求：\n\n- 名稱：${name}\n- 連結：${link}\n- Logo：${logo}\n- 介紹：${description}`
+        });
+    }
+);
+
+server.tool(
     "propose_new_event",
     "建立一個 Pull Request 來新增一個社群活動",
     {
