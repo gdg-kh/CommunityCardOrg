@@ -5,16 +5,29 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "mcp": "./index.js"
+    "community-card-mcp": "./index.js"
   },
   "scripts": {
     "start": "node index.js"
   },
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gdg-kh/CommunityCardOrg.git",
+    "directory": "mcp"
+  },
+  "homepage": "https://github.com/gdg-kh/CommunityCardOrg#readme",
+  "bugs": {
+    "url": "https://github.com/gdg-kh/CommunityCardOrg/issues"
+  },
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": ["mcp", "community", "kaohsiung"],
-  "author": "AndyAWD and contributors",
+  "keywords": ["mcp", "community", "kaohsiung", "gdg"],
+  "author": "AndyAWD and GDG Kaohsiung contributors",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
