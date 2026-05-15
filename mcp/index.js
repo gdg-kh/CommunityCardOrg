@@ -3,33 +3,30 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { Octokit } from "@octokit/rest";
 import { z } from "zod";
-import * as fs from "fs";
-import * as path from "path";
 
-// Initialize the MCP Server
 const server = new McpServer({
-    name: "kaohsiung-community-mcp",
+    name: "community-card-mcp",
     version: "1.0.0",
 });
 
-// Helper to get local data paths (assuming running from /mcp or root)
-const getDataPath = (filename) => {
-    // Check if we are running in the mcp folder or root folder
-    const relativePath = fs.existsSync(path.join(process.cwd(), "2026")) 
-        ? path.join(process.cwd(), "2026", filename)
-        : path.join(process.cwd(), "..", "2026", filename);
-    return relativePath;
-};
+const DATA_BASE_URL = process.env.COMMUNITY_CARD_DATA_URL || "https://community-card.org/2026";
 
-// Tool: Get Communities
+async function fetchData(filename) {
+    const url = `${DATA_BASE_URL}/${filename}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+        throw new Error(`HTTP ${res.status} fetching ${url}`);
+    }
+    return res.json();
+}
+
 server.tool(
     "get_communities",
-    "取得高雄技術社群清單與介紹",
+    "取得社群清單與介紹",
     {},
     async () => {
         try {
-            const dataPath = getDataPath("data.json");
-            const data = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+            const data = await fetchData("data.json");
             return {
                 content: [{ type: "text", text: JSON.stringify(data.communities, null, 2) }]
             };
@@ -42,23 +39,18 @@ server.tool(
     }
 );
 
-// Tool: Get Events
 server.tool(
     "get_events",
-    "取得高雄技術社群活動行事曆",
+    "取得社群活動行事曆",
     {
         month: z.string().optional().describe("過濾特定月份的活動 (格式: YYYY-MM)，若未提供則回傳所有活動"),
     },
     async ({ month }) => {
         try {
-            const eventsPath = getDataPath("events.json");
-            const events = JSON.parse(fs.readFileSync(eventsPath, "utf-8"));
-            
-            let filteredEvents = events;
-            if (month) {
-                filteredEvents = events.filter(e => e.date.startsWith(month));
-            }
-            
+            const events = await fetchData("events.json");
+            const filteredEvents = month
+                ? events.filter(e => e.date.startsWith(month))
+                : events;
             return {
                 content: [{ type: "text", text: JSON.stringify(filteredEvents, null, 2) }]
             };
@@ -71,7 +63,6 @@ server.tool(
     }
 );
 
-// Tool: Propose New Event
 server.tool(
     "propose_new_event",
     "建立一個 Pull Request 來新增一個社群活動",
@@ -83,7 +74,6 @@ server.tool(
         link: z.string().url("必須是有效的 URL").optional().default("").describe("活動報名或詳細資訊連結"),
     },
     async ({ date, title, community, description, link }) => {
-        // Check for GitHub Token
         const token = process.env.GITHUB_TOKEN;
         if (!token) {
             return {
@@ -93,22 +83,19 @@ server.tool(
         }
 
         try {
-            // 1. Process Business Logic: Lookup Community Color
-            const dataPath = getDataPath("data.json");
-            let communityColor = "#808080"; // Default grey
-            
-            if (fs.existsSync(dataPath)) {
-                const data = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
-                // Match by mapped name or original name in events
-                const foundCommunity = data.communities.find(c => 
-                    c.name === community || 
-                    c.name.includes(community) || 
+            let communityColor = "#808080";
+            try {
+                const data = await fetchData("data.json");
+                const foundCommunity = data.communities.find(c =>
+                    c.name === community ||
+                    c.name.includes(community) ||
                     community.includes(c.name)
                 );
-                
                 if (foundCommunity && foundCommunity.color) {
                     communityColor = foundCommunity.color;
                 }
+            } catch {
+                // 查不到顏色就 fallback 預設灰色，不阻斷 PR 建立
             }
 
             const newEvent = {
@@ -120,23 +107,17 @@ server.tool(
                 color: communityColor
             };
 
-            // 2. GitHub API Operations
             const octokit = new Octokit({ auth: token });
-            
-            // Note: Since this is meant to be run via npx, the user running it needs to provide
-            // the repo owner and repo name. We'll try to infer it from git config or env vars, 
-            // but for safety, we require them as ENV vars if not standard.
-            const owner = process.env.GITHUB_REPO_OWNER || "YOUR_GITHUB_USERNAME"; // Replace later in docs
+            const owner = process.env.GITHUB_REPO_OWNER;
             const repo = process.env.GITHUB_REPO_NAME || "CommunityCardOrg";
-            
-            if (owner === "YOUR_GITHUB_USERNAME") {
+
+            if (!owner) {
                return {
                    content: [{ type: "text", text: "請設定 GITHUB_REPO_OWNER 環境變數來指定發送 PR 的目標倉庫。" }],
                    isError: true,
                };
             }
 
-            // Get current events.json from main branch
             const fileContent = await octokit.repos.getContent({
                 owner,
                 repo,
@@ -150,13 +131,10 @@ server.tool(
 
             const currentEvents = JSON.parse(Buffer.from(fileContent.data.content, "base64").toString("utf-8"));
             currentEvents.push(newEvent);
-            
-            // Sort by date just to be nice
             currentEvents.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
             const updatedContentBase64 = Buffer.from(JSON.stringify(currentEvents, null, 2)).toString("base64");
 
-            // Create a new branch
             const mainRef = await octokit.git.getRef({
                 owner,
                 repo,
@@ -172,7 +150,6 @@ server.tool(
                 sha: mainSha
             });
 
-            // Update the file in the new branch
             await octokit.repos.createOrUpdateFileContents({
                 owner,
                 repo,
@@ -183,7 +160,6 @@ server.tool(
                 branch: branchName
             });
 
-            // Create the Pull Request
             const pr = await octokit.pulls.create({
                 owner,
                 repo,
@@ -206,11 +182,10 @@ server.tool(
     }
 );
 
-// Start the server
 async function main() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    console.log("Kaohsiung Community MCP Server running on stdio");
+    console.error(`Community Card MCP Server running on stdio (data: ${DATA_BASE_URL})`);
 }
 
 main().catch((error) => {

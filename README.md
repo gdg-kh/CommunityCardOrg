@@ -93,7 +93,7 @@ npm run generate-og
 
 | # | 檔案 | 位置/欄位 | 改成什麼 |
 |---|---|---|---|
-| 1 | `README.md` | 所有 `YOUR_GITHUB_USERNAME` | 你的 GitHub 帳號或組織名稱 |
+| 1 | `README.md` | 城市名、網域、repo 路徑、社群名稱等敘述 | 改成你的城市/組織內容 |
 | 2 | `openapi.yaml` | `servers[0].url` | 你的 GitHub Pages 網址（例 `https://your-domain.com` 或 `https://yourname.github.io/YourRepo`） |
 | 3 | `CNAME` | 整個內容 | 你的自訂網域；若無自訂網域可**刪除此檔** |
 | 4 | `package.json` | `name`、`description` | 你的專案資訊 |
@@ -101,8 +101,8 @@ npm run generate-og
 | 6 | `2026/data.json` | `communities`、`sponsors`、`rewards` | 你的城市的社群資料 |
 | 7 | `2026/events.json` | 全部 | 你的城市的活動資料 |
 | 8 | `assets/stamps/` | PNG 檔 | 你的城市的印章設計 |
-| 9 | `mcp/index.js` | 第 10 行 `name: "kaohsiung-community-mcp"` | 改成你的城市，例如 `taipei-community-mcp` |
-| 10 | `mcp/package.json` | `name` | 改成例如 `taipei-community-card-mcp` |
+
+> 💡 **MCP 伺服器不需要 fork**：fork 後只需在 AI 工具的 MCP 設定中把 `COMMUNITY_CARD_DATA_URL` 環境變數指向你的 GitHub Pages 網址（例 `https://taipei-card.org/2026`），就能直接使用發佈在 npm 上的 [`community-card-mcp`](https://www.npmjs.com/package/community-card-mcp) 套件，不必修改 `mcp/` 內任何檔案或重新發佈 npm。詳見下方「2. 透過 MCP 伺服器」章節。
 
 ### 資料更新工作流
 
@@ -181,7 +181,7 @@ JSON 範例：
 
 ### 2. 透過 MCP 伺服器 (Model Context Protocol) - 適合各類 AI 開發工具
 
-我們在 `mcp/` 目錄下實作了一個 Node.js MCP 伺服器腳本。你不需要把專案 clone 下來，只需要透過 `npx` 指令就能在自己的電腦上讓 AI 工具直接連線本專案資料。
+我們在 npm 發佈了 [`community-card-mcp`](https://www.npmjs.com/package/community-card-mcp) 套件，內含一個輕量的 Node.js MCP 伺服器。你不需要 clone 專案，只要透過 `npx` 指令就能在 AI 工具中直接連線本專案資料。
 
 #### 可用工具
 
@@ -193,11 +193,12 @@ JSON 範例：
 
 #### 環境變數
 
-| 變數 | 必填 | 說明 |
-|---|---|---|
-| `GITHUB_TOKEN` | 僅 `propose_new_event` 需要 | 需有目標 repo `repo` 權限的 Personal Access Token |
-| `GITHUB_REPO_OWNER` | 僅 `propose_new_event` 需要 | 目標 repo 擁有者（例：`AndyAWD`） |
-| `GITHUB_REPO_NAME` | 僅 `propose_new_event` 需要 | 目標 repo 名稱（預設 `CommunityCardOrg`） |
+| 變數 | 必填 | 預設 | 說明 |
+|---|---|---|---|
+| `COMMUNITY_CARD_DATA_URL` | – | `https://community-card.org/2026` | 資料來源基底 URL；fork 至其他城市/組織時改成自己的網址（例 `https://taipei-card.org/2026`） |
+| `GITHUB_TOKEN` | 僅 `propose_new_event` 需要 | – | 需有目標 repo `repo` 權限的 Personal Access Token |
+| `GITHUB_REPO_OWNER` | 僅 `propose_new_event` 需要 | – | 目標 repo 擁有者（例：`gdg-kh`） |
+| `GITHUB_REPO_NAME` | 僅 `propose_new_event` 需要 | `CommunityCardOrg` | 目標 repo 名稱 |
 
 #### 安裝設定
 
@@ -208,16 +209,13 @@ JSON 範例：
 ```json
 {
   "mcpServers": {
-    "kaohsiung-community": {
+    "community-card": {
       "command": "npx",
-      "args": [
-        "-y",
-        "github:YOUR_GITHUB_USERNAME/CommunityCardOrg#main",
-        "mcp"
-      ],
+      "args": ["-y", "community-card-mcp"],
       "env": {
+        "COMMUNITY_CARD_DATA_URL": "https://community-card.org/2026",
         "GITHUB_TOKEN": "（選填）若希望 AI 能發 PR 新增活動，請填入你的 Personal Access Token",
-        "GITHUB_REPO_OWNER": "YOUR_GITHUB_USERNAME",
+        "GITHUB_REPO_OWNER": "gdg-kh",
         "GITHUB_REPO_NAME": "CommunityCardOrg"
       }
     }
@@ -225,35 +223,34 @@ JSON 範例：
 }
 ```
 
-*(⚠️ 注意：請將 `YOUR_GITHUB_USERNAME` 替換為實際存放此專案的 GitHub 帳號；fork 者請改為自己的帳號與 repo 名稱。)*
+*（高雄使用者可直接使用以上預設；fork 至其他城市/組織者請把 `COMMUNITY_CARD_DATA_URL`、`GITHUB_REPO_OWNER`、`GITHUB_REPO_NAME` 改為自己的網址與 repo。）*
 
 各工具的設定檔位置：
 
 *   **Claude Code**：執行 `claude mcp add` 互動式新增，或手動把上述 JSON 加到 `~/.claude.json`（全域）或專案的 `.mcp.json`。
 *   **Gemini CLI**：把設定加到 `~/.gemini/settings.json` 的 `mcpServers` 區塊。
-*   **Codex CLI**：把設定加到 `~/.codex/config.toml` 的 `[mcp_servers.kaohsiung-community]` 區段，或專案 `.codex/mcp.json`。
+*   **Codex CLI**：把設定加到 `~/.codex/config.toml` 的 `[mcp_servers.community-card]` 區段，或專案 `.codex/mcp.json`。
 
 #### 驗證安裝
 
 最快的本機驗證：
 
 ```bash
-cd mcp
-npm install
-node index.js
-# 應印出：Kaohsiung Community MCP Server running on stdio
+npx -y community-card-mcp
+# 應印出（stderr）：Community Card MCP Server running on stdio (data: https://community-card.org/2026)
+# 按 Ctrl+C 結束。
 ```
 
 在各 AI 工具中驗證：
 
-*   **Claude Code**：對話中輸入 `/mcp` 應看到 `kaohsiung-community` 狀態為 `connected`。
+*   **Claude Code**：對話中輸入 `/mcp` 應看到 `community-card` 狀態為 `connected`。
 *   **Gemini CLI**：輸入 `/mcp` 或 `/tools` 應列出 `get_communities`、`get_events`、`propose_new_event`。
 *   **Codex CLI**：輸入 `/mcp` 或 `mcp list` 確認連線狀態。
 
 若連線失敗，最常見原因：
 1.  Node.js 版本低於 18。
 2.  MCP 設定 JSON 格式錯誤（多了逗號、引號等）。
-3.  Fork 後忘了把 `YOUR_GITHUB_USERNAME` 改成自己的帳號，導致 `npx` 抓不到 repo。
+3.  Fork 至其他城市時，忘了把 `COMMUNITY_CARD_DATA_URL` 改成自己的 GitHub Pages 網址，AI 會抓到原始的高雄資料。
 
 ---
 
