@@ -120,24 +120,24 @@ Fork 後若只是要定期維護自家社群的活動，建議流程：
 
 我們提供兩種無伺服器 (Serverless) 的整合方式：
 
-### 1. 透過靜態 API (OpenAPI) - 適合各大主流 AI 模型
+### 1. 透過靜態 JSON 端點 (OpenAPI) - 適合具備網址擷取能力的 AI
 
-本專案提供符合標準的 `openapi.yaml` 規格檔，讓 AI 能直接讀取 GitHub Pages 上的靜態 JSON 資料。
+本專案在 GitHub Pages 直接公開兩支可供 AI 讀取的靜態 JSON 端點，並提供 [`/openapi.yaml`](./openapi.yaml) 作為這些端點的**規格說明文件**（描述欄位、型別、限制）：
 
-*   **規格檔位置**：[`/openapi.yaml`](./openapi.yaml)
-*   **如何使用：**
-    *   **Gemini (Gems)**:
-        1. 在 Gemini 中建立一個自訂 Gem。
-        2. 在擴充功能 (Extensions) 或是動作 (Actions) 設定中新增一個 OpenAPI 動作。
-        3. 貼上我們專案中的 `openapi.yaml` 內容。
-    *   **Claude**:
-        目前 Claude 網頁版尚未原生支援匯入 OpenAPI 規格，但你可以直接將 `openapi.yaml` 的網址貼給 Claude，並請它依照規格呼叫 API。
-    *   **ChatGPT (Custom GPTs)**:
-        1. 在 ChatGPT 建立一個自訂 GPT。
-        2. 在 Configure > Actions 中點擊 "Create new action"。
-        3. 貼上我們專案中的 `openapi.yaml` 內容。
+*   社群資料：`https://community-card.org/2026/data.json`
+*   活動行事曆：`https://community-card.org/2026/events.json`
 
-    *(設定完成後，AI 就能自動看懂並呼叫 `/2026/data.json` 與 `/2026/events.json` 取得最新活動資訊！)*
+依需求選擇下列其中一種使用方式：
+
+**A. 直接擷取 JSON 網址（最簡單，適合一次性查詢）**
+
+把上述 JSON 或 `openapi.yaml` 的網址貼到具備 WebFetch 能力的 AI 工具（例如 Claude Code、Gemini CLI）對話中，AI 會自行讀取資料並依規格回答。不需要任何額外設定。
+
+**B. 透過 MCP 伺服器（推薦，適合穩定整合）**
+
+若希望 AI 能直接呼叫專屬工具（`get_communities`、`get_events`），甚至自動發 PR 新增活動（`propose_new_event`），請參考下方「2. 透過 MCP 伺服器」章節的設定步驟。
+
+> ⚠️ 注意：目前主流 AI CLI 工具（Claude Code / Gemini CLI / Codex CLI）**沒有原生「匯入 OpenAPI 規格作為 Action」的 UI**。`openapi.yaml` 在本專案的角色是給 AI 與 MCP 伺服器**參照欄位定義**，不是被當成可呼叫的動作清單匯入。
 
 #### 資料 Schema 速查
 
