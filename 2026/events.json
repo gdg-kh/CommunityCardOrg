@@ -950,5 +950,13 @@
     "description": "12 月聚會",
     "link": "https://www.facebook.com/groups/buffet.dev",
     "color": "#4285F4"
+  },
+  {
+    "date": "2026-06-06",
+    "community": "南台灣敏捷社群",
+    "title": "《敏捷組織的五項修練》導讀會高雄場",
+    "description": "前台灣敏捷協會理事長張昀煒（Hermes）帶著新書來到高雄，親自帶領大家拆解 ARRAS 模型，打造具備敏捷 DNA 的高績效團隊！",
+    "link": "https://agilekaohsiung.kktix.cc/events/2026-june-6",
+    "color": "#4285F4"
   }
 ]
