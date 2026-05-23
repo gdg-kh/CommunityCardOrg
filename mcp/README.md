@@ -18,7 +18,8 @@
 
 | 變數 | 必填 | 預設 | 說明 |
 |---|---|---|---|
-| `COMMUNITY_CARD_DATA_URL` | – | `https://community-card.org/2026` | 資料來源基底 URL；fork 至其他城市時改成自己的網址 |
+| `COMMUNITY_CARD_DATA_URL` | – | `https://community-card.org` | 資料來源基底 URL；fork 至其他城市時改成自己的網址 |
+| `COMMUNITY_CARD_SUB_PATH` | – | `2026` | 年度/版本子目錄路徑（例如當前為 2026；年底可改成 v2 以實現年份脫鉤） |
 | `GITHUB_TOKEN` | 僅 `propose_new_event` 工具需要 | – | 對目標 repo 有 `repo` 權限的 Personal Access Token |
 | `GITHUB_REPO_OWNER` | 僅 `propose_new_event` 工具需要 | – | 目標 repo 擁有者（例：`gdg-kh`） |
 | `GITHUB_REPO_NAME` | 僅 `propose_new_event` 工具需要 | `CommunityCardOrg` | 目標 repo 名稱 |
@@ -34,6 +35,8 @@
       "command": "npx",
       "args": ["-y", "community-card-mcp"],
       "env": {
+        "COMMUNITY_CARD_DATA_URL": "https://community-card.org",
+        "COMMUNITY_CARD_SUB_PATH": "2026",
         "GITHUB_TOKEN": "（選填）若希望 AI 能發 PR 新增活動，請填入 Personal Access Token",
         "GITHUB_REPO_OWNER": "gdg-kh",
         "GITHUB_REPO_NAME": "CommunityCardOrg"
