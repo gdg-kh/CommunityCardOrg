@@ -1,6 +1,6 @@
 # community-card-mcp
 
-社群名牌卡 [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) 伺服器：透過 stdio 提供「查詢社群／活動／贊助商／集章獎勵」與「自動發 PR 新增活動／贊助商／集章獎勵」共七個工具，讓 AI 助理可以直接讀取與貢獻社群名牌卡專案的資料。
+社群名牌卡 [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) 伺服器：透過 stdio 提供「查詢社群／活動／贊助商／集章獎勵」與「自動發 PR 新增活動」共五個工具，讓 AI 助理可以直接讀取與貢獻社群名牌卡專案的資料。
 
 預設指向 [高雄社群名牌卡](https://community-card.org)，但可透過環境變數指向任意 fork（例：台北社群卡、台中社群卡）。
 
@@ -12,18 +12,16 @@
 | `get_events` | `month`（選填，`YYYY-MM`） | 唯讀 | 取得活動行事曆，可依月份過濾 |
 | `get_sponsors` | 無 | 唯讀 | 取得贊助商清單 |
 | `get_rewards` | 無 | 唯讀 | 取得集章獎勵清單 |
-| `propose_new_event` | `date`、`title`、`community`、`description`（≤20 字）、`link` | 需 GitHub Token | 在指定 repo 自動建立 PR 新增活動 |
-| `propose_new_sponsor` | `name`、`link`、`logo`、`description` | 需 GitHub Token | 自動建立 PR 新增贊助商 |
-| `propose_new_reward` | `name`、`link`、`logo`、`description` | 需 GitHub Token | 自動建立 PR 新增集章獎勵項目 |
+| `propose_new_event` | `date`、`title`、`community`、`description`（≤50 字）、`link` | 需 GitHub Token | 在指定 repo 自動建立 PR 新增活動 |
 
 ## 環境變數
 
 | 變數 | 必填 | 預設 | 說明 |
 |---|---|---|---|
 | `COMMUNITY_CARD_DATA_URL` | – | `https://community-card.org/2026` | 資料來源基底 URL；fork 至其他城市時改成自己的網址 |
-| `GITHUB_TOKEN` | 僅 `propose_*` 工具需要 | – | 對目標 repo 有 `repo` 權限的 Personal Access Token |
-| `GITHUB_REPO_OWNER` | 僅 `propose_*` 工具需要 | – | 目標 repo 擁有者（例：`gdg-kh`） |
-| `GITHUB_REPO_NAME` | 僅 `propose_*` 工具需要 | `CommunityCardOrg` | 目標 repo 名稱 |
+| `GITHUB_TOKEN` | 僅 `propose_new_event` 工具需要 | – | 對目標 repo 有 `repo` 權限的 Personal Access Token |
+| `GITHUB_REPO_OWNER` | 僅 `propose_new_event` 工具需要 | – | 目標 repo 擁有者（例：`gdg-kh`） |
+| `GITHUB_REPO_NAME` | 僅 `propose_new_event` 工具需要 | `CommunityCardOrg` | 目標 repo 名稱 |
 
 ## 在 AI 工具中使用
 

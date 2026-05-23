@@ -135,7 +135,7 @@ Fork 後若只是要定期維護自家社群的活動，建議流程：
 
 **B. 透過 MCP 伺服器（推薦，適合穩定整合）**
 
-若希望 AI 能直接呼叫專屬工具（`get_communities`、`get_events`、`get_sponsors`、`get_rewards`），甚至自動發 PR 新增活動／贊助商／集章獎勵（`propose_new_event`、`propose_new_sponsor`、`propose_new_reward`），請參考下方「2. 透過 MCP 伺服器」章節的設定步驟。
+若希望 AI 能直接呼叫專屬工具（`get_communities`、`get_events`、`get_sponsors`、`get_rewards`），甚至自動發 PR 新增活動（`propose_new_event`），請參考下方「2. 透過 MCP 伺服器」章節的設定步驟。
 
 > ⚠️ 注意：目前主流 AI CLI 工具（Claude Code / Gemini CLI / Codex CLI）**沒有原生「匯入 OpenAPI 規格作為 Action」的 UI**。`openapi.yaml` 在本專案的角色是給 AI 與 MCP 伺服器**參照欄位定義**，不是被當成可呼叫的動作清單匯入。
 
@@ -162,7 +162,7 @@ Fork 後若只是要定期維護自家社群的活動，建議流程：
 | `date` | string | ✓ | `YYYY-MM-DD`，例如 `2026-05-15` |
 | `community` | string | ✓ | 主辦社群名稱（需對應 `communities[].name`） |
 | `title` | string | ✓ | 活動標題 |
-| `description` | string | – | **最多 20 個字**（與 MCP `propose_new_event` 限制一致） |
+| `description` | string | – | **最多 50 個字**（與 MCP `propose_new_event` 限制一致） |
 | `link` | string | ✓ | 報名/詳情連結 |
 | `color` | string | ✓ | hex 顏色，應對應主辦社群代表色 |
 
@@ -191,18 +191,16 @@ JSON 範例：
 | `get_events` | `month`（選填，格式 `YYYY-MM`） | 唯讀 | 取得活動行事曆，可依月份過濾 |
 | `get_sponsors` | 無 | 唯讀 | 取得贊助商清單 |
 | `get_rewards` | 無 | 唯讀 | 取得集章獎勵清單 |
-| `propose_new_event` | `date`、`title`、`community`、`description`（≤20 字）、`link` | **需 GitHub Token** | 自動建立 PR 新增活動 |
-| `propose_new_sponsor` | `name`、`link`、`logo`、`description` | **需 GitHub Token** | 自動建立 PR 新增贊助商 |
-| `propose_new_reward` | `name`、`link`、`logo`、`description` | **需 GitHub Token** | 自動建立 PR 新增集章獎勵項目 |
+| `propose_new_event` | `date`、`title`、`community`、`description`（≤50 字）、`link` | **需 GitHub Token** | 自動建立 PR 新增活動 |
 
 #### 環境變數
 
 | 變數 | 必填 | 預設 | 說明 |
 |---|---|---|---|
 | `COMMUNITY_CARD_DATA_URL` | – | `https://community-card.org/2026` | 資料來源基底 URL；fork 至其他城市/組織時改成自己的網址（例 `https://taipei-card.org/2026`） |
-| `GITHUB_TOKEN` | 僅 `propose_*` 工具需要 | – | 需有目標 repo `repo` 權限的 Personal Access Token |
-| `GITHUB_REPO_OWNER` | 僅 `propose_*` 工具需要 | – | 目標 repo 擁有者（例：`gdg-kh`） |
-| `GITHUB_REPO_NAME` | 僅 `propose_*` 工具需要 | `CommunityCardOrg` | 目標 repo 名稱 |
+| `GITHUB_TOKEN` | 僅 `propose_new_event` 工具需要 | – | 需有目標 repo `repo` 權限的 Personal Access Token |
+| `GITHUB_REPO_OWNER` | 僅 `propose_new_event` 工具需要 | – | 目標 repo 擁有者（例：`gdg-kh`） |
+| `GITHUB_REPO_NAME` | 僅 `propose_new_event` 工具需要 | `CommunityCardOrg` | 目標 repo 名稱 |
 
 #### 安裝設定
 
