@@ -73,7 +73,7 @@ npm run generate-og
 
 1.  **Fork 本專案**並建立分支。
 2.  視需求修改下列檔案：
-    *   新增活動 → 編輯 `2026/events.json`（注意 `description` **不能超過 20 個字**，詳見下方 [資料 Schema](#資料-schema-速查)）。
+    *   新增活動 → 編輯 `2026/events.json`（注意 `description` **不能超過 50 個字**，詳見下方 [資料 Schema](#資料-schema-速查)）。
     *   新增社群 → 編輯 `2026/data.json` 的 `communities`。
     *   新增印章 → 放 PNG 到 `assets/stamps/`。
 3.  本機用瀏覽器開啟 `2026/index.html` 確認顯示無誤。
