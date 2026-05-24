@@ -131,6 +131,16 @@ server.resource(
         mimeType: "text/markdown"
     },
     async () => {
+        let communityListMd;
+        try {
+            const data = await fetchData("data.json");
+            communityListMd = data.communities
+                .map(c => `* **${c.name}** (代表色: ${c.color || "#808080"})`)
+                .join("\n");
+        } catch (err) {
+            communityListMd = `* *(無法即時載入社群名冊，請呼叫 \`get_communities\` 工具查詢完整清單)*`;
+        }
+
         return {
             contents: [{
                 uri: "community-card://guidelines",
@@ -146,14 +156,8 @@ server.resource(
 * **簡短描述 (description)**：**強烈約束：描述內容絕對不可超過 50 個字**！若超過 50 個字，提案將會失敗。
 * **報名連結 (link)**：必須是有效的 \`http://\` 或 \`https://\` 網址。
 
-## 2. 官方註冊之社群清單 (以 data.json 為準)
-* **GDG Kaohsiung** (代表色: #EA4335)
-* **KIMU高雄獨立遊戲開發者聚會** (代表色: #1F70C1)
-* **PyLadies Kaohsiung** (代表色: #E65A4F)
-* **Kaohsiung WordPress Meetup** (代表色: #21759B)
-* **COSCUP** (代表色: #0087DE)
-* **高雄前端社群** (代表色: #E44D26)
-* *(其他完整名冊請使用 get_communities 工具查詢)*
+## 2. 官方註冊之社群清單（自 data.json 即時同步）
+${communityListMd}
 
 請在發送 PR 提案前，仔細閱讀此指南以確保提案順利通過。`
             }]
@@ -217,15 +221,14 @@ server.tool(
                     }
                 }
 
-                // 2. 計算包含當月起共四個月的月份陣列
+                // 2. 計算包含上個月起共四個月的月份陣列（對齊 propose_new_event 允許的補登範圍）
                 const monthsToInclude = [];
-                let [baseYr, baseMo] = baseYearMonth.split("-").map(Number);
-                for (let i = 0; i < 4; i++) {
-                    const m = baseMo + i;
-                    const yOffset = Math.floor((m - 1) / 12);
-                    const realMo = ((m - 1) % 12) + 1;
-                    const realYr = baseYr + yOffset;
-                    monthsToInclude.push(`${realYr}-${String(realMo).padStart(2, "0")}`);
+                const [baseYr, baseMo] = baseYearMonth.split("-").map(Number);
+                for (let i = -1; i < 3; i++) {
+                    const d = new Date(baseYr, baseMo - 1 + i, 1);
+                    const yr = d.getFullYear();
+                    const mo = String(d.getMonth() + 1).padStart(2, "0");
+                    monthsToInclude.push(`${yr}-${mo}`);
                 }
 
                 // 3. 篩選活動
@@ -234,6 +237,7 @@ server.tool(
                 );
 
                 // 4. 智慧裁減長欄位 (以節省 Token)
+                // 閾值 12 對應約 3KB 完整 JSON / ~1000 tokens，符合單一 tool response 的合理預算
                 const shouldCompress = filteredEvents.length > 12;
                 const finalEvents = shouldCompress 
                     ? filteredEvents.map(e => ({
