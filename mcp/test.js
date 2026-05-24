@@ -200,7 +200,7 @@ function simulateGetEvents(monthParam, events) {
     } else {
         // 使用 2026-05 作為虛擬的當前月份基準
         const baseYearMonth = "2026-05";
-        const monthsToInclude = ["2026-05", "2026-06", "2026-07", "2026-08"];
+        const monthsToInclude = ["2026-04", "2026-05", "2026-06", "2026-07"];
         
         const filteredEvents = events.filter(e => 
             monthsToInclude.some(m => e.date.startsWith(m))
