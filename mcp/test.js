@@ -43,7 +43,7 @@ const findAndValidateCommunity = new Function(
 const realData = JSON.parse(fs.readFileSync(path.join("2026", "data.json"), "utf8"));
 const communities = realData.communities;
 
-console.log("=== 🧪 開始執行 community-card-mcp 1.2.0 本地測試 ===\n");
+console.log("=== 🧪 開始執行 community-card-mcp 2.0.0 本地測試 ===\n");
 
 let passedTests = 0;
 let failedTests = 0;
@@ -258,5 +258,5 @@ if (failedTests > 0) {
     console.error("\n❌ [ERROR] 部分本地驗證測試失敗，請檢查邏輯是否有誤！");
     process.exit(1);
 } else {
-    console.log("\n🎉 [SUCCESS] 所有的本地驗證測試均完美通過！MCP 伺服器 1.2.0 厚重構完全正確。");
+    console.log("\n🎉 [SUCCESS] 所有的本地驗證測試均完美通過！MCP 伺服器 2.0.0 厚重構完全正確。");
 }

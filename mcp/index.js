@@ -6,7 +6,7 @@ import { z } from "zod";
 
 const server = new McpServer({
     name: "community-card-mcp",
-    version: "1.2.0",
+    version: "2.0.0",
 });
 
 const SUB_PATH = process.env.COMMUNITY_CARD_SUB_PATH || "2026";
