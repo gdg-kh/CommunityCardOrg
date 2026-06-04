@@ -680,6 +680,14 @@
     "color": "#34A853"
   },
   {
+    "date": "2026-06-06",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #9",
+    "description": "一分鐘framer架站",
+    "link": "https://luma.com/saqaqmb5",
+    "color": "#34A853"
+  },
+  {
     "date": "2026-05-04",
     "community": "K.NET",
     "title": "軟體開發‧雲端‧AI‧職涯",
@@ -749,6 +757,14 @@
     "title": "高雄 WordPress 小聚 2026/05",
     "description": "網站做完卻沒人來、沒人買？問題不是功能不夠，而是缺流量與轉換策略。做好商品頁＋Facebook廣告，銷售自然發生",
     "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/314485245/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-06-16",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/06",
+    "description": "讓 WooCommerce 變身 SaaS by Moska",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/314485262/",
     "color": "#4285F4"
   },
   {
@@ -835,8 +851,8 @@
     "date": "2026-06-30",
     "community": "開發者 Buffet",
     "title": "開發者 Café",
-    "description": "6 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
+    "description": "AI 時代下找工作的方式 by Coach 喬",
+    "link": "https://www.facebook.com/events/4342089669453026",
     "color": "#4285F4"
   },
   {
