@@ -824,6 +824,14 @@
     "color": "#34A853"
   },
   {
+    "date": "2026-06-15",
+    "community": "KIMU 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "場地確認中",
+    "link": "https://www.facebook.com/groups/kimugroup",
+    "color": "#34A853"
+  },
+  {
     "date": "2026-06-09",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #42",
@@ -848,7 +856,7 @@
     "color": "#FA3C0A"
   },
   {
-    "date": "2026-06-30",
+    "date": "2026-07-07",
     "community": "開發者 Buffet",
     "title": "開發者 Café",
     "description": "AI 時代下找工作的方式 by Coach 喬",
@@ -1053,6 +1061,38 @@
     "title": "氛圍工作者交流趴",
     "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
     "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-07-06",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-07-13",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-07-20",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-07-27",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
     "color": "#F9AB00"
   }
 ]
