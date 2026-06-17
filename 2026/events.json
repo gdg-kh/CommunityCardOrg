@@ -832,14 +832,6 @@
     "color": "#34A853"
   },
   {
-    "date": "2026-06-15",
-    "community": "KIMU 高雄獨立遊戲開發者聚會",
-    "title": "KIMU 之南部人下班來聊遊戲",
-    "description": "場地確認中",
-    "link": "https://www.facebook.com/groups/kimugroup",
-    "color": "#34A853"
-  },
-  {
     "date": "2026-06-09",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #42",
@@ -853,6 +845,14 @@
     "title": "職涯「泰」有戲｜解構跨域人才基因！在國泰 CDC 活出你的 N 種可能",
     "description": "這場小聚會把視角從工程師切換成至產品經理，聊聊 AI 對 PM 在敏捷管理的衝擊與具體做法",
     "link": "https://www.accupass.com/event/2605050921071192419364",
+    "color": "#34a853"
+  },
+  {
+    "date": "2026-07-31",
+    "community": "國泰 CDC 小聚",
+    "title": "告別技術門檻！用大腦驅動 AI 搞定麻煩事",
+    "description": "這次 CDC 小聚將帶你打破實作的高牆，從日常筆記的思維整理，到運用工具將點子具體落地，讓你真正拿回產出的主導權！",
+    "link": "https://www.accupass.com/event/2606120230111345822036",
     "color": "#34a853"
   },
   {
