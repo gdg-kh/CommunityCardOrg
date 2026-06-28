@@ -661,6 +661,12 @@ ul {
     flex-shrink: 0;
   }
 
+  .btn-cal {
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
   thead th {
     text-align: center;
   }
@@ -675,10 +681,25 @@ ul {
       display: block;
     }
 
+    .btn-cal-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn-cal {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      min-height: 40px;
+      width: 100%;
+    }
+
     th:nth-child(1),
     td:nth-child(1),
     th:nth-child(2),
-    td:nth-child(2) {
+    td:nth-child(2),
+    th:last-child,
+    td:last-child {
       width: 1%;
       white-space: nowrap;
     }

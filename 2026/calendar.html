@@ -411,6 +411,73 @@
 
               // ── 本月活動列表工具函式 ──────────────────────────
 
+              let currentMonthEvents = [];
+
+              function getGoogleCalendarURL(event) {
+                const start = event.date.replace(/-/g, "");
+                const [ey, em, ed] = event.date.split("-").map(Number);
+                const nextDay = new Date(ey, em - 1, ed + 1);
+                const end = `${nextDay.getFullYear()}${String(nextDay.getMonth() + 1).padStart(2, "0")}${String(nextDay.getDate()).padStart(2, "0")}`;
+                const text = encodeURIComponent(
+                  event.title
+                    ? `${event.community} - ${event.title}`
+                    : event.community,
+                );
+                const descParts = [];
+                if (event.description)
+                  descParts.push(
+                    event.description.replace(/<br\s*\/?>/gi, "\n"),
+                  );
+                if (event.link && event.link !== "#")
+                  descParts.push("活動連結：" + event.link);
+                const details = encodeURIComponent(descParts.join("\n"));
+                return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${end}&details=${details}`;
+              }
+
+              function downloadICS(index) {
+                const event = currentMonthEvents[index];
+                const start = event.date.replace(/-/g, "");
+                const [ey, em, ed] = event.date.split("-").map(Number);
+                const nextDay = new Date(ey, em - 1, ed + 1);
+                const end = `${nextDay.getFullYear()}${String(nextDay.getMonth() + 1).padStart(2, "0")}${String(nextDay.getDate()).padStart(2, "0")}`;
+                const summary = event.title
+                  ? `${event.community} - ${event.title}`
+                  : event.community;
+                const descParts = [];
+                if (event.description)
+                  descParts.push(
+                    event.description.replace(/<br\s*\/?>/gi, "\\n"),
+                  );
+                if (event.link && event.link !== "#")
+                  descParts.push("活動連結：" + event.link);
+                const lines = [
+                  "BEGIN:VCALENDAR",
+                  "VERSION:2.0",
+                  "PRODID:-//Community Card Org//高雄社群活動//ZH",
+                  "BEGIN:VEVENT",
+                  `UID:${event.date}-${encodeURIComponent(event.community)}@community-card.org`,
+                  `DTSTART;VALUE=DATE:${start}`,
+                  `DTEND;VALUE=DATE:${end}`,
+                  `SUMMARY:${summary}`,
+                ];
+                if (descParts.length)
+                  lines.push(`DESCRIPTION:${descParts.join("\\n")}`);
+                if (event.link && event.link !== "#")
+                  lines.push(`URL:${event.link}`);
+                lines.push("END:VEVENT", "END:VCALENDAR");
+                const blob = new Blob([lines.join("\r\n")], {
+                  type: "text/calendar;charset=utf-8",
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `${event.date}-${event.community}.ics`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+              }
+
               function renderEventList() {
                 const listRoot = document.getElementById("event-list-root");
                 const monthEvents = allEvents
@@ -419,6 +486,7 @@
                     return y === currentYear && m === currentMonth + 1;
                   })
                   .sort((a, b) => a.date.localeCompare(b.date));
+                currentMonthEvents = monthEvents;
 
                 // Update total events count
                 if (eventCountText) {
@@ -433,9 +501,11 @@
 
                 let html = `<div class="list-header" style="display:none;">${currentMonth + 1} 月活動（共 ${monthEvents.length} 場）</div>`;
                 html +=
+                  '<p style="font-size:0.85rem;color:#666;margin-bottom:10px;">點擊按鈕可將活動加入手機行事曆</p>';
+                html +=
                   '<div class="table-responsive"><table class="table table-sm table-hover mb-0">';
                 html +=
-                  '<thead><tr><th>#</th><th>日期</th><th class="col-weekday">星期</th><th>活動</th></tr></thead>';
+                  '<thead><tr><th>#</th><th>日期</th><th class="col-weekday">星期</th><th>活動</th><th><span class="d-none d-sm-inline">加入</span>行事曆</th></tr></thead>';
                 html += "<tbody>";
                 monthEvents.forEach((event, i) => {
                   const [y, m, d] = event.date.split("-");
@@ -451,6 +521,7 @@
                   const dateLabel = `<span style="${dateColor}">${m}/${d}</span>`;
                   const weekLabel = `<span style="${dateColor}">週${weekNames[dayOfWeek]}</span>`;
                   const dot = `<span class="community-dot" style="background:${event.color || "#666"};"></span>`;
+                  const googleURL = getGoogleCalendarURL(event);
 
                   const eventLinkStart =
                     event.link && event.link !== "#"
@@ -466,11 +537,20 @@
                                 <td style="white-space:nowrap;">${dateLabel}<span class="weekday-mobile" style="${dateColor}">週${weekNames[dayOfWeek]}</span></td>
                                 <td class="col-weekday" style="white-space:nowrap;">${weekLabel}</td>
                                 <td><div style="display:flex;align-items:flex-start;gap:6px;">${dot}<div><strong>${event.community}</strong>${event.title ? `<div style="color:#555;margin-top:2px;">${eventLinkStart}${event.title}${eventLinkEnd}</div>` : ""}${event.description ? `<div style="font-size:0.8rem;color:#777;margin-top:4px;line-height:1.4;">${event.description}</div>` : ""}</div></div></td>
+                                <td style="white-space:nowrap;">
+                                    <div class="btn-cal-group">
+                                        <a href="${googleURL}" target="_blank" class="btn btn-outline-primary btn-cal">Google</a>
+                                        <button class="btn btn-outline-secondary btn-cal" onclick="downloadICS(${i})">下載</button>
+                                    </div>
+                                </td>
                             </tr>`;
                 });
                 html += "</tbody></table></div>";
                 listRoot.innerHTML = html;
               }
+
+              // 將 downloadICS 暴露至全域，供 onclick 使用
+              window.downloadICS = downloadICS;
 
               // ── Google Calendar 訂閱 Modal ──────────────────
 
