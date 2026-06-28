@@ -118,6 +118,53 @@ ol {
   padding: 10px 2px;
 }
 
+.nav.nav-pills.nav-fill {
+  padding: 8px;
+  display: flex !important;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav.nav-pills.nav-fill::-webkit-scrollbar {
+  height: 6px;
+}
+
+.nav.nav-pills.nav-fill::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.nav.nav-pills.nav-fill > .nav-item {
+  flex: 1 0 110px;
+  min-width: 110px;
+  text-align: center;
+}
+
+.nav.nav-pills.nav-fill > .nav-item > .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 6px;
+  line-height: 1.2;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .nav.nav-pills.nav-fill > .nav-item {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
 .card {
   border: 1px solid #ccc;
   padding: 16px;
@@ -391,23 +438,23 @@ ul {
 
 /* National holidays - same red border as weekends */
 .calendar-day.holiday {
-    border-left: 1px solid #f28b82;
-    border-right: 1px solid #f28b82;
-    border-bottom: 1px solid #f28b82;
+  border-left: 1px solid #f28b82;
+  border-right: 1px solid #f28b82;
+  border-bottom: 1px solid #f28b82;
 }
 
 .calendar-day.holiday.holiday-top {
-    border-top: 1px solid #f28b82;
+  border-top: 1px solid #f28b82;
 }
 
 /* Remove duplicate border between adjacent holidays */
 .calendar-day.holiday + .calendar-day.holiday {
-    border-left: none;
+  border-left: none;
 }
 
 /* Remove right border on holiday when adjacent to Saturday (avoid double border) */
 .calendar-day.holiday:has(+ .calendar-day.saturday) {
-    border-right: none;
+  border-right: none;
 }
 
 .date-number {
