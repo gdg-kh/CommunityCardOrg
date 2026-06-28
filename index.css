@@ -661,12 +661,6 @@ ul {
     flex-shrink: 0;
   }
 
-  .btn-cal {
-    padding: 2px 8px;
-    font-size: 0.8rem;
-    white-space: nowrap;
-  }
-
   thead th {
     text-align: center;
   }
@@ -681,25 +675,10 @@ ul {
       display: block;
     }
 
-    .btn-cal-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .btn-cal {
-      padding: 8px 12px;
-      font-size: 0.9rem;
-      min-height: 40px;
-      width: 100%;
-    }
-
     th:nth-child(1),
     td:nth-child(1),
     th:nth-child(2),
-    td:nth-child(2),
-    th:last-child,
-    td:last-child {
+    td:nth-child(2) {
       width: 1%;
       white-space: nowrap;
     }
@@ -799,4 +778,78 @@ ul {
 
 .table tr.bg-upcoming > td {
   animation: blink-pale-yellow-td 2s infinite;
+}
+
+/* 訂閱 Google Calendar 按鈕 */
+.calendar-subscribe-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+
+  .btn {
+    min-height: 40px;
+    padding: 0 20px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+/* 訂閱 Google Calendar Modal */
+.subscribe-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.subscribe-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.subscribe-modal-content {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 24px;
+  max-width: 360px;
+  width: calc(100% - 32px);
+  text-align: center;
+}
+
+.subscribe-modal-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.subscribe-modal-body {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.subscribe-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  .btn {
+    min-width: 80px;
+    min-height: 40px;
+    font-size: 0.9rem;
+  }
 }

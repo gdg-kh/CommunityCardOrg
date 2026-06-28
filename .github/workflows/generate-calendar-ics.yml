@@ -1,0 +1,41 @@
+name: Generate Community Calendar ICS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "*/events.json"
+      - "scripts/generate-calendar-ics.js"
+      - ".github/workflows/generate-calendar-ics.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-ics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ">=18.0.0"
+
+      - name: Generate ICS
+        run: npm run generate-ics
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "**/community-calendar.ics"
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update community calendar ICS" -m "更新社群月曆 ICS"
+            git push
+          fi

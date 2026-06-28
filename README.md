@@ -10,6 +10,8 @@
 
 *   **🪪 數位名牌卡與集章體驗**：線上挑選專屬印章，點擊卡片即可輕鬆蓋章，並支援下載高解析度紀念圖檔。
 *   **📅 高雄社群月曆**：整合大高雄地區各項軟體、技術與設計社群的活動資訊，讓你不再錯過任何精彩聚會。
+    社群月曆支援 Google Calendar 訂閱，來源為年度目錄下的 community-calendar.ics，
+    並由 GitHub Action 根據 events.json 自動更新。
 *   **🎁 集章獎勵**：參與活動並收集印章，解鎖專屬的社群成就與獎勵。
 *   **🤝 社群與贊助商介紹**：快速認識高雄在地的活躍社群與支持技術發展的贊助夥伴。
 *   **🤖 AI 友善**：同時提供 OpenAPI 規格與 MCP 伺服器，讓 AI 助理可以直接查詢資料、甚至代為發 Pull Request。
@@ -39,6 +41,9 @@ npm install
 
 # 產生 Open Graph 圖片
 npm run generate-og
+
+# 從年度 events.json 產生 Google Calendar 訂閱用 ICS
+npm run generate-ics
 ```
 
 本專案是純靜態網站，直接用瀏覽器打開 `2026/index.html` 就能預覽。
@@ -57,6 +62,7 @@ npm run generate-og
 | `2026/index.html`、`2026/sponsors.html` | 該年度頁面 |
 | `2026/data.json` | 社群、贊助商、獎勵資料 |
 | `2026/events.json` | 活動行事曆 |
+| `2026/community-calendar.ics` | Google Calendar 訂閱用 ICS，由 events.json 產生 |
 | `2025/` | 前一年度封存 |
 | `assets/stamps/` | 印章圖檔 |
 | `mcp/` | MCP 伺服器 |

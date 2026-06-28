@@ -4,7 +4,8 @@
   "description": "高雄社群名牌卡 - 社群月曆 OG 圖生成",
   "type": "module",
   "scripts": {
-    "generate-og": "node scripts/generate-og-images.js"
+    "generate-og": "node scripts/generate-og-images.js",
+    "generate-ics": "node scripts/generate-calendar-ics.js"
   },
   "dependencies": {
     "puppeteer": "^23.0.0"

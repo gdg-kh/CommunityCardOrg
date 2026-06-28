@@ -1,0 +1,1118 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Community Card Org//高雄社群活動//ZH
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:高雄社群月曆
+BEGIN:VEVENT
+UID:2025-12-01-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20251201
+DTEND;VALUE=DATE:20251202
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io/
+URL:https://www.facebook.com/k.net.io/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-02-GDG%20Kaohsiung-TOOCON%20%2336@community-card.org
+DTSTART;VALUE=DATE:20251202
+DTEND;VALUE=DATE:20251203
+SUMMARY:GDG Kaohsiung - TOOCON #36
+DESCRIPTION:1. Codex 入門教學\n2. 饅頭與他的快樂夥伴的腦洞巡禮\n活動連結：https://www.facebook.com/share/p/1Ab34kEKmA/
+URL:https://www.facebook.com/share/p/1Ab34kEKmA/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-03-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20251203
+DTEND;VALUE=DATE:20251204
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-06-UIUX%20Kaohsiung-%E7%95%B6%E8%A8%AD%E8%A8%88%E5%B8%AB%E9%81%87%E4%B8%8A%E5%9C%8B%E5%AE%B6%E7%B4%9A%E7%B3%BB%E7%B5%B1@community-card.org
+DTSTART;VALUE=DATE:20251206
+DTEND;VALUE=DATE:20251207
+SUMMARY:UIUX Kaohsiung - 當設計師遇上國家級系統
+DESCRIPTION:解析”勞保局 e 化服務系統”UIUX細節
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-08-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20251208
+DTEND;VALUE=DATE:20251209
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io/
+URL:https://www.facebook.com/k.net.io/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-10-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20251210
+DTEND;VALUE=DATE:20251211
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-11-KIMU%20-%20%E9%AB%98%E9%9B%84%E7%8D%A8%E7%AB%8B%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E8%80%85%E8%81%9A%E6%9C%83-KIMU%20%E4%B9%8B%E5%8D%97%E9%83%A8%E4%BA%BA%E4%B8%8B%E7%8F%AD%E4%BE%86%E8%81%8A%E9%81%8A%E6%88%B2@community-card.org
+DTSTART;VALUE=DATE:20251211
+DTEND;VALUE=DATE:20251212
+SUMMARY:KIMU - 高雄獨立遊戲開發者聚會 - KIMU 之南部人下班來聊遊戲
+DESCRIPTION:活動連結：https://www.facebook.com/groups/kimugroup/
+URL:https://www.facebook.com/groups/kimugroup/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-13-KaLUG-2512%20meetup@community-card.org
+DTSTART;VALUE=DATE:20251213
+DTEND;VALUE=DATE:20251214
+SUMMARY:KaLUG - 2512 meetup
+DESCRIPTION:第一次雄校聯聚會\n活動連結：https://kalug.tw/
+URL:https://kalug.tw/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-15-GDG%20Kaohsiung-%E6%8B%86%E8%A7%A3%E9%AB%98%E8%96%AA%E8%B3%BD%E9%81%93%E7%9A%84%E5%8E%9F%E7%90%86@community-card.org
+DTSTART;VALUE=DATE:20251215
+DTEND;VALUE=DATE:20251216
+SUMMARY:GDG Kaohsiung - 拆解高薪賽道的原理
+DESCRIPTION:科技工作講主持人、美商工程師主管抹布 Moboo 夜間開講\n活動連結：https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-chai-jie-gao-xin-sai-dao-de-yuan-li
+URL:https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-chai-jie-gao-xin-sai-dao-de-yuan-li
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-15-K.NET-%E4%BC%81%E6%A5%AD%E8%87%AA%E5%8B%95%E5%8C%96%E6%8B%86%E8%A7%A3@community-card.org
+DTSTART;VALUE=DATE:20251215
+DTEND;VALUE=DATE:20251216
+SUMMARY:K.NET - 企業自動化拆解
+DESCRIPTION:從 LINE 到 n8n的逐步指南\n活動連結：https://knet.kktix.cc/events/70260567
+URL:https://knet.kktix.cc/events/70260567
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-16-%E9%AB%98%E9%9B%84%20WordPress-%E9%AB%98%E9%9B%84%20WordPress%20%E5%B0%8F%E8%81%9A%202025%2F12@community-card.org
+DTSTART;VALUE=DATE:20251216
+DTEND;VALUE=DATE:20251217
+SUMMARY:高雄 WordPress - 高雄 WordPress 小聚 2025/12
+DESCRIPTION:wordpress 的生成式 AI 應用 - 客服 QA - 葉期財\n活動連結：https://www.meetup.com/kaohsiung-wordpress-meetup/
+URL:https://www.meetup.com/kaohsiung-wordpress-meetup/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-17-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20251217
+DTEND;VALUE=DATE:20251218
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-18-Second%20Space-%E6%B8%AC%E8%A9%A6%E8%A9%A6%E9%A3%9B%E5%A0%B4%EF%BC%9A%E7%82%BA%E4%BD%A0%E7%9A%84%E5%B0%88%E6%A1%88%E6%94%B6%E9%9B%86%E5%9B%9E%E9%A5%8B@community-card.org
+DTSTART;VALUE=DATE:20251218
+DTEND;VALUE=DATE:20251219
+SUMMARY:Second Space - 測試試飛場：為你的專案收集回饋
+DESCRIPTION:活動連結：https://www.secondspace.dev/zh/
+URL:https://www.secondspace.dev/zh/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-18-PyLadies%20Kaohsiung-PyLadies%20Kaohsiung%20%E7%B6%B2%E7%AB%99%E8%88%87%E7%A4%BE%E7%BE%A4%E5%AA%92%E9%AB%94%E7%9A%84%E9%9B%B6%E6%88%90%E6%9C%AC%20AI%20%E5%B7%A5%E5%85%B7%E5%AF%A6%E5%8B%99%E5%88%86%E4%BA%AB@community-card.org
+DTSTART;VALUE=DATE:20251218
+DTEND;VALUE=DATE:20251219
+SUMMARY:PyLadies Kaohsiung - PyLadies Kaohsiung 網站與社群媒體的零成本 AI 工具實務分享
+DESCRIPTION:活動連結：https://pyladies-kaohsiung.kktix.cc/events/pyladies-chat-202512
+URL:https://pyladies-kaohsiung.kktix.cc/events/pyladies-chat-202512
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-19-Second%20Space-Digital%20Nomad%20Night@community-card.org
+DTSTART;VALUE=DATE:20251219
+DTEND;VALUE=DATE:20251220
+SUMMARY:Second Space - Digital Nomad Night
+DESCRIPTION:活動連結：https://www.secondspace.dev/zh/
+URL:https://www.secondspace.dev/zh/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-22-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20251222
+DTEND;VALUE=DATE:20251223
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io/
+URL:https://www.facebook.com/k.net.io/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-24-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20251224
+DTEND;VALUE=DATE:20251225
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-27-Second%20Space-Cursor%20AI@community-card.org
+DTSTART;VALUE=DATE:20251227
+DTEND;VALUE=DATE:20251228
+SUMMARY:Second Space - Cursor AI
+DESCRIPTION:打造順暢的開發流程與舒服的 Issues 修正體驗\n活動連結：https://www.secondspace.dev/zh/
+URL:https://www.secondspace.dev/zh/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-29-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20251229
+DTEND;VALUE=DATE:20251230
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io/
+URL:https://www.facebook.com/k.net.io/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-12-30-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20251230
+DTEND;VALUE=DATE:20251231
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:12 月聚會\n活動連結：https://www.facebook.com/groups/buffet.dev/
+URL:https://www.facebook.com/groups/buffet.dev/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-03-UIUX%20Kaohsiung-UI%3C%3EDev%20%E5%9C%98%E9%9A%8A%E5%88%86%E5%B7%A5%E8%88%87%E5%89%8D%E7%AB%AF%E6%BA%9D%E9%80%9A@community-card.org
+DTSTART;VALUE=DATE:20260103
+DTEND;VALUE=DATE:20260104
+SUMMARY:UIUX Kaohsiung - UI<>Dev 團隊分工與前端溝通
+DESCRIPTION:大家一起討論踩過的坑！\n活動連結：https://luma.com/whqeko1i
+URL:https://luma.com/whqeko1i
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-05-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260105
+DTEND;VALUE=DATE:20260106
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io/
+URL:https://www.facebook.com/k.net.io/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-06-GDG%20Kaohsiung-TOOCON%20%2337@community-card.org
+DTSTART;VALUE=DATE:20260106
+DTEND;VALUE=DATE:20260107
+SUMMARY:GDG Kaohsiung - TOOCON #37
+DESCRIPTION:1. 多 AI 協作的實踐方式\n2. 如何與 Gemini AI 分工合作\n活動連結：https://gdg.community.dev/e/mvr6kt/
+URL:https://gdg.community.dev/e/mvr6kt/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-11-Second%20Space-AI%20%E6%94%9D%E5%BD%B1%E5%B7%A5%E4%BD%9C%E5%9D%8A@community-card.org
+DTSTART;VALUE=DATE:20260111
+DTEND;VALUE=DATE:20260112
+SUMMARY:Second Space - AI 攝影工作坊
+DESCRIPTION:活動連結：https://www.secondspace.dev/zh/
+URL:https://www.secondspace.dev/zh/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-12-K.NET-Season%20of%20AI%20-%20MCP%20%3A%20Taiwan@community-card.org
+DTSTART;VALUE=DATE:20260112
+DTEND;VALUE=DATE:20260113
+SUMMARY:K.NET - Season of AI - MCP : Taiwan
+DESCRIPTION:1. 以 MAF 框架看 Agent Workflows Orchestrations\n2. MCP × 既有 API：安全治理與最小變動整合設計\n活動連結：https://knet.kktix.cc/events/season-of-ai-mcp
+URL:https://knet.kktix.cc/events/season-of-ai-mcp
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-14-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260114
+DTEND;VALUE=DATE:20260115
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-15-KIMU%20-%20%E9%AB%98%E9%9B%84%E7%8D%A8%E7%AB%8B%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E8%80%85%E8%81%9A%E6%9C%83-KIMU%20%E4%B9%8B%E5%8D%97%E9%83%A8%E4%BA%BA%E4%B8%8B%E7%8F%AD%E4%BE%86%E8%81%8A%E9%81%8A%E6%88%B2@community-card.org
+DTSTART;VALUE=DATE:20260115
+DTEND;VALUE=DATE:20260116
+SUMMARY:KIMU - 高雄獨立遊戲開發者聚會 - KIMU 之南部人下班來聊遊戲
+DESCRIPTION:聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流\n活動連結：https://www.facebook.com/share/p/1ByYFdxGE8/
+URL:https://www.facebook.com/share/p/1ByYFdxGE8/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-18-Second%20Space-%E6%B8%AC%E8%A9%A6%E8%A9%A6%E9%A3%9B%E5%A0%B4%EF%BC%9A%E7%82%BA%E4%BD%A0%E7%9A%84%E5%B0%88%E6%A1%88%E6%94%B6%E9%9B%86%E5%9B%9E%E9%A5%8B@community-card.org
+DTSTART;VALUE=DATE:20260118
+DTEND;VALUE=DATE:20260119
+SUMMARY:Second Space - 測試試飛場：為你的專案收集回饋
+DESCRIPTION:您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！\n活動連結：https://www.secondspace.dev/zh/
+URL:https://www.secondspace.dev/zh/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-19-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260119
+DTEND;VALUE=DATE:20260120
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io/
+URL:https://www.facebook.com/k.net.io/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-21-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260121
+DTEND;VALUE=DATE:20260122
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-21-%E9%AB%98%E9%9B%84%20WordPress-%E9%AB%98%E9%9B%84%20WordPress%20%E5%B0%8F%E8%81%9A%202026%2F01@community-card.org
+DTSTART;VALUE=DATE:20260121
+DTEND;VALUE=DATE:20260122
+SUMMARY:高雄 WordPress - 高雄 WordPress 小聚 2026/01
+DESCRIPTION:玩轉 WordPress 插件 + n8n by Honda\n活動連結：https://www.meetup.com/kaohsiung-wordpress-meetup/events/312622012/
+URL:https://www.meetup.com/kaohsiung-wordpress-meetup/events/312622012/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-22-Second%20Space-AI%20%E8%A8%8E%E8%AB%96%E5%9C%88@community-card.org
+DTSTART;VALUE=DATE:20260122
+DTEND;VALUE=DATE:20260123
+SUMMARY:Second Space - AI 討論圈
+DESCRIPTION:人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。\n活動連結：https://www.secondspace.dev/zh/
+URL:https://www.secondspace.dev/zh/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-25-g0v%20%E5%8F%B0%E7%81%A3%E9%9B%B6%E6%99%82%E6%94%BF%E5%BA%9C-%E5%8F%B0%E7%81%A3%E9%9B%B6%E6%99%82%E6%94%BF%E5%BA%9C%E7%AC%AC%E6%9F%92%E6%8B%BE%E5%A3%B9%E6%AC%A1%E9%AB%98%E9%9B%84%E9%BB%91%E5%AE%A2%E6%9D%BE%EF%BC%88g0v%20KHH%20_%20Kaohsiung%20Hackath71n%EF%BC%89@community-card.org
+DTSTART;VALUE=DATE:20260125
+DTEND;VALUE=DATE:20260126
+SUMMARY:g0v 台灣零時政府 - 台灣零時政府第柒拾壹次高雄黑客松（g0v KHH _ Kaohsiung Hackath71n）
+DESCRIPTION:g0v 是一個草根式的公民社群，致力於加深公民對社會的貢獻以及彼此間的連結\n活動連結：https://g0v-jothon.kktix.cc/events/g0v-hackath71n
+URL:https://g0v-jothon.kktix.cc/events/g0v-hackath71n
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-26-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260126
+DTEND;VALUE=DATE:20260127
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io/
+URL:https://www.facebook.com/k.net.io/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-27-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20260127
+DTEND;VALUE=DATE:20260128
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:抽屜裡的舊硬碟復活了！用 Unraid 零門檻輕鬆駕馭 NAS\n活動連結：https://www.facebook.com/groups/buffet.dev
+URL:https://www.facebook.com/groups/buffet.dev
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-01-28-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260128
+DTEND;VALUE=DATE:20260129
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-02-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260202
+DTEND;VALUE=DATE:20260203
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io/
+URL:https://www.facebook.com/k.net.io/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-03-GDG%20Kaohsiung-TOOCON%20%2338@community-card.org
+DTSTART;VALUE=DATE:20260203
+DTEND;VALUE=DATE:20260204
+SUMMARY:GDG Kaohsiung - TOOCON #38
+DESCRIPTION:1. 用 Windsurf 以及 Google Conduct 與多 coding agent 打造一人開發團隊\n2. 團隊導入 Vibe Coding 失控到穩定生成經驗分享\n活動連結：https://gdg.community.dev/e/mcvasn/
+URL:https://gdg.community.dev/e/mcvasn/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-04-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260204
+DTEND;VALUE=DATE:20260205
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-07-UIUX%20Kaohsiung-%E9%AB%98%E9%9B%84%E8%A8%AD%E8%A8%88%E5%B8%AB%E8%81%9A%E6%9C%83%20%235@community-card.org
+DTSTART;VALUE=DATE:20260207
+DTEND;VALUE=DATE:20260208
+SUMMARY:UIUX Kaohsiung - 高雄設計師聚會 #5
+DESCRIPTION:活動連結：https://luma.com/0avbdv5w
+URL:https://luma.com/0avbdv5w
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-09-KIMU%20-%20%E9%AB%98%E9%9B%84%E7%8D%A8%E7%AB%8B%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E8%80%85%E8%81%9A%E6%9C%83-KIMU%20%E4%B9%8B%E5%8D%97%E9%83%A8%E4%BA%BA%E4%B8%8B%E7%8F%AD%E4%BE%86%E8%81%8A%E9%81%8A%E6%88%B2@community-card.org
+DTSTART;VALUE=DATE:20260209
+DTEND;VALUE=DATE:20260210
+SUMMARY:KIMU - 高雄獨立遊戲開發者聚會 - KIMU 之南部人下班來聊遊戲
+DESCRIPTION:聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流\n活動連結：https://www.facebook.com/share/p/1CUJk4RUnp/
+URL:https://www.facebook.com/share/p/1CUJk4RUnp/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-09-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260209
+DTEND;VALUE=DATE:20260210
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-11-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260211
+DTEND;VALUE=DATE:20260212
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-12-Second%20Space-AI%20%E8%A8%8E%E8%AB%96%E5%9C%88@community-card.org
+DTSTART;VALUE=DATE:20260212
+DTEND;VALUE=DATE:20260213
+SUMMARY:Second Space - AI 討論圈
+DESCRIPTION:人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。\n活動連結：https://www.secondspace.dev/zh/
+URL:https://www.secondspace.dev/zh/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-12-PyLadies%20Kaohsiung-%E8%B5%B0%E9%80%B2%E8%B3%87%E6%96%99%E9%A0%98%E5%9F%9F%EF%BC%9A%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8%E5%AE%B6%E8%88%87%E5%88%86%E6%9E%90%E5%B8%AB%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8%E8%88%87%E8%81%B7%E6%B6%AF%E9%81%B8%E6%93%87@community-card.org
+DTSTART;VALUE=DATE:20260212
+DTEND;VALUE=DATE:20260213
+SUMMARY:PyLadies Kaohsiung - 走進資料領域：資料科學家與分析師的工作日常與職涯選擇
+DESCRIPTION:線上活動\n活動連結：https://pyladies-kaohsiung.kktix.cc/events/pyladies-journey-202602
+URL:https://pyladies-kaohsiung.kktix.cc/events/pyladies-journey-202602
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-18-Second%20Space-%E6%B8%AC%E8%A9%A6%E8%A9%A6%E9%A3%9B%E5%A0%B4%EF%BC%9A%E7%82%BA%E4%BD%A0%E7%9A%84%E5%B0%88%E6%A1%88%E6%94%B6%E9%9B%86%E5%9B%9E%E9%A5%8B@community-card.org
+DTSTART;VALUE=DATE:20260218
+DTEND;VALUE=DATE:20260219
+SUMMARY:Second Space - 測試試飛場：為你的專案收集回饋
+DESCRIPTION:您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！\n活動連結：https://www.secondspace.dev/zh/
+URL:https://www.secondspace.dev/zh/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-21-KaLUG-%E5%88%9D%E4%BA%94%E9%81%8E%E5%B9%B4%E8%81%9A%E6%9C%83@community-card.org
+DTSTART;VALUE=DATE:20260221
+DTEND;VALUE=DATE:20260222
+SUMMARY:KaLUG - 初五過年聚會
+DESCRIPTION:過年好久不見的北漂朋友們一起回來吃飯聊天\n活動連結：https://luma.com/84foqx9q?utm_source=kalug.tw/
+URL:https://luma.com/84foqx9q?utm_source=kalug.tw/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-23-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260223
+DTEND;VALUE=DATE:20260224
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io/
+URL:https://www.facebook.com/k.net.io/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-24-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20260224
+DTEND;VALUE=DATE:20260225
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:蘋果會拋棄你的舊筆電，但 OpenCore 不會\n活動連結：https://www.facebook.com/share/17jQoqDXz5/
+URL:https://www.facebook.com/share/17jQoqDXz5/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-25-%E9%AB%98%E9%9B%84%20WordPress-%E9%AB%98%E9%9B%84%20WordPress%20%E5%B0%8F%E8%81%9A%202026%2F02@community-card.org
+DTSTART;VALUE=DATE:20260225
+DTEND;VALUE=DATE:20260226
+SUMMARY:高雄 WordPress - 高雄 WordPress 小聚 2026/02
+DESCRIPTION:如何用 Vibe Coding 建立客製化系統：塔羅抽卡系統 & 儲值結算系統 by 墨求彤\n活動連結：https://www.meetup.com/kaohsiung-wordpress-meetup/events/313140106/
+URL:https://www.meetup.com/kaohsiung-wordpress-meetup/events/313140106/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-28-Second%20Space-Pizza%20%26%20Networking@community-card.org
+DTSTART;VALUE=DATE:20260228
+DTEND;VALUE=DATE:20260301
+SUMMARY:Second Space - Pizza & Networking
+DESCRIPTION:Great ideas deserve great company.\n活動連結：https://luma.com/ktq1367v
+URL:https://luma.com/ktq1367v
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-02-28-Second%20Space-Creator%20x%20Creator@community-card.org
+DTSTART;VALUE=DATE:20260228
+DTEND;VALUE=DATE:20260301
+SUMMARY:Second Space - Creator x Creator
+DESCRIPTION:What happens when creators share the room—not just the stage?\n活動連結：https://luma.com/fex0e0vn
+URL:https://luma.com/fex0e0vn
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-02-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260302
+DTEND;VALUE=DATE:20260303
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io/
+URL:https://www.facebook.com/k.net.io/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-07-UIUX%20Kaohsiung-%E9%AB%98%E9%9B%84%E8%A8%AD%E8%A8%88%E5%B8%AB%E8%81%9A%E6%9C%83%20%236@community-card.org
+DTSTART;VALUE=DATE:20260307
+DTEND;VALUE=DATE:20260308
+SUMMARY:UIUX Kaohsiung - 高雄設計師聚會 #6
+DESCRIPTION:Design Token System\n活動連結：https://luma.com/jc7upvkg
+URL:https://luma.com/jc7upvkg
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-09-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260309
+DTEND;VALUE=DATE:20260310
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-10-GDG%20Kaohsiung-TOOCON%20%2339@community-card.org
+DTSTART;VALUE=DATE:20260310
+DTEND;VALUE=DATE:20260311
+SUMMARY:GDG Kaohsiung - TOOCON #39
+DESCRIPTION:1. AI 驅動的 API 開發實戰\n2. Scaffold 自動化整合模板工具\n活動連結：https://gdg.community.dev/e/mwp8d8/
+URL:https://gdg.community.dev/e/mwp8d8/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-11-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260311
+DTEND;VALUE=DATE:20260312
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-17-%E9%AB%98%E9%9B%84%20WordPress-%E9%AB%98%E9%9B%84%20WordPress%20%E5%B0%8F%E8%81%9A%202026%2F03@community-card.org
+DTSTART;VALUE=DATE:20260317
+DTEND;VALUE=DATE:20260318
+SUMMARY:高雄 WordPress - 高雄 WordPress 小聚 2026/03
+DESCRIPTION:不止是部落格：用 WordPress 打造具備「贊助機制」的數據社群\n活動連結：https://www.meetup.com/kaohsiung-wordpress-meetup/events/313647240/
+URL:https://www.meetup.com/kaohsiung-wordpress-meetup/events/313647240/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-18-Second%20Space-%E6%B8%AC%E8%A9%A6%E8%A9%A6%E9%A3%9B%E5%A0%B4%EF%BC%9A%E7%82%BA%E4%BD%A0%E7%9A%84%E5%B0%88%E6%A1%88%E6%94%B6%E9%9B%86%E5%9B%9E%E9%A5%8B@community-card.org
+DTSTART;VALUE=DATE:20260318
+DTEND;VALUE=DATE:20260319
+SUMMARY:Second Space - 測試試飛場：為你的專案收集回饋
+DESCRIPTION:您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！\n活動連結：https://luma.com/0yho08oq
+URL:https://luma.com/0yho08oq
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-18-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260318
+DTEND;VALUE=DATE:20260319
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-19-KIMU%20-%20%E9%AB%98%E9%9B%84%E7%8D%A8%E7%AB%8B%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E8%80%85%E8%81%9A%E6%9C%83-KIMU%20%E4%B9%8B%E5%8D%97%E9%83%A8%E4%BA%BA%E4%B8%8B%E7%8F%AD%E4%BE%86%E8%81%8A%E9%81%8A%E6%88%B2@community-card.org
+DTSTART;VALUE=DATE:20260319
+DTEND;VALUE=DATE:20260320
+SUMMARY:KIMU - 高雄獨立遊戲開發者聚會 - KIMU 之南部人下班來聊遊戲
+DESCRIPTION:聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流\n活動連結：https://www.facebook.com/share/p/1GSLrBtqzt/
+URL:https://www.facebook.com/share/p/1GSLrBtqzt/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-20-Second%20Space-AI%20%E8%A8%8E%E8%AB%96%E5%9C%88@community-card.org
+DTSTART;VALUE=DATE:20260320
+DTEND;VALUE=DATE:20260321
+SUMMARY:Second Space - AI 討論圈
+DESCRIPTION:人工智慧討論會即將重返英迪格酒店的屋頂酒吧！入場免費，但需購買一杯飲品。\n活動連結：https://luma.com/38vuf7we
+URL:https://luma.com/38vuf7we
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-21-GDG%20Kaohsiung-Build%20with%20AI%202026%20%E9%AB%98%E9%9B%84%E5%A0%B4@community-card.org
+DTSTART;VALUE=DATE:20260321
+DTEND;VALUE=DATE:20260322
+SUMMARY:GDG Kaohsiung - Build with AI 2026 高雄場
+DESCRIPTION:極致懶人學 — 從 Vibe SQL 到 AI 代理的生存策略\n活動連結：https://www.accupass.com/event/2602230332571726015441
+URL:https://www.accupass.com/event/2602230332571726015441
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-21-PyLadies%20Kaohsiung-Python%20%E9%87%91%E8%9E%8D%E6%95%B8%E6%93%9A%E5%B7%A5%E4%BD%9C%E5%9D%8A@community-card.org
+DTSTART;VALUE=DATE:20260321
+DTEND;VALUE=DATE:20260322
+SUMMARY:PyLadies Kaohsiung - Python 金融數據工作坊
+DESCRIPTION:實體+線上活動\n活動連結：https://kaohsiung.pyladies.com/#activity
+URL:https://kaohsiung.pyladies.com/#activity
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-21-KaLUG-2603%20meetup@community-card.org
+DTSTART;VALUE=DATE:20260321
+DTEND;VALUE=DATE:20260322
+SUMMARY:KaLUG - 2603 meetup
+DESCRIPTION:畫電路/nextcloud...\n活動連結：https://luma.com/awwlb7l0
+URL:https://luma.com/awwlb7l0
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-23-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260323
+DTEND;VALUE=DATE:20260324
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-25-GDG%20Kaohsiung-Build%20with%20AI%202026%20%E9%AB%98%E9%9B%84%E5%A0%B4@community-card.org
+DTSTART;VALUE=DATE:20260325
+DTEND;VALUE=DATE:20260326
+SUMMARY:GDG Kaohsiung - Build with AI 2026 高雄場
+DESCRIPTION:Gemini CLI 演義第一回：安環境巧佈八卦陣，定計畫初試空城計\n活動連結：https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026setup-the-base-plan-the-case/
+URL:https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026setup-the-base-plan-the-case/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-30-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260330
+DTEND;VALUE=DATE:20260331
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-03-31-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20260331
+DTEND;VALUE=DATE:20260401
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:饅頭我不寫程式了之 Plan Mode 是在 Plan 什麼？\n活動連結：https://www.facebook.com/share/1BTZjDj9ew/
+URL:https://www.facebook.com/share/1BTZjDj9ew/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-01-GDG%20Kaohsiung-%E5%A5%BD%E7%9A%84%E9%96%8B%E7%99%BC%E8%80%85%E7%A4%BE%E7%BE%A4%20X%20%E5%85%94%20CON%202026%20%E5%B9%B4%E6%9C%83@community-card.org
+DTSTART;VALUE=DATE:20260401
+DTEND;VALUE=DATE:20260402
+SUMMARY:GDG Kaohsiung - 好的開發者社群 X 兔 CON 2026 年會
+DESCRIPTION:我們致力於推廣最高境界的工程師禪意，無論發生什麼事，先說「好的」，然後繼續工作\n活動連結：https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-good-developer-group-x-tu-con-annual-conf-2026
+URL:https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-good-developer-group-x-tu-con-annual-conf-2026
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-04-UIUX%20Kaohsiung-%E9%AB%98%E9%9B%84%E8%A8%AD%E8%A8%88%E5%B8%AB%E8%81%9A%E6%9C%83%20%237@community-card.org
+DTSTART;VALUE=DATE:20260404
+DTEND;VALUE=DATE:20260405
+SUMMARY:UIUX Kaohsiung - 高雄設計師聚會 #7
+DESCRIPTION:活動連結：https://luma.com/v9lkn7yw
+URL:https://luma.com/v9lkn7yw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-07-GDG%20Kaohsiung-TOOCON%20%2340@community-card.org
+DTSTART;VALUE=DATE:20260407
+DTEND;VALUE=DATE:20260408
+SUMMARY:GDG Kaohsiung - TOOCON #40
+DESCRIPTION:1. 亞灣區的數位匯流：高雄智慧城市展\n2. 可以幫我「想」個程式嗎？\n活動連結：https://gdg.community.dev/e/mjmbpq/
+URL:https://gdg.community.dev/e/mjmbpq/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-08-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260408
+DTEND;VALUE=DATE:20260409
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-09-KIMU%20-%20%E9%AB%98%E9%9B%84%E7%8D%A8%E7%AB%8B%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E8%80%85%E8%81%9A%E6%9C%83-KIMU%20%E4%B9%8B%E5%8D%97%E9%83%A8%E4%BA%BA%E4%B8%8B%E7%8F%AD%E4%BE%86%E8%81%8A%E9%81%8A%E6%88%B2@community-card.org
+DTSTART;VALUE=DATE:20260409
+DTEND;VALUE=DATE:20260410
+SUMMARY:KIMU - 高雄獨立遊戲開發者聚會 - KIMU 之南部人下班來聊遊戲
+DESCRIPTION:聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流\n活動連結：https://www.facebook.com/share/p/1B82E6RSih/
+URL:https://www.facebook.com/share/p/1B82E6RSih/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-10-vLAB%20Online-OWASP%20Meetup%20%E9%AB%98%E9%9B%84%E5%AF%A6%E9%AB%94@community-card.org
+DTSTART;VALUE=DATE:20260410
+DTEND;VALUE=DATE:20260411
+SUMMARY:vLAB Online - OWASP Meetup 高雄實體
+DESCRIPTION:這是2025第一場南部的聚會，本次活動除了分享最新 OWASP 動態更與台灣社群 vLAB Online 同好交流活動。\n活動連結：https://csa.kktix.cc/events/owasp20260410
+URL:https://csa.kktix.cc/events/owasp20260410
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-13-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260413
+DTEND;VALUE=DATE:20260414
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-15-GDG%20Kaohsiung-Build%20with%20AI%202026%20%E9%AB%98%E9%9B%84%E5%A0%B4@community-card.org
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260416
+SUMMARY:GDG Kaohsiung - Build with AI 2026 高雄場
+DESCRIPTION:Gemini CLI 演義第二回：設內鉤嚴查違法紀，自動修大敗亂碼軍\n活動連結：https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026hook-the-flow-fix-the-show/
+URL:https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026hook-the-flow-fix-the-show/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-18-Global%20AI%20Kaohsiung-GitHub%20Copilot%20Dev%20Days@community-card.org
+DTSTART;VALUE=DATE:20260418
+DTEND;VALUE=DATE:20260419
+SUMMARY:Global AI Kaohsiung - GitHub Copilot Dev Days
+DESCRIPTION:GitHub Copilot is more than a code completion tool — it's becoming every developer's AI-powered collaborator.\n活動連結：https://luma.com/qa3rfmn9
+URL:https://luma.com/qa3rfmn9
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-20-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260420
+DTEND;VALUE=DATE:20260421
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-21-%E9%AB%98%E9%9B%84%20WordPress-%E9%AB%98%E9%9B%84%20WordPress%20%E5%B0%8F%E8%81%9A%202026%2F04@community-card.org
+DTSTART;VALUE=DATE:20260421
+DTEND;VALUE=DATE:20260422
+SUMMARY:高雄 WordPress - 高雄 WordPress 小聚 2026/04
+DESCRIPTION:未定\n活動連結：https://www.meetup.com/kaohsiung-wordpress-meetup/events/314117651/
+URL:https://www.meetup.com/kaohsiung-wordpress-meetup/events/314117651/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-24-GDG%20Kaohsiung-Build%20with%20AI%202026%20%E9%AB%98%E9%9B%84%E5%A0%B4@community-card.org
+DTSTART;VALUE=DATE:20260424
+DTEND;VALUE=DATE:20260425
+SUMMARY:GDG Kaohsiung - Build with AI 2026 高雄場
+DESCRIPTION:解構 AI 代理與穩定性工程的實戰進化論\n活動連結：https://www.accupass.com/event/2603170317539828627210
+URL:https://www.accupass.com/event/2603170317539828627210
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-25-PyLadies%20Kaohsiung-Python%20%E9%87%91%E8%9E%8D%E6%95%B8%E6%93%9A%E5%B7%A5%E4%BD%9C%E5%9D%8A@community-card.org
+DTSTART;VALUE=DATE:20260425
+DTEND;VALUE=DATE:20260426
+SUMMARY:PyLadies Kaohsiung - Python 金融數據工作坊
+DESCRIPTION:實體+線上活動\n活動連結：https://kaohsiung.pyladies.com/#activity
+URL:https://kaohsiung.pyladies.com/#activity
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-27-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260427
+DTEND;VALUE=DATE:20260428
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-04-28-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20260428
+DTEND;VALUE=DATE:20260429
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:新年新希望(?)，讓社群活動紀錄自動化\n活動連結：https://www.facebook.com/share/14Xq25meQzk/
+URL:https://www.facebook.com/share/14Xq25meQzk/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-02-UIUX%20Kaohsiung-%E9%AB%98%E9%9B%84%E8%A8%AD%E8%A8%88%E5%B8%AB%E8%81%9A%E6%9C%83%20%238@community-card.org
+DTSTART;VALUE=DATE:20260502
+DTEND;VALUE=DATE:20260503
+SUMMARY:UIUX Kaohsiung - 高雄設計師聚會 #8
+DESCRIPTION:活動連結：https://luma.com/sxng9fgs
+URL:https://luma.com/sxng9fgs
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-06-UIUX%20Kaohsiung-%E9%AB%98%E9%9B%84%E8%A8%AD%E8%A8%88%E5%B8%AB%E8%81%9A%E6%9C%83%20%239@community-card.org
+DTSTART;VALUE=DATE:20260606
+DTEND;VALUE=DATE:20260607
+SUMMARY:UIUX Kaohsiung - 高雄設計師聚會 #9
+DESCRIPTION:一分鐘framer架站\n活動連結：https://luma.com/saqaqmb5
+URL:https://luma.com/saqaqmb5
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-04-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260504
+DTEND;VALUE=DATE:20260505
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-05-GDG%20Kaohsiung-TOOCON%20%2341@community-card.org
+DTSTART;VALUE=DATE:20260505
+DTEND;VALUE=DATE:20260506
+SUMMARY:GDG Kaohsiung - TOOCON #41
+DESCRIPTION:1. AI 在社福領域的應用\n2. AI 智慧文件管理\n活動連結：https://gdg.community.dev/e/mmp9xd/
+URL:https://gdg.community.dev/e/mmp9xd/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-11-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260511
+DTEND;VALUE=DATE:20260512
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-12-KIMU%20-%20%E9%AB%98%E9%9B%84%E7%8D%A8%E7%AB%8B%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E8%80%85%E8%81%9A%E6%9C%83-KIMU%20%E4%B9%8B%E5%8D%97%E9%83%A8%E4%BA%BA%E4%B8%8B%E7%8F%AD%E4%BE%86%E8%81%8A%E9%81%8A%E6%88%B2@community-card.org
+DTSTART;VALUE=DATE:20260512
+DTEND;VALUE=DATE:20260513
+SUMMARY:KIMU - 高雄獨立遊戲開發者聚會 - KIMU 之南部人下班來聊遊戲
+DESCRIPTION:聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流\n活動連結：https://www.facebook.com/share/p/17ZgAhaey3/
+URL:https://www.facebook.com/share/p/17ZgAhaey3/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-22-KIMU%20-%20%E9%AB%98%E9%9B%84%E7%8D%A8%E7%AB%8B%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E8%80%85%E8%81%9A%E6%9C%83-KIMU%20%E4%B9%8B%E5%8D%97%E9%83%A8%E4%BA%BA%E4%B8%8B%E7%8F%AD%E4%BE%86%E8%81%8A%E9%81%8A%E6%88%B2@community-card.org
+DTSTART;VALUE=DATE:20260622
+DTEND;VALUE=DATE:20260623
+SUMMARY:KIMU - 高雄獨立遊戲開發者聚會 - KIMU 之南部人下班來聊遊戲
+DESCRIPTION:聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流\n活動連結：https://www.facebook.com/share/p/1cxRiLFm7S/
+URL:https://www.facebook.com/share/p/1cxRiLFm7S/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-13-GDG%20Kaohsiung-Build%20with%20AI%202026%20%E9%AB%98%E9%9B%84%E5%A0%B4@community-card.org
+DTSTART;VALUE=DATE:20260513
+DTEND;VALUE=DATE:20260514
+SUMMARY:GDG Kaohsiung - Build with AI 2026 高雄場
+DESCRIPTION:Gemini CLI 演義第三回：立軍令巧寫單元測，全自動歸降慣例標\n活動連結：https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026skill-the-test-commit-the-best/
+URL:https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026skill-the-test-commit-the-best/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-14-KSDA%20%E9%AB%98%E9%9B%84%E5%B8%82%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E8%80%85%E5%8D%94%E6%9C%83-%E5%BE%9E%20Prompt%20%E5%88%B0%20Action%20-%20%E6%8E%8C%E6%8F%A1%20Computer%20Use%20%E5%AF%A6%E7%8F%BE%E5%85%A8%E8%87%AA%E5%8B%95%E5%B7%A5%E4%BD%9C%E6%B5%81@community-card.org
+DTSTART;VALUE=DATE:20260514
+DTEND;VALUE=DATE:20260515
+SUMMARY:KSDA 高雄市軟體開發者協會 - 從 Prompt 到 Action - 掌握 Computer Use 實現全自動工作流
+DESCRIPTION:掌握 AI 自動化的完整鏈條\n活動連結：https://ksda.kktix.cc/events/computeruse
+URL:https://ksda.kktix.cc/events/computeruse
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-25-KSDA%20%E9%AB%98%E9%9B%84%E5%B8%82%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E8%80%85%E5%8D%94%E6%9C%83-AI%20%E6%99%82%E4%BB%A3%E7%9A%84%E7%B6%B2%E7%AB%99%E5%8D%B3%E6%88%B0%E5%8A%9B@community-card.org
+DTSTART;VALUE=DATE:20260625
+DTEND;VALUE=DATE:20260626
+SUMMARY:KSDA 高雄市軟體開發者協會 - AI 時代的網站即戰力
+DESCRIPTION:用 Claude Cowork 規劃 × Lovable 實作，做出小型商業網站\n活動連結：https://ksda.kktix.cc/events/vibecoding-2606
+URL:https://ksda.kktix.cc/events/vibecoding-2606
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-16-KaLUG-Ubuntu%202604%20%2BFedora%2044%20Release%20Party@community-card.org
+DTSTART;VALUE=DATE:20260516
+DTEND;VALUE=DATE:20260517
+SUMMARY:KaLUG - Ubuntu 2604 +Fedora 44 Release Party
+DESCRIPTION:一起來聊聊新版 Ubuntu & Fedora 有沒有什麼期待的新功能\n活動連結：https://luma.com/ytanoy01
+URL:https://luma.com/ytanoy01
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-18-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260518
+DTEND;VALUE=DATE:20260519
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-19-%E9%AB%98%E9%9B%84%20WordPress-%E9%AB%98%E9%9B%84%20WordPress%20%E5%B0%8F%E8%81%9A%202026%2F05@community-card.org
+DTSTART;VALUE=DATE:20260519
+DTEND;VALUE=DATE:20260520
+SUMMARY:高雄 WordPress - 高雄 WordPress 小聚 2026/05
+DESCRIPTION:網站做完卻沒人來、沒人買？問題不是功能不夠，而是缺流量與轉換策略。做好商品頁＋Facebook廣告，銷售自然發生\n活動連結：https://www.meetup.com/kaohsiung-wordpress-meetup/events/314485245/
+URL:https://www.meetup.com/kaohsiung-wordpress-meetup/events/314485245/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-16-%E9%AB%98%E9%9B%84%20WordPress-%E9%AB%98%E9%9B%84%20WordPress%20%E5%B0%8F%E8%81%9A%202026%2F06@community-card.org
+DTSTART;VALUE=DATE:20260616
+DTEND;VALUE=DATE:20260617
+SUMMARY:高雄 WordPress - 高雄 WordPress 小聚 2026/06
+DESCRIPTION:讓 WooCommerce 變身 SaaS by Moska\n活動連結：https://www.meetup.com/kaohsiung-wordpress-meetup/events/314485262/
+URL:https://www.meetup.com/kaohsiung-wordpress-meetup/events/314485262/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-22-vLAB%20Online-OWASP%20LLM%20%E5%AE%89%E5%85%A8%E5%AF%A6%E4%BD%9C%E8%AA%B2@community-card.org
+DTSTART;VALUE=DATE:20260522
+DTEND;VALUE=DATE:20260523
+SUMMARY:vLAB Online - OWASP LLM 安全實作課
+DESCRIPTION:White Hat Doggy (WHD) 平台與工具簡介\n活動連結：https://docs.google.com/forms/d/e/1FAIpQLScLabLw0IPwYf3phDUwUwUnpfFsGk43nGi67U9A8_1ItdkMXw/viewform
+URL:https://docs.google.com/forms/d/e/1FAIpQLScLabLw0IPwYf3phDUwUwUnpfFsGk43nGi67U9A8_1ItdkMXw/viewform
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-23-PyLadies%20Kaohsiung-Python%20%E5%85%A5%E9%96%80%E5%B7%A5%E4%BD%9C%E5%9D%8A@community-card.org
+DTSTART;VALUE=DATE:20260523
+DTEND;VALUE=DATE:20260524
+SUMMARY:PyLadies Kaohsiung - Python 入門工作坊
+DESCRIPTION:實體活動\n活動連結：https://kaohsiung.pyladies.com/#activity
+URL:https://kaohsiung.pyladies.com/#activity
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-24-PyLadies%20Kaohsiung-Python%20%E5%85%A5%E9%96%80%E5%B7%A5%E4%BD%9C%E5%9D%8A@community-card.org
+DTSTART;VALUE=DATE:20260524
+DTEND;VALUE=DATE:20260525
+SUMMARY:PyLadies Kaohsiung - Python 入門工作坊
+DESCRIPTION:實體活動\n活動連結：https://kaohsiung.pyladies.com/#activity
+URL:https://kaohsiung.pyladies.com/#activity
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-25-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260525
+DTEND;VALUE=DATE:20260526
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-26-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20260526
+DTEND;VALUE=DATE:20260527
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:我為什麼做 ZeroSpec：先把專案整理到 AI 看得懂\n活動連結：https://www.facebook.com/share/1Az2NKVbEb/
+URL:https://www.facebook.com/share/1Az2NKVbEb/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-29-%E5%9C%8B%E6%B3%B0%20CDC%20%E5%B0%8F%E8%81%9A-%E5%95%9F%E5%8B%95%20PM%20%E5%85%A8%E9%9D%A2%E5%8D%87%E7%B4%9A%EF%BD%9CAI%20%E6%B5%AA%E6%BD%AE%E4%B8%8B%E7%9A%84%E6%95%8F%E6%8D%B7%E5%AF%A6%E8%B8%90%E8%88%87%E5%9C%98%E9%9A%8A%E6%95%88%E8%83%BD%E5%84%AA%E5%8C%96@community-card.org
+DTSTART;VALUE=DATE:20260529
+DTEND;VALUE=DATE:20260530
+SUMMARY:國泰 CDC 小聚 - 啟動 PM 全面升級｜AI 浪潮下的敏捷實踐與團隊效能優化
+DESCRIPTION:這場小聚會把視角從工程師切換成至產品經理，聊聊 AI 對 PM 在敏捷管理的衝擊與具體做法\n活動連結：https://www.accupass.com/event/2603310918191420664682
+URL:https://www.accupass.com/event/2603310918191420664682
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-05-29-KIMU%20%E9%AB%98%E9%9B%84%E7%8D%A8%E7%AB%8B%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC%E8%80%85%E8%81%9A%E6%9C%83-%E8%B7%A8%E5%8D%80%E8%B7%A8%E5%9F%9F%E5%AA%92%E5%90%88%E7%94%A2%E6%A5%AD%E5%B0%8F%E8%81%9A@community-card.org
+DTSTART;VALUE=DATE:20260529
+DTEND;VALUE=DATE:20260530
+SUMMARY:KIMU 高雄獨立遊戲開發者聚會 - 跨區跨域媒合產業小聚
+DESCRIPTION:文策院 x 高市府 x TACG 協會 ACG 媒合專場\n活動連結：https://forms.gle/SAxv68X8wmEqUL4i8
+URL:https://forms.gle/SAxv68X8wmEqUL4i8
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-09-GDG%20Kaohsiung-TOOCON%20%2342@community-card.org
+DTSTART;VALUE=DATE:20260609
+DTEND;VALUE=DATE:20260610
+SUMMARY:GDG Kaohsiung - TOOCON #42
+DESCRIPTION:1. 使用 Skills 打造 AI CLI 設定精靈\n2. 我的 iPAS AI 備考方式\n活動連結：https://gdg.community.dev/e/m8qd55/
+URL:https://gdg.community.dev/e/m8qd55/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-24-%E5%9C%8B%E6%B3%B0%20CDC%20%E5%B0%8F%E8%81%9A-%E8%81%B7%E6%B6%AF%E3%80%8C%E6%B3%B0%E3%80%8D%E6%9C%89%E6%88%B2%EF%BD%9C%E8%A7%A3%E6%A7%8B%E8%B7%A8%E5%9F%9F%E4%BA%BA%E6%89%8D%E5%9F%BA%E5%9B%A0%EF%BC%81%E5%9C%A8%E5%9C%8B%E6%B3%B0%20CDC%20%E6%B4%BB%E5%87%BA%E4%BD%A0%E7%9A%84%20N%20%E7%A8%AE%E5%8F%AF%E8%83%BD@community-card.org
+DTSTART;VALUE=DATE:20260624
+DTEND;VALUE=DATE:20260625
+SUMMARY:國泰 CDC 小聚 - 職涯「泰」有戲｜解構跨域人才基因！在國泰 CDC 活出你的 N 種可能
+DESCRIPTION:這場小聚會把視角從工程師切換成至產品經理，聊聊 AI 對 PM 在敏捷管理的衝擊與具體做法\n活動連結：https://www.accupass.com/event/2605050921071192419364
+URL:https://www.accupass.com/event/2605050921071192419364
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-31-%E5%9C%8B%E6%B3%B0%20CDC%20%E5%B0%8F%E8%81%9A-%E5%91%8A%E5%88%A5%E6%8A%80%E8%A1%93%E9%96%80%E6%AA%BB%EF%BC%81%E7%94%A8%E5%A4%A7%E8%85%A6%E9%A9%85%E5%8B%95%20AI%20%E6%90%9E%E5%AE%9A%E9%BA%BB%E7%85%A9%E4%BA%8B@community-card.org
+DTSTART;VALUE=DATE:20260731
+DTEND;VALUE=DATE:20260801
+SUMMARY:國泰 CDC 小聚 - 告別技術門檻！用大腦驅動 AI 搞定麻煩事
+DESCRIPTION:這次 CDC 小聚將帶你打破實作的高牆，從日常筆記的思維整理，到運用工具將點子具體落地，讓你真正拿回產出的主導權！\n活動連結：https://www.accupass.com/event/2606120230111345822036
+URL:https://www.accupass.com/event/2606120230111345822036
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-27-PyLadies%20Kaohsiung-Python%20%E9%87%91%E8%9E%8D%E6%95%B8%E6%93%9A%E5%B7%A5%E4%BD%9C%E5%9D%8A@community-card.org
+DTSTART;VALUE=DATE:20260627
+DTEND;VALUE=DATE:20260628
+SUMMARY:PyLadies Kaohsiung - Python 金融數據工作坊
+DESCRIPTION:實體+線上活動\n活動連結：https://kaohsiung.pyladies.com/#activity
+URL:https://kaohsiung.pyladies.com/#activity
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-07-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20260707
+DTEND;VALUE=DATE:20260708
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:AI 時代下找工作的方式 by Coach 喬\n活動連結：https://www.facebook.com/events/4342089669453026
+URL:https://www.facebook.com/events/4342089669453026
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-14-GDG%20Kaohsiung-TOOCON%20%2343@community-card.org
+DTSTART;VALUE=DATE:20260714
+DTEND;VALUE=DATE:20260715
+SUMMARY:GDG Kaohsiung - TOOCON #43
+DESCRIPTION:1.從 Vibe 到 Harness：AI 協作實戰經驗分享\n2.K8s 簡介到部署\n活動連結：https://gdg.community.dev/e/mcg3my/
+URL:https://gdg.community.dev/e/mcg3my/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-25-PyLadies%20Kaohsiung-Python%20%E9%87%91%E8%9E%8D%E6%95%B8%E6%93%9A%E5%B7%A5%E4%BD%9C%E5%9D%8A@community-card.org
+DTSTART;VALUE=DATE:20260725
+DTEND;VALUE=DATE:20260726
+SUMMARY:PyLadies Kaohsiung - Python 金融數據工作坊
+DESCRIPTION:實體+線上活動\n活動連結：https://kaohsiung.pyladies.com/#activity
+URL:https://kaohsiung.pyladies.com/#activity
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-28-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20260728
+DTEND;VALUE=DATE:20260729
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:7 月聚會\n活動連結：https://www.facebook.com/groups/buffet.dev
+URL:https://www.facebook.com/groups/buffet.dev
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-08-04-GDG%20Kaohsiung-TOOCON%20%2344@community-card.org
+DTSTART;VALUE=DATE:20260804
+DTEND;VALUE=DATE:20260805
+SUMMARY:GDG Kaohsiung - TOOCON #44
+DESCRIPTION:活動連結：https://gdg.community.dev/e/mw59ns/
+URL:https://gdg.community.dev/e/mw59ns/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-08-25-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20260825
+DTEND;VALUE=DATE:20260826
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:8 月聚會\n活動連結：https://www.facebook.com/groups/buffet.dev
+URL:https://www.facebook.com/groups/buffet.dev
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-09-08-GDG%20Kaohsiung-TOOCON%20%2345@community-card.org
+DTSTART;VALUE=DATE:20260908
+DTEND;VALUE=DATE:20260909
+SUMMARY:GDG Kaohsiung - TOOCON #45
+DESCRIPTION:活動連結：https://www.facebook.com/groups/toocon/
+URL:https://www.facebook.com/groups/toocon/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-09-29-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20260929
+DTEND;VALUE=DATE:20260930
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:9 月聚會\n活動連結：https://www.facebook.com/groups/buffet.dev
+URL:https://www.facebook.com/groups/buffet.dev
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-10-06-GDG%20Kaohsiung-TOOCON%20%2346@community-card.org
+DTSTART;VALUE=DATE:20261006
+DTEND;VALUE=DATE:20261007
+SUMMARY:GDG Kaohsiung - TOOCON #46
+DESCRIPTION:活動連結：https://www.facebook.com/groups/toocon/
+URL:https://www.facebook.com/groups/toocon/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-10-27-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20261027
+DTEND;VALUE=DATE:20261028
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:10 月聚會\n活動連結：https://www.facebook.com/groups/buffet.dev
+URL:https://www.facebook.com/groups/buffet.dev
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-03-GDG%20Kaohsiung-TOOCON%20%2347@community-card.org
+DTSTART;VALUE=DATE:20261103
+DTEND;VALUE=DATE:20261104
+SUMMARY:GDG Kaohsiung - TOOCON #47
+DESCRIPTION:活動連結：https://www.facebook.com/groups/toocon/
+URL:https://www.facebook.com/groups/toocon/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-14-GDG%20Kaohsiung-DevFest%202026%20%E9%AB%98%E9%9B%84%E5%A0%B4@community-card.org
+DTSTART;VALUE=DATE:20261114
+DTEND;VALUE=DATE:20261115
+SUMMARY:GDG Kaohsiung - DevFest 2026 高雄場
+DESCRIPTION:活動連結：https://www.facebook.com/groups/GDGKaohsiung
+URL:https://www.facebook.com/groups/GDGKaohsiung
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-24-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20261124
+DTEND;VALUE=DATE:20261125
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:11 月聚會\n活動連結：https://www.facebook.com/groups/buffet.dev
+URL:https://www.facebook.com/groups/buffet.dev
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-08-GDG%20Kaohsiung-TOOCON%20%2348@community-card.org
+DTSTART;VALUE=DATE:20261208
+DTEND;VALUE=DATE:20261209
+SUMMARY:GDG Kaohsiung - TOOCON #48
+DESCRIPTION:活動連結：https://www.facebook.com/groups/toocon/
+URL:https://www.facebook.com/groups/toocon/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-29-%E9%96%8B%E7%99%BC%E8%80%85%20Buffet-%E9%96%8B%E7%99%BC%E8%80%85%20Caf%C3%A9@community-card.org
+DTSTART;VALUE=DATE:20261229
+DTEND;VALUE=DATE:20261230
+SUMMARY:開發者 Buffet - 開發者 Café
+DESCRIPTION:12 月聚會\n活動連結：https://www.facebook.com/groups/buffet.dev
+URL:https://www.facebook.com/groups/buffet.dev
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-06-%E5%8D%97%E5%8F%B0%E7%81%A3%E6%95%8F%E6%8D%B7%E7%A4%BE%E7%BE%A4-%E3%80%8A%E6%95%8F%E6%8D%B7%E7%B5%84%E7%B9%94%E7%9A%84%E4%BA%94%E9%A0%85%E4%BF%AE%E7%B7%B4%E3%80%8B%E5%B0%8E%E8%AE%80%E6%9C%83%E9%AB%98%E9%9B%84%E5%A0%B4@community-card.org
+DTSTART;VALUE=DATE:20260606
+DTEND;VALUE=DATE:20260607
+SUMMARY:南台灣敏捷社群 - 《敏捷組織的五項修練》導讀會高雄場
+DESCRIPTION:前台灣敏捷協會理事長張昀煒（Hermes）帶著新書來到高雄，親自帶領大家拆解 ARRAS 模型，打造具備敏捷 DNA 的高績效團隊！\n活動連結：https://agilekaohsiung.kktix.cc/events/2026-june-6
+URL:https://agilekaohsiung.kktix.cc/events/2026-june-6
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-01-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260601
+DTEND;VALUE=DATE:20260602
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-08-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260608
+DTEND;VALUE=DATE:20260609
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-15-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-22-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260622
+DTEND;VALUE=DATE:20260623
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-29-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260629
+DTEND;VALUE=DATE:20260630
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-06-24-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260624
+DTEND;VALUE=DATE:20260625
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-08-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260708
+DTEND;VALUE=DATE:20260709
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-15-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260715
+DTEND;VALUE=DATE:20260716
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-22-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260722
+DTEND;VALUE=DATE:20260723
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-29-VSCP%20%E7%B2%89%E9%B3%A5%E8%B6%B4-%E6%B0%9B%E5%9C%8D%E5%B7%A5%E4%BD%9C%E8%80%85%E4%BA%A4%E6%B5%81%E8%B6%B4@community-card.org
+DTSTART;VALUE=DATE:20260729
+DTEND;VALUE=DATE:20260730
+SUMMARY:VSCP 粉鳥趴 - 氛圍工作者交流趴
+DESCRIPTION:個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用\n活動連結：https://www.facebook.com/groups/vscp.tw
+URL:https://www.facebook.com/groups/vscp.tw
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-06-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260707
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-13-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260713
+DTEND;VALUE=DATE:20260714
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-20-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260720
+DTEND;VALUE=DATE:20260721
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-07-27-K.NET-%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E2%80%A7%E9%9B%B2%E7%AB%AF%E2%80%A7AI%E2%80%A7%E8%81%B7%E6%B6%AF@community-card.org
+DTSTART;VALUE=DATE:20260727
+DTEND;VALUE=DATE:20260728
+SUMMARY:K.NET - 軟體開發‧雲端‧AI‧職涯
+DESCRIPTION:星巴克常態聚會交流\n活動連結：https://www.facebook.com/k.net.io
+URL:https://www.facebook.com/k.net.io
+END:VEVENT
+END:VCALENDAR
