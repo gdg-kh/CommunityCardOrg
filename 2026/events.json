@@ -736,6 +736,14 @@
     "color": "#34A853"
   },
   {
+    "date": "2026-07-08",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "活動頁還沒開",
+    "link": "https://www.facebook.com/groups/kimugroup",
+    "color": "#34A853"
+  },
+  {
     "date": "2026-05-13",
     "community": "GDG Kaohsiung",
     "title": "Build with AI 2026 高雄場",
@@ -1133,6 +1141,14 @@
     "title": "Build with AI 2026 高雄場",
     "description": "I/O Extended",
     "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-build-with-ai-kaohsiung-2026io-extended/",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2026-07-25",
+    "community": "高雄生成式 AI 社群",
+    "title": "AI 代理人與 AI Coding 的實機案例",
+    "description": "這次主要會介紹主流的 AI 服務應用方式，而這些是可以直接達到商用等級的 AI 服務，本次活動會提及的服務",
+    "link": "https://kh-gai.kktix.cc/events/kh-ai-02",
     "color": "#EA4335"
   }
 ]
