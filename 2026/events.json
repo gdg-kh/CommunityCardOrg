@@ -1157,6 +1157,14 @@
     "title": "AI 代理人與 AI Coding 的實機案例",
     "description": "這次主要會介紹主流的 AI 服務應用方式，而這些是可以直接達到商用等級的 AI 服務，本次活動會提及的服務",
     "link": "https://kh-gai.kktix.cc/events/kh-ai-02",
-    "color": "#EA4335"
+    "color": "#808080"
+  },
+  {
+    "date": "2026-07-14",
+    "community": "OpenAI Build Week",
+    "title": "Community Workshop - Kaohsiung",
+    "description": "活動目標是讓 builders 一起學習 Codex、實際動手 build，並參與全球 Build Week 挑戰。",
+    "link": "https://luma.com/build-week-kaohsiung",
+    "color": "#808080"
   }
 ]
