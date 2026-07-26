@@ -928,6 +928,14 @@
     "color": "#FA3C0A"
   },
   {
+    "date": "2026-08-22",
+    "community": "PyLadies Kaohsiung",
+    "title": "Discord Bot 一日工作坊",
+    "description": "帶大家從開發、專案管理到部署，實際體驗完整的應用開發流程！",
+    "link": "https://kaohsiung.pyladies.com/#activity",
+    "color": "#FA3C0A"
+  },
+  {
     "date": "2026-07-28",
     "community": "開發者 Buffet",
     "title": "開發者 Café",
@@ -1152,6 +1160,14 @@
     "color": "#EA4335"
   },
   {
+    "date": "2026-07-19",
+    "community": "GDG Kaohsiung",
+    "title": "開發者的文藝復興：純手工程式聚會",
+    "description": "這是一場沒有 AI 的活動，讓我們回到 2021 年，體驗那個沒有 AI 的時代的社群活動會聊什麼。",
+    "link": "https://gdg.community.dev/events/details/google-gdg-kaohsiung-presents-code-renaissance-a-handcrafted-meetup/",
+    "color": "#EA4335"
+  },
+  {
     "date": "2026-07-25",
     "community": "高雄生成式 AI 社群",
     "title": "AI 代理人與 AI Coding 的實機案例",
@@ -1173,6 +1189,14 @@
     "title": "測試試飛場：為你的專案收集回饋",
     "description": "您正在開發應用程式或產品，並希望獲得回饋嗎？加入我們吧！",
     "link": "https://miso.tw/zh/e/test-pilot-july-22",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-08-01",
+    "community": "Second Space",
+    "title": "Video Gen Hackathon",
+    "description": "Creators and builders will gather for a focused AI video generation hackathon.",
+    "link": "https://miso.tw/zh/e/ai-video-generation-hackathon-august-2026",
     "color": "#F9AB00"
   },
   {
