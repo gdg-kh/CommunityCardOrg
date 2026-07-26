@@ -931,7 +931,7 @@
     "date": "2026-08-22",
     "community": "PyLadies Kaohsiung",
     "title": "Discord Bot 一日工作坊",
-    "description": "帶大家從開發、專案管理到部署，實際體驗完整的應用開發流程！",
+    "description": "實體活動",
     "link": "https://kaohsiung.pyladies.com/#activity",
     "color": "#FA3C0A"
   },
@@ -1206,5 +1206,29 @@
     "description": "這場講座，Mei和你分享一位長年海外多國數位遊牧者，對人生設計的真心告白！\n講座高互動，也包含最後大家自由交流時間！",
     "link": "https://docs.google.com/forms/d/e/1FAIpQLScm_ttLxByRDWHz6__2NJDmY1at800e2DnjvgUpzglrejpFVQ/viewform",
     "color": "#808080"
+  },
+  {
+    "date": "2026-09-30",
+    "community": "PyLadies Kaohsiung",
+    "title": "職涯交流：軟體工程師的工作日常與職涯選擇",
+    "description": "",
+    "link": "https://kaohsiung.pyladies.com/#activity",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-11-21",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 入門工作坊",
+    "description": "實體活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2026-11-22",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 入門工作坊",
+    "description": "實體活動",
+    "link": "https://kaohsiung.pyladies.com/#activity",
+    "color": "#FA3C0A"
   }
 ]
