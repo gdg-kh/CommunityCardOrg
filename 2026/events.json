@@ -696,6 +696,14 @@
     "color": "#34A853"
   },
   {
+    "date": "2026-08-01",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #11",
+    "description": "用 AI 讓 Figma 幫你快速做動畫，這場活動，會不藏私的分享幾個動畫plugin模板以及做動畫的經驗，讓你快速習得figma做動畫技能",
+    "link": "https://luma.com/g4pro4es",
+    "color": "#34A853"
+  },
+  {
     "date": "2026-05-04",
     "community": "K.NET",
     "title": "軟體開發‧雲端‧AI‧職涯",
@@ -765,6 +773,14 @@
     "title": "AI 時代的網站即戰力",
     "description": "用 Claude Cowork 規劃 × Lovable 實作，做出小型商業網站",
     "link": "https://ksda.kktix.cc/events/vibecoding-2606",
+    "color": "#808080"
+  },
+  {
+    "date": "2026-08-12",
+    "community": "KSDA 高雄市軟體開發者協會",
+    "title": "使用免費 AI 額度解放你的無限遊戲創意",
+    "description": "這不是一堂只教你「複製貼上 Prompt」的理論課，而是一場 180 分鐘手把手帶你完成《Choplifter》經典遊戲重製與部署的極速實戰",
+    "link": "https://ksda.kktix.cc/events/free-ai-game-dev-2026",
     "color": "#808080"
   },
   {
@@ -915,7 +931,7 @@
     "date": "2026-07-14",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #43",
-    "description": "1.從 Vibe 到 Harness：AI 協作實戰經驗分享<br>2.K8s 簡介到部署",
+    "description": "1.從 Vibe 到 Harness：AI 協作實戰經驗分享<br>2.K8s 簡介到部署\n2.K8s 簡介到部署",
     "link": "https://gdg.community.dev/e/mcg3my/",
     "color": "#EA4335"
   },
@@ -947,7 +963,7 @@
     "date": "2026-08-04",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #44",
-    "description": "",
+    "description": "1.實戰 Vibe Coding 寫 APP 外掛! AI 時代的安卓逆向開發 - Luma MCP\n2.本地端的 CICD工具架設",
     "link": "https://gdg.community.dev/e/mw59ns/",
     "color": "#EA4335"
   },
@@ -963,7 +979,7 @@
     "date": "2026-09-08",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #45",
-    "description": "",
+    "description": "1.對症下碼 把麻煩交給 AI：一位中醫師的生活自動化實驗\n2.工具都會打字了，AI 時代下我們怎麼招募與培養工程師 ",
     "link": "https://www.facebook.com/groups/toocon/",
     "color": "#EA4335"
   },
@@ -1200,11 +1216,27 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-08-26",
+    "community": "Second Space",
+    "title": "MGS2026 x Second Space：Founders React 2026",
+    "description": "Founders React 讓早期階段的作品，直接面對真正了解創業歷程的人。經驗豐富的創辦人與創業家，將針對概念、小型專案、尚未完成的功能與新創事業，提供直接又實用的意見。",
+    "link": "https://miso.tw/zh/e/founders-react-second-space-august-2026",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2026-07-26",
     "community": "台灣數位遊牧村",
     "title": "七年數位遊牧生活實驗",
     "description": "這場講座，Mei和你分享一位長年海外多國數位遊牧者，對人生設計的真心告白！\n講座高互動，也包含最後大家自由交流時間！",
     "link": "https://docs.google.com/forms/d/e/1FAIpQLScm_ttLxByRDWHz6__2NJDmY1at800e2DnjvgUpzglrejpFVQ/viewform",
+    "color": "#808080"
+  },
+  {
+    "date": "2026-08-21",
+    "community": "Claude Community Event",
+    "title": "Kaohsiung | Claude Meetup",
+    "description": "「你的錢都花在哪了」｜分享者：高見龍",
+    "link": "https://luma.com/claude-kaohsiung",
     "color": "#808080"
   }
 ]
