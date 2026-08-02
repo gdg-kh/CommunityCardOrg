@@ -15,13 +15,6 @@
       "color": "#4285F4"
     },
     {
-      "name": "國泰 CDC 小聚",
-      "link": "https://lit.link/zh-tw/cdc0413",
-      "logo": "../assets/logo_cdc_v3.png",
-      "description": "介紹：<br>🌟 國泰 CDC 小聚<br>中南部領航 FinTech 新浪潮！<br><br>國泰 CDC 小聚是專注於金融科技（FinTech）與雲端技術的技術型社群。中南部雙據點致力於推動數位轉型與全球化佈局！<br><br>🌞 台中 CDC ✈️ 海外數位基地 ✈️<br>打造中部首座金融科技新地標，進駐台灣中部首座國際物流產業基地。台中 CDC 目標是支援集團的國際化發展並負責負責資訊服務與基礎架構規劃。<br><br>🚢 高雄 CDC ☁️ 雲端轉型基地 ☁️<br>坐落在高雄亞灣區黃金地段，面向一整面尊爵不凡的無敵海景。高雄 CDC 專注於雲端轉型任務，包含核心及周邊上雲架構及開發，以及雲端服務應用評估及導入。<br><br>國泰 CDC 小聚將於台中與高雄不定期舉辦實體技術 Meetup，未來也會有更多不同形式的交流活動。如果你是想要南漂、北漂或台中、高雄在地的工程師，或關注金融科技與雲端發展的朋友，那走過路過不要錯過！在這裡，你不僅可以學習成長，也可以找到無限的機會和發展前景，歡迎透過國泰 CDC 小聚與我們交流～",
-      "color": "#34a853"
-    },
-    {
       "name": "高雄 WordPress 小聚",
       "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/",
       "logo": "../assets/logo_kaohsiung_word_press_v2.png",
@@ -101,12 +94,6 @@
     }
   ],
   "rewards": [
-    {
-      "name": "國泰 CDC 小聚",
-      "link": "https://reurl.cc/ZlZmVp",
-      "logo": "../assets/rewards_cdc.png",
-      "description": "介紹：<br>參加台中或高雄 CDC 小聚活動即可累積點數，點數可依累計場次兌換不同好禮。<br>集滿 2 場可兌換造型磁鐵、集滿 4 場可兌換環保吸管組，集滿 6 場可兌換三合一快充線。<br><br>1. 本活動僅限參與 CDC 小聚的會眾享有集點與兌換資格。<br>2. 請於活動現場主動出示您的集點卡，由工作人員協助核對並完成兌換。"
-    },
     {
       "name": "GDG Kaohsiung",
       "link": "https://www.facebook.com/groups/GDGKaohsiung",
