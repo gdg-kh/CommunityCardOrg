@@ -752,6 +752,14 @@
     "color": "#34A853"
   },
   {
+    "date": "2026-08-07",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
+    "link": "  https://www.facebook.com/share/p/1GYB2woQg3/",
+    "color": "#34A853"
+  },
+  {
     "date": "2026-05-13",
     "community": "GDG Kaohsiung",
     "title": "Build with AI 2026 高雄場",
@@ -1245,6 +1253,14 @@
     "title": "Kaohsiung | Claude Meetup",
     "description": "「你的錢都花在哪了」｜分享者：高見龍",
     "link": "https://luma.com/claude-kaohsiung",
+    "color": "#808080"
+  },
+  {
+    "date": "2026-08-18",
+    "community": "Claude Community Event",
+    "title": "Kaohsiung | Claude Code Skill Evals Workshop",
+    "description": "這場 workshop 會聚焦在如何為已經寫好的 Claude Code Skill 設計 Evals，驗證它的品質與穩定性。",
+    "link": "https://luma.com/claude-p1qs",
     "color": "#808080"
   },
   {
