@@ -1232,11 +1232,35 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-08-08",
+    "community": "Second Space",
+    "title": "Test Pilot: August",
+    "description": "Test Pilot Session is a face-to-face feedback forum for creators and developers",
+    "link": "https://miso.tw/zh/e/test-pilot-july-copy",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2026-08-26",
     "community": "Second Space",
     "title": "MGS2026 x Second Space：Founders React 2026",
     "description": "Founders React 讓早期階段的作品，直接面對真正了解創業歷程的人。經驗豐富的創辦人與創業家，將針對概念、小型專案、尚未完成的功能與新創事業，提供直接又實用的意見。",
     "link": "https://miso.tw/zh/e/founders-react-second-space-august-2026",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-08-28",
+    "community": "Second Space",
+    "title": "專家 vs 學生：現場對決",
+    "description": "六位參賽者。三道高難度情境題。一座舞台。 我們將邀請三位學生與三位業界專家登台，展開宛如電視實境秀的現場挑戰。每一回合都會從真實情境出發：職場衝突、創投募資、產品上市策略，或其他同樣棘手的難題。",
+    "link": "https://miso.tw/zh/e/expert-vs-student-live-kaohsiung-august-2026",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-08-27",
+    "community": "Second Space",
+    "title": "[11th Fleet] Our Second Event in Kaohsiung",
+    "description": "Come to meet a potential collaborator, first hire, customer, or simply someone who understands what it takes to build a company or career in a new market.",
+    "link": "https://miso.tw/zh/e/kaohsiung-founders-networking-second-space-red-august-2026",
     "color": "#F9AB00"
   },
   {
@@ -1250,15 +1274,15 @@
   {
     "date": "2026-08-21",
     "community": "Claude Community Event",
-    "title": "Kaohsiung | Claude Meetup",
-    "description": "「你的錢都花在哪了」｜分享者：高見龍",
+    "title": "Claude Meetup",
+    "description": "你的錢都花在哪了",
     "link": "https://luma.com/claude-kaohsiung",
     "color": "#808080"
   },
   {
     "date": "2026-08-18",
     "community": "Claude Community Event",
-    "title": "Kaohsiung | Claude Code Skill Evals Workshop",
+    "title": "Claude Code Skill Evals Workshop",
     "description": "這場 workshop 會聚焦在如何為已經寫好的 Claude Code Skill 設計 Evals，驗證它的品質與穩定性。",
     "link": "https://luma.com/claude-p1qs",
     "color": "#808080"
