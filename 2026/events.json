@@ -704,6 +704,14 @@
     "color": "#34A853"
   },
   {
+    "date": "2026-09-05",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #12",
+    "description": "Claude Skill 驗證/分享開箱夜，只要你對 Claude Code 有興趣，帶著好奇心來就可以～也歡迎厲害大大的分享",
+    "link": "https://luma.com/1487rgbl",
+    "color": "#34A853"
+  },
+  {
     "date": "2026-05-04",
     "community": "K.NET",
     "title": "軟體開發‧雲端‧AI‧職涯",
@@ -1248,19 +1256,19 @@
     "color": "#F9AB00"
   },
   {
-    "date": "2026-08-28",
-    "community": "Second Space",
-    "title": "專家 vs 學生：現場對決",
-    "description": "六位參賽者。三道高難度情境題。一座舞台。 我們將邀請三位學生與三位業界專家登台，展開宛如電視實境秀的現場挑戰。每一回合都會從真實情境出發：職場衝突、創投募資、產品上市策略，或其他同樣棘手的難題。",
-    "link": "https://miso.tw/zh/e/expert-vs-student-live-kaohsiung-august-2026",
-    "color": "#F9AB00"
-  },
-  {
     "date": "2026-08-27",
     "community": "Second Space",
     "title": "[11th Fleet] Our Second Event in Kaohsiung",
     "description": "Come to meet a potential collaborator, first hire, customer, or simply someone who understands what it takes to build a company or career in a new market.",
     "link": "https://miso.tw/zh/e/kaohsiung-founders-networking-second-space-red-august-2026",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-08-31",
+    "community": "Second Space",
+    "title": "前進歐洲：創業、成長、拓展",
+    "description": "如何在歐洲創業、如何讓您的事業成功打入歐洲市場，來自拉脫維亞／英國、荷蘭、愛沙尼亞／美國等地的專業菁英，親自飛抵現場、面對面分享第一手經驗！更帶你深入了解歐洲生活、當地文化，以及語言與財務的實用知識。",
+    "link": "https://miso.tw/zh/e/event-8op6e79g",
     "color": "#F9AB00"
   },
   {
