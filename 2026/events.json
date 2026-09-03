@@ -1478,5 +1478,13 @@
     "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
     "link": "https://www.facebook.com/groups/vscp.tw",
     "color": "#F9AB00"
+  },
+  {
+    "date": "2026-10-31",
+    "community": "Mopcon",
+    "title": "MOPCON 科技年會 2026",
+    "description": "堅持在濁水以南的應用科技年會，從軟體定義載具到生成式 AI，，與南台灣的開發者一起把前沿技術談到落地",
+    "link": "https://mopcon.org/2026/",
+    "color": "#808080"
   }
 ]
