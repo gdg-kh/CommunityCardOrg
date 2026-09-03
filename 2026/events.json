@@ -851,8 +851,16 @@
     "date": "2026-08-18",
     "community": "高雄 WordPress",
     "title": "高雄 WordPress 小聚 2026/08",
-    "description": "",
-    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/",
+    "description": "bbPress & BuddyPress，どっち？",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/315918705/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2026-09-05",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/09",
+    "description": "用 AI 做出自己的官網，然後呢？ by 東毅",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/316251383",
     "color": "#4285F4"
   },
   {
@@ -1248,6 +1256,30 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-09-09",
+    "community": "Second Space",
+    "title": "Test Pilot：九月場",
+    "description": "你正在開發 App 或產品，想聽聽大家的回饋嗎？歡迎加入！",
+    "link": "https://miso.tw/zh/e/test-pilot-august-copy",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-09-25",
+    "community": "Second Space",
+    "title": "Kaohsiung Tech Night",
+    "description": "無需任何準備，歡迎前來。這裡匯集了開發者、設計師、創辦人、學生、數位遊牧者以及所有在科技和設計領域探索人生的好奇人士。無需任何經驗即可參與討論，也無需事先認識任何人。",
+    "link": "https://miso.tw/zh/e/kaohsiung-tech-night",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-09-26",
+    "community": "Second Space",
+    "title": "零基礎也能用 Claude 寫程式？ Vibecoding 技巧大公開！",
+    "description": "想自己寫程式、自動化工作流程，卻不知道第一步該怎麼走？ 這場實作 Workshop 將帶你從「只有一個想法」，一路做到真正能執行的第一個程式。",
+    "link": "https://miso.tw/zh/e/introduction-to-vibe-coding-with-claude",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2026-08-26",
     "community": "Second Space",
     "title": "MGS2026 x Second Space：Founders React 2026",
@@ -1360,6 +1392,30 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-09-07",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-09-14",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-09-21",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2026-08-05",
     "community": "VSCP 粉鳥趴",
     "title": "氛圍工作者交流趴",
@@ -1385,6 +1441,38 @@
   },
   {
     "date": "2026-08-26",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-09-09",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-09-16",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-09-23",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-09-30",
     "community": "VSCP 粉鳥趴",
     "title": "氛圍工作者交流趴",
     "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
