@@ -768,6 +768,14 @@
     "color": "#34A853"
   },
   {
+    "date": "2026-09-23",
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "title": "KIMU 之南部人下班來聊遊戲",
+    "description": "聊聊自己的side project、或是最近玩了什麼遊戲、對業界有什麼想法，有興趣的都歡迎來交流",
+    "link": "  https://www.facebook.com/share/p/18xEuDeYu1/",
+    "color": "#34A853"
+  },
+  {
     "date": "2026-05-13",
     "community": "GDG Kaohsiung",
     "title": "Build with AI 2026 高雄場",
@@ -1485,6 +1493,14 @@
     "title": "MOPCON 科技年會 2026",
     "description": "堅持在濁水以南的應用科技年會，從軟體定義載具到生成式 AI，，與南台灣的開發者一起把前沿技術談到落地",
     "link": "https://mopcon.org/2026/",
+    "color": "#808080"
+  },
+  {
+    "date": "2026-09-24",
+    "community": "KSDG",
+    "title": "KSDG #73 無人機操控與法規入門+無人機足球介紹",
+    "description": "雖然無人機現在很便宜，但是無人機操作可是受到民航法的管理喔！所以在飛行重量、區域、時間都有法規限制，所以先了解相關知識才能安全又安心的進入無人機的世界喔",
+    "link": "https://ksdg.kktix.cc/events/uav-intro-and-drone-soccer",
     "color": "#808080"
   }
 ]
