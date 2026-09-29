@@ -712,6 +712,14 @@
     "color": "#34A853"
   },
   {
+    "date": "2026-10-03",
+    "community": "UIUX Kaohsiung",
+    "title": "高雄設計師聚會 #13",
+    "description": "Move with intent 介紹網頁卷軸效果及動畫",
+    "link": "https://luma.com/hmymloe6",
+    "color": "#34A853"
+  },
+  {
     "date": "2026-05-04",
     "community": "K.NET",
     "title": "軟體開發‧雲端‧AI‧職涯",
@@ -872,6 +880,14 @@
     "color": "#4285F4"
   },
   {
+    "date": "2026-10-20",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/10",
+    "description": "Google 商家經營：把陌生的客人變成熟客 by Allen 國安",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/316748093",
+    "color": "#4285F4"
+  },
+  {
     "date": "2026-05-22",
     "community": "vLAB Online",
     "title": "OWASP LLM 安全實作課",
@@ -1027,8 +1043,8 @@
     "date": "2026-09-29",
     "community": "開發者 Buffet",
     "title": "開發者 Café",
-    "description": "9 月聚會",
-    "link": "https://www.facebook.com/groups/buffet.dev",
+    "description": "我幫我的筆記養了一隻會講幹話的精靈——順便帶你入門 Obsidian 插件開發",
+    "link": "https://fb.me/e/8sYJibXbJ",
     "color": "#4285F4"
   },
   {
@@ -1059,8 +1075,8 @@
     "date": "2026-11-14",
     "community": "GDG Kaohsiung",
     "title": "DevFest 2026 高雄場",
-    "description": "",
-    "link": "https://www.facebook.com/groups/GDGKaohsiung",
+    "description": "DevFest 高雄場是 GDG Kaohsiung 舉辦的軟體技術年會。我們希望能打造一個專屬「高雄」的技術年會，讓高雄的講者、社群、和社群友善企業有更多交流的機會！",
+    "link": "https://gdgkh.cc/2026/",
     "color": "#EA4335"
   },
   {
@@ -1312,6 +1328,30 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-10-01",
+    "community": "Second Space",
+    "title": "Test Pilot: October",
+    "description": "Test Pilot Session 是為創作者與開發者舉辦的實體交流回饋活動。帶上你還在開發中的專案，無論是 App 線框圖、MVP、硬體原型或全新概念，都能從同儕與導師那裡獲得具體可行的建議。在專注的 2.5 小時活動中，直接現場調整、快速迭代。",
+    "link": "https://miso.tw/zh/e/test-pilot-september-copy",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-10-03",
+    "community": "Second Space",
+    "title": "用 Jev 打造應用：實作工作坊",
+    "description": "你的軟體有自己的狀態。它需要的是決策，不是另一段聊天回覆。立即報名工作坊，記得帶上筆電，一起動手實作。",
+    "link": "https://miso.tw/zh/e/building-with-jev-workshop",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-10-23",
+    "community": "Second Space",
+    "title": "Founder 0→1 Lab",
+    "description": "先別急著做產品。先判斷，這個想法值不值得你再花一個月。幫你釐清：現在在哪個階段、最大的假設是什麼，以及接下來該做哪一步。",
+    "link": "https://miso.tw/zh/e/founder-zero-to-one-lab-kaohsiung-2026",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2026-07-26",
     "community": "台灣數位遊牧村",
     "title": "七年數位遊牧生活實驗",
@@ -1424,6 +1464,30 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-10-05",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-10-12",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-10-19",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2026-08-05",
     "community": "VSCP 粉鳥趴",
     "title": "氛圍工作者交流趴",
@@ -1481,6 +1545,38 @@
   },
   {
     "date": "2026-09-30",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-10-07",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-10-14",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-10-21",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-10-28",
     "community": "VSCP 粉鳥趴",
     "title": "氛圍工作者交流趴",
     "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
