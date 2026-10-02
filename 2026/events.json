@@ -816,6 +816,22 @@
     "color": "#808080"
   },
   {
+    "date": "2026-09-30",
+    "community": "KSDA 高雄市軟體開發者協會",
+    "title": "Gemini × Notebook × Canva：3小時打造高質感職場提案",
+    "description": "",
+    "link": "https://ksda.kktix.cc/events/free-ai-ppt-2026",
+    "color": "#808080"
+  },
+  {
+    "date": "2026-10-03",
+    "community": "KSDA 高雄市軟體開發者協會",
+    "title": "驅動企業數位轉型：從問題診斷到 1 頁式提案實作",
+    "description": "你是否讀了許多 AI 概念書，卻依然不知道如何在企業內部真正落地？本書作者將《從 AI Demo 到企業上線》中的核心觀念與架構，濃縮轉化為 3 小時高密度的實戰 Workshop！",
+    "link": "https://ksda.kktix.cc/events/ai-company-2026",
+    "color": "#808080"
+  },
+  {
     "date": "2026-05-16",
     "community": "KaLUG",
     "title": "Ubuntu 2604 +Fedora 44 Release Party",
@@ -1051,8 +1067,8 @@
     "date": "2026-10-06",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #46",
-    "description": "",
-    "link": "https://www.facebook.com/groups/toocon/",
+    "description": "1. Hiring in the AI Era：招募與培養工程師的新挑戰\n2. 去 Google I/O 能做什麼？有沒有空學 ADK？可以來打造 AI Agent 嗎？",
+    "link": "https://gdg.community.dev/e/mjzvcp/",
     "color": "#EA4335"
   },
   {
@@ -1068,7 +1084,7 @@
     "community": "GDG Kaohsiung",
     "title": "TOOCON #47",
     "description": "",
-    "link": "https://www.facebook.com/groups/toocon/",
+    "link": "https://gdg.community.dev/e/myhu4h/",
     "color": "#EA4335"
   },
   {
@@ -1092,7 +1108,7 @@
     "community": "GDG Kaohsiung",
     "title": "TOOCON #48",
     "description": "",
-    "link": "https://www.facebook.com/groups/toocon/",
+    "link": "https://gdg.community.dev/e/mvjnd9/",
     "color": "#EA4335"
   },
   {
