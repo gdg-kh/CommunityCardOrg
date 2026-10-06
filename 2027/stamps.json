@@ -26,17 +26,7 @@
         "required": 4,
         "text": "參加四場 GDG 活動，可到 GDG 高雄活動現場兌換 DevFest 2025 高雄場帆布袋乙個（數量有限，請提前告知組織者）。"
       },
-      "publicKeys": [
-        {
-          "kid": "GDG_Kaohsiung",
-          "jwk": {
-            "kty": "EC",
-            "crv": "P-256",
-            "x": "_HtIxBRXpHciZ24ZJK_z0KgimwoBl48MMDKEVxMcisg",
-            "y": "ZdjyWqcgYeKzlf0jnFfRp2OnEJn9mR5HYs2fGiVPD24"
-          }
-        }
-      ]
+      "publicKeys": []
     },
     {
       "id": "developer-buffet",
@@ -65,7 +55,7 @@
       "reward": {
         "scope": "others",
         "required": 1,
-        "text": "參加任一場其他社群的活動，就可以參加 PyLadies Kaohsiung 的線上活動（報名表請附上護照截圖）。"
+        "text": "參加任一場其他社群的活動，就可以參加 PyLadies Kaohsiung 的線上活動（報名請附上備份連結）。"
       },
       "publicKeys": [
         {
