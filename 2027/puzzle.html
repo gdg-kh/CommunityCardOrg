@@ -491,7 +491,7 @@
         <!-- 頁面標題 -->
         <div class="title-box">
           <h1 class="title">
-            <span style="color: #34a853">高雄社群</span>拼圖
+            <span style="color: #34a853; user-select: none; -webkit-user-select: none; cursor: default;" onclick="handleTitleClick()">高雄社群</span>拼圖
           </h1>
           <p class="subtitle">參與社群活動簽到，解鎖專屬社群拼圖徽章與集章獎勵！</p>
         </div>
@@ -670,6 +670,28 @@
       let communitiesData = [];
       let userBadges = [];
 
+      // 組織者查驗後台彩蛋邏輯（連續點擊標題「高雄社群」10 次解鎖）
+      let adminUnlocked = false;
+      let titleClickCount = 0;
+      let titleClickTimer = null;
+
+      function handleTitleClick() {
+        titleClickCount++;
+        clearTimeout(titleClickTimer);
+        titleClickTimer = setTimeout(() => {
+          titleClickCount = 0;
+        }, 5000);
+
+        if (titleClickCount >= 10) {
+          adminUnlocked = true;
+          titleClickCount = 0;
+          const btnAdmin = document.getElementById("btnAdminPanel");
+          if (btnAdmin) {
+            btnAdmin.style.display = "inline-flex";
+          }
+        }
+      }
+
       // 初始化頁面
       window.addEventListener("DOMContentLoaded", async () => {
         // 網址若有 ?user= 參數則自動覆寫
@@ -770,7 +792,7 @@
             localStorage.removeItem("puzzle_github_user");
             userBadges = [];
             const btnAdmin = document.getElementById("btnAdminPanel");
-            if (btnAdmin) btnAdmin.style.display = "none";
+            if (btnAdmin && !adminUnlocked) btnAdmin.style.display = "none";
             renderCards();
             updateProgressBar();
           }
@@ -786,7 +808,7 @@
         if (!currentUser) {
           userBadges = [];
           const btnAdmin = document.getElementById("btnAdminPanel");
-          if (btnAdmin) btnAdmin.style.display = "none";
+          if (btnAdmin && !adminUnlocked) btnAdmin.style.display = "none";
           renderCards();
           updateProgressBar();
           return;
@@ -798,12 +820,10 @@
           );
           const data = await res.json();
 
-          // 檢查是否為組織者白名單
+          // 組織者查驗按鈕改由點擊標題「高雄社群」10 次解鎖，不自動顯示
           const btnAdmin = document.getElementById("btnAdminPanel");
-          if (data.isAdmin) {
-            btnAdmin.style.display = "inline-flex";
-          } else {
-            btnAdmin.style.display = "none";
+          if (btnAdmin) {
+            btnAdmin.style.display = adminUnlocked ? "inline-flex" : "none";
           }
 
           userBadges = data.badges || [];
