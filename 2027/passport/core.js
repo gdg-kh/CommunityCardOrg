@@ -2,7 +2,21 @@
 // 簽到碼格式：<base64url(payload JSON)>.<base64url(ECDSA P-256 簽章)>
 // payload：{ v, c 社群ID, k 金鑰ID, e 活動ID, t 標題, d 日期, m onsite|online, iat, nbf, exp }
 
-export const STORAGE_KEY = "ccard2027.stamps";
+// 示範模式：網址帶 ?mock=1 開啟（同一個分頁會記住），?mock=0 關閉
+// 使用 mock/stamps.json 的測試公鑰，印章存在另一個 key，不影響真正的護照
+const MOCK_FLAG = "ccard2027.mock";
+export const MOCK = (() => {
+  try {
+    const flag = new URLSearchParams(location.search).get("mock");
+    if (flag === "1") sessionStorage.setItem(MOCK_FLAG, "1");
+    if (flag === "0") sessionStorage.removeItem(MOCK_FLAG);
+    return sessionStorage.getItem(MOCK_FLAG) === "1";
+  } catch {
+    return false;
+  }
+})();
+
+export const STORAGE_KEY = MOCK ? "ccard2027.mock.stamps" : "ccard2027.stamps";
 export const CLOCK_SKEW = 120; // 允許手機時間誤差（秒）
 export const MODES = { onsite: "實體", online: "線上" };
 
@@ -52,7 +66,7 @@ async function fetchJson(url) {
 // 社群名稱、顏色、logo 以 data.json 為準；stamps.json 只補上簽到設定
 // （兩者是否一致由 scripts/check-data.mjs 在 CI 檢查）
 export function loadRegistry() {
-  registryPromise ??= Promise.all([fetchJson("stamps.json"), fetchJson("data.json")]).then(
+  registryPromise ??= Promise.all([fetchJson(MOCK ? "mock/stamps.json" : "stamps.json"), fetchJson("data.json")]).then(
     ([stamps, data]) => {
       const members = new Map(data.communities.map((c) => [c.name, c]));
       const communities = [
@@ -71,7 +85,8 @@ export function loadRegistry() {
 }
 
 export function loadEvents() {
-  eventsPromise ??= fetch("events.json", { cache: "no-cache" })
+  // 示範模式使用 mock/events.json 的範例月曆
+  eventsPromise ??= fetch(MOCK ? "mock/events.json" : "events.json", { cache: "no-cache" })
     .then((r) => (r.ok ? r.json() : []))
     .catch(() => []);
   return eventsPromise;
@@ -336,6 +351,46 @@ export async function decodeBackup(str) {
   } catch {
     throw new Error("備份連結內容不完整或已損壞，請確認有複製到完整的連結");
   }
+}
+
+// ---------- 示範模式 ----------
+
+export function showMockBanner() {
+  if (!MOCK) return;
+  const bar = document.createElement("div");
+  bar.className = "pp-mock-banner";
+  const base = new URL("../", import.meta.url); // 年度資料夾（例如 2027/）
+  bar.innerHTML = `🧪 示範模式：使用假資料與測試金鑰，不會影響你的護照 ·
+    <a href="${new URL("mock/index.html", base)}">情境清單</a> ·
+    <a href="${new URL("passport.html?mock=0", base)}">離開示範模式</a>`;
+  document.body.prepend(bar);
+}
+
+// 示範模式：示範資料（mock/scenarios.json）版本不同時，清空並放入預設的示範印章
+const MOCK_VERSION = "ccard2027.mock.version";
+
+export async function seedMockStamps(registry) {
+  if (!MOCK) return;
+  const { generatedAt, passportRecords } = await fetchJson("mock/scenarios.json");
+  try {
+    if (localStorage.getItem(MOCK_VERSION) === generatedAt) return;
+    localStorage.setItem(MOCK_VERSION, generatedAt);
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    return;
+  }
+  // 依原本順序放入，模擬實際簽到的先後（同一場實體優先）
+  const verified = await Promise.all(
+    passportRecords.map(async (r) => {
+      try {
+        const { payload } = await verifyToken(r.token, registry);
+        return { ...r, payload };
+      } catch {
+        return null;
+      }
+    }),
+  );
+  mergeStampRecords(verified.filter(Boolean));
 }
 
 // ---------- 環境偵測 ----------

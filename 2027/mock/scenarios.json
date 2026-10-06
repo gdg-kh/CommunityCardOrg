@@ -1,0 +1,137 @@
+{
+  "_說明": "由 scripts/generate-mock.mjs 產生，請勿手動修改。",
+  "generatedAt": "2026-10-06T16:29:18.396Z",
+  "passportRecords": [
+    {
+      "token": "eyJ2IjoxLCJjIjoiZ2RnLWthb2hzaXVuZyIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDEtMDYiLCJlIjoiMjAyNi0wMS0wNiIsInQiOiJUT09DT04gIzM3IiwibSI6Im9ubGluZSIsImlhdCI6MTc2NzY5ODk0MCwibmJmIjoxNzY3Njk4OTQwLCJleHAiOjE3Njc2OTkyNDB9.X7JW7lAMl5FCyqNAZbetgAUaprzTXab1Wqn39eOBOy3ahS7G-7bhvZcf1aIw_quaD6MX1z1Clrv-jO3nmK05yQ",
+      "at": 1767699000000
+    },
+    {
+      "token": "eyJ2IjoxLCJjIjoiZ2RnLWthb2hzaXVuZyIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDEtMDYiLCJlIjoiMjAyNi0wMS0wNiIsInQiOiJUT09DT04gIzM3IiwibSI6Im9uc2l0ZSIsImlhdCI6MTc2NzYyODgwMCwibmJmIjoxNzY3NjI4ODAwLCJleHAiOjE3Njc4MDE1NDB9.m8hK_ZLqMJWzf8Bm_CVKF1iye8TeYglggyex0GGFmA0CSLVp5OkCkgeyZOaGokFEy4NbFEbGDoYgj-gWYqufTw",
+      "at": 1767699000000
+    },
+    {
+      "token": "eyJ2IjoxLCJjIjoiZ2RnLWthb2hzaXVuZyIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDItMDMiLCJlIjoiMjAyNi0wMi0wMyIsInQiOiJUT09DT04gIzM4IiwibSI6Im9ubGluZSIsImlhdCI6MTc3MDExODE0MCwibmJmIjoxNzcwMTE4MTQwLCJleHAiOjE3NzAxMTg0NDB9.ohe471aFIH7lKButmrE6HJ-CFCBum0qZRW6GaYZm4YGiECO8_IoJsb2Roc8Uk6TvdLVDenhwu-HI7HebM1U_sQ",
+      "at": 1770118200000
+    },
+    {
+      "token": "eyJ2IjoxLCJjIjoiZ2RnLWthb2hzaXVuZyIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDMtMTAiLCJlIjoiMjAyNi0wMy0xMCIsInQiOiJUT09DT04gIzM5IiwibSI6Im9uc2l0ZSIsImlhdCI6MTc3MzA3MjAwMCwibmJmIjoxNzczMDcyMDAwLCJleHAiOjE3NzMyNDQ3NDB9.m_JGC9a-t9URSGDiXtJJvvlaSq2IU1tPA1STjoqxJQYrPC0Pg3tBM3Qp5f3FBpemNKNfvdYRUEXOly8mn3P7Lw",
+      "at": 1773142200000
+    },
+    {
+      "token": "eyJ2IjoxLCJjIjoiZ2RnLWthb2hzaXVuZyIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDMtMjEiLCJlIjoiMjAyNi0wMy0yMSIsInQiOiJCdWlsZCB3aXRoIEFJIDIwMjYg6auY6ZuE5aC0IiwibSI6Im9uc2l0ZSIsImlhdCI6MTc3NDAyMjQwMCwibmJmIjoxNzc0MDIyNDAwLCJleHAiOjE3NzQxOTUxNDB9.piv29DQf5B0m2SdKsg2LdMOdUQ-2bTq4sqtqeIcqFg0H7JEWxfwDaPpG89ewr8CZbbdikCMa9EUe_AhVfYCZQQ",
+      "at": 1774092600000
+    },
+    {
+      "token": "eyJ2IjoxLCJjIjoiZGV2ZWxvcGVyLWJ1ZmZldCIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDEtMjciLCJlIjoiMjAyNi0wMS0yNyIsInQiOiLplovnmbzogIUgQ2Fmw6kiLCJtIjoib25zaXRlIiwiaWF0IjoxNzY5NDQzMjAwLCJuYmYiOjE3Njk0NDMyMDAsImV4cCI6MTc2OTYxNTk0MH0.2t1XcRPrHHah-4eWZsdXWHxe_FeFi-oEQCNeoTgP2j0p5uFaRjLk4i63MI-aK39USCjp9pOiz8YMrCKIC0xFQg",
+      "at": 1769513400000
+    },
+    {
+      "token": "eyJ2IjoxLCJjIjoiZGV2ZWxvcGVyLWJ1ZmZldCIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDItMjQiLCJlIjoiMjAyNi0wMi0yNCIsInQiOiLplovnmbzogIUgQ2Fmw6kiLCJtIjoib25saW5lIiwiaWF0IjoxNzcxODYyNDAwLCJuYmYiOjE3NzE4NjI0MDAsImV4cCI6MTc3MjAzNTE0MH0.8LRzCTNyN1YfcHbNMZ_-tcYnLMoJYjVdPrLzxXYr9-kUpC_2fRBCOSV-CAQmp-ERvfMXBdEbonn2AQLsEsIk1A",
+      "at": 1771932600000
+    },
+    {
+      "token": "eyJ2IjoxLCJjIjoicHlsYWRpZXMta2FvaHNpdW5nIiwiayI6Im1vY2siLCJkIjoiMjAyNi0wMy0yMSIsImUiOiIyMDI2LTAzLTIxIiwidCI6IlB5dGhvbiDph5Hono3mlbjmk5rlt6XkvZzlnYoiLCJtIjoib25zaXRlIiwiaWF0IjoxNzc0MDIyNDAwLCJuYmYiOjE3NzQwMjI0MDAsImV4cCI6MTc3NDE5NTE0MH0.QyW2rcX_LdmGheKj2Efruy2G8x2pDe6DOG3TqhjHcFJL1N7eCt_Y3U79t3EMeEV__nn7XaCpEg7znigXE04d7Q",
+      "at": 1774092600000
+    },
+    {
+      "token": "eyJ2IjoxLCJjIjoidWl1eC1rYW9oc2l1bmciLCJrIjoibW9jayIsImQiOiIyMDI2LTAyLTA3IiwiZSI6IjIwMjYtMDItMDciLCJ0Ijoi6auY6ZuE6Kit6KiI5bir6IGa5pyDICM1IiwibSI6Im9ubGluZSIsImlhdCI6MTc3MDM5MzYwMCwibmJmIjoxNzcwMzkzNjAwLCJleHAiOjE3NzA1NjYzNDB9.ketPsdMcGs78Z_6JxBWewkxdAwPmcliPRPoVP0SCHXaApDrwP8_E5Imi_xolGxEz_W0td4yzfWVNELg1BaEJdw",
+      "at": 1770463800000
+    },
+    {
+      "token": "eyJ2IjoxLCJjIjoiay1uZXQiLCJrIjoibW9jayIsImQiOiIyMDI2LTAxLTEyIiwiZSI6IjIwMjYtMDEtMTIiLCJ0IjoiU2Vhc29uIG9mIEFJIC0gTUNQIDogVGFpd2FuIiwibSI6Im9uc2l0ZSIsImlhdCI6MTc2ODQ3NjYwMCwibmJmIjoxNzY4NDc2NTcwLCJleHAiOjE3Njg0NzcyMDAsInIiOjEsIm4iOiJtb2NrMSJ9.OqSGPwnU0TrdCMjPrr6CDYw3jUjgxF7mcp0uxudztj70YEyMcwFdXHrugUn7e7DEXNARZNXp4YQlSnoE39OQmg",
+      "at": 1768476660000
+    },
+    {
+      "token": "eyJ2IjoxLCJjIjoia3NkZyIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDktMjQiLCJlIjoiMjAyNi0wOS0yNCIsInQiOiJLU0RHICM3MyDnhKHkurrmqZ_mk43mjqfoiIfms5Xopo_lhaXploAr54Sh5Lq65qmf6Laz55CD5LuL57S5IiwibSI6Im9uc2l0ZSIsImlhdCI6MTc5MDE3OTIwMCwibmJmIjoxNzkwMTc5MjAwLCJleHAiOjE3OTAzNTE5NDB9.AfPqQprytlgD_hqVyKG21v4LK7Wgk8-iuBKVXHmpeFU1YW-EYK5EUY2y2G9Mcxv4a4pdFnQcAoocZ7OogFtKcA",
+      "at": 1790249400000
+    }
+  ],
+  "checkin": [
+    {
+      "id": "new",
+      "title": "一般簽到",
+      "expect": "簽到成功，Second Space 多一個章",
+      "success": true,
+      "token": "eyJ2IjoxLCJjIjoic2Vjb25kLXNwYWNlIiwiayI6Im1vY2siLCJkIjoiMjAyNi0wMS0xMSIsImUiOiIyMDI2LTAxLTExIiwidCI6IkFJIOaUneW9seW3peS9nOWdiiIsIm0iOiJvbnNpdGUiLCJpYXQiOjE3OTEzMDQwOTgsIm5iZiI6MTc5MTMwNDA5OCwiZXhwIjo0MTAyMzI5NjAwfQ.6CBdqTqmcneopvTLwW0gV6bPZ4MjGZOE657zvhcqqPjoqNqP85AZGlrxwoj1kLNSRALB-GcvKlQBGRxR1CRpdA"
+    },
+    {
+      "id": "upgrade",
+      "title": "線上 → 實體",
+      "expect": "已改為實體簽到（GDG 2/3 原本只有線上章）",
+      "success": true,
+      "token": "eyJ2IjoxLCJjIjoiZ2RnLWthb2hzaXVuZyIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDItMDMiLCJlIjoiMjAyNi0wMi0wMyIsInQiOiJUT09DT04gIzM4IiwibSI6Im9uc2l0ZSIsImlhdCI6MTc5MTMwNDA5OCwibmJmIjoxNzkxMzA0MDk4LCJleHAiOjQxMDIzMjk2MDB9.g2br8t5nrFxbJY5eQo7B8zpKCL2DshTs4rIgmwLebwN5j7w0JA-tPHsno0P7PNHRoz_d5rT9UbYav_NDCoac2g"
+    },
+    {
+      "id": "duplicate",
+      "title": "已有實體再掃線上",
+      "expect": "這場已經簽到過囉，保留實體章",
+      "success": true,
+      "token": "eyJ2IjoxLCJjIjoiZ2RnLWthb2hzaXVuZyIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDEtMDYiLCJlIjoiMjAyNi0wMS0wNiIsInQiOiJUT09DT04gIzM3IiwibSI6Im9ubGluZSIsImlhdCI6MTc5MTMwNDA5OCwibmJmIjoxNzkxMzA0MDk4LCJleHAiOjQxMDIzMjk2MDB9.TdwZOSAUk0hmd-fujDGGkoNjy3fRJ876p-NewBsY9kr0GX7VbjG4Xg76v56iLFjgrzYlicoM1QmJAxXd8RalTA"
+    },
+    {
+      "id": "makeup",
+      "title": "過去活動補簽",
+      "expect": "簽到成功，看起來跟一般章一樣",
+      "success": true,
+      "token": "eyJ2IjoxLCJjIjoidnNjcCIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDEtMTQiLCJlIjoiMjAyNi0wMS0xNCIsInQiOiLmsJvlnI3lt6XkvZzogIXkuqTmtYHotrQiLCJtIjoib25saW5lIiwiaWF0IjoxNzkxMzA0MDk4LCJuYmYiOjE3OTEzMDQwOTgsImV4cCI6NDEwMjMyOTYwMCwiciI6MSwibiI6Im1vY2syIn0.vm42ZejUMD4ILK0lN5SQnbbThmZ0-7tKRT5eYL4GQ6ylNV9S3WLaD_8eBdycMIMTiw31_GXF8NLr_qBc2SXDbQ"
+    },
+    {
+      "id": "others-reward",
+      "title": "其他社群簽到觸發 PyLadies 獎勵提示",
+      "expect": "顯示 PyLadies 獎勵已達成（在 PyLadies 自己簽到不會顯示）",
+      "success": true,
+      "token": "eyJ2IjoxLCJjIjoia2ltdSIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDEtMTUiLCJlIjoiMjAyNi0wMS0xNSIsInQiOiJLSU1VIOS5i-WNl-mDqOS6uuS4i-ePreS-huiBiumBiuaIsiIsIm0iOiJvbnNpdGUiLCJpYXQiOjE3OTEzMDQwOTgsIm5iZiI6MTc5MTMwNDA5OCwiZXhwIjo0MTAyMzI5NjAwfQ.uHFn88qRJrgv4qAPGk1cpSvFd-nCm7hSNxkXLeCz-oe9DyHBAjHIjdbF-rDQecIf6HIQRbv-Eq6TbPoQSmwOcw"
+    },
+    {
+      "id": "partner",
+      "title": "合作社群簽到",
+      "expect": "國泰 CDC 小聚（合作社群）簽到成功",
+      "success": true,
+      "token": "eyJ2IjoxLCJjIjoiY2F0aGF5LWNkYyIsImsiOiJtb2NrIiwiZCI6IjIwMjYtMDUtMjkiLCJlIjoiMjAyNi0wNS0yOSIsInQiOiLllZ_li5UgUE0g5YWo6Z2i5Y2H57Sa772cQUkg5rWq5r2u5LiL55qE5pWP5o235a-m6LiQ6IiH5ZyY6ZqK5pWI6IO95YSq5YyWIiwibSI6Im9uc2l0ZSIsImlhdCI6MTc5MTMwNDA5OCwibmJmIjoxNzkxMzA0MDk4LCJleHAiOjQxMDIzMjk2MDB9.v2xOlH1wIPV1-tXQCoo2Qn_X2vVIi_rifscWH3m6XdbOo0D7Ki3WUldiVb_ZS72OZt-4U7zrrCqu4VMeRrt1ww"
+    },
+    {
+      "id": "expired",
+      "title": "簽到碼已過期",
+      "expect": "簽到失敗：簽到碼已過期",
+      "success": false,
+      "token": "eyJ2IjoxLCJjIjoic2Vjb25kLXNwYWNlIiwiayI6Im1vY2siLCJkIjoiMjAyNi0wMS0xOCIsImUiOiIyMDI2LTAxLTE4IiwidCI6Iua4rOippuippumjm-WgtO-8mueCuuS9oOeahOWwiOahiOaUtumbhuWbnumliyIsIm0iOiJvbnNpdGUiLCJpYXQiOjE3OTEzMDQwOTgsIm5iZiI6MTU3NzgzNjgwMCwiZXhwIjoxNTc3OTIzMjAwfQ.HXOauiIORA_SZnqWXMOPI4P1WHKesw69FJuaXDXCkiEqaaA_kAcphtyuwmMwPfPCyc7H0kvVPC5YYfxyXDQkCQ"
+    },
+    {
+      "id": "notyet",
+      "title": "尚未開始簽到",
+      "expect": "簽到失敗：簽到尚未開始",
+      "success": false,
+      "token": "eyJ2IjoxLCJjIjoic2Vjb25kLXNwYWNlIiwiayI6Im1vY2siLCJkIjoiMjAyNi0wMS0yMiIsImUiOiIyMDI2LTAxLTIyIiwidCI6IkFJIOiojuirluWciCIsIm0iOiJvbnNpdGUiLCJpYXQiOjE3OTEzMDQwOTgsIm5iZiI6NDEwMjMyNjAwMCwiZXhwIjo0MTAyMzI5NjAwfQ.i-vBHyX7weqAc-wV28Mwu_SHMBdTqR1RfHGmTbeudkKHzSl07ZcEoewx8m1h76BEQjYYbftIuijALtFyO5CdnQ"
+    },
+    {
+      "id": "tampered",
+      "title": "被竄改的簽到碼",
+      "expect": "簽到失敗：簽章驗證失敗",
+      "success": false,
+      "token": "eyJ2IjoxLCJjIjoic2Vjb25kLXNwYWNlIiwiayI6Im1vY2siLCJkIjoiMjAyNi0wMi0xMiIsImUiOiIyMDI2LTAyLTEyIiwidCI6IkFJIOiojuirluWciCIsIm0iOiJvbmxpbmUiLCJpYXQiOjE3OTEzMDQwOTgsIm5iZiI6MTc5MTMwNDA5OCwiZXhwIjo0MTAyMzI5NjAwfQ.ubq3KF5EXsiuap4UhqkRZZcSdoE51DI1C1E7ak0ofvnIgMs1EFKYDTipRq6b7XYKIvACnozG7XTJ6wZ6fV8O9g"
+    },
+    {
+      "id": "inactive",
+      "title": "尚未開通集章的社群",
+      "expect": "簽到失敗：KaLUG 尚未參與數位集章，但歡迎參加活動",
+      "success": false,
+      "token": "eyJ2IjoxLCJjIjoia2FsdWciLCJrIjoibW9jayIsImQiOiIyMDI2LTAyLTIxIiwiZSI6IjIwMjYtMDItMjEiLCJ0Ijoi5Yid5LqU6YGO5bm06IGa5pyDIiwibSI6Im9uc2l0ZSIsImlhdCI6MTc5MTMwNDA5OCwibmJmIjoxNzkxMzA0MDk4LCJleHAiOjQxMDIzMjk2MDB9.NEcTtwQORbNpGUqes_SRAi2G7L747DdnDHR_yBNDyZW8KfbvwICqJWcngMrAEvtfvZNGojcnvf-0nSqsKs6FPA"
+    },
+    {
+      "id": "revoked",
+      "title": "已停用的金鑰",
+      "expect": "簽到失敗：金鑰已停用",
+      "success": false,
+      "token": "eyJ2IjoxLCJjIjoiZ2RnLWthb2hzaXVuZyIsImsiOiJvbGQiLCJkIjoiMjAyNi0wMy0yNSIsImUiOiIyMDI2LTAzLTI1IiwidCI6IkJ1aWxkIHdpdGggQUkgMjAyNiDpq5jpm4TloLQiLCJtIjoib25zaXRlIiwiaWF0IjoxNzkxMzA0MDk4LCJuYmYiOjE3OTEzMDQwOTgsImV4cCI6NDEwMjMyOTYwMH0.WbxEBKMZ_dB3UtGzPhthqk0rcgzVM5m5ij_rqSKMve5JafU_CvVTCRrzeGLomohgjWAveuVQ6xrKGbK7BJk3Cw"
+    }
+  ],
+  "backup": "zjdNbk6I4GAbg_zLXwxTHqJcItERJEDkITE11CSomEmg5w6_fwt6Zmtqe3V6uwsWbVJ683_fvXy7jVoS0HCxtSyEtyWkU2jh0iKVtq_k_Oa7oaYQ1ZA6xCRyRDkXLUwfLUwVIehK7EEAKe0SjBulGg3R_zvJzFljtFZxaH8QnS1HYUi61AsTtqIC2m9eOX5Bsdy2z5Mqax3LONc8zRWU6hYd83v90fJn3GvAUSdhzRqyrvaVt24hFxKaGhGkqYB3ySFdryAI51SBAXiriKR2wZ_DI5L_t9tEaN-P-aHHwcpBSMxZofhMv8SMJgp1SBiXvJYfy6pmvq0JWmoCzoH1AdzOp0ocrGT06VI9kpINEe-Zh0K40xtQvX4UFWABBBPz8_fj6B0wxb87ujFcTm2ybRMTVE037HQ02SL_Pl8_nDKLqiAnfI8L39pwtZvit5fpCAG1XIdwR5xzTH7YL2taVCXfZVxeXu7VkTVq2Ju0J1mQ-k59zXcKGt4Q9H-UtCp13tEkVMI3-RlNITJ5oEtJ9EVOnR1pP4vDWv8OnPZ6QgjynvzrfhnvbSqA27ymnXcaop2O_V4v9mrpLuM-GVUpRenIN0-4O1-haP5Y0c5XADLDlyT7PVKm6ceOqNmzbOE484l8MMATZbLnggQT-3TLeBGJ8HLp0E4zWcSvELM7P2v-wpc6fbEes_bS13vKyK1gylRn0M0d8YT24f1LGdLD16GMZJ0PG9EMZJUTV6WcZ-WM7uJIAMry6lrGVEbp81Ry7jfNgCUzD1Erdt-t6mbQ8at3wHDZXy70WiRrd4Utt7gWRrY6vJ25z8w0Ln0O4u8u7_gkorKT_KOO5wDT9DMyDDZqMj2AuP6JfZbRYve3yAkp5A8J7F89w4b19eKyJzLKpnM8mWbY9yNsfJjlTEHXkf06y7akKnvwnXp2W3YG1B8Rtgu5SqfTGL0egWTW6vC3Wk-OFZiArGz-PN178CNa0GrjXLhM54xiNj2L0DZmM1oJVRZfLXb5GZ2NZPdsHlquVwr_j_fgL",
+  "verify": "zxdXZrqO4Fgbgd-nrpmTGhEvCFJPYhABJoNWKmAJmysj49EewS63q7F0q6ahbHclSbpYdf1m_1x9__JYMBgPza7-VjRzmV-Iz-3p7fGUhk43B6dD4A3zC6klMYrxCBj8g6YgvQwHmsEO590KK-kKKR7ayUU71KJcGTECHbNBhAp-wtqZa1wGi4gAuhSNipz1CGwqwEpuIKYFvT2eUWSxDATkRg0dvMJW0Q3JHwsqopt-HR4_FOeRMReqms5K1RMxcZXEecUhRaaysxG9t3IZ9qNPN2USUiRdsGAMc08OGIzTb6ARe2HLFV881bBRuCGNaTUQBeyNReStuM-oAr4suSw-VT28lPeqL5FhT0m-_0wthIYgimD9__v7fq4V62XyhxptKAT6rFZzpWO9qjOkUw6xm30OjdPQy3dr3bs9ekddmpXjASbLRL_f7c3khCXnZAc62Cy2ihM4WovRkBxoT9_m-ZsPRy5xg7bFydfHLNdjgHTH_HTX4Qgr6rDat4Us17hdqLFLU3lTUN7WoQ47KoXe1UeqRk4JZrThJjTKQ0ffFbmQhddqJj4tw4Ti5kJJI27nMM9z7tG4NNS3AIHokQNAt35R3PhY6HiXbzrjIKyBTC0Y_o3wlBDvNmtQWgKaXzD-ohl7IkT6rDaBH8pdq_C8SyqJRYlEuvSU0GpESDeg9oSMasGKxs5rGRivvUOVPugA7Pn6-vKE5wYqTV_WtwFVkyQXW3fJ13FwF6UWW98ql0BLsm-ujSRk_W5suS24P40KKpDu3tEsZt0U6qS0BsxS4n6pF6_LpHfc3_4ReAaO1wRrf4iNfTzcNhummdOsxz0mp-FEJy2DA8-1dYhI4IAUyW0cCWwfSU-0kAssVH-tZGxLllvHra31lqzLMq4J_lC_hVLT-WNbeddr7Ne0dMvwYnPblfPZRA9_1WKRYDP7Qa7zKm_VMBXJodCfVJ6wOXPTxD3BolDqsWB1ag29k38qHs6CbJvYZOwFjmAX5bbXv48zkUfQ8rH1nlbH3whgO_ssUrUQq46RVAvVeBM3CMyhwT1rHh1RPtkHk6uEOsXMrLpnlkhd-jsoc8pDhi-0Jd94Rl7_A7JE9rXdMtZ_WX5gNWd_NwE-b4-ZqVkdCJUFmklXVBFE6tzqY2rUNa3yLdXc64-adrA8sxxpR7oEPLJ74ZMbisYIGnFtzu_qnrPsALwBWCn4K-cX6Fm7iQdunmsUL2O0j1j5eHPc2lMxaUjFbJtrhZmkwobQmWT7WO6oAS6_mTc2uzzw6G7WxMSh8e_VXdodkfZ2eH3XUdpOhyLGi8HPDYKAb_2RN93jMzXEU82C-p_Vjw01Gcyx9-22MOMVUOzUREbbNRQgaV_CDLc9XS-4q14LfDLzQtNN3y61Jurlc0_BSve7LHxvyGRz5t4b0ONMpaPTWkDhPedOxeDz-rSEZUyl47HizcTS52x0JyV-9MMIafHOSgRqEJ11SxMBb4FZSwieyQ9xNKz4cwUi9pxGI0S6rje4UcQTYGhOPkHn2D-eeCRUQcaGsfTIoMSVL8dFY8UMzIwtLUeRp5v94M9tQtz6lHg1fpn78W-oLgw6OfQHX8S3W09Ryi_SjXrnd-fxWcU553Vq_Sj2YEv-eejxaI87T7i31LFZcgJQITKnf1f5y0eG2diXoLon0fIXjkN7H1e0ghvL5vHhQm-WCZYrTsdZKHvPnIdVZddfTlJ1TQG2bnA_c22A44n6ttd7Kg7f1_JQuOI79pwdQrn41gIb5NfgYQHJ8LJ--vGKD0_4KVc2AylyfCkHjCX6j8oEMfjWYsCIN6HvSfxhMAClwwJ8Gk9WbjtvPgym34bUS4jFvs2ib2pfSIqOshWq-rILqvN2kMafnMopEVLL3FaUEkmtvzxuK3VjOeINqLxUAduA-hrIpPjX2Uqrg9DHOOSAy3_P_5_8A",
+  "inactive": [
+    "kalug",
+    "agile-south-taiwan",
+    "vlab",
+    "kaohsiung-wordpress"
+  ]
+}

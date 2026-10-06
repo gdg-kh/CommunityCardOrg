@@ -61,6 +61,17 @@
 *   `stamp.onsite` / `stamp.online` 的 `variant`：`color`（彩色）、`grayscale`（黑白）、`tint` + `color`（單色）、`image` + `src`（指定另一張圖）。
 *   `reward`：`scope` 為 `community`（只算該社群的章）、`others`（只算其他社群的章，例如 PyLadies 的獎勵）或 `all`（所有社群都算），`required` 為需要的章數。
 
+### 示範模式（mock）
+
+想預覽各種情況時，開啟 `2027/mock/index.html`，裡面列出所有示範情境的連結：
+
+*   護照畫面：已收集與灰底（尚未開通集章）的社群、集章獎勵、實體／線上不同圖案、補簽章
+*   簽到情境：一般簽到、線上改實體、重複簽到、補簽、合作社群、過期、尚未開始、被竄改、未開通社群、金鑰已停用
+*   備份還原與驗證頁的各種檢查結果
+
+網址帶 `?mock=1` 就會進入示範模式（同一個分頁會記住），使用 `2027/mock/stamps.json` 的測試公鑰，印章另外存放，不會影響真正的護照；`?mock=0` 離開。
+示範資料由 `npm run generate:mock`（`scripts/generate-mock.mjs`）產生，測試金鑰固定存在 `scripts/mock-keys.json`（只對 `2027/mock/stamps.json` 有效，與正式金鑰無關），重新產生後已開啟的示範連結仍可使用。示範用的月曆 `2027/mock/events.json` 由 `2026/events.json` 複製而來（只讀取、不修改 2026）；修改 `stamps.json` 後可以重新產生。
+
 ### 資料一致性檢查（CI）
 
 `.github/workflows/check-data.yml` 會在 PR 時執行 `npm run check:data`（`scripts/check-data.mjs`，預設檢查 2027，可用 `node scripts/check-data.mjs <年度>` 指定），檢查：

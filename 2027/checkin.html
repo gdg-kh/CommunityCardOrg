@@ -39,6 +39,8 @@
         rewardStamps,
         rewardCounts,
         modeBadges,
+        showMockBanner,
+        seedMockStamps,
         stampSpec,
         stampRotation,
         requestPersistentStorage,
@@ -91,6 +93,8 @@
         }
 
         const registry = await loadRegistry();
+        showMockBanner();
+        await seedMockStamps(registry);
         let verified;
         try {
           verified = await verifyToken(token, registry, { checkTime: true });

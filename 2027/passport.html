@@ -77,6 +77,8 @@
         rewardCounts,
         modeBadges,
         canCheckin,
+        showMockBanner,
+        seedMockStamps,
         REWARD_SCOPES,
         stampSpec,
         stampRotation,
@@ -413,6 +415,8 @@
 
       async function main() {
         registry = await loadRegistry();
+        showMockBanner();
+        await seedMockStamps(registry);
         const inApp = inAppBrowserName();
         if (inApp) {
           notice(`⚠️ 你正在 <b>${inApp}</b> 內建的瀏覽器中開啟，這裡看到的印章跟 Safari／Chrome 裡的是分開的。`);

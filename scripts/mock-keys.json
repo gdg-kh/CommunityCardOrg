@@ -1,0 +1,137 @@
+{
+  "_說明": "示範模式專用的測試私鑰，只對 2027/mock/stamps.json 有效，與正式金鑰無關。",
+  "keys": {
+    "gdg-kaohsiung|mock": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "P9xQvmEr_SuQtn4ljU6OxxyEvP-dZQ7q8rYKaQ-gAhQ",
+      "y": "RaeS3DLoHcsEDFxmwWgPRj8zR7asSjTkFQbZJbR3ys4",
+      "crv": "P-256",
+      "d": "zRQvsbdHNxnJXmUlA8z3E3YV4YSuKvej1T_DKqRJObs"
+    },
+    "developer-buffet|mock": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "RAvivjp1f22oPc38-J9KatySjzAl3b_dNfUDWi1-YjQ",
+      "y": "VOZAuboEmZCwvU4f-Tbh1fQQdns8D6NWtWE7qdGxw80",
+      "crv": "P-256",
+      "d": "SbYP9ZdRPUUx0f_NpLAiYcGJTVEBB1eFpuK2mAgElVs"
+    },
+    "pyladies-kaohsiung|mock": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "r2DVTwzvFF3WKW4yV21IjUIJmJ5NBHvzMuTl42q4Tss",
+      "y": "T5EPO9XTC1BzB9u9SLpY8UWZAKHx4m66mdaqGlYCYqM",
+      "crv": "P-256",
+      "d": "Sf_6NE_fSBD2wWsFsD2eYNM8VH0SIoFQMTql3XnD9r4"
+    },
+    "second-space|mock": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "lTnoN3naEzQa-LySE28flSnaSr5oTy_O_Ad3cGwz_oY",
+      "y": "9T04YDYAPth2PhZA_lbE6PLYxrjAYRqju8B2L6ICAZs",
+      "crv": "P-256",
+      "d": "sgjKLwURzKrI4FZ4mbfXQ-XF1PbN_XR3SYPQlDs9PTI"
+    },
+    "kimu|mock": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "86M2weHgmbIdQ96DWiEYcxS5pGY6_xIvwsI-M_iQx8U",
+      "y": "tz5EnFS4KUScUDcGLRlGUlTqzBhp0Pm-JxaTNcYCBnQ",
+      "crv": "P-256",
+      "d": "LTPXuutEreGLSAkTqqOdvXq4mjXrLugykwVz5N1FxhM"
+    },
+    "k-net|mock": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "qSU9B9DNL7CxKQhxDJewuEfaqPWtijEiPHXqDOFISNo",
+      "y": "m0GxRE0ouUpkSExbokxIGNd5dZq_b2cBKOjXrw0rAP8",
+      "crv": "P-256",
+      "d": "Efvjo2phdI_T-k6ODAsFMS7UTNcVtfwRcWHQwVdtTUA"
+    },
+    "vscp|mock": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "WWuzGBane0iQ_K4NK-D1AhOCe309iwuaTjYDGgupmkA",
+      "y": "UDGK_g8WH2BRB3gCDpo5b52OsaPjqLr7FdAV7tOwvlk",
+      "crv": "P-256",
+      "d": "30T8l8ividCzHoj7DXfBC-pBYjAYRbYa0gcCyWtVY8w"
+    },
+    "uiux-kaohsiung|mock": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "RzG2FqtEhxFNt0jRMk7GKr1r-C5pPM5oh0mB_y0JVDg",
+      "y": "QykH58jeUg43tUNWl0KvW9wu6dXAR7K0Nb_UnzPYoqY",
+      "crv": "P-256",
+      "d": "kU8NAtJCK9Y9FmfQLt08jWxLkacOjXXyhZmDHbRnW9I"
+    },
+    "cathay-cdc|mock": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "v0b7qznfSa6qz9SMWve0SWglrv9jTW-_y9RLidXt0sY",
+      "y": "uYDPWshfJXPVPgXJmrl83j7FPW3G8r7FM8lFWovnyHw",
+      "crv": "P-256",
+      "d": "dFYaJvLr_-xnBPAeV6vHarAI7hp4Px70chVXDymeR-Q"
+    },
+    "ksdg|mock": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "QZ8Gmt57zoZufOdEh2Gipc1I38Dvof4MtxqSWAXlq-M",
+      "y": "WAp-UF5jyI1bRi7DhUHbqNmgzcXLq_mAj57UaPykRFQ",
+      "crv": "P-256",
+      "d": "SE6z6zxf1-Aygr6cB2sdUq6NNM1Zg9N7v3I6K4GLIFM"
+    },
+    "gdg-kaohsiung|old": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "UZvrTUCeOtzFmY-3cGJJbwhnp6uxHKsbzf_5rpjgtRo",
+      "y": "O63SvwLMPXi1X_N_KK_eKMeMA9ZQH83-whiOSU3I-5o",
+      "crv": "P-256",
+      "d": "s9WoUucLIFh5Koz7UxjwMFl5y4jvxG1Ebr1kOEbDeQ0"
+    },
+    "stray": {
+      "key_ops": [
+        "sign"
+      ],
+      "ext": true,
+      "kty": "EC",
+      "x": "InlUhKNmVWFbqop6lDGl7A4-pkBGva9Q_8vPbfXmolA",
+      "y": "L8BEUM0vHvVaAyjK633nuw4YO2lRZYF5DCR_hCFcsdI",
+      "crv": "P-256",
+      "d": "Rcthb8l3ViykcpBA-hzidZizJMiptrsTCp-MgF2iSiY"
+    }
+  }
+}

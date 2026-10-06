@@ -1,0 +1,325 @@
+{
+  "_說明": [
+    "示範模式用的社群設定，由 scripts/generate-mock.mjs 產生，請勿手動修改。"
+  ],
+  "communities": [
+    {
+      "id": "gdg-kaohsiung",
+      "name": "GDG Kaohsiung",
+      "stamp": {
+        "image": "../assets/stamps/logo_gdg_kaohsiung.png",
+        "mode": "distinct",
+        "onsite": {
+          "variant": "color"
+        },
+        "online": {
+          "variant": "grayscale"
+        }
+      },
+      "reward": {
+        "scope": "community",
+        "required": 4,
+        "text": "參加四場 GDG 活動，可到 GDG 高雄活動現場兌換 DevFest 2025 高雄場帆布袋乙個（數量有限，請提前告知組織者）。"
+      },
+      "publicKeys": [
+        {
+          "kid": "mock",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "P9xQvmEr_SuQtn4ljU6OxxyEvP-dZQ7q8rYKaQ-gAhQ",
+            "y": "RaeS3DLoHcsEDFxmwWgPRj8zR7asSjTkFQbZJbR3ys4"
+          }
+        },
+        {
+          "kid": "old",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "UZvrTUCeOtzFmY-3cGJJbwhnp6uxHKsbzf_5rpjgtRo",
+            "y": "O63SvwLMPXi1X_N_KK_eKMeMA9ZQH83-whiOSU3I-5o"
+          },
+          "revokedAt": "2026-01-01T00:00:00+08:00"
+        }
+      ]
+    },
+    {
+      "id": "developer-buffet",
+      "name": "開發者 Buffet",
+      "stamp": {
+        "image": "../assets/stamps/logo_developer_buffet_v2.png",
+        "mode": "distinct",
+        "onsite": {
+          "variant": "image",
+          "src": "../assets/stamps/seal_developer_buffet_red.png"
+        },
+        "online": {
+          "variant": "image",
+          "src": "../assets/stamps/seal_developer_buffet_blue.png"
+        }
+      },
+      "publicKeys": [
+        {
+          "kid": "mock",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "RAvivjp1f22oPc38-J9KatySjzAl3b_dNfUDWi1-YjQ",
+            "y": "VOZAuboEmZCwvU4f-Tbh1fQQdns8D6NWtWE7qdGxw80"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pyladies-kaohsiung",
+      "name": "PyLadies Kaohsiung",
+      "stamp": {
+        "image": "../assets/stamps/logo_pyladies_kh.png",
+        "mode": "shared"
+      },
+      "reward": {
+        "scope": "others",
+        "required": 1,
+        "text": "參加任一場其他社群的活動，就可以參加 PyLadies Kaohsiung 的線上活動（報名請附上備份連結）。"
+      },
+      "publicKeys": [
+        {
+          "kid": "mock",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "r2DVTwzvFF3WKW4yV21IjUIJmJ5NBHvzMuTl42q4Tss",
+            "y": "T5EPO9XTC1BzB9u9SLpY8UWZAKHx4m66mdaqGlYCYqM"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kaohsiung-wordpress",
+      "name": "高雄 WordPress 小聚",
+      "stamp": {
+        "image": "../assets/stamps/logo_kaohsiung_word_press_v2.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "second-space",
+      "name": "Second Space",
+      "stamp": {
+        "image": "../assets/stamps/logo_second_space.png",
+        "mode": "shared"
+      },
+      "publicKeys": [
+        {
+          "kid": "mock",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "lTnoN3naEzQa-LySE28flSnaSr5oTy_O_Ad3cGwz_oY",
+            "y": "9T04YDYAPth2PhZA_lbE6PLYxrjAYRqju8B2L6ICAZs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kalug",
+      "name": "KaLUG",
+      "stamp": {
+        "image": "../assets/stamps/logo_kalug.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "kimu",
+      "name": "KIMU 高雄獨立遊戲開發者聚會",
+      "stamp": {
+        "image": "../assets/stamps/logo_kimu.png",
+        "mode": "shared"
+      },
+      "publicKeys": [
+        {
+          "kid": "mock",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "86M2weHgmbIdQ96DWiEYcxS5pGY6_xIvwsI-M_iQx8U",
+            "y": "tz5EnFS4KUScUDcGLRlGUlTqzBhp0Pm-JxaTNcYCBnQ"
+          }
+        }
+      ]
+    },
+    {
+      "id": "agile-south-taiwan",
+      "name": "南台灣敏捷社群",
+      "stamp": {
+        "image": "../assets/stamps/logo_agile_south_taiwan.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "k-net",
+      "name": "K.NET",
+      "stamp": {
+        "image": "../assets/stamps/logo_k_net.png",
+        "mode": "shared"
+      },
+      "publicKeys": [
+        {
+          "kid": "mock",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "qSU9B9DNL7CxKQhxDJewuEfaqPWtijEiPHXqDOFISNo",
+            "y": "m0GxRE0ouUpkSExbokxIGNd5dZq_b2cBKOjXrw0rAP8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vscp",
+      "name": "VSCP 粉鳥趴",
+      "stamp": {
+        "image": "../assets/stamps/logo_vscp.png",
+        "mode": "shared"
+      },
+      "publicKeys": [
+        {
+          "kid": "mock",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "WWuzGBane0iQ_K4NK-D1AhOCe309iwuaTjYDGgupmkA",
+            "y": "UDGK_g8WH2BRB3gCDpo5b52OsaPjqLr7FdAV7tOwvlk"
+          }
+        }
+      ]
+    },
+    {
+      "id": "uiux-kaohsiung",
+      "name": "UIUX.Kaohsiung",
+      "stamp": {
+        "image": "../assets/stamps/logo_uiux_kaohsiung.png",
+        "mode": "shared"
+      },
+      "publicKeys": [
+        {
+          "kid": "mock",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "RzG2FqtEhxFNt0jRMk7GKr1r-C5pPM5oh0mB_y0JVDg",
+            "y": "QykH58jeUg43tUNWl0KvW9wu6dXAR7K0Nb_UnzPYoqY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vlab",
+      "name": "vLAB Online 台灣路由網路實驗中心",
+      "stamp": {
+        "image": "../assets/logo_vlab.png",
+        "mode": "shared"
+      },
+      "publicKeys": [],
+      "short": "vLAB"
+    }
+  ],
+  "partners": [
+    {
+      "id": "cathay-cdc",
+      "name": "國泰 CDC 小聚",
+      "color": "#34A853",
+      "stamp": {
+        "image": "../assets/stamps/logo_cdc_v3.png",
+        "mode": "shared"
+      },
+      "publicKeys": [
+        {
+          "kid": "mock",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "v0b7qznfSa6qz9SMWve0SWglrv9jTW-_y9RLidXt0sY",
+            "y": "uYDPWshfJXPVPgXJmrl83j7FPW3G8r7FM8lFWovnyHw"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ksda",
+      "name": "KSDA 高雄市軟體開發者協會",
+      "short": "KSDA",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "ksdg",
+      "name": "KSDG",
+      "short": "KSDG",
+      "color": "#808080",
+      "publicKeys": [
+        {
+          "kid": "mock",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "QZ8Gmt57zoZufOdEh2Gipc1I38Dvof4MtxqSWAXlq-M",
+            "y": "WAp-UF5jyI1bRi7DhUHbqNmgzcXLq_mAj57UaPykRFQ"
+          }
+        }
+      ]
+    },
+    {
+      "id": "g0v",
+      "name": "g0v 台灣零時政府",
+      "short": "g0v",
+      "color": "#9E9E9F",
+      "publicKeys": []
+    },
+    {
+      "id": "global-ai-kaohsiung",
+      "name": "Global AI Kaohsiung",
+      "short": "Global AI",
+      "color": "#4285F4",
+      "publicKeys": []
+    },
+    {
+      "id": "kaohsiung-genai",
+      "name": "高雄生成式 AI 社群",
+      "short": "高雄 GenAI",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "digital-nomad-tw",
+      "name": "台灣數位遊牧村",
+      "short": "數位遊牧",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "mopcon",
+      "name": "Mopcon",
+      "short": "MOPCON",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "openai-build-week",
+      "name": "OpenAI Build Week",
+      "short": "OpenAI",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "claude-community",
+      "name": "Claude Community Event",
+      "short": "Claude",
+      "color": "#808080",
+      "publicKeys": []
+    }
+  ]
+}

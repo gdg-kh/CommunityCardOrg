@@ -53,6 +53,7 @@
         loadVerifiedStamps,
         rewardStamps,
         modeBadges,
+        showMockBanner,
         isMakeup,
         renderStamp,
         stampSpec,
@@ -63,6 +64,7 @@
       const SHORT_WINDOW = 30 * 60; // 有效時間在 30 分鐘內視為短效（輪替）碼
       const $ = (id) => document.getElementById(id);
       const registry = await loadRegistry();
+      showMockBanner();
       const events = await loadEvents();
       const eventIndex = new Set(events.map((ev) => `${communityIdOf(registry, ev.community)}|${ev.date}`));
 

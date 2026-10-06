@@ -643,3 +643,15 @@ ul.pp-summary {
     font-size: 0.85rem;
   }
 }
+
+/* 示範模式提示 */
+.pp-mock-banner {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  padding: 8px 12px;
+  background: #fff4ce;
+  border-bottom: 1px solid #f9d77e;
+  font-size: 0.8rem;
+  text-align: center;
+}

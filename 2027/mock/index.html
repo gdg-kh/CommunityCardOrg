@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link href="../../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../index.css" />
+    <link rel="stylesheet" href="../passport/passport.css" />
+    <title>護照示範情境 - 高雄社群名牌卡</title>
+    <style>
+      .mock-list {
+        display: block;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 16px;
+        li {
+          padding: 10px 0;
+          border-bottom: 1px dashed #e3e3e3;
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+        a {
+          font-weight: 700;
+        }
+        .expect {
+          font-size: 0.8rem;
+          color: #666;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="pp-mock-banner">🧪 示範模式：使用假資料與測試金鑰，不會影響你的護照</div>
+    <div class="cardWrapper">
+      <div class="card" style="margin-top: 8px">
+        <div class="title-box">
+          <h1 class="title"><span class="specialColor">護照</span>示範情境</h1>
+          <p class="subtitle">用假資料預覽各種簽到與驗證情況</p>
+        </div>
+        <div class="pp-notice info">
+          點下面的連結會進入示範模式：使用 <code>mock/stamps.json</code> 的測試公鑰，印章另外存放，不會動到真正的護照。
+          第一次開啟護照或簽到頁時（或示範資料重新產生後）會自動放入預設的示範印章。資料由 <code>npm run generate:mock</code> 產生。
+        </div>
+        <div class="pp-actions" style="justify-content: flex-start">
+          <button class="pp-btn secondary" id="reset">重設示範資料</button>
+          <a class="pp-btn secondary" href="../passport.html?mock=0">離開示範模式</a>
+        </div>
+        <div id="app"><p class="pp-muted">載入中…</p></div>
+      </div>
+    </div>
+
+    <script type="module">
+      const app = document.getElementById("app");
+      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+      const item = (href, title, expect) =>
+        `<li><a href="${esc(href)}">${esc(title)}</a><div class="expect">${esc(expect)}</div></li>`;
+
+      document.getElementById("reset").onclick = () => {
+        try {
+          localStorage.removeItem("ccard2027.mock.stamps");
+          localStorage.removeItem("ccard2027.mock.version");
+        } catch {}
+        alert("已重設，下次開啟護照時會重新放入預設的示範印章");
+      };
+
+      const s = await (await fetch("scenarios.json", { cache: "no-cache" })).json();
+
+      const passport = [
+        ["../passport.html?mock=1", "綜合護照", `社群收集：灰底的 ${s.inactive.join("、")} 尚未開放集章，不算進分母；合作社群 KSDG 有章才出現`],
+        ["../passport.html?mock=1&c=gdg-kaohsiung", "GDG Kaohsiung 護照", "4 場達成帆布袋獎勵、可開兌換畫面；1/6 同時有線上和實體，只留實體章；線上章為黑白"],
+        ["../passport.html?mock=1&c=developer-buffet", "開發者 Buffet 護照", "distinct：實體是紅色章、線上是藍色章"],
+        ["../passport.html?mock=1&c=pyladies-kaohsiung", "PyLadies Kaohsiung 護照", "不顯示集章獎勵（只計算其他社群的章，改在綜合護照顯示）"],
+        ["../passport.html?mock=1&c=k-net", "K.NET 護照", "其中一個章是活動後補簽的，看起來跟一般章一樣"],
+        ["../passport.html?mock=1&c=kalug", "KaLUG 護照（未開通）", "提示尚未參與數位集章，但仍歡迎參加活動"],
+      ];
+
+      app.innerHTML = `
+        <div class="pp-section-title">護照畫面</div>
+        <ul class="mock-list">${passport.map(([h, t, e]) => item(h, t, e)).join("")}</ul>
+
+        <div class="pp-section-title">簽到情境</div>
+        <p class="pp-muted">打開連結就會簽到。成功的情境會改變示範護照，想重來可以按上方「重設示範資料」。</p>
+        <div class="pp-section-title" style="font-size:0.95rem">✅ 預期簽到成功</div>
+        <ul class="mock-list">${s.checkin
+          .filter((c) => c.success)
+          .map((c) => item(`../checkin.html?mock=1#${c.token}`, c.title, `預期：${c.expect}`))
+          .join("")}</ul>
+        <div class="pp-section-title" style="font-size:0.95rem">❌ 預期簽到失敗（示範錯誤訊息）</div>
+        <ul class="mock-list">${s.checkin
+          .filter((c) => !c.success)
+          .map((c) => item(`../checkin.html?mock=1#${c.token}`, c.title, `預期：${c.expect}`))
+          .join("")}</ul>
+
+        <div class="pp-section-title">備份還原</div>
+        <ul class="mock-list">${item(
+          `../passport.html?mock=1#import=${s.backup}`,
+          "開啟備份連結",
+          "預期：備份裡有 3 個有效印章（1 個驗證失敗略過），其中 3 個可匯入：K.NET、KIMU 兩個新章，以及開發者 Buffet 由線上改為實體",
+        )}</ul>
+
+        <div class="pp-section-title">驗證頁</div>
+        <ul class="mock-list">${item(
+          `../verify.html?mock=1#import=${s.verify}`,
+          "驗證一份含各種情況的備份",
+          "預期：✅ 正常與短效碼、ℹ️ 同場不計入／月曆上沒有／補簽（通過）、⚠️ 簽到時間不在有效時間內／有效時間不含活動日期、❌ 金鑰已停用／被竄改",
+        )}</ul>
+
+        <p class="pp-muted">資料產生時間：${esc(new Date(s.generatedAt).toLocaleString("zh-TW", { hour12: false }))}</p>`;
+    </script>
+  </body>
+</html>
