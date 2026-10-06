@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link href="../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="stylesheet" href="passport/passport.css" />
+    <title>主辦方簽到工具 - 2027 高雄社群名牌卡</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"
+      integrity="sha384-Dr98ddmUw2QkdCarNQ+OL7xLty7cSxgR0T7v1tq4UErS/qLV0132sBYTolRAFuOV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="cardWrapper">
+      <div class="card" style="margin-top: 8px">
+        <div class="title-box">
+          <h1 class="title"><span class="specialColor">主辦方</span>簽到工具</h1>
+          <p class="subtitle">產生社群金鑰、簽出活動簽到 QR code</p>
+          <p class="pp-muted" style="margin:0"><a href="verify.html">驗證參加者的護照備份 →</a></p>
+        </div>
+        <div class="pp-notice info">
+          🔒 所有運算都在這個瀏覽器裡完成，私鑰不會上傳到任何地方。請妥善保管金鑰檔和密碼，
+          持有金鑰的人就能簽出你們社群的簽到碼。
+        </div>
+
+        <form class="pp-form" onsubmit="return false">
+          <div>
+            <label for="community">社群</label>
+            <select id="community"></select>
+          </div>
+          <div id="key-status" class="pp-notice">請先選擇社群並解鎖金鑰。</div>
+        </form>
+
+        <div class="pp-tabs" style="margin-top: 16px">
+          <button class="active" data-tab="sign">簽出 QR code</button>
+          <button data-tab="makeup">過去活動補簽</button>
+          <button data-tab="keys">金鑰管理</button>
+        </div>
+
+        <!-- 金鑰管理 -->
+        <section id="tab-keys" hidden>
+          <div class="pp-section-title">解鎖金鑰</div>
+          <form class="pp-form" id="unlock-form" onsubmit="return false">
+            <div id="saved-key-row" hidden class="pp-notice info">
+              這個瀏覽器已儲存 <b id="saved-key-name"></b> 的加密金鑰，輸入密碼即可解鎖。
+              <button type="button" class="pp-btn secondary" id="forget-key" style="padding: 2px 10px; margin-left: 6px">移除</button>
+            </div>
+            <div id="file-row">
+              <label for="key-file">金鑰檔（.ccard-key.json）</label>
+              <input type="file" id="key-file" accept=".json,application/json" />
+            </div>
+            <div>
+              <label for="unlock-pass">金鑰密碼</label>
+              <input type="password" id="unlock-pass" autocomplete="current-password" />
+            </div>
+            <label style="font-weight: 400; display: flex; gap: 6px; align-items: center">
+              <input type="checkbox" id="remember" style="width: auto" checked />
+              在這個瀏覽器記住加密後的金鑰檔（仍需密碼才能使用）
+            </label>
+            <div><button class="pp-btn" id="unlock">解鎖</button></div>
+          </form>
+
+          <div class="divider" style="margin-top: 20px"></div>
+          <div class="pp-section-title">產生新金鑰</div>
+          <p class="pp-muted">
+            每個社群只需要產生一次。產生後請下載金鑰檔保存，並把公鑰透過 Pull Request 加到
+            <code>2027/stamps.json</code>，合併後簽到碼才會生效。
+          </p>
+          <form class="pp-form" id="gen-form" onsubmit="return false">
+            <div class="row">
+              <div>
+                <label for="gen-kid">金鑰 ID</label>
+                <input id="gen-kid" placeholder="2027a" />
+              </div>
+              <div></div>
+            </div>
+            <div class="row">
+              <div>
+                <label for="gen-pass">設定密碼（至少 8 個字）</label>
+                <input type="password" id="gen-pass" autocomplete="new-password" />
+              </div>
+              <div>
+                <label for="gen-pass2">再輸入一次</label>
+                <input type="password" id="gen-pass2" autocomplete="new-password" />
+              </div>
+            </div>
+            <div><button class="pp-btn green" id="generate">產生並下載金鑰檔</button></div>
+          </form>
+          <div id="gen-result"></div>
+        </section>
+
+        <!-- 簽出 QR code -->
+        <section id="tab-sign">
+          <form class="pp-form" id="sign-form" onsubmit="return false">
+            <div>
+              <label for="event">活動（來自社群月曆）</label>
+              <select id="event"></select>
+            </div>
+            <div class="row">
+              <div>
+                <label for="ev-date">日期</label>
+                <input type="date" id="ev-date" />
+              </div>
+              <div>
+                <label for="ev-id">活動 ID（同一天多場時請改成不同的值）</label>
+                <input id="ev-id" />
+              </div>
+            </div>
+            <div>
+              <label for="ev-title">活動名稱</label>
+              <input id="ev-title" maxlength="60" />
+            </div>
+            <div>
+              <label>簽到方式</label>
+              <div class="radio-row">
+                <label><input type="radio" name="mode" value="onsite" checked /> 📍 實體</label>
+                <label><input type="radio" name="mode" value="online" /> 💻 線上</label>
+                <label><input type="radio" name="mode" value="both" /> 📍💻 實體＋線上</label>
+              </div>
+              <p class="pp-muted" id="both-hint" hidden style="margin: 6px 0 0">
+                會產生兩張 QR code。同一場活動每人只會留下一個章，兩種都簽到時以實體為準。
+              </p>
+            </div>
+            <label style="font-weight: 400; display: flex; gap: 6px; align-items: center">
+              <input type="checkbox" id="rotate" style="width: auto" />
+              <span id="rotate-label">輪替模式：QR code 每 60 秒更新一次，適合線上直播畫面或投影，降低被截圖轉傳的機會</span>
+            </label>
+            <div class="row" id="window-fixed">
+              <div>
+                <label for="nbf">開始簽到</label>
+                <input type="datetime-local" id="nbf" />
+              </div>
+              <div>
+                <label for="exp">結束簽到</label>
+                <input type="datetime-local" id="exp" />
+              </div>
+            </div>
+            <div class="row" id="window-rotate" hidden>
+              <div>
+                <label for="rotate-min">每個 QR code 有效幾分鐘</label>
+                <input type="number" id="rotate-min" value="5" min="1" max="60" />
+              </div>
+              <div></div>
+            </div>
+            <div><button class="pp-btn" id="sign">產生簽到 QR code</button></div>
+          </form>
+
+          <div id="qr-area" hidden style="margin-top: 16px"></div>
+        </section>
+
+        <!-- 過去活動補簽 -->
+        <section id="tab-makeup" hidden>
+          <div class="pp-notice info">
+            給錯過簽到的參加者補簽用。每次產生的補簽碼都是<b>不同的一張</b>，只在短時間內有效（預設 10 分鐘），
+            請當面出示或私訊給本人，並請對方馬上掃描。補簽章在護照上跟一般的章一樣，只有驗證頁會註明是補簽。
+          </div>
+          <form class="pp-form" onsubmit="return false">
+            <div>
+              <label for="mk-event">活動（已舉辦的場次）</label>
+              <select id="mk-event"></select>
+            </div>
+            <div class="row">
+              <div>
+                <label for="mk-date">日期</label>
+                <input type="date" id="mk-date" />
+              </div>
+              <div>
+                <label for="mk-id">活動 ID（需與當天簽到用的一致）</label>
+                <input id="mk-id" />
+              </div>
+            </div>
+            <div>
+              <label for="mk-title">活動名稱</label>
+              <input id="mk-title" maxlength="60" />
+            </div>
+            <div>
+              <label>簽到方式</label>
+              <div class="radio-row">
+                <label><input type="radio" name="mk-mode" value="onsite" checked /> 📍 實體</label>
+                <label><input type="radio" name="mk-mode" value="online" /> 💻 線上</label>
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label for="mk-minutes">有效時間（分鐘）</label>
+                <input type="number" id="mk-minutes" value="10" min="1" max="1440" />
+              </div>
+              <div>
+                <label for="mk-note">發給誰（選填，只記在這個瀏覽器方便對帳）</label>
+                <input id="mk-note" placeholder="例如：暱稱" />
+              </div>
+            </div>
+            <div><button class="pp-btn" id="mk-sign">產生補簽 QR code</button></div>
+          </form>
+          <div id="mk-area" hidden style="margin-top: 16px"></div>
+          <div id="mk-log" style="margin-top: 16px"></div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module">
+      import {
+        MODES,
+        loadRegistry,
+        eventsOf,
+        signPayload,
+        b64urlEncode,
+        b64urlDecode,
+        todayInTaipei,
+        formatDate,
+        escapeHtml,
+        stripTags,
+      } from "./passport/core.js";
+
+      const KEY_STORE = "ccard2027.organizerKeys";
+      const MAKEUP_LOG = "ccard2027.makeupLog";
+      const ROTATE_SECONDS = 60;
+      const PBKDF2_ITERATIONS = 310000;
+      const STAMPS_EDIT_URL = "https://github.com/gdg-kh/CommunityCardOrg/edit/main/2027/stamps.json";
+      const $ = (id) => document.getElementById(id);
+      const enc = new TextEncoder();
+
+      const registry = await loadRegistry();
+      let unlocked = null; // { communityId, kid, privateKey, publicJwk }
+      let rotateTimer = null;
+      let panels = []; // 目前顯示的 QR code：{ mode, rotate, url, label, el }
+      let fullscreen = null; // { mode, el }
+      let makeupTimer = null;
+
+      // ---------- 金鑰加解密 ----------
+
+      async function deriveKey(passphrase, salt, iterations) {
+        const base = await crypto.subtle.importKey("raw", enc.encode(passphrase), "PBKDF2", false, ["deriveKey"]);
+        return crypto.subtle.deriveKey(
+          { name: "PBKDF2", hash: "SHA-256", salt, iterations },
+          base,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["encrypt", "decrypt"],
+        );
+      }
+
+      async function encryptKeyFile(communityId, kid, privateJwk, publicJwk, passphrase) {
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const aes = await deriveKey(passphrase, salt, PBKDF2_ITERATIONS);
+        const ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, aes, enc.encode(JSON.stringify(privateJwk)));
+        return {
+          format: "ccard-key-v1",
+          community: communityId,
+          kid,
+          publicJwk,
+          kdf: { name: "PBKDF2", hash: "SHA-256", iterations: PBKDF2_ITERATIONS, salt: b64urlEncode(salt) },
+          iv: b64urlEncode(iv),
+          ciphertext: b64urlEncode(ciphertext),
+          createdAt: new Date().toISOString(),
+        };
+      }
+
+      async function decryptKeyFile(file, passphrase) {
+        if (file?.format !== "ccard-key-v1") throw new Error("不是有效的金鑰檔");
+        const aes = await deriveKey(passphrase, b64urlDecode(file.kdf.salt), file.kdf.iterations);
+        let plain;
+        try {
+          plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64urlDecode(file.iv) }, aes, b64urlDecode(file.ciphertext));
+        } catch {
+          throw new Error("密碼錯誤");
+        }
+        const jwk = JSON.parse(new TextDecoder().decode(plain));
+        const privateKey = await crypto.subtle.importKey("jwk", jwk, { name: "ECDSA", namedCurve: "P-256" }, false, ["sign"]);
+        return { communityId: file.community, kid: file.kid, privateKey, publicJwk: file.publicJwk };
+      }
+
+      function storedKeys() {
+        try {
+          return JSON.parse(localStorage.getItem(KEY_STORE) || "{}");
+        } catch {
+          return {};
+        }
+      }
+
+      function storeKey(file) {
+        try {
+          const all = storedKeys();
+          all[file.community] = file;
+          localStorage.setItem(KEY_STORE, JSON.stringify(all));
+        } catch {}
+      }
+
+      function forgetKey(communityId) {
+        try {
+          const all = storedKeys();
+          delete all[communityId];
+          localStorage.setItem(KEY_STORE, JSON.stringify(all));
+        } catch {}
+      }
+
+      function download(name, text, type = "application/json") {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(new Blob([text], { type }));
+        a.download = name;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      }
+
+      // ---------- 社群與金鑰狀態 ----------
+
+      const communitySel = $("community");
+      communitySel.innerHTML =
+        `<option value="">— 選擇社群 —</option>` +
+        registry.communities
+          .map((c) => `<option value="${c.id}">${escapeHtml(c.name)}${c.partner ? "（合作社群）" : ""}</option>`)
+          .join("");
+
+      const current = () => registry.byId.get(communitySel.value);
+
+      function registeredKey(community, kid, publicJwk) {
+        const k = (community.publicKeys || []).find((x) => x.kid === kid);
+        if (!k) return { ok: false, reason: "missing" };
+        if (k.jwk.x !== publicJwk.x || k.jwk.y !== publicJwk.y) return { ok: false, reason: "mismatch" };
+        if (k.revokedAt) return { ok: false, reason: "revoked" };
+        return { ok: true };
+      }
+
+      function updateStatus() {
+        const c = current();
+        const box = $("key-status");
+        const saved = c && storedKeys()[c.id];
+        $("saved-key-row").hidden = !saved;
+        $("file-row").hidden = !!saved;
+        if (saved) $("saved-key-name").textContent = `${c.name}（${saved.kid}）`;
+
+        const used = new Set((c?.publicKeys || []).map((k) => k.kid));
+        let n = 0;
+        while (used.has(`2027${String.fromCharCode(97 + n)}`)) n++;
+        $("gen-kid").value = `2027${String.fromCharCode(97 + n)}`;
+
+        if (!c) {
+          box.className = "pp-notice";
+          box.textContent = "請先選擇社群並解鎖金鑰。";
+          return;
+        }
+        if (!unlocked || unlocked.communityId !== c.id) {
+          box.className = "pp-notice";
+          const n = (c.publicKeys || []).filter((k) => !k.revokedAt).length;
+          box.innerHTML = n
+            ? `${escapeHtml(c.name)} 已登錄 ${n} 把金鑰。請到「金鑰管理」解鎖你的金鑰。`
+            : `${escapeHtml(c.name)} 還沒有登錄任何金鑰，請到「金鑰管理」產生新金鑰。`;
+          return;
+        }
+        const reg = registeredKey(c, unlocked.kid, unlocked.publicJwk);
+        if (reg.ok) {
+          box.className = "pp-notice success";
+          box.innerHTML = `🔓 已解鎖 <b>${escapeHtml(c.name)}</b> 的金鑰（${escapeHtml(unlocked.kid)}），已登錄在網站上。`;
+        } else {
+          box.className = "pp-notice error";
+          box.innerHTML = {
+            missing: `🔓 已解鎖金鑰（${escapeHtml(unlocked.kid)}），但<b>還沒登錄到 stamps.json</b>，簽出的 QR code 目前會被拒絕。請先發 PR 加入公鑰。`,
+            mismatch: `⚠️ 金鑰 ${escapeHtml(unlocked.kid)} 跟 stamps.json 登錄的公鑰不一致，簽出的 QR code 會被拒絕。`,
+            revoked: `⚠️ 金鑰 ${escapeHtml(unlocked.kid)} 已停用，請產生新金鑰。`,
+          }[reg.reason];
+        }
+      }
+
+      // ---------- 活動選單 ----------
+
+      async function fillEvents() {
+        const c = current();
+        const sel = $("event");
+        const today = todayInTaipei();
+        const events = c ? await eventsOf(registry, c.id) : [];
+        sel.innerHTML =
+          events
+            .map((ev, i) => `<option value="${i}">${ev.date} ${escapeHtml(ev.title || stripTags(ev.description))}</option>`)
+            .join("") + `<option value="custom">自訂（月曆上沒有的活動）</option>`;
+        const next = events.findIndex((ev) => ev.date >= today);
+        sel.value = next >= 0 ? String(next) : "custom";
+        sel._events = events;
+        applyEvent();
+        fillMakeupEvents(events);
+      }
+
+      const pad = (n) => String(n).padStart(2, "0");
+      const toLocalInput = (d) =>
+        `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+
+      function applyEvent() {
+        const sel = $("event");
+        const ev = sel.value === "custom" ? null : sel._events[+sel.value];
+        const date = ev?.date || todayInTaipei();
+        $("ev-date").value = date;
+        $("ev-title").value = ev ? (ev.title || stripTags(ev.description)).slice(0, 60) : "";
+        $("ev-id").value = date;
+        applyWindow();
+      }
+
+      // 預設：活動當天 00:00 到隔天 23:59（台灣時間）
+      function applyWindow() {
+        const date = $("ev-date").value || todayInTaipei();
+        const start = new Date(`${date}T00:00:00+08:00`);
+        const end = new Date(start.getTime() + (48 * 3600 - 60) * 1000);
+        $("nbf").value = toLocalInput(start);
+        $("exp").value = toLocalInput(end);
+      }
+
+      $("event").onchange = applyEvent;
+      $("ev-date").onchange = () => {
+        $("ev-id").value = $("ev-date").value;
+        applyWindow();
+      };
+      const selectedMode = () => document.querySelector('input[name="mode"]:checked').value;
+
+      // 要產生哪些 QR code；實體＋線上時，輪替只套用在線上那張
+      function plan() {
+        const mode = selectedMode();
+        const rotate = $("rotate").checked;
+        if (mode === "both") return [{ mode: "onsite", rotate: false }, { mode: "online", rotate }];
+        return [{ mode, rotate }];
+      }
+
+      function applyMode() {
+        const p = plan();
+        $("window-fixed").hidden = !p.some((x) => !x.rotate);
+        $("window-rotate").hidden = !p.some((x) => x.rotate);
+        $("both-hint").hidden = selectedMode() !== "both";
+        $("rotate-label").textContent =
+          selectedMode() === "both"
+            ? "線上 QR code 使用輪替模式：每 60 秒更新一次，降低直播畫面被截圖轉傳的機會"
+            : "輪替模式：QR code 每 60 秒更新一次，適合線上直播畫面或投影，降低被截圖轉傳的機會";
+      }
+
+      document.querySelectorAll('input[name="mode"]').forEach((r) => {
+        r.onchange = () => {
+          $("rotate").checked = r.value !== "onsite";
+          applyMode();
+        };
+      });
+      $("rotate").onchange = applyMode;
+
+      communitySel.onchange = async () => {
+        stopRotate();
+        stopMakeup();
+        $("qr-area").hidden = true;
+        $("mk-area").hidden = true;
+        updateStatus();
+        await fillEvents();
+      };
+
+      // ---------- 分頁 ----------
+
+      document.querySelectorAll(".pp-tabs button").forEach((btn) => {
+        btn.onclick = () => {
+          document.querySelectorAll(".pp-tabs button").forEach((b) => b.classList.toggle("active", b === btn));
+          $("tab-sign").hidden = btn.dataset.tab !== "sign";
+          $("tab-makeup").hidden = btn.dataset.tab !== "makeup";
+          $("tab-keys").hidden = btn.dataset.tab !== "keys";
+        };
+      });
+
+      // ---------- 解鎖 ----------
+
+      $("forget-key").onclick = () => {
+        const c = current();
+        if (c && confirm("確定要從這個瀏覽器移除已儲存的金鑰檔嗎？請確認你另外保存了金鑰檔。")) {
+          forgetKey(c.id);
+          if (unlocked?.communityId === c.id) unlocked = null;
+          updateStatus();
+        }
+      };
+
+      $("unlock").onclick = async () => {
+        const c = current();
+        if (!c) return alert("請先選擇社群");
+        let file = storedKeys()[c.id];
+        try {
+          if (!file) {
+            const f = $("key-file").files[0];
+            if (!f) return alert("請選擇金鑰檔");
+            file = JSON.parse(await f.text());
+          }
+          if (file.community !== c.id) {
+            throw new Error(`這是「${registry.byId.get(file.community)?.name || file.community}」的金鑰檔，跟選擇的社群不同`);
+          }
+          unlocked = await decryptKeyFile(file, $("unlock-pass").value);
+          if ($("remember").checked) storeKey(file);
+          $("unlock-pass").value = "";
+          updateStatus();
+          document.querySelector('.pp-tabs button[data-tab="sign"]').click();
+        } catch (err) {
+          alert(`解鎖失敗：${err.message}`);
+        }
+      };
+
+      // ---------- 產生金鑰 ----------
+
+      $("generate").onclick = async () => {
+        const c = current();
+        if (!c) return alert("請先選擇社群");
+        const kid = $("gen-kid").value.trim();
+        const pass = $("gen-pass").value;
+        if (!/^[A-Za-z0-9_-]{1,20}$/.test(kid)) return alert("金鑰 ID 只能用英數字、底線和連字號");
+        if ((c.publicKeys || []).some((k) => k.kid === kid)) return alert("這個金鑰 ID 已經用過了");
+        if (pass.length < 8) return alert("密碼至少 8 個字");
+        if (pass !== $("gen-pass2").value) return alert("兩次輸入的密碼不一樣");
+
+        const pair = await crypto.subtle.generateKey({ name: "ECDSA", namedCurve: "P-256" }, true, ["sign", "verify"]);
+        const privateJwk = await crypto.subtle.exportKey("jwk", pair.privateKey);
+        const { kty, crv, x, y } = await crypto.subtle.exportKey("jwk", pair.publicKey);
+        const publicJwk = { kty, crv, x, y };
+        const file = await encryptKeyFile(c.id, kid, privateJwk, publicJwk, pass);
+        download(`${c.id}-${kid}.ccard-key.json`, JSON.stringify(file, null, 2));
+        if ($("remember").checked) storeKey(file);
+        unlocked = { communityId: c.id, kid, publicJwk, privateKey: pair.privateKey };
+        $("gen-pass").value = $("gen-pass2").value = "";
+
+        const entry = JSON.stringify({ kid, jwk: publicJwk }, null, 2);
+        const section = c.partner ? "partners" : "communities";
+        $("gen-result").innerHTML = `
+          <div class="pp-notice success" style="margin-top:12px">
+            <p>✅ 已下載金鑰檔 <b>${escapeHtml(c.id)}-${escapeHtml(kid)}.ccard-key.json</b>，請保存在安全的地方（例如密碼管理工具）。</p>
+            <p>接下來請把下面的公鑰加到 <code>2027/stamps.json</code> 中 ${section} 的「${escapeHtml(c.name)}」項目的 <code>publicKeys</code> 陣列，再發 Pull Request：</p>
+            <pre class="pp-code">${escapeHtml(entry)}</pre>
+            <div class="pp-actions" style="justify-content:flex-start">
+              <button class="pp-btn secondary" id="copy-entry">複製公鑰</button>
+              <a class="pp-btn secondary" href="${STAMPS_EDIT_URL}" target="_blank" rel="noopener">在 GitHub 編輯 stamps.json</a>
+            </div>
+            <p class="pp-muted">公鑰可以公開；金鑰檔和密碼請不要放進 repo 或傳到公開的地方。</p>
+          </div>`;
+        $("copy-entry").onclick = () => navigator.clipboard.writeText(entry);
+        updateStatus();
+      };
+
+      // ---------- 簽出 QR code ----------
+
+      async function makeToken(mode, rotate) {
+        const c = current();
+        const now = Math.floor(Date.now() / 1000);
+        let nbf;
+        let exp;
+        if (rotate) {
+          nbf = now - 30;
+          exp = now + Math.max(1, +$("rotate-min").value || 5) * 60;
+        } else {
+          nbf = Math.floor(new Date($("nbf").value).getTime() / 1000);
+          exp = Math.floor(new Date($("exp").value).getTime() / 1000);
+        }
+        const payload = {
+          v: 1,
+          c: c.id,
+          k: unlocked.kid,
+          e: $("ev-id").value.trim(),
+          t: $("ev-title").value.trim().slice(0, 60),
+          d: $("ev-date").value,
+          m: mode,
+          iat: now,
+          nbf,
+          exp,
+        };
+        const token = await signPayload(unlocked.privateKey, payload);
+        const url = new URL("checkin.html", location.href);
+        url.search = "openExternalBrowser=1"; // LINE 內開啟時改用預設瀏覽器
+        url.hash = token;
+        return { payload, url: url.toString() };
+      }
+
+      function drawQr(canvas, value, size) {
+        new QRious({ element: canvas, value, size, level: "M", padding: 16 });
+      }
+
+      function panelHtml(p) {
+        return `
+          <div class="pp-qr" data-mode="${p.mode}">
+            <div class="divider"></div>
+            <div class="pp-section-title">${p.mode === "onsite" ? "📍" : "💻"} ${MODES[p.mode]}簽到 QR code${p.rotate ? "（輪替）" : ""}</div>
+            <canvas></canvas>
+            <div class="pp-muted countdown"></div>
+            <div class="url"></div>
+            <div class="pp-actions">
+              <button class="pp-btn" data-act="fullscreen">全螢幕顯示</button>
+              <button class="pp-btn secondary" data-act="copy">複製連結</button>
+              <button class="pp-btn secondary" data-act="download">下載 QR code</button>
+              <a class="pp-btn secondary" data-act="test" target="_blank" rel="noopener">開啟簽到頁測試</a>
+            </div>
+          </div>`;
+      }
+
+      async function refreshPanel(p) {
+        const { payload, url } = await makeToken(p.mode, p.rotate);
+        p.url = url;
+        p.label = `${current().name} ${MODES[payload.m]}簽到 ${formatDate(payload.d)}`;
+        drawQr(p.el.querySelector("canvas"), url, 640);
+        p.el.querySelector(".url").textContent = url;
+        p.el.querySelector('[data-act="test"]').href = url;
+        if (fullscreen?.mode === p.mode) drawQr(fullscreen.el.querySelector("canvas"), url, 1000);
+      }
+
+      function setCountdown(p, text) {
+        p.el.querySelector(".countdown").textContent = text;
+        if (fullscreen?.mode === p.mode) fullscreen.el.querySelector(".countdown").textContent = text;
+      }
+
+      function stopRotate() {
+        clearInterval(rotateTimer);
+        rotateTimer = null;
+      }
+
+      function openFullscreen(p) {
+        const el = document.createElement("div");
+        el.className = "pp-qr-fullscreen";
+        el.innerHTML = `
+          <div class="title">${escapeHtml(p.label)}</div>
+          <div>${escapeHtml(p.subtitle ?? $("ev-title").value)}</div>
+          <canvas></canvas>
+          <div class="pp-muted countdown">${escapeHtml(p.el.querySelector(".countdown").textContent)}</div>
+          <div class="pp-muted">用手機相機掃描即可簽到集章</div>
+          <button class="pp-btn secondary">關閉</button>`;
+        drawQr(el.querySelector("canvas"), p.url, 1000);
+        el.querySelector("button").onclick = () => {
+          fullscreen = null;
+          el.remove();
+          document.exitFullscreen?.().catch(() => {});
+        };
+        document.body.appendChild(el);
+        fullscreen = { mode: p.mode, el };
+        el.requestFullscreen?.().catch(() => {});
+      }
+
+      function bindPanel(p) {
+        const btn = (act) => p.el.querySelector(`[data-act="${act}"]`);
+        btn("fullscreen").onclick = () => openFullscreen(p);
+        btn("copy").onclick = async () => {
+          await navigator.clipboard.writeText(p.url);
+          btn("copy").textContent = "已複製 ✓";
+          setTimeout(() => (btn("copy").textContent = "複製連結"), 1500);
+        };
+        btn("download").onclick = () => {
+          const a = document.createElement("a");
+          a.download = p.fileName || `checkin-${current().id}-${$("ev-id").value}-${p.mode}.png`;
+          a.href = p.el.querySelector("canvas").toDataURL("image/png");
+          a.click();
+        };
+      }
+
+      $("sign").onclick = async () => {
+        const c = current();
+        if (!c) return alert("請先選擇社群");
+        if (!unlocked || unlocked.communityId !== c.id) return alert("請先到「金鑰管理」解鎖這個社群的金鑰");
+        if (!$("ev-date").value || !$("ev-id").value.trim() || !$("ev-title").value.trim()) return alert("請填寫日期、活動 ID 和活動名稱");
+        const p = plan();
+        if (p.some((x) => !x.rotate) && !($("exp").value > $("nbf").value)) return alert("結束時間必須晚於開始時間");
+
+        stopRotate();
+        const area = $("qr-area");
+        area.innerHTML = p.map(panelHtml).join("");
+        area.hidden = false;
+        panels = p.map((x) => ({ ...x, el: area.querySelector(`[data-mode="${x.mode}"]`) }));
+        for (const panel of panels) {
+          await refreshPanel(panel);
+          bindPanel(panel);
+        }
+
+        const rotating = panels.filter((x) => x.rotate);
+        if (rotating.length) {
+          // 以實際時間計算，避免分頁在背景時計時器被降速而延後輪替
+          let nextAt = Date.now() + ROTATE_SECONDS * 1000;
+          let refreshing = false;
+          const tick = async () => {
+            if (refreshing) return;
+            if (Date.now() >= nextAt) {
+              refreshing = true;
+              nextAt = Date.now() + ROTATE_SECONDS * 1000;
+              try {
+                for (const x of rotating) await refreshPanel(x);
+              } finally {
+                refreshing = false;
+              }
+            }
+            const left = Math.max(0, Math.ceil((nextAt - Date.now()) / 1000));
+            rotating.forEach((x) => setCountdown(x, `🔄 ${left} 秒後更新 QR code`));
+          };
+          tick();
+          rotateTimer = setInterval(tick, 1000);
+        }
+      };
+
+      // ---------- 過去活動補簽 ----------
+
+      function fillMakeupEvents(events) {
+        const sel = $("mk-event");
+        const today = todayInTaipei();
+        const past = events.filter((ev) => ev.date <= today).reverse();
+        sel.innerHTML =
+          past
+            .map((ev, i) => `<option value="${i}">${ev.date} ${escapeHtml(ev.title || stripTags(ev.description))}</option>`)
+            .join("") + `<option value="custom">自訂（月曆上沒有的活動）</option>`;
+        sel.value = past.length ? "0" : "custom";
+        sel._events = past;
+        applyMakeupEvent();
+      }
+
+      function applyMakeupEvent() {
+        const sel = $("mk-event");
+        const ev = sel.value === "custom" ? null : sel._events[+sel.value];
+        $("mk-date").value = ev?.date || "";
+        $("mk-id").value = ev?.date || "";
+        $("mk-title").value = ev ? (ev.title || stripTags(ev.description)).slice(0, 60) : "";
+      }
+
+      $("mk-event").onchange = applyMakeupEvent;
+      $("mk-date").onchange = () => ($("mk-id").value = $("mk-date").value);
+
+      function makeupLog() {
+        try {
+          return JSON.parse(localStorage.getItem(MAKEUP_LOG) || "[]");
+        } catch {
+          return [];
+        }
+      }
+
+      function saveMakeupLog(list) {
+        try {
+          localStorage.setItem(MAKEUP_LOG, JSON.stringify(list.slice(-200)));
+        } catch {}
+      }
+
+      function renderMakeupLog() {
+        const c = current();
+        const list = makeupLog()
+          .filter((x) => x.c === c?.id)
+          .reverse();
+        $("mk-log").innerHTML = list.length
+          ? `<div class="divider"></div>
+            <div class="pp-section-title">補簽記錄（只存在這個瀏覽器）</div>
+            <ul class="pp-timeline">${list
+              .map(
+                (x) => `<li><div class="meta">
+                  <div class="title">${escapeHtml(x.t)} <span class="pp-badge ${x.m}">${MODES[x.m]}</span></div>
+                  <div class="sub">${formatDate(x.d)} · 編號 <code>${escapeHtml(x.n)}</code> · ${new Date(x.iat * 1000).toLocaleString("zh-TW", { hour12: false })} 產生${x.note ? ` · 給 ${escapeHtml(x.note)}` : ""}</div>
+                </div></li>`,
+              )
+              .join("")}</ul>
+            <div class="pp-actions" style="justify-content:flex-start"><button class="pp-btn secondary" id="mk-clear">清除這個社群的補簽記錄</button></div>`
+          : "";
+        $("mk-clear")?.addEventListener("click", () => {
+          if (!confirm("確定要清除補簽記錄嗎？已發出的補簽碼不受影響。")) return;
+          saveMakeupLog(makeupLog().filter((x) => x.c !== c.id));
+          renderMakeupLog();
+        });
+      }
+
+      function stopMakeup() {
+        clearInterval(makeupTimer);
+        makeupTimer = null;
+      }
+
+      $("mk-sign").onclick = async () => {
+        const c = current();
+        if (!c) return alert("請先選擇社群");
+        if (!unlocked || unlocked.communityId !== c.id) return alert("請先到「金鑰管理」解鎖這個社群的金鑰");
+        const d = $("mk-date").value;
+        if (!d || !$("mk-id").value.trim() || !$("mk-title").value.trim()) return alert("請填寫日期、活動 ID 和活動名稱");
+        if (d > todayInTaipei()) return alert("補簽只能用在已經舉辦過的活動");
+        const minutes = Math.min(1440, Math.max(1, +$("mk-minutes").value || 10));
+        const mode = document.querySelector('input[name="mk-mode"]:checked').value;
+
+        const now = Math.floor(Date.now() / 1000);
+        const payload = {
+          v: 1,
+          c: c.id,
+          k: unlocked.kid,
+          e: $("mk-id").value.trim(),
+          t: $("mk-title").value.trim().slice(0, 60),
+          d,
+          m: mode,
+          iat: now,
+          nbf: now - 30,
+          exp: now + minutes * 60,
+          r: 1, // 補簽
+          n: b64urlEncode(crypto.getRandomValues(new Uint8Array(6))), // 每張補簽碼的編號
+        };
+        const token = await signPayload(unlocked.privateKey, payload);
+        const url = new URL("checkin.html", location.href);
+        url.search = "openExternalBrowser=1";
+        url.hash = token;
+
+        const log = makeupLog();
+        log.push({ c: c.id, e: payload.e, t: payload.t, d, m: mode, n: payload.n, iat: now, exp: payload.exp, note: $("mk-note").value.trim() });
+        saveMakeupLog(log);
+        $("mk-note").value = "";
+
+        stopMakeup();
+        const area = $("mk-area");
+        area.innerHTML = panelHtml({ mode: "makeup" })
+          .replace(/<div class="pp-section-title">.*?<\/div>/, `<div class="pp-section-title">${mode === "onsite" ? "📍" : "💻"} ${MODES[mode]}補簽 QR code（編號 ${payload.n}）</div>`);
+        area.hidden = false;
+        const p = {
+          mode: "makeup",
+          url: url.toString(),
+          label: `${c.name} ${MODES[mode]}補簽 ${formatDate(d)}`,
+          subtitle: `${payload.t}｜一次性補簽碼 ${payload.n}`,
+          fileName: `makeup-${c.id}-${payload.e}-${payload.n}.png`,
+          el: area.querySelector(".pp-qr"),
+        };
+        drawQr(p.el.querySelector("canvas"), p.url, 640);
+        p.el.querySelector(".url").textContent = p.url;
+        p.el.querySelector('[data-act="test"]').href = p.url;
+        bindPanel(p);
+
+        const tick = () => {
+          const left = payload.exp - Math.floor(Date.now() / 1000);
+          if (left <= 0) {
+            setCountdown(p, "⌛ 這張補簽碼已過期，需要的話請重新產生");
+            p.el.querySelector("canvas").style.opacity = "0.2";
+            stopMakeup();
+            return;
+          }
+          setCountdown(p, `⏳ 剩 ${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")} 有效`);
+        };
+        tick();
+        makeupTimer = setInterval(tick, 1000);
+        renderMakeupLog();
+      };
+
+      communitySel.addEventListener("change", renderMakeupLog);
+
+      updateStatus();
+      await fillEvents();
+      renderMakeupLog();
+    </script>
+  </body>
+</html>

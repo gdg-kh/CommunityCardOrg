@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // 備份資料放在網址 # 後面；先取出再清掉，避免進入瀏覽紀錄與分析工具
+      window.__ppHash = location.hash;
+      if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+      addEventListener("hashchange", () => location.reload());
+    </script>
+    <link href="../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="stylesheet" href="passport/passport.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#14212e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="社群護照" />
+    <link rel="apple-touch-icon" href="../assets/passport/icon-192.png" />
+    <meta
+      content="2027 高雄社群名牌卡數位護照，掃描活動現場的 QR code 就能集章。"
+      name="description"
+    />
+    <meta content="2027 高雄社群名牌卡 - 社群護照" property="og:title" />
+    <meta
+      content="2027 高雄社群名牌卡數位護照，掃描活動現場的 QR code 就能集章。"
+      property="og:description"
+    />
+    <meta
+      content="https://community-card.org/2027/passport.html"
+      property="og:url"
+    />
+    <meta
+      content="https://community-card.org/assets/print_community_card_forward_300dpi_2026.png"
+      property="og:image"
+    />
+    <title>2027 高雄社群名牌卡 - 社群護照</title>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KCNJBYW13R");
+    </script>
+  </head>
+
+  <body>
+    <div class="cardWrapper">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item"><a class="nav-link" href="index.html">社群月曆</a></li>
+        <li class="nav-item"><a class="nav-link active" href="passport.html">社群護照</a></li>
+        <li class="nav-item"><a class="nav-link" href="communities.html">社群介紹</a></li>
+        <li class="nav-item"><a class="nav-link" href="sponsors.html">贊助商</a></li>
+      </ul>
+      <div class="card">
+        <div id="notices"></div>
+        <div id="app"><p class="pp-muted text-center">載入中…</p></div>
+      </div>
+    </div>
+
+    <script type="module">
+      import {
+        loadRegistry,
+        eventsOf,
+        loadVerifiedStamps,
+        mergeStampRecords,
+        encodeBackup,
+        decodeBackup,
+        renderStamp,
+        rewardStamps,
+        rewardCounts,
+        modeBadges,
+        canCheckin,
+        REWARD_SCOPES,
+        stampSpec,
+        stampRotation,
+        inAppBrowserName,
+        isStandalone,
+        formatDate,
+        todayInTaipei,
+        escapeHtml,
+        registerServiceWorker,
+        stripTags,
+      } from "./passport/core.js";
+
+      const app = document.getElementById("app");
+      const notices = document.getElementById("notices");
+      const params = new URLSearchParams(location.search);
+      const communityId = params.get("c");
+
+      let registry;
+      let stamps = [];
+
+      function notice(html, type = "") {
+        notices.insertAdjacentHTML("beforeend", `<div class="pp-notice ${type}">${html}</div>`);
+      }
+
+      // 印章外觀一律依社群設定（distinct／shared）
+      const stampImage = (community, mode, size = 240) =>
+        renderStamp(stampSpec(community, mode), size);
+      const baseImage = (community, size = 160) =>
+        renderStamp(stampSpec(community, "onsite", { ignoreMode: true }), size);
+
+      function rewardProgress(community) {
+        const r = community.reward;
+        if (!r) return null;
+        const list = rewardStamps(community, stamps);
+        return { have: list.length, required: r.required, list, done: list.length >= r.required };
+      }
+
+      // ---------- 兌換畫面 ----------
+
+      async function openRedeem(community) {
+        const prog = rewardProgress(community);
+        const thumbs = await Promise.all(
+          prog.list.map(async (s) => `<img src="${await stampImage(s.community, s.payload.m, 120)}" alt="" />`),
+        );
+        const el = document.createElement("div");
+        el.className = "pp-overlay";
+        el.innerHTML = `
+          <img class="big" src="${await baseImage(community, 280)}" alt="" />
+          <div style="font-size:1.3rem;font-weight:800">${escapeHtml(community.name)} 集章獎勵</div>
+          <div class="verified">${prog.done ? "✅" : "⏳"} 已驗證 ${prog.have} 個章（需要 ${prog.required} 個）</div>
+          <div style="max-width:420px;font-size:0.85rem;opacity:0.85">${escapeHtml(community.reward.text || "")}</div>
+          <div class="stamps">${thumbs.join("")}</div>
+          <div><span class="pulse"></span><span class="clock" id="pp-clock"></span></div>
+          <div style="font-size:0.75rem;opacity:0.7">時間持續跳動代表是即時畫面，不是截圖</div>
+          <button class="pp-btn secondary" id="pp-close">關閉</button>`;
+        document.body.appendChild(el);
+        const clock = el.querySelector("#pp-clock");
+        const tick = () => {
+          clock.textContent = new Date().toLocaleTimeString("zh-TW", { hour12: false, timeZone: "Asia/Taipei" });
+        };
+        tick();
+        const timer = setInterval(tick, 1000);
+        el.querySelector("#pp-close").onclick = () => {
+          clearInterval(timer);
+          el.remove();
+        };
+      }
+
+      // ---------- 備份 ----------
+
+      async function shareBackup() {
+        const code = await encodeBackup(stamps);
+        const url = new URL("passport.html", location.href);
+        url.hash = `import=${code}`;
+        const text = url.toString();
+        const box = document.getElementById("backup-box");
+        box.innerHTML = `
+          <p class="pp-muted">把這個連結存到記事本、傳給自己，或在新手機上開啟就能還原：</p>
+          <textarea readonly rows="4" style="width:100%;font-size:0.7rem;border-radius:8px;border:1px solid #ccc;padding:6px">${escapeHtml(text)}</textarea>`;
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: "我的社群護照備份", url: text });
+            return;
+          } catch {}
+        }
+        try {
+          await navigator.clipboard.writeText(text);
+          box.insertAdjacentHTML("beforeend", `<p class="pp-muted">✅ 已複製到剪貼簿</p>`);
+        } catch {}
+      }
+
+      async function showImport(code) {
+        let records;
+        try {
+          records = await decodeBackup(code);
+        } catch {
+          notice("備份連結無法解析，請確認連結是否完整。", "error");
+          return;
+        }
+        const checked = await loadVerifiedStamps(registry, records);
+        const valid = checked.filter((s) => s.valid);
+        // 這支手機沒有的場次，或是可以把線上章換成實體章的場次
+        const existing = new Map(stamps.map((s) => [s.key, s.payload.m]));
+        const fresh = valid.filter(
+          (s) => !existing.has(s.key) || (existing.get(s.key) === "online" && s.payload.m === "onsite"),
+        );
+        const invalid = checked.length - valid.length;
+        notices.insertAdjacentHTML(
+          "beforeend",
+          `<div class="pp-notice info" id="import-box">
+            <p><b>還原備份</b>：備份裡有 ${valid.length} 個有效印章${invalid ? `（另有 ${invalid} 個驗證失敗，將略過）` : ""}，其中 <b>${fresh.length}</b> 個是這支手機還沒有的。</p>
+            <div class="pp-actions" style="justify-content:flex-start">
+              ${fresh.length ? `<button class="pp-btn green" id="import-yes">匯入 ${fresh.length} 個印章</button>` : ""}
+              <button class="pp-btn secondary" id="import-no">${fresh.length ? "取消" : "關閉"}</button>
+            </div>
+          </div>`,
+        );
+        document.getElementById("import-no").onclick = () => document.getElementById("import-box").remove();
+        const yes = document.getElementById("import-yes");
+        if (yes) {
+          yes.onclick = async () => {
+            const { added, upgraded, saved } = mergeStampRecords(fresh);
+            document.getElementById("import-box").remove();
+            const msg = `✅ 已匯入 ${added} 個印章${upgraded ? `，${upgraded} 個線上章改為實體章` : ""}`;
+            notice(saved ? msg : "無法儲存，請確認不是無痕模式。", saved ? "success" : "error");
+            await reload();
+          };
+        }
+      }
+
+      // ---------- 綜合護照 ----------
+
+      async function renderOverview() {
+        const communities = new Set(stamps.map((s) => s.payload.c));
+        const onsite = stamps.filter((s) => s.payload.m === "onsite").length;
+
+        // 社群收集：固定順序排列，一眼看出哪些社群還沒參加過；合作社群有章才出現，不算進總數
+        // 尚未開通數位簽到（沒有公鑰）的社群仍顯示在最後，但不算進分母
+        const members = registry.communities.filter((c) => !c.partner && (canCheckin(c) || communities.has(c.id)));
+        const collected = members.filter((c) => communities.has(c.id)).length;
+        const partnerCollected = registry.communities.filter((c) => c.partner && communities.has(c.id)).length;
+        const shown = registry.communities.filter((c) => !c.partner || communities.has(c.id));
+        const isInactive = (c) => !canCheckin(c) && !communities.has(c.id);
+        const wall = await Promise.all(
+          [...shown.filter((c) => !isInactive(c)), ...shown.filter(isInactive)]
+            .map(async (c) => {
+              if (isInactive(c)) {
+                return `
+                  <a class="pp-community inactive" href="?c=${encodeURIComponent(c.id)}" title="尚未參與數位集章，仍歡迎參加活動">
+                    <img src="${await baseImage(c)}" alt="" />
+                    <div class="name">${escapeHtml(c.short || c.name)}</div>
+                    <div class="count">尚未開放集章</div>
+                    <div class="welcome">歡迎參加活動</div>
+                  </a>`;
+              }
+              const count = stamps.filter((s) => s.payload.c === c.id).length;
+              const prog = (c.reward?.scope || "community") === "community" ? rewardProgress(c) : null;
+              const bar = prog
+                ? `<div class="pp-progress" title="獎勵進度 ${prog.have} / ${prog.required}"><div style="width:${Math.min(100, (prog.have / prog.required) * 100)}%"></div></div>`
+                : "";
+              return `
+                <a class="pp-community ${count ? "got" : "empty"}" href="?c=${encodeURIComponent(c.id)}">
+                  ${count ? `<span class="check" aria-label="已收集">✓</span>` : ""}
+                  <img src="${await baseImage(c)}" alt="" />
+                  <div class="name">${escapeHtml(c.short || c.name)}</div>
+                  <div class="count">${count ? `${count} 個章` : "尚未參加"}</div>
+                  ${bar}
+                </a>`;
+            }),
+        );
+
+        const rewards = registry.communities
+          .filter((c) => c.reward)
+          .map((c) => {
+            const prog = rewardProgress(c);
+            return `
+              <div class="pp-notice ${prog.done ? "success" : ""}">
+                <p><b>${escapeHtml(c.name)}</b>：${escapeHtml(c.reward.text || "")}</p>
+                <div class="pp-progress"><div style="width:${Math.min(100, (prog.have / prog.required) * 100)}%"></div></div>
+                <p class="pp-muted" style="margin-top:6px">${prog.have} / ${prog.required}
+                ${prog.done ? `<button class="pp-btn green" style="margin-left:8px;padding:4px 12px" data-redeem="${c.id}">開啟兌換畫面</button>` : ""}</p>
+              </div>`;
+          });
+
+        const timeline = await Promise.all(
+          [...stamps].reverse().map(
+            async (s) => `
+              <li>
+                <img src="${await stampImage(s.community, s.payload.m, 120)}" alt="" />
+                <div class="meta">
+                  <div class="title">${escapeHtml(s.payload.t || s.community.name)}</div>
+                  <div class="sub">${formatDate(s.payload.d)} · ${escapeHtml(s.community.name)} ${modeBadges(s.payload)}</div>
+                </div>
+              </li>`,
+          ),
+        );
+
+        app.innerHTML = `
+          <div class="title-box">
+            <h1 class="title"><span class="specialColor">我的</span>社群護照</h1>
+            <p class="subtitle">掃描活動現場的簽到 QR code 就會自動蓋章</p>
+          </div>
+          <div class="pp-stats">
+            <div class="pp-stat"><div class="num">${stamps.length}</div><div class="label">印章</div></div>
+            <div class="pp-stat"><div class="num">${onsite}</div><div class="label">實體</div></div>
+            <div class="pp-stat"><div class="num">${stamps.length - onsite}</div><div class="label">線上</div></div>
+          </div>
+          <div class="pp-collect-head">
+            <div class="pp-section-title" style="margin:0">社群收集</div>
+            <div class="pp-collect-count"><b>${collected}</b> / ${members.length} 個社群${partnerCollected ? `<span class="pp-muted">＋合作社群 ${partnerCollected}</span>` : ""}</div>
+          </div>
+          <div class="pp-progress" style="margin-bottom:12px"><div style="width:${members.length ? (collected / members.length) * 100 : 0}%"></div></div>
+          <div class="pp-wall">${wall.join("")}</div>
+          ${rewards.length ? `<div class="divider" style="margin-top:16px"></div><div class="pp-section-title">集章獎勵</div>${rewards.join("")}` : ""}
+          <div class="divider" style="margin-top:16px"></div>
+          <div class="pp-section-title">簽到記錄</div>
+          ${timeline.length ? `<ul class="pp-timeline">${timeline.join("")}</ul>` : `<p class="pp-muted">還沒有任何印章，到社群活動現場掃描簽到 QR code 吧！</p>`}
+          <div class="divider" style="margin-top:16px"></div>
+          <div class="pp-section-title">備份與還原</div>
+          <p class="pp-muted">印章只存在這支手機的瀏覽器裡，清除瀏覽資料或換手機就會不見。建議定期產生備份連結並保存。</p>
+          <div class="pp-actions" style="justify-content:flex-start">
+            <button class="pp-btn secondary" id="backup" ${stamps.length ? "" : "disabled"}>產生備份連結</button>
+          </div>
+          <div id="backup-box"></div>`;
+
+        document.getElementById("backup").onclick = shareBackup;
+        app.querySelectorAll("[data-redeem]").forEach((btn) => {
+          btn.onclick = () => openRedeem(registry.byId.get(btn.dataset.redeem));
+        });
+      }
+
+      // ---------- 單一社群護照 ----------
+
+      async function renderCommunity(community) {
+        const mine = stamps.filter((s) => s.payload.c === community.id);
+        const events = await eventsOf(registry, community.id);
+        const today = todayInTaipei();
+        const byDate = new Map();
+        for (const s of mine) {
+          if (!byDate.has(s.payload.d)) byDate.set(s.payload.d, []);
+          byDate.get(s.payload.d).push(s);
+        }
+        // 不在月曆上的場次（例如臨時加開的線上活動）也要列出來
+        const eventDates = new Set(events.map((ev) => ev.date));
+        const slots = [
+          ...events.map((ev) => ({ date: ev.date, title: ev.title || stripTags(ev.description) })),
+          ...[...byDate.keys()]
+            .filter((d) => !eventDates.has(d))
+            .map((d) => ({ date: d, title: byDate.get(d)[0].payload.t })),
+        ].sort((a, b) => a.date.localeCompare(b.date));
+
+        const cells = await Promise.all(
+          slots.map(async (slot) => {
+            const got = byDate.get(slot.date) || [];
+            let state = slot.date > today ? "upcoming" : "missed";
+            let inner = slot.date > today ? "即將舉行" : "未參加";
+            if (got.length) {
+              state = "attended";
+              const s = got[0];
+              inner = `<img src="${await stampImage(community, s.payload.m)}" alt="" style="transform:rotate(${stampRotation(s.token)}deg)" />`;
+            }
+            const badges = got.map((s) => modeBadges(s.payload)).join(" ");
+            return `
+              <div class="pp-event ${state}">
+                <div class="slot">${inner}</div>
+                <div class="date">${formatDate(slot.date)}</div>
+                <div class="title">${escapeHtml(slot.title || "")}</div>
+                ${badges ? `<div>${badges}</div>` : ""}
+              </div>`;
+          }),
+        );
+
+        // 不計算自己社群印章的獎勵（例如 PyLadies）不在自己的護照頁顯示，改在綜合護照顯示
+        const prog = rewardCounts(community, community.id) ? rewardProgress(community) : null;
+        const onsite = mine.filter((s) => s.payload.m === "onsite").length;
+        const reward = prog
+          ? `<div class="pp-notice ${prog.done ? "success" : ""}">
+              <p>🎁 ${escapeHtml(community.reward.text || "")}</p>
+              <div class="pp-progress"><div style="width:${Math.min(100, (prog.have / prog.required) * 100)}%"></div></div>
+              <p class="pp-muted" style="margin-top:6px">${prog.have} / ${prog.required}（${REWARD_SCOPES[community.reward.scope || "community"]}）</p>
+              ${prog.done ? `<button class="pp-btn green" id="redeem">開啟兌換畫面</button>` : ""}
+            </div>`
+          : "";
+        const keyless = !canCheckin(community)
+          ? `<div class="pp-notice">這個社群尚未參與數位集章，目前無法掃碼簽到，但仍然非常歡迎參加他們的活動！${community.link ? ` <a href="${escapeHtml(community.link)}" target="_blank" rel="noopener">看看社群動態 →</a>` : ""}</div>`
+          : "";
+
+        app.innerHTML = `
+          <p><a href="passport.html" class="minorLink" style="color:#4285f4">← 我的綜合護照</a></p>
+          <div class="pp-community-head">
+            <img src="${await baseImage(community, 200)}" alt="" />
+            <div>
+              <h1>${escapeHtml(community.name)}</h1>
+              <div class="pp-muted">${community.link ? `<a href="${escapeHtml(community.link)}" target="_blank" rel="noopener">社群連結</a>` : ""}</div>
+            </div>
+          </div>
+          <div class="pp-stats">
+            <div class="pp-stat"><div class="num">${mine.length}</div><div class="label">印章</div></div>
+            <div class="pp-stat"><div class="num">${onsite}</div><div class="label">實體</div></div>
+            <div class="pp-stat"><div class="num">${mine.length - onsite}</div><div class="label">線上</div></div>
+            <div class="pp-stat"><div class="num">${events.length}</div><div class="label">月曆場次</div></div>
+          </div>
+          ${keyless}
+          ${reward}
+          ${cells.length ? `<div class="pp-events">${cells.join("")}</div>` : `<p class="pp-muted">月曆上還沒有這個社群的活動。</p>`}`;
+
+        const btn = document.getElementById("redeem");
+        if (btn) btn.onclick = () => openRedeem(community);
+      }
+
+      // ---------- 主流程 ----------
+
+      async function render() {
+        if (communityId) {
+          const community = registry.byId.get(communityId);
+          if (!community) {
+            app.innerHTML = `<p>找不到這個社群。</p><a class="pp-btn" href="passport.html">回到我的護照</a>`;
+            return;
+          }
+          document.title = `${community.name} 護照 - 高雄社群名牌卡`;
+          await renderCommunity(community);
+        } else {
+          await renderOverview();
+        }
+      }
+
+      async function reload() {
+        const all = await loadVerifiedStamps(registry);
+        stamps = all.filter((s) => s.valid);
+        const bad = all.length - stamps.length;
+        if (bad) notice(`有 ${bad} 個印章驗證失敗（可能是金鑰已停用），不會顯示。`);
+        await render();
+      }
+
+      async function main() {
+        registry = await loadRegistry();
+        const inApp = inAppBrowserName();
+        if (inApp) {
+          notice(`⚠️ 你正在 <b>${inApp}</b> 內建的瀏覽器中開啟，這裡看到的印章跟 Safari／Chrome 裡的是分開的。`);
+        } else if (!isStandalone()) {
+          notice("📱 建議把這頁<b>加入主畫面</b>，iPhone 上可以避免瀏覽器自動清除印章。", "info");
+        }
+        await reload();
+        const m = /^#import=(.+)$/.exec(window.__ppHash || "");
+        if (m) await showImport(m[1]);
+      }
+
+      registerServiceWorker();
+      main().catch((err) => {
+        console.error(err);
+        app.innerHTML = `<p class="pp-muted">載入失敗：${escapeHtml(err.message)}</p>`;
+      });
+    </script>
+  </body>
+</html>

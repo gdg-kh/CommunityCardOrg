@@ -1,0 +1,240 @@
+{
+  "_說明": [
+    "數位簽到護照設定。社群名稱以 data.json 為準：communities[].name 必須與 data.json 的 communities[].name 完全相同。",
+    "不在 data.json 的合作社群放在 partners，需自行提供 name / short / color。",
+    "id：簽到碼與網址使用的社群代號，建立後請勿更改。",
+    "stamp.mode：distinct = 實體/線上不同圖案，shared = 共用圖案；variant：color | grayscale | tint(+color) | image(+src)。",
+    "publicKeys：由各社群 organizer 在 organizer.html 產生後以 PR 加入；停用時加上 revokedAt。",
+    "格式由 scripts/check-data.mjs 在 CI 檢查。"
+  ],
+  "communities": [
+    {
+      "id": "gdg-kaohsiung",
+      "name": "GDG Kaohsiung",
+      "stamp": {
+        "image": "../assets/stamps/logo_gdg_kaohsiung.png",
+        "mode": "distinct",
+        "onsite": {
+          "variant": "color"
+        },
+        "online": {
+          "variant": "grayscale"
+        }
+      },
+      "reward": {
+        "scope": "community",
+        "required": 4,
+        "text": "參加四場 GDG 活動，可到 GDG 高雄活動現場兌換 DevFest 2025 高雄場帆布袋乙個（數量有限，請提前告知組織者）。"
+      },
+      "publicKeys": [
+        {
+          "kid": "GDG_Kaohsiung",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "_HtIxBRXpHciZ24ZJK_z0KgimwoBl48MMDKEVxMcisg",
+            "y": "ZdjyWqcgYeKzlf0jnFfRp2OnEJn9mR5HYs2fGiVPD24"
+          }
+        }
+      ]
+    },
+    {
+      "id": "developer-buffet",
+      "name": "開發者 Buffet",
+      "stamp": {
+        "image": "../assets/stamps/logo_developer_buffet_v2.png",
+        "mode": "distinct",
+        "onsite": {
+          "variant": "image",
+          "src": "../assets/stamps/seal_developer_buffet_red.png"
+        },
+        "online": {
+          "variant": "image",
+          "src": "../assets/stamps/seal_developer_buffet_blue.png"
+        }
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "pyladies-kaohsiung",
+      "name": "PyLadies Kaohsiung",
+      "stamp": {
+        "image": "../assets/stamps/logo_pyladies_kh.png",
+        "mode": "shared"
+      },
+      "reward": {
+        "scope": "others",
+        "required": 1,
+        "text": "參加任一場其他社群的活動，就可以參加 PyLadies Kaohsiung 的線上活動（報名表請附上護照截圖）。"
+      },
+      "publicKeys": [
+        {
+          "kid": "pyladies_kaohsiung",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "EVgkXtA7NOIvtp-KFxcHEwgbiz5DHizQf1glJNi_bxw",
+            "y": "h541VT_Ji5bLS0dLp1PVql_u4toWZKC2rsCdxTmdiOY"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kaohsiung-wordpress",
+      "name": "高雄 WordPress 小聚",
+      "stamp": {
+        "image": "../assets/stamps/logo_kaohsiung_word_press_v2.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "second-space",
+      "name": "Second Space",
+      "stamp": {
+        "image": "../assets/stamps/logo_second_space.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "kalug",
+      "name": "KaLUG",
+      "stamp": {
+        "image": "../assets/stamps/logo_kalug.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "kimu",
+      "name": "KIMU 高雄獨立遊戲開發者聚會",
+      "stamp": {
+        "image": "../assets/stamps/logo_kimu.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "agile-south-taiwan",
+      "name": "南台灣敏捷社群",
+      "stamp": {
+        "image": "../assets/stamps/logo_agile_south_taiwan.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "k-net",
+      "name": "K.NET",
+      "stamp": {
+        "image": "../assets/stamps/logo_k_net.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "vscp",
+      "name": "VSCP 粉鳥趴",
+      "stamp": {
+        "image": "../assets/stamps/logo_vscp.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "uiux-kaohsiung",
+      "name": "UIUX.Kaohsiung",
+      "stamp": {
+        "image": "../assets/stamps/logo_uiux_kaohsiung.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "vlab",
+      "name": "vLAB Online 台灣路由網路實驗中心",
+      "stamp": {
+        "image": "../assets/logo_vlab.png",
+        "mode": "shared"
+      },
+      "publicKeys": [],
+      "short": "vLAB"
+    }
+  ],
+  "partners": [
+    {
+      "id": "cathay-cdc",
+      "name": "國泰 CDC 小聚",
+      "color": "#34A853",
+      "stamp": {
+        "image": "../assets/stamps/logo_cdc_v3.png",
+        "mode": "shared"
+      },
+      "publicKeys": []
+    },
+    {
+      "id": "ksda",
+      "name": "KSDA 高雄市軟體開發者協會",
+      "short": "KSDA",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "ksdg",
+      "name": "KSDG",
+      "short": "KSDG",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "g0v",
+      "name": "g0v 台灣零時政府",
+      "short": "g0v",
+      "color": "#9E9E9F",
+      "publicKeys": []
+    },
+    {
+      "id": "global-ai-kaohsiung",
+      "name": "Global AI Kaohsiung",
+      "short": "Global AI",
+      "color": "#4285F4",
+      "publicKeys": []
+    },
+    {
+      "id": "kaohsiung-genai",
+      "name": "高雄生成式 AI 社群",
+      "short": "高雄 GenAI",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "digital-nomad-tw",
+      "name": "台灣數位遊牧村",
+      "short": "數位遊牧",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "mopcon",
+      "name": "Mopcon",
+      "short": "MOPCON",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "openai-build-week",
+      "name": "OpenAI Build Week",
+      "short": "OpenAI",
+      "color": "#808080",
+      "publicKeys": []
+    },
+    {
+      "id": "claude-community",
+      "name": "Claude Community Event",
+      "short": "Claude",
+      "color": "#808080",
+      "publicKeys": []
+    }
+  ]
+}
