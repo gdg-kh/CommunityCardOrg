@@ -1,0 +1,11 @@
+{
+  "name": "community-puzzle-cloudflare",
+  "version": "1.0.0",
+  "private": true,
+  "description": "2027 高雄社群拼圖 Cloudflare Workers + D1 後端 API",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute puzzle-prod --remote --file=./schema.sql -y"
+  }
+}

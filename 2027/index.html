@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="2027 高雄社群活動月曆，彙整高雄在地技術社群活動資訊，掌握最新社群動態。"
+      name="description"
+    />
+    <meta
+      content="高雄社群, 社群月曆, 活動行事曆, 技術講座, 高雄活動, Kaohsiung Events, 社群拼圖"
+      name="keywords"
+    />
+    <meta content="2027 高雄社群名牌卡 - 社群月曆" property="og:title" />
+    <meta
+      content="2027 高雄社群活動月曆，彙整高雄在地技術社群活動資訊，掌握最新社群動態。"
+      property="og:description"
+    />
+    <meta content="website" property="og:type" />
+    <meta
+      content="https://community-card.org/2027/index.html"
+      property="og:url"
+    />
+    <meta
+      content="https://community-card.org/assets/print_community_card_forward_300dpi_2026.png"
+      property="og:image"
+    />
+    <meta content="高雄社群名牌卡" property="og:site_name" />
+    <title>2027 高雄社群名牌卡 - 社群月曆</title>
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* 假日名稱標籤 */
+      .date-row {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+        margin-bottom: 8px;
+      }
+
+      .date-row .date-number {
+        display: inline;
+        margin-bottom: 0;
+      }
+
+      .holiday-label {
+        font-size: 0.95em;
+        color: #e53e3e;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        min-width: 0;
+      }
+
+      /* 2027 專用頁籤主題色彩 */
+      .nav-link-calendar.active {
+        background-color: #4285f4 !important;
+        color: #fff !important;
+      }
+      .nav-link-puzzle.active {
+        background-color: #34a853 !important;
+        color: #fff !important;
+      }
+      .nav-link-communities.active {
+        background-color: #f9ab00 !important;
+        color: #fff !important;
+      }
+      .nav-link-sponsors.active {
+        background-color: #ea4335 !important;
+        color: #fff !important;
+      }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KCNJBYW13R");
+    </script>
+  </head>
+  <body>
+    <div class="cardWrapper">
+      <!-- 導覽列：第一頁 社群月曆、第二頁 社群拼圖、第三頁 社群介紹、第四頁 贊助商 -->
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link active nav-link-calendar" href="index.html">社群月曆</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-puzzle" href="puzzle.html">社群拼圖</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-communities" href="communities.html">社群介紹</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-sponsors" href="sponsors.html">贊助商</a>
+        </li>
+      </ul>
+
+      <div class="card" style="margin-bottom: 12px">
+        <div class="title-box">
+          <h1 class="title">
+            <span class="specialColor">高雄軟體社群活動</span>
+          </h1>
+          <p class="subtitle">2027 高雄在地技術社群活動行事曆，掌握最新社群動態</p>
+        </div>
+
+        <div class="btn-group calendar-btn-group" role="group">
+          <button id="view-calendar-btn" class="btn btn-outline-primary">
+            月曆顯示
+          </button>
+          <button id="view-list-btn" class="btn btn-outline-primary">
+            清單顯示
+          </button>
+        </div>
+
+        <div id="calendar-layout">
+          <div class="calendar-nav">
+            <button id="prev-month" class="btn btn-outline-secondary">
+              <i class="fa-solid fa-angle-left"></i>
+              上個月
+            </button>
+            <h2 class="title mb-0" id="calendar-title-date"></h2>
+            <button id="next-month" class="btn btn-outline-secondary">
+              下個月
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
+          </div>
+          <div id="calendar-root" class="calendar-container">
+            <!-- Calendar will be rendered here -->
+            <div class="text-center p-3">載入活動中...</div>
+          </div>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              const titleDateSpan = document.getElementById(
+                "calendar-title-date",
+              );
+              const prevBtn = document.getElementById("prev-month");
+              const nextBtn = document.getElementById("next-month");
+              const viewCalendarBtn =
+                document.getElementById("view-calendar-btn");
+              const viewListBtn = document.getElementById("view-list-btn");
+              const calendarRoot = document.getElementById("calendar-root");
+              const eventListCard = document.getElementById("event-list-card");
+              const eventCountText =
+                document.getElementById("event-count-text");
+
+              let showCalendar = window.innerWidth > 768; // Default desktop: calendar, mobile: list
+
+              function updateView() {
+                if (showCalendar) {
+                  calendarRoot.style.display = "block";
+                  eventListCard.style.display = "none";
+                  viewCalendarBtn.classList.add("active");
+                  viewListBtn.classList.remove("active");
+                } else {
+                  calendarRoot.style.display = "none";
+                  eventListCard.style.display = "block";
+                  viewListBtn.classList.add("active");
+                  viewCalendarBtn.classList.remove("active");
+                }
+              }
+
+              viewCalendarBtn.addEventListener("click", () => {
+                showCalendar = true;
+                updateView();
+              });
+
+              viewListBtn.addEventListener("click", () => {
+                showCalendar = false;
+                updateView();
+              });
+
+              // Apply initial view
+              updateView();
+
+              // Initialize with 2027 (if current year is 2027 use current date, otherwise start at Jan 2027)
+              let currentDate = new Date();
+              let currentYear = 2027;
+              let currentMonth =
+                currentDate.getFullYear() === 2027
+                  ? currentDate.getMonth()
+                  : 0; // 0 = January
+              let allEvents = [];
+              let holidayMap = new Map(); // date → name
+
+              // Fetch events and holidays
+              Promise.all([
+                fetch("events.json").then((r) => r.json()),
+                fetch("holidays.json")
+                  .then((r) => r.json())
+                  .catch(() => []),
+              ])
+                .then(([events, holidays]) => {
+                  allEvents = events || [];
+                  holidayMap = new Map((holidays || []).map((h) => [h.date, h.name]));
+                  renderCalendar();
+                })
+                .catch((error) => {
+                  console.error("Error loading events:", error);
+                  calendarRoot.innerHTML =
+                    '<div class="text-center p-3 text-danger">無法載入活動資料</div>';
+                  const listRoot = document.getElementById("event-list-root");
+                  if (listRoot) {
+                    listRoot.innerHTML =
+                      '<div class="text-center p-3 text-danger">無法載入活動資料</div>';
+                  }
+                });
+
+              // Event Listeners for Navigation
+              prevBtn.addEventListener("click", () => {
+                currentMonth--;
+                if (currentMonth < 0) {
+                  currentMonth = 11;
+                  currentYear--;
+                }
+                renderCalendar();
+              });
+
+              nextBtn.addEventListener("click", () => {
+                currentMonth++;
+                if (currentMonth > 11) {
+                  currentMonth = 0;
+                  currentYear++;
+                }
+                renderCalendar();
+              });
+
+              let closestUpcomingDate = null;
+              function getEventDateClass(dateStr) {
+                const now = new Date();
+                const today = new Date(
+                  now.getFullYear(),
+                  now.getMonth(),
+                  now.getDate(),
+                ).getTime();
+                const [y, m, d] = dateStr.split("-").map(Number);
+                const eventTime = new Date(y, m - 1, d).getTime();
+                const diffDays = Math.round(
+                  (eventTime - today) / (1000 * 3600 * 24),
+                );
+                if (diffDays === 0) return " bg-today";
+
+                // only the closest upcoming event date
+                if (diffDays > 0) {
+                  if (!closestUpcomingDate) {
+                    closestUpcomingDate = dateStr;
+                    return " bg-upcoming";
+                  } else if (dateStr === closestUpcomingDate) {
+                    return " bg-upcoming";
+                  }
+                }
+
+                return "";
+              }
+
+              function renderCalendar() {
+                closestUpcomingDate = null; // Re-evaluate when rendering
+
+                // Pre-calculate nearest upcoming event to ensure both calendar grid and list view highlight the same date
+                const now = new Date();
+                const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+
+                const futureEvents = allEvents
+                  .filter((e) => e.date >= todayStr)
+                  .sort((a, b) => a.date.localeCompare(b.date));
+                if (futureEvents.length > 0) {
+                  closestUpcomingDate = futureEvents[0].date;
+                } else if (allEvents.length > 0) {
+                  closestUpcomingDate = allEvents[0].date;
+                }
+
+                // Update Title
+                titleDateSpan.textContent = `${currentYear} 年 ${currentMonth + 1} 月`;
+
+                const daysOfWeek = [
+                  "週一",
+                  "週二",
+                  "週三",
+                  "週四",
+                  "週五",
+                  "週六",
+                  "週日",
+                ];
+
+                // First day of the month
+                const firstDay = new Date(currentYear, currentMonth, 1);
+                // Day of week for the 1st
+                let startDay = firstDay.getDay();
+                // Adjust for Monday start (0=Mon, 6=Sun)
+                startDay = startDay === 0 ? 6 : startDay - 1;
+
+                // Days in month
+                const daysInMonth = new Date(
+                  currentYear,
+                  currentMonth + 1,
+                  0,
+                ).getDate();
+
+                let html = '<div class="calendar-header">';
+                daysOfWeek.forEach((day) => {
+                  html += `<div>${day}</div>`;
+                });
+                html += '</div><div class="calendar-grid">';
+
+                // Empty cells before start
+                for (let i = 0; i < startDay; i++) {
+                  html += '<div class="calendar-day empty"></div>';
+                }
+
+                // Days
+                for (let day = 1; day <= daysInMonth; day++) {
+                  const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+                  // Calculate day of week (0=Sunday, 6=Saturday)
+                  const currentDateObj = new Date(
+                    currentYear,
+                    currentMonth,
+                    day,
+                  );
+                  const dayOfWeek = currentDateObj.getDay();
+                  const isSaturday = dayOfWeek === 6;
+                  const isSunday = dayOfWeek === 0;
+                  const isWeekend = isSaturday || isSunday;
+
+                  // Check if we need top border (if previous week same day is not weekend or doesn't exist)
+                  let needTopBorder = false;
+                  if (isWeekend) {
+                    if (day <= 7) {
+                      needTopBorder = true;
+                    } else {
+                      const prevWeekDay = day - 7;
+                      const prevWeekDate = new Date(
+                        currentYear,
+                        currentMonth,
+                        prevWeekDay,
+                      );
+                      const prevWeekDayOfWeek = prevWeekDate.getDay();
+                      const prevWeekIsWeekend =
+                        prevWeekDayOfWeek === 0 || prevWeekDayOfWeek === 6;
+                      needTopBorder = !prevWeekIsWeekend;
+                    }
+                  }
+
+                  const weekendClass = isSaturday
+                    ? " saturday"
+                    : isSunday
+                      ? " sunday"
+                      : "";
+                  const topBorderClass = needTopBorder ? " weekend-top" : "";
+                  const rowClass = getEventDateClass(dateStr);
+
+                  // Holiday detection
+                  const holidayName = !isWeekend ? holidayMap.get(dateStr) : undefined;
+                  const isHoliday = !!holidayName;
+                  let holidayClass = "";
+                  if (isHoliday) {
+                    let needHolidayTop;
+                    if (day <= 7) {
+                      needHolidayTop = true;
+                    } else {
+                      const prevDateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day - 7).padStart(2, "0")}`;
+                      needHolidayTop = !holidayMap.has(prevDateStr);
+                    }
+                    holidayClass = " holiday" + (needHolidayTop ? " holiday-top" : "");
+                  }
+
+                  // Find events for this day
+                  const dayEvents = allEvents.filter((e) => e.date === dateStr);
+
+                  html += `<div class="calendar-day${weekendClass}${topBorderClass}${holidayClass}${rowClass}">
+                                ${isHoliday
+                                  ? `<div class="date-row"><span class="date-number">${day}</span><span class="holiday-label">${holidayName}</span></div>`
+                                  : `<span class="date-number">${day}</span>`
+                                }`;
+
+                  if (dayEvents.length > 0) {
+                    dayEvents.forEach((event) => {
+                      const linkStart =
+                        event.link && event.link !== "#"
+                          ? `<a href="${event.link}" target="_blank">`
+                          : "<div>";
+                      const linkEnd =
+                        event.link && event.link !== "#" ? "</a>" : "</div>";
+                      const colorStyle = event.color
+                        ? `style="color: ${event.color};"`
+                        : "";
+                      const borderStyle = event.color
+                        ? `style="border-left-color: ${event.color};"`
+                        : "";
+
+                      html += `<div class="day-event" ${borderStyle}>
+                                        ${linkStart}
+                                            <div class="event-community" ${colorStyle}>${event.community}</div>
+                                            <div class="event-name">${event.title}</div>
+                                            ${event.description ? `<div class="event-details-small">${event.description}</div>` : ""}
+                                        ${linkEnd}
+                                    </div>`;
+                    });
+                  }
+
+                  html += `</div>`;
+                }
+
+                // Fill remaining grid
+                const totalCells = startDay + daysInMonth;
+                const remaining = 7 - (totalCells % 7);
+                if (remaining < 7) {
+                  for (let i = 0; i < remaining; i++) {
+                    html += '<div class="calendar-day empty"></div>';
+                  }
+                }
+
+                html += "</div>";
+                calendarRoot.innerHTML = html;
+                renderEventList();
+              }
+
+              // ── 本月活動列表工具函式 ──────────────────────────
+
+              let currentMonthEvents = [];
+
+              function getGoogleCalendarURL(event) {
+                const start = event.date.replace(/-/g, "");
+                const [ey, em, ed] = event.date.split("-").map(Number);
+                const nextDay = new Date(ey, em - 1, ed + 1);
+                const end = `${nextDay.getFullYear()}${String(nextDay.getMonth() + 1).padStart(2, "0")}${String(nextDay.getDate()).padStart(2, "0")}`;
+                const text = encodeURIComponent(
+                  event.title
+                    ? `${event.community} - ${event.title}`
+                    : event.community,
+                );
+                const descParts = [];
+                if (event.description)
+                  descParts.push(
+                    event.description.replace(/<br\s*\/?>/gi, "\n"),
+                  );
+                if (event.link && event.link !== "#")
+                  descParts.push("活動連結：" + event.link);
+                const details = encodeURIComponent(descParts.join("\n"));
+                return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${end}&details=${details}`;
+              }
+
+              function downloadICS(index) {
+                const event = currentMonthEvents[index];
+                const start = event.date.replace(/-/g, "");
+                const [ey, em, ed] = event.date.split("-").map(Number);
+                const nextDay = new Date(ey, em - 1, ed + 1);
+                const end = `${nextDay.getFullYear()}${String(nextDay.getMonth() + 1).padStart(2, "0")}${String(nextDay.getDate()).padStart(2, "0")}`;
+                const summary = event.title
+                  ? `${event.community} - ${event.title}`
+                  : event.community;
+                const descParts = [];
+                if (event.description)
+                  descParts.push(
+                    event.description.replace(/<br\s*\/?>/gi, "\\n"),
+                  );
+                if (event.link && event.link !== "#")
+                  descParts.push("活動連結：" + event.link);
+                const lines = [
+                  "BEGIN:VCALENDAR",
+                  "VERSION:2.0",
+                  "PRODID:-//Community Card Org//高雄社群活動//ZH",
+                  "BEGIN:VEVENT",
+                  `UID:${event.date}-${encodeURIComponent(event.community)}@community-card.org`,
+                  `DTSTART;VALUE=DATE:${start}`,
+                  `DTEND;VALUE=DATE:${end}`,
+                  `SUMMARY:${summary}`,
+                ];
+                if (descParts.length)
+                  lines.push(`DESCRIPTION:${descParts.join("\\n")}`);
+                if (event.link && event.link !== "#")
+                  lines.push(`URL:${event.link}`);
+                lines.push("END:VEVENT", "END:VCALENDAR");
+                const blob = new Blob([lines.join("\r\n")], {
+                  type: "text/calendar;charset=utf-8",
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `${event.date}-${event.community}.ics`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+              }
+
+              function renderEventList() {
+                const listRoot = document.getElementById("event-list-root");
+                const monthEvents = allEvents
+                  .filter((e) => {
+                    const [y, m] = e.date.split("-").map(Number);
+                    return y === currentYear && m === currentMonth + 1;
+                  })
+                  .sort((a, b) => a.date.localeCompare(b.date));
+                currentMonthEvents = monthEvents;
+
+                // Update total events count
+                if (eventCountText) {
+                  eventCountText.textContent = `共 ${monthEvents.length} 場`;
+                }
+
+                if (monthEvents.length === 0) {
+                  listRoot.innerHTML =
+                    '<p class="text-muted text-center py-3">本月暫無活動資料</p>';
+                  return;
+                }
+
+                let html = `<div class="list-header" style="display:none;">${currentMonth + 1} 月活動（共 ${monthEvents.length} 場）</div>`;
+                html +=
+                  '<p style="font-size:0.85rem;color:#666;margin-bottom:10px;">點擊按鈕可將活動加入手機行事曆</p>';
+                html +=
+                  '<div class="table-responsive"><table class="table table-sm table-hover mb-0">';
+                html +=
+                  '<thead><tr><th>#</th><th>日期</th><th class="col-weekday">星期</th><th>活動</th><th><span class="d-none d-sm-inline">加入</span>行事曆</th></tr></thead>';
+                html += "<tbody>";
+                monthEvents.forEach((event, i) => {
+                  const [y, m, d] = event.date.split("-");
+                  const dayOfWeek = new Date(
+                    parseInt(y),
+                    parseInt(m) - 1,
+                    parseInt(d),
+                  ).getDay();
+                  const weekNames = ["日", "一", "二", "三", "四", "五", "六"];
+                  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+                  const isHoliday = !isWeekend && holidayMap.has(event.date);
+                  const dateColor = (isWeekend || isHoliday) ? "color:#e53e3e;" : "";
+                  const dateLabel = `<span style="${dateColor}">${m}/${d}</span>`;
+                  const weekLabel = `<span style="${dateColor}">週${weekNames[dayOfWeek]}</span>`;
+                  const dot = `<span class="community-dot" style="background:${event.color || "#666"};"></span>`;
+                  const googleURL = getGoogleCalendarURL(event);
+
+                  const eventLinkStart =
+                    event.link && event.link !== "#"
+                      ? `<a href="${event.link}" target="_blank" style="text-decoration:none;color:inherit;font-weight:bold;text-decoration:underline;">`
+                      : "";
+                  const eventLinkEnd =
+                    event.link && event.link !== "#" ? `</a>` : "";
+
+                  const rowClass = getEventDateClass(event.date);
+
+                  html += `<tr class="${rowClass.trim()}">
+                                <td style="white-space:nowrap;color:#999;">${i + 1}</td>
+                                <td style="white-space:nowrap;">${dateLabel}<span class="weekday-mobile" style="${dateColor}">週${weekNames[dayOfWeek]}</span></td>
+                                <td class="col-weekday" style="white-space:nowrap;">${weekLabel}</td>
+                                <td><div style="display:flex;align-items:flex-start;gap:6px;">${dot}<div><strong>${event.community}</strong>${event.title ? `<div style="color:#555;margin-top:2px;">${eventLinkStart}${event.title}${eventLinkEnd}</div>` : ""}${event.description ? `<div style="font-size:0.8rem;color:#777;margin-top:4px;line-height:1.4;">${event.description}</div>` : ""}</div></div></td>
+                                <td style="white-space:nowrap;">
+                                    <div class="btn-cal-group">
+                                        <a href="${googleURL}" target="_blank" class="btn btn-outline-primary btn-cal">Google</a>
+                                        <button class="btn btn-outline-secondary btn-cal" onclick="downloadICS(${i})">下載</button>
+                                    </div>
+                                </td>
+                            </tr>`;
+                });
+                html += "</tbody></table></div>";
+                listRoot.innerHTML = html;
+              }
+
+              // 將 downloadICS 暴露至全域，供 onclick 使用
+              window.downloadICS = downloadICS;
+            });
+          </script>
+
+          <div id="event-list-card">
+            <div id="event-list-root">
+              <div class="text-center p-3 text-muted">載入活動中...</div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 16px;
+          "
+        >
+          <span
+            id="event-count-text"
+            style="font-weight: bold; color: #666; font-size: 0.9rem"
+          ></span>
+          <p
+            style="text-align: right; font-size: 0.8rem; color: #666; margin: 0"
+          >
+            * 實際活動資訊依照主辦單位提供<br class="d-sm-none" />資訊為準
+          </p>
+        </div>
+        <div class="divider" style="margin-top: 1.5rem"></div>
+        <p style="text-align: center; font-size: 0.85rem; color: #64748b; margin-bottom: 0;">
+          高雄軟體社群月曆 2027 ｜ 掌握最新社群動態<br />
+          <a href="../2026/index.html" class="minorLink">← 查看 2026 高雄社群名牌卡</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

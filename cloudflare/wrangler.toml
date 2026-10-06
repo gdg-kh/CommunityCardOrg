@@ -1,0 +1,12 @@
+name = "community-puzzle-api"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+FRONTEND_URL = "https://communitycard.org/2027/"
+ADMIN_GITHUB_IDS = "AndyAWD"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "puzzle-prod"
+database_id = "e47f7459-b54b-47ae-ad3a-8f0520b3eed0"

@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>高雄社群拼圖 | Kaohsiung Community Puzzle</title>
+    <meta
+      content="高雄社群拼圖，紀錄你的社群歷程。活動簽到，解鎖專屬社群徽章與集章獎勵！"
+      name="description"
+    />
+    <meta
+      content="高雄社群, 社群拼圖, 名牌卡, 簽到, 集章獎勵, 技術社群, Kaohsiung Community Puzzle"
+      name="keywords"
+    />
+    <meta content="高雄社群拼圖" property="og:title" />
+    <meta
+      content="高雄社群拼圖，活動簽到，解鎖專屬社群徽章與集章獎勵！"
+      property="og:description"
+    />
+    <meta content="website" property="og:type" />
+    <meta
+      content="https://community-card.org/2027/puzzle.html"
+      property="og:url"
+    />
+    <meta
+      content="https://community-card.org/assets/print_community_card_forward_300dpi_2026.png"
+      property="og:image"
+    />
+    <meta content="高雄社群名牌卡" property="og:site_name" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KCNJBYW13R");
+    </script>
+
+    <style>
+      /* 2027 專用頁籤主題色彩 */
+      .nav-link-calendar.active {
+        background-color: #4285f4 !important;
+        color: #fff !important;
+      }
+      .nav-link-puzzle.active {
+        background-color: #34a853 !important;
+        color: #fff !important;
+      }
+      .nav-link-communities.active {
+        background-color: #f9ab00 !important;
+        color: #fff !important;
+      }
+      .nav-link-sponsors.active {
+        background-color: #ea4335 !important;
+        color: #fff !important;
+      }
+
+      /* 會眾資訊列 */
+      .user-bar {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+        flex-wrap: wrap;
+      }
+
+      .user-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        padding: 0.4rem 0.9rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .user-pill:hover {
+        background: #e2e8f0;
+        border-color: #94a3b8;
+      }
+
+      .user-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #34a853;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .btn-admin {
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+        color: #fff;
+        border: none;
+        padding: 0.4rem 0.9rem;
+        border-radius: 9999px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
+        transition: opacity 0.2s;
+      }
+      .btn-admin:hover {
+        opacity: 0.9;
+      }
+
+      /* 簽到核心區 */
+      .hero-box {
+        background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+        border-radius: 12px;
+        padding: 1.8rem 1.4rem;
+        text-align: center;
+        margin-bottom: 1.75rem;
+        color: #f8fafc;
+        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
+      }
+
+      .hero-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 0.4rem;
+        color: #f8fafc;
+      }
+
+      .hero-subtitle {
+        color: #94a3b8;
+        font-size: 0.9rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .checkin-form {
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .input-wrapper {
+        display: flex;
+        background: #0b1120;
+        border: 2px solid #334155;
+        border-radius: 9999px;
+        overflow: hidden;
+        transition: border-color 0.2s ease;
+      }
+
+      .input-wrapper:focus-within {
+        border-color: #38bdf8;
+      }
+
+      .checkin-input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: 0.8rem 1.25rem;
+        color: #f8fafc;
+        font-size: 0.95rem;
+      }
+
+      .checkin-input::placeholder {
+        color: #64748b;
+      }
+
+      .btn-submit {
+        margin: 3px;
+        padding: 0 1.5rem;
+        background: linear-gradient(135deg, #38bdf8, #0284c7);
+        color: #fff;
+        border: none;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: opacity 0.2s, transform 0.1s;
+      }
+
+      .btn-submit:hover {
+        opacity: 0.95;
+      }
+      .btn-submit:active {
+        transform: scale(0.98);
+      }
+      .btn-submit:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .msg-banner {
+        display: none;
+        margin-top: 0.75rem;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      .msg-banner.success {
+        display: block;
+        background: rgba(16, 185, 129, 0.15);
+        border: 1px solid #10b981;
+        color: #34d399;
+      }
+
+      .msg-banner.error {
+        display: block;
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid #ef4444;
+        color: #f87171;
+      }
+
+      /* 進度條 */
+      .progress-section {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 2rem;
+      }
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .progress-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1e293b;
+      }
+
+      .progress-count {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #0284c7;
+      }
+
+      .progress-bar-bg {
+        background: #e2e8f0;
+        height: 12px;
+        border-radius: 9999px;
+        overflow: hidden;
+      }
+
+      .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #4285f4, #34a853, #f9ab00, #ea4335);
+        width: 0%;
+        transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .milestones {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        margin-top: 0.4rem;
+        font-size: 0.75rem;
+        color: #64748b;
+      }
+
+      /* 拼圖卡牌牆網格 */
+      .puzzle-grid-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #1e293b;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .puzzle-card {
+        background: #fff;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 1.25rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+
+      .puzzle-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .puzzle-card.locked {
+        opacity: 0.65;
+        border-style: dashed;
+        filter: grayscale(0.85);
+        background: #fafafa;
+      }
+
+      .puzzle-card.locked:hover {
+        opacity: 0.85;
+      }
+
+      .puzzle-card.unlocked {
+        border-color: #38bdf8;
+        background: #f0f9ff;
+        box-shadow: 0 4px 14px -3px rgba(2, 132, 199, 0.2);
+      }
+
+      .card-logo {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+        margin-bottom: 0.75rem;
+        border-radius: 8px;
+        background: #fff;
+        padding: 4px;
+        border: 1px solid #f1f5f9;
+      }
+
+      .card-name {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+        color: #1e293b;
+      }
+
+      .card-status {
+        font-size: 0.78rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 9999px;
+        background: #e2e8f0;
+        color: #64748b;
+        font-weight: 600;
+      }
+
+      .card-status.active {
+        background: rgba(16, 185, 129, 0.2);
+        color: #059669;
+        font-weight: 700;
+      }
+
+      .stamp-ribbon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border: 2px solid #dc2626;
+        color: #dc2626;
+        font-weight: 900;
+        font-size: 0.72rem;
+        padding: 0.15rem 0.45rem;
+        text-transform: uppercase;
+        border-radius: 4px;
+        transform: rotate(12deg);
+        pointer-events: none;
+        display: none;
+      }
+
+      .unlocked .stamp-ribbon {
+        display: block;
+        animation: stampIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      @keyframes stampIn {
+        0% { transform: scale(2.5) rotate(-15deg); opacity: 0; }
+        100% { transform: scale(1) rotate(12deg); opacity: 1; }
+      }
+
+      /* Modal 彈窗 */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1050;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        padding: 1rem;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-box {
+        background: #fff;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 500px;
+        padding: 1.5rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25);
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+
+      .modal-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .modal-head h3 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #64748b;
+      }
+
+      @media (max-width: 600px) {
+        .input-wrapper {
+          flex-direction: column;
+          border-radius: 12px;
+        }
+        .btn-submit {
+          margin: 6px;
+          padding: 0.75rem;
+          justify-content: center;
+        }
+        .cards-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cardWrapper">
+      <!-- 導覽列：第一頁 社群月曆、第二頁 社群拼圖、第三頁 社群介紹、第四頁 贊助商 -->
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link nav-link-calendar" href="index.html">社群月曆</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active nav-link-puzzle" href="puzzle.html">社群拼圖</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-communities" href="communities.html">社群介紹</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-sponsors" href="sponsors.html">贊助商</a>
+        </li>
+      </ul>
+
+      <div class="card">
+        <!-- 頁面標題 -->
+        <div class="title-box">
+          <h1 class="title">
+            <span style="color: #34a853">高雄社群</span>拼圖
+          </h1>
+          <p class="subtitle">參與社群活動簽到，解鎖專屬社群拼圖徽章與集章獎勵！</p>
+        </div>
+
+        <!-- 會眾帳號徽章與組織者查驗後台按鈕 -->
+        <div class="user-bar">
+          <button
+            id="btnAdminPanel"
+            class="btn-admin"
+            style="display: none"
+            onclick="openAdminModal()"
+          >
+            組織者查驗後台
+          </button>
+          <div id="userBadge" class="user-pill" onclick="promptChangeUser()">
+            <div class="user-avatar" id="avatarText">?</div>
+            <span id="userName">點此設定 GitHub 帳號</span>
+          </div>
+        </div>
+
+        <!-- 簽到核心區 -->
+        <div class="hero-box">
+          <h2 class="hero-title">活動簽到</h2>
+          <p class="hero-subtitle">
+            於下方貼上活動主持人提供的通關密語（活動網址 ＋ 活動名稱），即可完成簽到並解鎖徽章。
+          </p>
+
+          <form class="checkin-form" onsubmit="handleCheckin(event)">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="inputSecret"
+                class="checkin-input"
+                placeholder="請貼上通關密語"
+                required
+                autocomplete="off"
+              />
+              <button type="submit" id="btnSubmit" class="btn-submit">
+                <span>解鎖拼圖</span>
+              </button>
+            </div>
+            <div id="msgBanner" class="msg-banner"></div>
+          </form>
+        </div>
+
+        <!-- 收集成就進度條 -->
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">社群收集進度</span>
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <a href="#rewards" style="font-size: 0.85rem; color: #34a853; text-decoration: none; font-weight: 600;">查看集章獎勵 ↓</a>
+              <span class="progress-count" id="progressText">0 / 12</span>
+            </div>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBar"></div>
+          </div>
+          <div class="milestones" id="milestonesList">
+            <span>1: 社群好朋友</span>
+            <span>2: 社群好好朋友</span>
+            <span>6: 社群好好好朋友</span>
+            <span>12: 社群好好好好朋友</span>
+          </div>
+        </div>
+
+        <!-- 拼圖收集板 -->
+        <div>
+          <h3 class="puzzle-grid-title">拼圖收集板</h3>
+          <div class="cards-grid" id="cardsGrid">
+            <!-- 由 JavaScript 動態載入 12 家社群拼圖 -->
+            <p style="grid-column: 1/-1; text-align: center; color: #64748b">
+              拼圖載入中...
+            </p>
+          </div>
+        </div>
+
+        <!-- 2026 集章獎勵內容（依需求整合於社群拼圖下方） -->
+        <div id="rewards" style="scroll-margin-top: 60px">
+          <div class="divider"></div>
+          <div class="title-box">
+            <h2 class="title">集章獎勵</h2>
+            <p class="subtitle">這裡匯集了高雄社群名牌卡有集章獎勵的社群</p>
+          </div>
+          <div class="divider"></div>
+
+          <div id="rewards-list">
+            <p style="text-align: center">載入中...</p>
+          </div>
+        </div>
+
+        <div class="divider" style="margin-top: 2rem"></div>
+        <p style="text-align: center; font-size: 0.85rem; color: #64748b">
+          高雄社群拼圖 ｜ 採用 Cloudflare Workers ＋ D1 高效架構<br />
+          <a href="../2026/index.html" class="minorLink">← 查看 2026 高雄社群名牌卡</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- 組織者查驗後台彈窗 (Admin Modal) -->
+    <div class="modal-overlay" id="adminModal">
+      <div class="modal-box">
+        <div class="modal-head">
+          <h3>社群主辦人查驗後台</h3>
+          <button class="modal-close" onclick="closeAdminModal()">&times;</button>
+        </div>
+
+        <div style="margin-bottom: 1.25rem">
+          <label
+            style="
+              display: block;
+              font-size: 0.85rem;
+              margin-bottom: 0.4rem;
+              color: #475569;
+            "
+          >
+            輸入會眾 GitHub 帳號查詢出席紀錄：
+          </label>
+          <div style="display: flex; gap: 0.5rem">
+            <input
+              type="text"
+              id="adminSearchUser"
+              class="form-control"
+              placeholder="例如：AndyAWD"
+            />
+            <button class="btn btn-primary" onclick="adminSearch()">查詢</button>
+          </div>
+        </div>
+
+        <div id="adminResult" style="display: none">
+          <div
+            style="
+              background: #f8fafc;
+              border: 1px solid #e2e8f0;
+              padding: 0.9rem;
+              border-radius: 8px;
+              margin-bottom: 1rem;
+            "
+          >
+            <div
+              style="font-weight: 700; margin-bottom: 0.4rem"
+              id="adminResultTitle"
+            >
+              查詢結果
+            </div>
+            <div
+              id="adminResultList"
+              style="font-size: 0.85rem; color: #475569; line-height: 1.6"
+            ></div>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; align-items: center">
+            <input
+              type="text"
+              id="adminVerifyNotes"
+              class="form-control"
+              placeholder="現場備註（例如：已領取貼紙）"
+              value="已現場核驗完成"
+            />
+            <button
+              class="btn-admin"
+              style="white-space: nowrap"
+              onclick="adminVerifyTarget()"
+            >
+              標記已核驗
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Cloudflare Worker API 網址
+      const API_BASE = "https://community-puzzle-api.anandydy529.workers.dev";
+
+      let currentUser = localStorage.getItem("puzzle_github_user") || "";
+      let communitiesData = [];
+      let userBadges = [];
+
+      // 初始化頁面
+      window.addEventListener("DOMContentLoaded", async () => {
+        // 網址若有 ?user= 參數則自動覆寫
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("user")) {
+          currentUser = urlParams.get("user").trim().replace(/^@+/, "");
+          localStorage.setItem("puzzle_github_user", currentUser);
+        }
+
+        updateUserUI();
+        await loadData();
+        if (currentUser) {
+          await fetchUserBadges();
+        }
+      });
+
+      // 載入社群資料與獎勵資料 (2027/data.json)
+      async function loadData() {
+        try {
+          const res = await fetch("data.json");
+          const json = await res.json();
+          communitiesData = json.communities || [];
+          updateMilestones();
+          renderCards();
+          updateProgressBar();
+          renderRewards(json.rewards || []);
+
+          // 若網址包含 #rewards 錨點，待 DOM 展開後精確捲動至獎勵區
+          if (window.location.hash === "#rewards") {
+            setTimeout(() => {
+              const el = document.getElementById("rewards");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }, 100);
+          }
+        } catch (err) {
+          console.error("載入 data.json 失敗", err);
+          document.getElementById("cardsGrid").innerHTML =
+            '<p style="grid-column: 1/-1; text-align: center; color: red;">無法載入社群資料</p>';
+          document.getElementById("rewards-list").innerHTML =
+            '<p style="text-align: center; color: red;">無法載入集章獎勵資料</p>';
+        }
+      }
+
+      // 渲染集章獎勵列表
+      function renderRewards(rewards) {
+        const list = document.getElementById("rewards-list");
+        list.innerHTML = "";
+
+        if (!rewards || rewards.length === 0) {
+          list.innerHTML = `
+            <p style="text-align: center; padding: 40px 0; font-size: 1.1em; color: #666;">
+              2027 年集章獎勵活動規劃中...<br><br>
+              敬請期待！
+            </p>
+          `;
+          return;
+        }
+
+        rewards.forEach((item) => {
+          const li = document.createElement("div");
+          li.className = "communityItem";
+          li.innerHTML = `
+            <a href="${item.link}" target="_blank">
+              <img src="${item.logo}" alt="${item.name}">
+            </a>
+            <a class="communityItemTitle" href="${item.link}" target="_blank">${item.name}</a>
+            <div class="description">${item.description}</div>
+          `;
+          list.appendChild(li);
+        });
+      }
+
+      // 更新使用者 UI 與白名單檢查
+      function updateUserUI() {
+        const avatarText = document.getElementById("avatarText");
+        const userName = document.getElementById("userName");
+
+        if (currentUser) {
+          avatarText.textContent = currentUser.charAt(0).toUpperCase();
+          userName.textContent = currentUser;
+        } else {
+          avatarText.textContent = "?";
+          userName.textContent = "點此設定 GitHub 帳號";
+        }
+      }
+
+      // 彈出設定帳號視窗
+      function promptChangeUser() {
+        const account = prompt(
+          "請輸入你的 GitHub 帳號 ID（例如 AndyAWD）：",
+          currentUser,
+        );
+        if (account !== null) {
+          currentUser = account.trim().replace(/^@+/, "");
+          if (currentUser) {
+            localStorage.setItem("puzzle_github_user", currentUser);
+          } else {
+            localStorage.removeItem("puzzle_github_user");
+            userBadges = [];
+            const btnAdmin = document.getElementById("btnAdminPanel");
+            if (btnAdmin) btnAdmin.style.display = "none";
+            renderCards();
+            updateProgressBar();
+          }
+          updateUserUI();
+          if (currentUser) {
+            fetchUserBadges();
+          }
+        }
+      }
+
+      // 從 Cloudflare API 抓取該使用者的已解鎖徽章
+      async function fetchUserBadges() {
+        if (!currentUser) {
+          userBadges = [];
+          const btnAdmin = document.getElementById("btnAdminPanel");
+          if (btnAdmin) btnAdmin.style.display = "none";
+          renderCards();
+          updateProgressBar();
+          return;
+        }
+
+        try {
+          const res = await fetch(
+            `${API_BASE}/api/my-badges?user=${encodeURIComponent(currentUser)}`,
+          );
+          const data = await res.json();
+
+          // 檢查是否為組織者白名單
+          const btnAdmin = document.getElementById("btnAdminPanel");
+          if (data.isAdmin) {
+            btnAdmin.style.display = "inline-flex";
+          } else {
+            btnAdmin.style.display = "none";
+          }
+
+          userBadges = data.badges || [];
+          renderCards();
+          updateProgressBar();
+        } catch (err) {
+          console.error("查詢個人徽章失敗", err);
+        }
+      }
+
+      // 正規化社群名稱（去除空白、標點符號並轉小寫，確保跨來源精準比對）
+      function normCommunity(s) {
+        return (s || "").toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]/g, "");
+      }
+
+      // 渲染卡牌牆
+      function renderCards() {
+        const grid = document.getElementById("cardsGrid");
+        grid.innerHTML = "";
+
+        // 預設佔位圖 SVG Data URI（防止破圖無窮迴圈）
+        const fallbackSvg = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='18' height='18' rx='2' ry='2'></rect><circle cx='8.5' cy='8.5' r='1.5'></circle><polyline points='21 15 16 10 5 21'></polyline></svg>";
+
+        communitiesData.forEach((c) => {
+          const cNorm = normCommunity(c.name);
+          // 支援名稱精準匹配、子字串包含與無符號雙向模糊比對
+          const badge = userBadges.find((b) => {
+            if (!b || !b.community_id) return false;
+            const bNorm = normCommunity(b.community_id);
+            return (
+              b.community_id === c.name ||
+              bNorm === cNorm ||
+              (bNorm.length > 2 && cNorm.includes(bNorm)) ||
+              (cNorm.length > 2 && bNorm.includes(cNorm))
+            );
+          });
+          const isUnlocked = !!badge;
+          const count = badge ? badge.count : 0;
+
+          const card = document.createElement("div");
+          card.className = `puzzle-card ${isUnlocked ? "unlocked" : "locked"}`;
+          card.onclick = () => showCardDetail(c, badge);
+
+          card.innerHTML = `
+            <div class="stamp-ribbon">已認證</div>
+            <img src="${c.logo}" alt="${c.name}" class="card-logo" onerror="this.onerror=null; this.src='${fallbackSvg}';" />
+            <h4 class="card-name">${c.name}</h4>
+            <div class="card-status ${isUnlocked ? "active" : ""}">
+              ${isUnlocked ? `已出席 ${count} 次` : "尚未解鎖"}
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      }
+
+      // 更新里程碑門檻（第一場與第二場進度固定，好好好朋友為一半社群捨去小數點，好好好好朋友為全部參加）
+      function updateMilestones() {
+        const total = communitiesData.length || 12;
+        const half = Math.floor(total / 2);
+        const container = document.getElementById("milestonesList");
+        if (container) {
+          container.innerHTML = `
+            <span>1: 社群好朋友</span>
+            <span>2: 社群好好朋友</span>
+            <span>${half}: 社群好好好朋友</span>
+            <span>${total}: 社群好好好好朋友</span>
+          `;
+        }
+      }
+
+      // 更新進度條
+      function updateProgressBar() {
+        const unlockedCount = userBadges.length;
+        const total = communitiesData.length || 12;
+        const pct = Math.min(100, Math.round((unlockedCount / total) * 100));
+
+        document.getElementById("progressText").textContent =
+          `${unlockedCount} / ${total}`;
+        document.getElementById("progressBar").style.width = `${pct}%`;
+        updateMilestones();
+      }
+
+      // 會眾提交密語簽到
+      async function handleCheckin(e) {
+        e.preventDefault();
+        const input = document.getElementById("inputSecret");
+        const secret = input.value.trim();
+        const banner = document.getElementById("msgBanner");
+        const submitBtn = document.getElementById("btnSubmit");
+
+        if (!currentUser) {
+          promptChangeUser();
+          if (!currentUser) return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "驗證中...";
+        banner.className = "msg-banner";
+
+        try {
+          const isTest = window.location.search.includes("test=true");
+          const checkinUrl = isTest ? `${API_BASE}/api/checkin?test=true` : `${API_BASE}/api/checkin`;
+          const res = await fetch(checkinUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              user: currentUser,
+              secret: secret,
+            }),
+          });
+
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            banner.className = "msg-banner success";
+            banner.textContent =
+              data.message || `成功解鎖 ${data.community} 拼圖印章！`;
+            input.value = "";
+            await fetchUserBadges();
+          } else {
+            banner.className = "msg-banner error";
+            banner.textContent =
+              data.error || "通關密語驗證失敗，請確認是否為今日活動！";
+          }
+        } catch (err) {
+          banner.className = "msg-banner error";
+          banner.textContent = "連線伺服器失敗，請稍後再試。";
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "<span>解鎖拼圖</span>";
+        }
+      }
+
+      // 卡牌點擊明細
+      function showCardDetail(community, badge) {
+        if (!badge) {
+          alert(
+            `【${community.name}】\n目前尚未收集此社群拼圖。\n請於活動當日輸入通關密語即可解鎖！`,
+          );
+        } else {
+          const eventsList = (badge.events || "")
+            .split("|||")
+            .filter(Boolean)
+            .join("\n• ");
+          alert(
+            `【${community.name}】已認證徽章！\n累積參與次數：${badge.count} 次\n\n參與場次歷程：\n• ${eventsList || "現場聚會"}`,
+          );
+        }
+      }
+
+      // 組織者查驗 Modal
+      function openAdminModal() {
+        document.getElementById("adminModal").classList.add("active");
+      }
+
+      function closeAdminModal() {
+        document.getElementById("adminModal").classList.remove("active");
+      }
+
+      let currentAdminTarget = "";
+
+      async function adminSearch() {
+        const target = document.getElementById("adminSearchUser").value.trim();
+        if (!target) return alert("請輸入帳號");
+
+        currentAdminTarget = target;
+        const resBox = document.getElementById("adminResult");
+        const title = document.getElementById("adminResultTitle");
+        const list = document.getElementById("adminResultList");
+
+        resBox.style.display = "block";
+        title.textContent = `會眾 @${target} 查詢中...`;
+        list.innerHTML = "讀取中...";
+
+        try {
+          const res = await fetch(
+            `${API_BASE}/api/admin/user-history?admin=${encodeURIComponent(currentUser)}&target=${encodeURIComponent(target)}`,
+          );
+          const data = await res.json();
+
+          if (!res.ok) {
+            title.textContent = "查詢失敗";
+            list.textContent = data.error || "權限不足";
+            return;
+          }
+
+          title.textContent = `@${target} 出席總數：${data.totalEvents} 次活動`;
+          if (data.checkins.length === 0) {
+            list.textContent = "尚無任何出席打卡紀錄。";
+          } else {
+            list.innerHTML = data.checkins
+              .map((c) => `• [${c.event_date}] ${c.community_id} - ${c.event_name}`)
+              .join("<br>");
+          }
+
+          if (data.verifications && data.verifications.length > 0) {
+            list.innerHTML +=
+              '<hr style="margin: 0.5rem 0; border-color: #cbd5e1;"><strong>已查驗備註紀錄：</strong><br>' +
+              data.verifications
+                .map(
+                  (v) =>
+                    `由 @${v.verified_by} 於 ${new Date(v.verified_at).toLocaleDateString()} 標記：${v.notes}`,
+                )
+                .join("<br>");
+          }
+        } catch (err) {
+          list.textContent = "連線失敗";
+        }
+      }
+
+      async function adminVerifyTarget() {
+        if (!currentAdminTarget) return alert("請先查詢會眾帳號");
+        const notes = document.getElementById("adminVerifyNotes").value.trim();
+
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/verify`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              admin: currentUser,
+              targetUser: currentAdminTarget,
+              notes: notes || "現場志工核驗完成",
+            }),
+          });
+          const data = await res.json();
+          if (res.ok) {
+            alert(data.message || "標記成功！");
+            adminSearch();
+          } else {
+            alert(data.error || "標記失敗");
+          }
+        } catch (e) {
+          alert("連線失敗");
+        }
+      }
+    </script>
+  </body>
+</html>

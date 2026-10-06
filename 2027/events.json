@@ -1,0 +1,98 @@
+[
+  {
+    "date": "2027-01-04",
+    "community": "K.NET",
+    "title": "2027 K.NET 開年軟體技術小聚",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io/",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2027-01-05",
+    "community": "GDG Kaohsiung",
+    "title": "TOOCON 2027 新年首聚",
+    "description": "Google 技術與高雄開發者新年實體交流",
+    "link": "https://www.facebook.com/groups/GDGKaohsiung",
+    "color": "#EA4335"
+  },
+  {
+    "date": "2027-01-08",
+    "community": "開發者 Buffet",
+    "title": "開發者 café 2027 首發聚",
+    "description": "輕鬆交流前後端、AI、UI/UX 與開源話題",
+    "link": "https://discord.gg/uRvhqpFeuG",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2027-01-10",
+    "community": "PyLadies Kaohsiung",
+    "title": "Python 新手與資料科學交流工作坊",
+    "description": "高雄女性技術社群交流與技能提升",
+    "link": "https://kaohsiung.pyladies.com/",
+    "color": "#FA3C0A"
+  },
+  {
+    "date": "2027-01-15",
+    "community": "UIUX.Kaohsiung",
+    "title": "2027 設計趨勢與 AI 設計協作實務",
+    "description": "高雄設計師互助聚會",
+    "link": "https://luma.com/uiux.kaohsiung",
+    "color": "#34A853"
+  },
+  {
+    "date": "2027-01-20",
+    "community": "南台灣敏捷社群",
+    "title": "產品思維與敏捷實務交流小聚",
+    "description": "以敏捷改變在地產業文化",
+    "link": "https://www.facebook.com/groups/agile.south.taiwan/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2027-01-22",
+    "community": "高雄 WordPress 小聚",
+    "title": "WordPress 網站架構與區塊編輯實戰",
+    "description": "內容產製與自由接案者交流",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2027-01-25",
+    "community": "VSCP 粉鳥趴",
+    "title": "獨立工作者商業與實務小聚",
+    "description": "打造互助、有活力的獨立工作者社群",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2027-01-28",
+    "community": "KIMU 高雄獨立遊戲開發者聚會",
+    "title": "獨立遊戲原型展示與交流會",
+    "description": "南台灣獨立遊戲交流與試玩分享",
+    "link": "https://www.facebook.com/groups/kimugroup/",
+    "color": "#34A853"
+  },
+  {
+    "date": "2027-02-05",
+    "community": "KaLUG",
+    "title": "Linux 與開源系統核心交流會",
+    "description": "Linux User Group 高雄定期技術聚會",
+    "link": "https://kalug.tw/",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2027-02-12",
+    "community": "vLAB Online 台灣路由網路實驗中心",
+    "title": "網路架構與雲端路由實戰交流",
+    "description": "網路工程與架構交流聚會",
+    "link": "http://www.vlab.tw",
+    "color": "#4285F4"
+  },
+  {
+    "date": "2027-02-18",
+    "community": "Second Space",
+    "title": "跨國數位遊牧與技術創作者之夜",
+    "description": "國際科技社群交流與共同工作之夜",
+    "link": "https://www.facebook.com/cubeworksx",
+    "color": "#F9AB00"
+  }
+]
