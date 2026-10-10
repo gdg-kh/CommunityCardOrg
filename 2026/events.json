@@ -1614,5 +1614,13 @@
     "description": "雖然無人機現在很便宜，但是無人機操作可是受到民航法的管理喔！所以在飛行重量、區域、時間都有法規限制，所以先了解相關知識才能安全又安心的進入無人機的世界喔",
     "link": "https://ksdg.kktix.cc/events/uav-intro-and-drone-soccer",
     "color": "#808080"
+  },
+  {
+    "date": "2026-11-05",
+    "community": "Codex Ambassador",
+    "title": "DevDay Exchange Community: Kaohsiung",
+    "description": "歡迎參加由在地 Codex Ambassador Harry Ng 主辦的高雄社群聚會！這是一場由社群發起的非官方活動，邀請在地開發者、學生、創業者與各領域的實作者，一起探索 OpenAI DevDay 的新想法、工具與發表內容，認識彼此，分享正在打造的作品。不論經驗多寡都歡迎參加，也歡迎剛開始使用 AI 開發的朋友。",
+    "link": "https://luma.com/gxlcaluh",
+    "color": "#808080"
   }
 ]
