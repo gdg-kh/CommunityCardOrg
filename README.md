@@ -25,6 +25,51 @@
 
 ---
 
+## 📱 數位簽到護照
+
+參加者掃描活動現場的 QR code 就能自動集章，不需要資料庫或登入。此功能放在 `2027/` 底下，不影響 2026 的頁面與資料。
+
+| 頁面 | 用途 |
+| --- | --- |
+| `2027/checkin.html` | 掃碼後的簽到頁，驗證簽章後存進護照 |
+| `2027/passport.html` | 綜合護照：社群牆、集章獎勵、簽到記錄、備份還原 |
+| `2027/passport.html?c=<社群 id>` | 單一社群護照：該社群所有場次、獎勵進度、兌換畫面 |
+| `2027/organizer.html` | 主辦方工具：產生社群金鑰、簽出簽到 QR code（不在導覽列） |
+| `2027/verify.html` | 驗證參加者提供的備份連結：簽章、QR code 有效時間、簽到時間、獎勵是否達標（只檢視不匯入，不在導覽列） |
+
+### 運作方式
+
+*   每個社群有一組 ECDSA P-256 金鑰。**私鑰**只在 organizer 手上（加密成金鑰檔保存），**公鑰**登錄在 `2027/stamps.json`。
+*   簽到 QR code 內容是「社群、活動、日期、實體/線上、有效時間」加上簽章，簽到頁用公鑰驗證，所以只有持有私鑰的人能簽出該社群的簽到碼。
+*   印章存在參加者瀏覽器的 localStorage。護照頁提供備份連結，並建議「加入主畫面」避免 iOS Safari 清除資料。
+
+### 社群 organizer：開通數位簽到
+
+1.  打開 `https://community-card.org/2027/organizer.html`，選擇社群 →「金鑰管理」→ 設定密碼並「產生並下載金鑰檔」。
+2.  妥善保存金鑰檔（`<社群 id>-<kid>.ccard-key.json`）和密碼，**不要**放進 repo。
+3.  把頁面顯示的公鑰加到 `2027/stamps.json` 對應社群的 `publicKeys`，發 Pull Request；合併部署後即可使用。
+4.  活動當天在「簽出 QR code」選擇活動與簽到方式（實體、線上，或「實體＋線上」一次產生兩張），產生 QR code 後列印或全螢幕顯示。線上 QR code 建議使用「輪替模式」（每 60 秒換一次）。
+    *   同一場活動每人只保留一個章；實體與線上都簽到時以**實體**為準（先線上後實體會自動改成實體章）。
+5.  有人錯過簽到時，可以在「過去活動補簽」產生一次性補簽碼（可選實體或線上）。每張都有不同編號、只在短時間內有效（預設 10 分鐘），請直接發給本人；護照上跟一般的章一樣，驗證頁會註明是補簽並可通過檢查，organizer 瀏覽器裡也會留下補簽記錄方便對帳。
+6.  金鑰外洩或換人管理時，在該金鑰加上 `"revokedAt": "<ISO 時間>"` 停用，再產生新金鑰。
+
+### `2027/stamps.json` 設定
+
+*   **社群名稱以 `2027/data.json` 為準**：`communities[].name` 必須與 `data.json` 的 `communities[].name` 完全相同；不在 `data.json` 的合作社群放在 `partners`。
+*   `id`：簽到碼與網址使用的社群代號，建立後請勿更改。
+*   `stamp.mode`：`distinct`（實體/線上不同圖案）或 `shared`（共用圖案）。
+*   `stamp.onsite` / `stamp.online` 的 `variant`：`color`（彩色）、`grayscale`（黑白）、`tint` + `color`（單色）、`image` + `src`（指定另一張圖）。
+*   `reward`：`scope` 為 `community`（只算該社群的章）、`others`（只算其他社群的章，例如 PyLadies 的獎勵）或 `all`（所有社群都算），`required` 為需要的章數。
+
+### 資料一致性檢查（CI）
+
+`.github/workflows/check-data.yml` 會在 PR 時執行 `npm run check:data`（`scripts/check-data.mjs`，預設檢查 2027，可用 `node scripts/check-data.mjs <年度>` 指定），檢查：
+
+*   `data.json` 的 `rewards`、`events.json` 的 `community`、`stamps.json` 的社群名稱都對得上 `data.json` 的 `communities`（或 `stamps.json` 的 `partners`）
+*   `stamps.json` 的 id、印章圖檔、variant、公鑰格式，以及有沒有誤放私鑰
+
+---
+
 ## 🛠️ 本機開發與部署
 
 ### 環境需求

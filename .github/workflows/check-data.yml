@@ -1,0 +1,35 @@
+name: Check community data
+
+on:
+  pull_request:
+    paths:
+      - "2027/data.json"
+      - "2027/events.json"
+      - "2027/stamps.json"
+      - "assets/**"
+      - "scripts/check-data.mjs"
+      - ".github/workflows/check-data.yml"
+  push:
+    branches: [main]
+    paths:
+      - "2027/data.json"
+      - "2027/events.json"
+      - "2027/stamps.json"
+      - "assets/**"
+      - "scripts/check-data.mjs"
+      - ".github/workflows/check-data.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 檢查社群名稱與簽到設定是否一致
+        run: node scripts/check-data.mjs 2027

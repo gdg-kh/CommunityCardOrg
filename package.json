@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "generate-og": "node scripts/generate-og-images.js",
-    "build:tracking": "node scripts/add-tracking.mjs"
+    "build:tracking": "node scripts/add-tracking.mjs",
+    "check:data": "node scripts/check-data.mjs"
   },
   "dependencies": {
     "puppeteer": "^23.0.0"

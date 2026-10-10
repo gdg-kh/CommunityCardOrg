@@ -1,0 +1,101 @@
+﻿<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="匯集高雄活躍的技術與交流社群，歡迎認識與參與。這裡有各個社群的介紹與連結。"
+      name="description"
+    />
+    <meta
+      content="高雄社群, 社群介紹, 技術社群, 交流社群, Kaohsiung Tech Communities"
+      name="keywords"
+    />
+    <meta content="2027 高雄社群名牌卡 - 社群介紹" property="og:title" />
+    <meta
+      content="匯集高雄活躍的技術與交流社群，歡迎認識與參與。這裡有各個社群的介紹與連結。"
+      property="og:description"
+    />
+    <meta content="website" property="og:type" />
+    <meta
+      content="https://community-card.org/2027/communities.html"
+      property="og:url"
+    />
+    <meta
+      content="https://community-card.org/assets/print_community_card_forward_300dpi_2026.png"
+      property="og:image"
+    />
+    <meta content="高雄社群名牌卡" property="og:site_name" />
+    <title>2027 高雄社群名牌卡 - 社群介紹</title>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KCNJBYW13R");
+    </script>
+  </head>
+  <body>
+    <div class="cardWrapper">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item"><a class="nav-link" href="index.html">社群月曆</a></li>
+        <li class="nav-item"><a class="nav-link" href="passport.html">社群護照</a></li>
+        <li class="nav-item"><a class="nav-link active" href="communities.html">社群介紹</a></li>
+        <li class="nav-item"><a class="nav-link" href="sponsors.html">贊助商</a></li>
+      </ul>
+
+      <div class="card">
+        <div class="title-box">
+          <h1 class="title">高雄在地社群</h1>
+          <p class="subtitle">這裡匯集了高雄活躍的技術與交流社群，歡迎參加！</p>
+        </div>
+        <div class="divider"></div>
+
+        <div id="communities-list">
+          <!-- Data will be loaded here -->
+          <p style="text-align: center">載入中...</p>
+        </div>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            fetch("data.json")
+              .then((response) => response.json())
+              .then((data) => {
+                const list = document.getElementById("communities-list");
+                list.innerHTML = ""; // Clear loading text
+
+                data.communities.forEach((item) => {
+                  const li = document.createElement("div"); // Using div instead of li to avoid validation errors if ul is missing, but kept class
+                  li.className = "communityItem";
+                  li.innerHTML = `
+                                    <a href="${item.link}" target="_blank">
+                                        <img src="${item.logo}" alt="${item.name}">
+                                    </a>
+                                    <a class="communityItemTitle" href="${item.link}" target="_blank">${item.name}</a>
+                                    <div class="description">${item.description}</div>
+                                `;
+                  list.appendChild(li);
+                });
+              })
+              .catch((error) => {
+                console.error("Error loading data:", error);
+                document.getElementById("communities-list").innerHTML =
+                  '<p style="text-align: center; color: red;">無法載入資料</p>';
+              });
+          });
+        </script>
+
+        <div class="divider"></div>
+      </div>
+    </div>
+  </body>
+</html>

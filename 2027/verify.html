@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <script>
+      // 備份資料放在網址 # 後面；先取出再清掉，避免留在瀏覽紀錄
+      window.__ppHash = location.hash;
+      if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+      addEventListener("hashchange", () => location.reload());
+    </script>
+    <link href="../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="stylesheet" href="passport/passport.css" />
+    <title>驗證護照備份 - 2027 高雄社群名牌卡</title>
+  </head>
+
+  <body>
+    <div class="cardWrapper">
+      <div class="card" style="margin-top: 8px">
+        <div class="title-box">
+          <h1 class="title"><span class="specialColor">驗證</span>護照備份</h1>
+          <p class="subtitle">檢查參加者提供的備份連結，確認印章與簽到時間</p>
+          <p class="pp-muted" style="margin: 0"><a href="organizer.html">← 主辦方簽到工具</a></p>
+        </div>
+        <div class="pp-notice info">
+          這裡只會檢視備份內容，<b>不會</b>匯入到你自己的護照。簽章、活動日期、QR code 有效時間無法被竄改；
+          參加者手機記錄的「簽到時間」沒有簽章保護，只能當作參考。
+        </div>
+
+        <form class="pp-form" onsubmit="return false">
+          <div>
+            <label for="input">備份連結</label>
+            <textarea id="input" rows="3" placeholder="https://community-card.org/2027/passport.html#import=..."></textarea>
+          </div>
+          <div><button class="pp-btn" id="check">驗證</button></div>
+        </form>
+
+        <div id="result" style="margin-top: 16px"></div>
+      </div>
+    </div>
+
+    <script type="module">
+      import {
+        CLOCK_SKEW,
+        loadRegistry,
+        loadEvents,
+        communityIdOf,
+        verifyToken,
+        parseToken,
+        decodeBackup,
+        loadVerifiedStamps,
+        rewardStamps,
+        modeBadges,
+        isMakeup,
+        renderStamp,
+        stampSpec,
+        formatDate,
+        escapeHtml,
+      } from "./passport/core.js";
+
+      const SHORT_WINDOW = 30 * 60; // 有效時間在 30 分鐘內視為短效（輪替）碼
+      const $ = (id) => document.getElementById(id);
+      const registry = await loadRegistry();
+      const events = await loadEvents();
+      const eventIndex = new Set(events.map((ev) => `${communityIdOf(registry, ev.community)}|${ev.date}`));
+
+      const fmt = (sec) =>
+        new Date(sec * 1000).toLocaleString("zh-TW", {
+          timeZone: "Asia/Taipei",
+          hour12: false,
+          month: "numeric",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      const minutes = (sec) => (sec >= 3600 ? `${Math.round(sec / 360) / 10} 小時` : `${Math.round(sec / 60)} 分鐘`);
+
+      function extractCode(text) {
+        const s = text.trim();
+        const m = /import=([A-Za-z0-9_-]+)/.exec(s);
+        if (m) return m[1];
+        if (/^[zj][A-Za-z0-9_-]+$/.test(s)) return s;
+        throw new Error("找不到備份資料，請貼上完整的備份連結");
+      }
+
+      // 每個印章的檢查項目：ok 通過、warn 需要注意、bad 無效、info 補充說明
+      function checksFor(row) {
+        if (!row.valid) return [{ level: "bad", text: `簽章無效：${row.error}` }];
+        const p = row.payload;
+        const out = [{ level: "ok", text: "簽章有效，由主辦方簽出" }];
+
+        const dayStart = Date.parse(`${p.d}T00:00:00+08:00`) / 1000;
+        const dayEnd = dayStart + 86400;
+        if (isMakeup(p)) {
+          // 補簽碼在活動之後才發出，不檢查有效時間是否涵蓋活動日期
+          out.push(
+            p.iat >= dayStart
+              ? { level: "info", text: `補簽：主辦方於 ${fmt(p.iat)} 發出的一次性補簽碼（編號 ${p.n || "無"}），可對照主辦方的補簽記錄` }
+              : { level: "warn", text: "補簽碼的發出時間早於活動日期，可能是主辦方設定錯誤" },
+          );
+        } else {
+          out.push(
+            p.nbf < dayEnd && p.exp > dayStart
+              ? { level: "ok", text: "QR code 有效時間涵蓋活動日期" }
+              : { level: "warn", text: `QR code 有效時間（${fmt(p.nbf)} ~ ${fmt(p.exp)}）不包含活動日期，可能是主辦方設定錯誤` },
+          );
+        }
+
+        const span = p.exp - p.nbf;
+        out.push(
+          isMakeup(p)
+            ? { level: "info", text: `補簽碼有效時間 ${minutes(p.exp - p.iat)}` }
+            : span <= SHORT_WINDOW
+            ? { level: "ok", text: `短效 QR code（${minutes(span)}），代表當下有看到現場或直播畫面` }
+            : { level: "info", text: `長效 QR code（${minutes(span)}），同一場的參加者拿到的是同一張` },
+        );
+
+        const at = Number(row.at) / 1000;
+        if (!Number.isFinite(at)) {
+          out.push({ level: "warn", text: "備份裡沒有簽到時間" });
+        } else if (at < p.nbf - CLOCK_SKEW || at > p.exp + CLOCK_SKEW) {
+          out.push({ level: "warn", text: `記錄的簽到時間 ${fmt(at)} 不在有效時間內（手機時間不準或資料被修改）` });
+        } else {
+          out.push({ level: "ok", text: `記錄的簽到時間 ${fmt(at)} 在有效時間內（僅供參考）` });
+        }
+
+        out.push(
+          eventIndex.has(`${p.c}|${p.d}`)
+            ? { level: "ok", text: "社群月曆上有這場活動" }
+            : { level: "info", text: "社群月曆上沒有這場活動（可能是臨時加開的活動）" },
+        );
+        return out;
+      }
+
+      const ICONS = { ok: "✅", warn: "⚠️", bad: "❌", info: "ℹ️" };
+      const hasWarning = (row) => row.checks.some((c) => c.level === "warn" || c.level === "bad");
+
+      async function verify(code) {
+        const records = await decodeBackup(code);
+        const rows = await Promise.all(
+          records.map(async (r) => {
+            try {
+              const { payload, community } = await verifyToken(r.token, registry);
+              return { ...r, payload, community, valid: true };
+            } catch (err) {
+              let payload = null;
+              try {
+                payload = parseToken(r.token).payload;
+              } catch {}
+              return { ...r, payload, community: payload && registry.byId.get(payload.c), valid: false, error: err.message };
+            }
+          }),
+        );
+        rows.forEach((row) => (row.checks = checksFor(row)));
+
+        // 計入的印章：同一場只算一個，實體優先（與護照相同規則）
+        const counted = (await loadVerifiedStamps(registry, records)).filter((s) => s.valid);
+        const countedTokens = new Set(counted.map((s) => s.token));
+        const byToken = new Map(rows.map((r) => [r.token, r]));
+        rows.forEach((row) => {
+          if (row.valid && !countedTokens.has(row.token)) {
+            row.checks.push({ level: "info", text: "同一場活動已有其他印章，這筆不計入（實體優先）" });
+          }
+        });
+
+        return { rows, counted, byToken };
+      }
+
+      async function render({ rows, counted, byToken }) {
+        const invalid = rows.filter((r) => !r.valid).length;
+        const warned = counted.filter((s) => hasWarning(byToken.get(s.token))).length;
+
+        // 依社群統計
+        const groups = new Map();
+        for (const s of counted) {
+          if (!groups.has(s.community.id)) groups.set(s.community.id, []);
+          groups.get(s.community.id).push(s);
+        }
+        const summary = [...groups.values()]
+          .map((list) => {
+            const c = list[0].community;
+            const onsite = list.filter((s) => s.payload.m === "onsite").length;
+            const warn = list.filter((s) => hasWarning(byToken.get(s.token))).length;
+            return `<li>${escapeHtml(c.name)}：<b>${list.length}</b> 個章（實體 ${onsite}、線上 ${list.length - onsite}）${warn ? `，<span style="color:#b06000">${warn} 個需要注意</span>` : "，全部通過"}</li>`;
+          })
+          .join("");
+
+        // 集章獎勵
+        const rewards = registry.communities
+          .filter((c) => c.reward)
+          .map((c) => {
+            const list = rewardStamps(c, counted);
+            const clean = list.filter((s) => !hasWarning(byToken.get(s.token))).length;
+            const done = list.length >= c.reward.required;
+            return `
+              <div class="pp-notice ${done ? "success" : ""}">
+                <p><b>${escapeHtml(c.name)}</b>：${escapeHtml(c.reward.text || "")}</p>
+                <p class="pp-muted" style="margin:0">${done ? "✅ 已達成" : "未達成"}：${list.length} / ${c.reward.required}
+                ${list.length !== clean ? `（其中 ${list.length - clean} 個有警告，全部通過的有 ${clean} 個）` : ""}</p>
+              </div>`;
+          })
+          .join("");
+
+        const items = await Promise.all(
+          [...rows]
+            .sort((a, b) => (a.payload?.d || "").localeCompare(b.payload?.d || ""))
+            .map(async (row) => {
+              const p = row.payload;
+              const img = row.valid
+                ? `<img src="${await renderStamp(stampSpec(row.community, p.m), 120)}" alt="" />`
+                : `<div style="width:44px;height:44px;flex:none;text-align:center;font-size:1.6rem">❌</div>`;
+              const head = p
+                ? `${escapeHtml(p.t || "")} ${modeBadges(p)}`
+                : "無法解析的簽到碼";
+              const sub = p ? `${formatDate(p.d)} · ${escapeHtml(row.community?.name || p.c)} · 活動 ID ${escapeHtml(p.e)}` : "";
+              const checks = row.checks
+                .map((c) => `<div class="check ${c.level}">${ICONS[c.level]} ${escapeHtml(c.text)}</div>`)
+                .join("");
+              return `
+                <li>
+                  ${img}
+                  <div class="meta">
+                    <div class="title">${head}</div>
+                    <div class="sub">${sub}</div>
+                    <div class="pp-checks">${checks}</div>
+                  </div>
+                </li>`;
+            }),
+        );
+
+        $("result").innerHTML = `
+          <div class="pp-stats">
+            <div class="pp-stat"><div class="num">${counted.length}</div><div class="label">計入的印章</div></div>
+            <div class="pp-stat"><div class="num">${groups.size}</div><div class="label">社群</div></div>
+            <div class="pp-stat"><div class="num">${warned}</div><div class="label">需要注意</div></div>
+            <div class="pp-stat"><div class="num">${invalid}</div><div class="label">無效</div></div>
+          </div>
+          ${summary ? `<div class="pp-section-title">各社群</div><ul class="pp-summary">${summary}</ul>` : `<p class="pp-muted">備份裡沒有有效的印章。</p>`}
+          ${rewards ? `<div class="pp-section-title">集章獎勵</div>${rewards}` : ""}
+          <div class="pp-section-title">每個印章的檢查結果</div>
+          <ul class="pp-timeline">${items.join("")}</ul>`;
+      }
+
+      async function run(text) {
+        $("result").innerHTML = `<p class="pp-muted">驗證中…</p>`;
+        try {
+          await render(await verify(extractCode(text)));
+        } catch (err) {
+          $("result").innerHTML = `<div class="pp-notice error">${escapeHtml(err.message || "備份連結無法解析")}</div>`;
+        }
+      }
+
+      $("check").onclick = () => run($("input").value);
+
+      const m = /^#import=(.+)$/.exec(window.__ppHash || "");
+      if (m) {
+        $("input").value = `#import=${m[1]}`;
+        run(m[1]);
+      }
+    </script>
+  </body>
+</html>

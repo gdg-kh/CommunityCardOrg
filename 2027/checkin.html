@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link href="../bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="stylesheet" href="passport/passport.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#14212e" />
+    <title>活動簽到 - 2027 高雄社群名牌卡</title>
+  </head>
+
+  <body>
+    <div class="cardWrapper">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item"><a class="nav-link" href="index.html">社群月曆</a></li>
+        <li class="nav-item"><a class="nav-link active" href="passport.html">社群護照</a></li>
+        <li class="nav-item"><a class="nav-link" href="communities.html">社群介紹</a></li>
+        <li class="nav-item"><a class="nav-link" href="sponsors.html">贊助商</a></li>
+      </ul>
+      <div class="card">
+        <div id="notices"></div>
+        <div id="result" class="pp-checkin">
+          <p class="pp-muted">簽到中…</p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import {
+        CheckinError,
+        loadRegistry,
+        verifyToken,
+        addStampRecord,
+        loadVerifiedStamps,
+        renderStamp,
+        rewardStamps,
+        rewardCounts,
+        modeBadges,
+        stampSpec,
+        stampRotation,
+        requestPersistentStorage,
+        inAppBrowserName,
+        isStandalone,
+        formatDate,
+        escapeHtml,
+        registerServiceWorker,
+      } from "./passport/core.js";
+
+      const result = document.getElementById("result");
+      const notices = document.getElementById("notices");
+      const token = decodeURIComponent(location.hash.slice(1));
+
+      function notice(html, type = "") {
+        notices.insertAdjacentHTML("beforeend", `<div class="pp-notice ${type}">${html}</div>`);
+      }
+
+      const HEADLINES = {
+        added: "簽到成功！",
+        upgraded: "已改為實體簽到！",
+        duplicate: "這場已經簽到過囉",
+      };
+
+      const ERROR_HINTS = {
+        format: "請重新掃描現場的 QR code。",
+        expired: "簽到碼有時效，請向主辦方索取最新的 QR code。",
+        notyet: "活動還沒開始簽到，請確認手機時間是否正確。",
+        key: "主辦方的金鑰可能還沒登錄到網站，請通知主辦方。",
+        inactive: "但仍然非常歡迎參加他們的活動！",
+        community: "主辦方的社群可能還沒登錄到網站，請通知主辦方。",
+        revoked: "請向主辦方索取新的 QR code。",
+        signature: "這個 QR code 可能被修改過，請重新掃描現場的 QR code。",
+      };
+
+      async function run() {
+        if (!token) {
+          result.innerHTML = `
+            <h2>沒有簽到碼</h2>
+            <p class="pp-muted">請用手機相機掃描活動現場的簽到 QR code。</p>
+            <a class="pp-btn" href="passport.html">查看我的護照</a>`;
+          return;
+        }
+
+        const inApp = inAppBrowserName();
+        if (inApp) {
+          notice(`
+            <p>⚠️ 你正在 <b>${inApp}</b> 內建的瀏覽器中開啟，簽到記錄只會存在 ${inApp} 裡，
+            之後用 Safari／Chrome 會看不到。建議點右上角「⋯」選擇「用瀏覽器開啟」後再簽到一次。</p>`);
+        }
+
+        const registry = await loadRegistry();
+        let verified;
+        try {
+          verified = await verifyToken(token, registry, { checkTime: true });
+        } catch (err) {
+          if (!(err instanceof CheckinError)) throw err;
+          result.innerHTML = `
+            <h2>簽到失敗</h2>
+            <p>${escapeHtml(err.message)}</p>
+            <p class="pp-muted">${ERROR_HINTS[err.code] || ""}</p>
+            <a class="pp-btn secondary" href="passport.html">查看我的護照</a>`;
+          return;
+        }
+
+        const { payload, community } = verified;
+        const { status, keptMode, saved } = addStampRecord(token, payload);
+        // 重複簽到時顯示原本保留的章（實體優先）
+        const mode = status === "duplicate" ? keptMode : payload.m;
+        // 簽到碼已存進護照，網址上就不必再保留
+        history.replaceState(null, "", location.pathname);
+        requestPersistentStorage();
+
+        if (!saved) {
+          notice(
+            "無法儲存簽到記錄，可能是使用無痕模式或瀏覽器封鎖了網站資料。請改用一般模式開啟。",
+            "error",
+          );
+        }
+
+        const stamps = (await loadVerifiedStamps(registry)).filter((s) => s.valid);
+        const total = stamps.length;
+        const ofCommunity = stamps.filter((s) => s.payload.c === community.id).length;
+        const src = await renderStamp(stampSpec(community, mode), 360);
+        // 只提示這個章有計算到的獎勵（例如 PyLadies 的獎勵只算其他社群的章）
+        const rewardHtml = registry.communities
+          .filter((c) => c.reward && rewardCounts(c, community.id))
+          .map((c) => {
+            const have = rewardStamps(c, stamps).length;
+            const link = `passport.html?c=${encodeURIComponent(c.id)}`;
+            return have >= c.reward.required
+              ? `<div class="pp-notice success">🎁 已達成 ${escapeHtml(c.name)} 的集章獎勵！到<a href="${c.reward.scope === "others" ? "passport.html" : link}">護照頁</a>可以開啟兌換畫面。</div>`
+              : `<div class="pp-notice info">🎁 再 ${c.reward.required - have} 個章就能兌換 ${escapeHtml(c.name)} 的獎勵</div>`;
+          })
+          .join("");
+
+        result.innerHTML = `
+          <div class="paper"><img class="pp-stamp-in" style="--rot:${stampRotation(token)}deg" src="${src}" alt="${escapeHtml(community.name)} 印章" /></div>
+          <h2>${HEADLINES[status]}</h2>
+          ${status === "upgraded" ? `<p class="pp-muted">你先前用線上簽到過這場，已改為實體章。</p>` : ""}
+          ${status === "duplicate" && keptMode !== payload.m ? `<p class="pp-muted">這場已經有實體章，同一場活動只會保留一個章。</p>` : ""}
+          <div>${escapeHtml(community.name)} ${modeBadges(status === "duplicate" ? { m: mode } : payload)}</div>
+          <div class="event-title">${escapeHtml(payload.t || "")}</div>
+          <div class="pp-muted">${formatDate(payload.d)}</div>
+          <div class="counts">
+            <div class="pp-stat"><div class="num">${ofCommunity}</div><div class="label">${escapeHtml(community.short || community.name)} 章數</div></div>
+            <div class="pp-stat"><div class="num">${total}</div><div class="label">全部章數</div></div>
+          </div>
+          ${rewardHtml}
+          <div class="pp-actions">
+            <a class="pp-btn" href="passport.html?c=${encodeURIComponent(community.id)}">${escapeHtml(community.short || community.name)} 護照</a>
+            <a class="pp-btn green" href="passport.html">我的綜合護照</a>
+          </div>`;
+
+        if (!isStandalone() && !inApp) {
+          notice(
+            `📱 簽到記錄存在這支手機的瀏覽器裡。建議<b>加入主畫面</b>（iPhone：分享 → 加入主畫面；Android：選單 → 加到主畫面），
+            並偶爾到護照頁<b>備份</b>，避免記錄被瀏覽器清除。`,
+            "info",
+          );
+        }
+      }
+
+      registerServiceWorker();
+      // 頁面開著時再開另一個簽到連結，只有 # 改變不會重新載入
+      addEventListener("hashchange", () => location.reload());
+      run().catch((err) => {
+        console.error(err);
+        result.innerHTML = `<h2>發生錯誤</h2><p class="pp-muted">${escapeHtml(err.message)}</p>`;
+      });
+    </script>
+  </body>
+</html>

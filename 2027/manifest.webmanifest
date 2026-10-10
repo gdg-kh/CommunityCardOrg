@@ -1,0 +1,11 @@
+{
+  "name": "2027 高雄社群名牌卡 - 社群護照",
+  "short_name": "社群護照",
+  "description": "掃描活動現場的 QR code，收集高雄社群的印章。",
+  "lang": "zh-TW",
+  "start_url": "passport.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f6f6",
+  "theme_color": "#14212e"
+}
