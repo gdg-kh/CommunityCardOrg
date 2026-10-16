@@ -70,15 +70,37 @@ export function loadRegistry() {
   return registryPromise;
 }
 
+// 容錯別名對照（相容歷史資料或全銜寫法）
+const COMMUNITY_ALIASES = {
+  "KIMU 高雄獨立遊戲開發者聚會": "KIMU - 高雄獨立遊戲開發者聚會",
+  "UIUX.Kaohsiung": "UIUX Kaohsiung",
+  "高雄 WordPress 小聚": "高雄 WordPress",
+  "vLAB Online 台灣路由網路實驗中心": "vLAB Online",
+};
+
 export function loadEvents() {
-  eventsPromise ??= fetch("events.json", { cache: "no-cache" })
-    .then((r) => (r.ok ? r.json() : []))
+  eventsPromise ??= Promise.all([
+    fetch("../2026/events.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : []))
+      .catch(() => []),
+    fetch("events.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : []))
+      .catch(() => []),
+  ])
+    .then(([e2026, e2027]) => {
+      const combined = [
+        ...(Array.isArray(e2026) ? e2026 : []),
+        ...(Array.isArray(e2027) ? e2027 : []),
+      ];
+      return combined.sort((a, b) => a.date.localeCompare(b.date));
+    })
     .catch(() => []);
   return eventsPromise;
 }
 
 export function communityIdOf(registry, name) {
-  return registry.byName.get(name) || null;
+  const resolvedName = COMMUNITY_ALIASES[name] || name;
+  return registry.byName.get(resolvedName) || null;
 }
 
 export async function eventsOf(registry, communityId) {
