@@ -71,7 +71,7 @@
     },
     {
       "id": "kaohsiung-wordpress",
-      "name": "高雄 WordPress 小聚",
+      "name": "高雄 WordPress",
       "stamp": {
         "image": "../assets/stamps/logo_kaohsiung_word_press_v2.png",
         "mode": "shared"
@@ -98,7 +98,7 @@
     },
     {
       "id": "kimu",
-      "name": "KIMU 高雄獨立遊戲開發者聚會",
+      "name": "KIMU - 高雄獨立遊戲開發者聚會",
       "stamp": {
         "image": "../assets/stamps/logo_kimu.png",
         "mode": "shared"
@@ -134,7 +134,7 @@
     },
     {
       "id": "uiux-kaohsiung",
-      "name": "UIUX.Kaohsiung",
+      "name": "UIUX Kaohsiung",
       "stamp": {
         "image": "../assets/stamps/logo_uiux_kaohsiung.png",
         "mode": "shared"
@@ -143,7 +143,7 @@
     },
     {
       "id": "vlab",
-      "name": "vLAB Online 台灣路由網路實驗中心",
+      "name": "vLAB Online",
       "stamp": {
         "image": "../assets/logo_vlab.png",
         "mode": "shared"
@@ -152,79 +152,5 @@
       "short": "vLAB"
     }
   ],
-  "partners": [
-    {
-      "id": "cathay-cdc",
-      "name": "國泰 CDC 小聚",
-      "color": "#34A853",
-      "stamp": {
-        "image": "../assets/stamps/logo_cdc_v3.png",
-        "mode": "shared"
-      },
-      "publicKeys": []
-    },
-    {
-      "id": "ksda",
-      "name": "KSDA 高雄市軟體開發者協會",
-      "short": "KSDA",
-      "color": "#808080",
-      "publicKeys": []
-    },
-    {
-      "id": "ksdg",
-      "name": "KSDG",
-      "short": "KSDG",
-      "color": "#808080",
-      "publicKeys": []
-    },
-    {
-      "id": "g0v",
-      "name": "g0v 台灣零時政府",
-      "short": "g0v",
-      "color": "#9E9E9F",
-      "publicKeys": []
-    },
-    {
-      "id": "global-ai-kaohsiung",
-      "name": "Global AI Kaohsiung",
-      "short": "Global AI",
-      "color": "#4285F4",
-      "publicKeys": []
-    },
-    {
-      "id": "kaohsiung-genai",
-      "name": "高雄生成式 AI 社群",
-      "short": "高雄 GenAI",
-      "color": "#808080",
-      "publicKeys": []
-    },
-    {
-      "id": "digital-nomad-tw",
-      "name": "台灣數位遊牧村",
-      "short": "數位遊牧",
-      "color": "#808080",
-      "publicKeys": []
-    },
-    {
-      "id": "mopcon",
-      "name": "Mopcon",
-      "short": "MOPCON",
-      "color": "#808080",
-      "publicKeys": []
-    },
-    {
-      "id": "openai-build-week",
-      "name": "OpenAI Build Week",
-      "short": "OpenAI",
-      "color": "#808080",
-      "publicKeys": []
-    },
-    {
-      "id": "claude-community",
-      "name": "Claude Community Event",
-      "short": "Claude",
-      "color": "#808080",
-      "publicKeys": []
-    }
-  ]
+  "partners": []
 }
