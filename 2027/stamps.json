@@ -43,7 +43,17 @@
           "src": "../assets/stamps/seal_developer_buffet_blue.png"
         }
       },
-      "publicKeys": []
+      "publicKeys": [
+        {
+          "kid": "2027a",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "QjvyQ5VCQQjeGH1UtcyAguQ5BmlgMc8O3MPkNYPVK5M",
+            "y": "WYd8HOllQRdW4SODotwfLcK3FsZ8hom-M2ZNvYnwpdI"
+          }
+        }
+      ]
     },
     {
       "id": "pyladies-kaohsiung",
