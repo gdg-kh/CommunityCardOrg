@@ -160,6 +160,15 @@
       },
       "publicKeys": [],
       "short": "vLAB"
+    },
+    {
+      "id": "ksdg",
+      "name": "KSDG",
+      "stamp": {
+        "image": "../assets/logo_ksdg.jpg",
+        "mode": "shared"
+      },
+      "publicKeys": []
     }
   ],
   "partners": []
