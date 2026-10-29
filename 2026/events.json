@@ -793,43 +793,43 @@
   },
   {
     "date": "2026-05-14",
-    "community": "KSDA 高雄市軟體開發者協會",
+    "community": "KSDG",
     "title": "從 Prompt 到 Action - 掌握 Computer Use 實現全自動工作流",
     "description": "掌握 AI 自動化的完整鏈條",
     "link": "https://ksda.kktix.cc/events/computeruse",
-    "color": "#808080"
+    "color": "#4285F4"
   },
   {
     "date": "2026-06-25",
-    "community": "KSDA 高雄市軟體開發者協會",
+    "community": "KSDG",
     "title": "AI 時代的網站即戰力",
     "description": "用 Claude Cowork 規劃 × Lovable 實作，做出小型商業網站",
     "link": "https://ksda.kktix.cc/events/vibecoding-2606",
-    "color": "#808080"
+    "color": "#4285F4"
   },
   {
     "date": "2026-08-12",
-    "community": "KSDA 高雄市軟體開發者協會",
+    "community": "KSDG",
     "title": "使用免費 AI 額度解放你的無限遊戲創意",
     "description": "這不是一堂只教你「複製貼上 Prompt」的理論課，而是一場 180 分鐘手把手帶你完成《Choplifter》經典遊戲重製與部署的極速實戰",
     "link": "https://ksda.kktix.cc/events/free-ai-game-dev-2026",
-    "color": "#808080"
+    "color": "#4285F4"
   },
   {
     "date": "2026-09-30",
-    "community": "KSDA 高雄市軟體開發者協會",
+    "community": "KSDG",
     "title": "Gemini × Notebook × Canva：3小時打造高質感職場提案",
     "description": "",
     "link": "https://ksda.kktix.cc/events/free-ai-ppt-2026",
-    "color": "#808080"
+    "color": "#4285F4"
   },
   {
     "date": "2026-10-03",
-    "community": "KSDA 高雄市軟體開發者協會",
+    "community": "KSDG",
     "title": "驅動企業數位轉型：從問題診斷到 1 頁式提案實作",
     "description": "你是否讀了許多 AI 概念書，卻依然不知道如何在企業內部真正落地？本書作者將《從 AI Demo 到企業上線》中的核心觀念與架構，濃縮轉化為 3 小時高密度的實戰 Workshop！",
     "link": "https://ksda.kktix.cc/events/ai-company-2026",
-    "color": "#808080"
+    "color": "#4285F4"
   },
   {
     "date": "2026-05-16",
@@ -1601,11 +1601,11 @@
   },
   {
     "date": "2026-10-31",
-    "community": "Mopcon",
+    "community": "KSDG",
     "title": "MOPCON 科技年會 2026",
     "description": "堅持在濁水以南的應用科技年會，從軟體定義載具到生成式 AI，，與南台灣的開發者一起把前沿技術談到落地",
     "link": "https://mopcon.org/2026/",
-    "color": "#808080"
+    "color": "#4285F4"
   },
   {
     "date": "2026-09-24",
@@ -1613,7 +1613,7 @@
     "title": "KSDG #73 無人機操控與法規入門+無人機足球介紹",
     "description": "雖然無人機現在很便宜，但是無人機操作可是受到民航法的管理喔！所以在飛行重量、區域、時間都有法規限制，所以先了解相關知識才能安全又安心的進入無人機的世界喔",
     "link": "https://ksdg.kktix.cc/events/uav-intro-and-drone-soccer",
-    "color": "#808080"
+    "color": "#4285F4"
   },
   {
     "date": "2026-11-05",
