@@ -168,7 +168,17 @@
         "image": "../assets/logo_ksdg.jpg",
         "mode": "shared"
       },
-      "publicKeys": []
+      "publicKeys": [
+        {
+          "kid": "2027a",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "JCHHnOxDz2PrVm8jatLELfSSA0ZJyR5sr1bCPmBqR7Q",
+            "y": "-AO3-tz9b_RUEeKm0sh8UV1N5NBMxNV68SH1sn37IT4"
+          }
+        }
+      ]
     }
   ],
   "partners": []
