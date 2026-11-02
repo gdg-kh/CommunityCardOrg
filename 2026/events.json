@@ -1003,7 +1003,7 @@
     "date": "2026-07-14",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #43",
-    "description": "1.從 Vibe 到 Harness：AI 協作實戰經驗分享<br>2.K8s 簡介到部署\n2.K8s 簡介到部署",
+    "description": "1.從 Vibe 到 Harness：AI 協作實戰經驗分享<br>2.K8s 簡介到部署<br>2.K8s 簡介到部署",
     "link": "https://gdg.community.dev/e/mcg3my/",
     "color": "#EA4335"
   },
@@ -1035,7 +1035,7 @@
     "date": "2026-08-04",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #44",
-    "description": "1.實戰 Vibe Coding 寫 APP 外掛! AI 時代的安卓逆向開發 - Luma MCP\n2.本地端的 CICD工具架設",
+    "description": "1.實戰 Vibe Coding 寫 APP 外掛! AI 時代的安卓逆向開發 - Luma MCP<br>2.本地端的 CICD工具架設",
     "link": "https://gdg.community.dev/e/mw59ns/",
     "color": "#EA4335"
   },
@@ -1051,7 +1051,7 @@
     "date": "2026-09-08",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #45",
-    "description": "1.對症下碼 把麻煩交給 AI：一位中醫師的生活自動化實驗\n2.工具都會打字了，AI 時代下我們怎麼招募與培養工程師 ",
+    "description": "1.對症下碼 把麻煩交給 AI：一位中醫師的生活自動化實驗<br>2.工具都會打字了，AI 時代下我們怎麼招募與培養工程師 ",
     "link": "https://www.facebook.com/groups/toocon/",
     "color": "#EA4335"
   },
@@ -1067,7 +1067,7 @@
     "date": "2026-10-06",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #46",
-    "description": "1. Hiring in the AI Era：招募與培養工程師的新挑戰\n2. 去 Google I/O 能做什麼？有沒有空學 ADK？可以來打造 AI Agent 嗎？",
+    "description": "1. Hiring in the AI Era：招募與培養工程師的新挑戰<br>2. 去 Google I/O 能做什麼？有沒有空學 ADK？可以來打造 AI Agent 嗎？",
     "link": "https://gdg.community.dev/e/mjzvcp/",
     "color": "#EA4335"
   },
@@ -1083,7 +1083,7 @@
     "date": "2026-11-10",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #47",
-    "description": "",
+    "description": "1.跟著 Claude Academy，重新認識 Claude<br>2.忘了齁：一個健忘咖啡師的 AI 雙刀流開發實驗",
     "link": "https://gdg.community.dev/e/myhu4h/",
     "color": "#EA4335"
   },
@@ -1107,7 +1107,7 @@
     "date": "2026-12-08",
     "community": "GDG Kaohsiung",
     "title": "TOOCON #48",
-    "description": "",
+    "description": "1.火箭隊 23 梯專題發表 - 「找測試，找對咖。」 <br>2.從寫校務通變成寫一套系統？",
     "link": "https://gdg.community.dev/e/mvjnd9/",
     "color": "#EA4335"
   },
@@ -1504,6 +1504,46 @@
     "color": "#F9AB00"
   },
   {
+    "date": "2026-11-02",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-09",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-16",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-23",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-30",
+    "community": "K.NET",
+    "title": "軟體開發‧雲端‧AI‧職涯",
+    "description": "星巴克常態聚會交流",
+    "link": "https://www.facebook.com/k.net.io",
+    "color": "#F9AB00"
+  },
+  {
     "date": "2026-08-05",
     "community": "VSCP 粉鳥趴",
     "title": "氛圍工作者交流趴",
@@ -1593,6 +1633,38 @@
   },
   {
     "date": "2026-10-28",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-04",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-11",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-18",
+    "community": "VSCP 粉鳥趴",
+    "title": "氛圍工作者交流趴",
+    "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
+    "link": "https://www.facebook.com/groups/vscp.tw",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-25",
     "community": "VSCP 粉鳥趴",
     "title": "氛圍工作者交流趴",
     "description": "個人工作者（室）運作、經營、AI 輔助開發、創作、AI 學習與應用",
