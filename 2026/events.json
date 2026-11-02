@@ -1360,11 +1360,35 @@
     "color": "#F9AB00"
   },
   {
-    "date": "2026-10-23",
+    "date": "2026-11-08",
     "community": "Second Space",
     "title": "Founder 0→1 Lab",
     "description": "先別急著做產品。先判斷，這個想法值不值得你再花一個月。幫你釐清：現在在哪個階段、最大的假設是什麼，以及接下來該做哪一步。",
     "link": "https://miso.tw/zh/e/founder-zero-to-one-lab-kaohsiung-2026",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-15",
+    "community": "Second Space",
+    "title": "一堆 PDF、Excel、Email？讓 AI 幫你整理好!",
+    "description": "",
+    "link": "https://miso.tw/zh/e/second-space-ai-data-organizing-workshop-session-one",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-29",
+    "community": "Second Space",
+    "title": "不會寫程式，也想做 App︖⽤ AI 把你的點⼦做出來！",
+    "description": "",
+    "link": "https://miso.tw/zh/e/ai-copy",
+    "color": "#F9AB00"
+  },
+  {
+    "date": "2026-11-22",
+    "community": "Second Space",
+    "title": "每天都在做⼀樣的事︖讓 AI 幫你⾃動完成",
+    "description": "",
+    "link": "https://miso.tw/zh/e/pdfexcelemail-ai-copy",
     "color": "#F9AB00"
   },
   {
