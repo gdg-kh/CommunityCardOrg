@@ -26,7 +26,17 @@
         "required": 4,
         "text": "參加四場 GDG 活動，可到 GDG 高雄活動現場兌換 DevFest 2025 高雄場帆布袋乙個（數量有限，請提前告知組織者）。"
       },
-      "publicKeys": []
+      "publicKeys": [
+        {
+          "kid": "2027a",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "vrqbJQSGRlrBw6MzTArG1M0-2RI1nkRfcqPf3XfIn_o",
+            "y": "YmaPkgTS2PGJ47CbB_kT5E3ZF6TI-3JMIvi9HjswMp0"
+          }
+        }
+      ]
     },
     {
       "id": "developer-buffet",

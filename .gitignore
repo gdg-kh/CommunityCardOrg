@@ -6,3 +6,6 @@ node_modules/
 
 # macOS
 .DS_Store
+
+# Community Card Keys
+*.ccard-key.json
