@@ -106,6 +106,7 @@
 
       function notice(html, type = "") {
         notices.insertAdjacentHTML("beforeend", `<div class="pp-notice ${type}">${html}</div>`);
+        notices.lastElementChild?.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
 
       // 印章外觀一律依社群設定（distinct／shared）
@@ -176,6 +177,7 @@
       }
 
       async function showImport(code) {
+        document.getElementById("import-box")?.remove();
         let records;
         try {
           records = await decodeBackup(code);
@@ -201,12 +203,14 @@
             </div>
           </div>`,
         );
-        document.getElementById("import-no").onclick = () => document.getElementById("import-box").remove();
+        const box = document.getElementById("import-box");
+        box?.scrollIntoView({ behavior: "smooth", block: "center" });
+        document.getElementById("import-no").onclick = () => document.getElementById("import-box")?.remove();
         const yes = document.getElementById("import-yes");
         if (yes) {
           yes.onclick = async () => {
             const { added, upgraded, saved } = mergeStampRecords(fresh);
-            document.getElementById("import-box").remove();
+            document.getElementById("import-box")?.remove();
             const msg = `✅ 已匯入 ${added} 個印章${upgraded ? `，${upgraded} 個線上章改為實體章` : ""}`;
             notice(saved ? msg : "無法儲存，請確認不是無痕模式。", saved ? "success" : "error");
             await reload();
@@ -326,21 +330,27 @@
               notice("請輸入或貼上備份連結或代碼。", "error");
               return;
             }
-            let code = raw;
-            const hashIdx = raw.indexOf("#");
-            if (hashIdx >= 0) {
-              code = raw.slice(hashIdx + 1);
+            let code = "";
+            const mParam = /(?:#|\?|&|^)import=([A-Za-z0-9_-]+)/i.exec(raw);
+            if (mParam) {
+              code = mParam[1];
+            } else {
+              const mToken = /\b([zj][A-Za-z0-9_-]{10,})\b/.exec(raw);
+              if (mToken) {
+                code = mToken[1];
+              } else {
+                let fallback = raw.replace(/^#/, "").replace(/^import=/i, "").trim();
+                if (fallback.startsWith("z") || fallback.startsWith("j")) {
+                  code = fallback;
+                }
+              }
             }
-            const match = /^import=(.+)$/.exec(code);
-            if (match) {
-              code = match[1];
-            }
-            code = code.trim();
-            if (!code.startsWith("z") && !code.startsWith("j")) {
+            if (!code || (!code.startsWith("z") && !code.startsWith("j"))) {
               notice("備份格式不正確，請輸入完整的備份連結或代碼。", "error");
               return;
             }
             await showImport(code);
+            importInput.value = "";
           };
           importBtn.onclick = doManualImport;
           importInput.onkeydown = (e) => {

@@ -83,6 +83,26 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+// 輔助函式：自快取中尋找對應回應（含首頁與導航退回）
+async function getFallbackResponse(req, url) {
+  const hit = await caches.match(req, { ignoreSearch: true });
+  if (hit) return hit;
+
+  // 若存取目錄根路徑，嘗試以 index.html 回應
+  if (url.pathname.endsWith("/2027/") || url.pathname.endsWith("/2027")) {
+    const indexHit = await caches.match("./index.html");
+    if (indexHit) return indexHit;
+  }
+
+  // 若離線導航且無快取，退回護照首頁
+  if (req.mode === "navigate") {
+    const fallback = await caches.match("./passport.html");
+    if (fallback) return fallback;
+  }
+
+  return null;
+}
+
 // 頁面與資料：網路優先，若連線不順超過 2.5 秒或斷網則即刻使用快取（避免現場網路壅塞卡住）
 async function networkFirstWithTimeout(req, timeoutMs = 2500) {
   const cache = await caches.open(CACHE);
@@ -97,7 +117,7 @@ async function networkFirstWithTimeout(req, timeoutMs = 2500) {
         return res;
       }
       // 當網路 res 回傳狀態非 200 時（!res.ok，例如伺服器 4xx/5xx），優先檢查並回退快取版本
-      const hit = await caches.match(req, { ignoreSearch: true });
+      const hit = await getFallbackResponse(req, url);
       if (hit) return hit;
       return res;
     });
@@ -108,21 +128,8 @@ async function networkFirstWithTimeout(req, timeoutMs = 2500) {
 
     return await Promise.race([fetchPromise, timeoutPromise]);
   } catch {
-    const hit = await caches.match(req, { ignoreSearch: true });
+    const hit = await getFallbackResponse(req, url);
     if (hit) return hit;
-
-    // 若存取目錄根路徑，嘗試以 index.html 回應
-    if (url.pathname.endsWith("/2027/") || url.pathname.endsWith("/2027")) {
-      const indexHit = await caches.match("./index.html");
-      if (indexHit) return indexHit;
-    }
-
-    // 若離線導航且無快取，退回護照首頁
-    if (req.mode === "navigate") {
-      const fallback = await caches.match("./passport.html");
-      if (fallback) return fallback;
-    }
-
     return Response.error();
   }
 }

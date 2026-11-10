@@ -133,7 +133,8 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-await new Promise((resolve) => server.listen(8765, resolve));
+await new Promise((resolve) => server.listen(0, resolve));
+const port = server.address().port;
 
 try {
   const testEndpoints = [
@@ -153,7 +154,7 @@ try {
   ];
 
   for (const { url, expectedType } of testEndpoints) {
-    const res = await fetch(`http://localhost:8765${url}`);
+    const res = await fetch(`http://localhost:${port}${url}`);
     assert(res.status === 200, `HTTP 200 OK: ${url}`);
     assert(res.headers.get("content-type")?.includes(expectedType), `正確 MIME 型態 (${expectedType}): ${url}`);
   }
@@ -187,6 +188,7 @@ assert(passportHtml.includes('id="import-input"'), '2027/passport.html 包含 id
 assert(passportHtml.includes('id="import-btn"'), '2027/passport.html 包含 id="import-btn" 按鈕');
 assert(passportHtml.includes("還原印章"), "2027/passport.html 包含「還原印章」按鈕文字");
 assert(passportHtml.includes("showImport"), "2027/passport.html 包含 showImport 呼叫邏輯");
+assert(passportHtml.includes("scrollIntoView"), "2027/passport.html 包含 scrollIntoView 確保還原視窗與提示在可視區");
 
 const checkinHtml = await readFile(path.resolve("2027/checkin.html"), "utf8");
 assert(checkinHtml.includes("可複製備份連結，貼至主畫面 App 的備份與還原區塊進行同步"), "2027/checkin.html 包含 iPhone 使用者複製備份至主畫面還原提示");
@@ -298,6 +300,23 @@ for (let y = 0; y < mHeight; y++) {
   }
 }
 assert(maxDist512 <= 204.8, `icon-maskable-512.png 最遠前景點 (${maxDist512.toFixed(2)}px) <= 204.8px (40% 安全圓半徑)`);
+
+const maskable192Buf = await readFile(path.resolve("assets/passport/icon-maskable-192.png"));
+const { width: mWidth192, height: mHeight192, pixels: mPixels192 } = getPngPixels(maskable192Buf);
+const mcx192 = mWidth192 / 2;
+const mcy192 = mHeight192 / 2;
+let maxDist192 = 0;
+for (let y = 0; y < mHeight192; y++) {
+  for (let x = 0; x < mWidth192; x++) {
+    const idx = (y * mWidth192 + x) * 4;
+    const r = mPixels192[idx], g = mPixels192[idx + 1], b = mPixels192[idx + 2];
+    if (r !== 20 || g !== 33 || b !== 46) {
+      const d = Math.hypot(x - mcx192, y - mcy192);
+      if (d > maxDist192) maxDist192 = d;
+    }
+  }
+}
+assert(maxDist192 <= 76.8, `icon-maskable-192.png 最遠前景點 (${maxDist192.toFixed(2)}px) <= 76.8px (40% 安全圓半徑)`);
 
 console.log("\n=== 10. 驗證 .nav-2027 的 Grid 四等分與 min-width: 0 ===");
 assert(indexCss.includes("display: grid !important"), "index.css 包含 display: grid !important");

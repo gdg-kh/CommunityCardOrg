@@ -115,11 +115,12 @@ ol {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
   width: 100% !important;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 
   .nav-item {
     min-width: 0 !important;
     width: 100% !important;
+    flex: 1 1 0 !important;
 
     .nav-link {
       padding: 10px 2px;
