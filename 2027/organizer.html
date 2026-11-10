@@ -7,6 +7,14 @@
     <link href="../bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../index.css" />
     <link rel="stylesheet" href="passport/passport.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#14212e" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="社群護照" />
+    <link rel="apple-touch-icon" href="../assets/passport/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/passport/icon-192.png" />
     <title>主辦方簽到工具 - 2027 高雄社群名牌卡</title>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"
@@ -215,6 +223,7 @@
         formatDate,
         escapeHtml,
         stripTags,
+        registerServiceWorker,
       } from "./passport/core.js";
 
       const KEY_STORE = "ccard2027.organizerKeys";
@@ -828,6 +837,7 @@
 
       communitySel.addEventListener("change", renderMakeupLog);
 
+      registerServiceWorker();
       updateStatus();
       await fillEvents();
       renderMakeupLog();

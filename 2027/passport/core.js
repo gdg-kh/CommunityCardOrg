@@ -325,11 +325,11 @@ export function rewardStamps(community, stamps) {
 
 export async function requestPersistentStorage() {
   try {
-    if (navigator.storage?.persist && !(await navigator.storage.persisted())) {
-      await navigator.storage.persist();
-    }
+    if (!navigator.storage?.persist) return false;
+    if (await navigator.storage.persisted()) return true;
+    return await navigator.storage.persist();
   } catch {
-    // 不支援就算了
+    return false;
   }
 }
 
@@ -373,7 +373,11 @@ export function inAppBrowserName() {
 
 export function isStandalone() {
   return (
-    window.matchMedia?.("(display-mode: standalone)").matches || navigator.standalone === true
+    window.matchMedia?.("(display-mode: standalone)").matches ||
+    window.matchMedia?.("(display-mode: minimal-ui)").matches ||
+    window.matchMedia?.("(display-mode: fullscreen)").matches ||
+    window.matchMedia?.("(display-mode: window-controls-overlay)").matches ||
+    navigator.standalone === true
   );
 }
 

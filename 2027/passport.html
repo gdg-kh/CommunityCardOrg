@@ -427,26 +427,49 @@
 
       window.addEventListener("appinstalled", () => {
         document.getElementById("pwa-install-banner")?.remove();
+        document.getElementById("pwa-generic-hint")?.remove();
         notice("🎉 感謝安裝！社群護照已成功加入手機主畫面，印章資料已獲得持久保護。", "success");
       });
 
       function showInstallBanner() {
         if (isStandalone() || document.getElementById("pwa-install-banner")) return;
+        if (sessionStorage.getItem("pwa_install_dismissed") === "true") return;
+
+        // 移除通用提示，避免兩層安裝引導重疊
+        document.getElementById("pwa-generic-hint")?.remove();
+
         const banner = document.createElement("div");
         banner.id = "pwa-install-banner";
         banner.className = "pp-notice install";
         banner.innerHTML = `
-          <div><b>📥 安裝「社群護照」App</b></div>
-          <div style="font-size:0.82rem;line-height:1.4">將護照加到手機主畫面，現場離線隨時開啟，並可防止印章資料遭瀏覽器清除。</div>
-          <button type="button" class="pp-install-btn" id="pwa-install-btn">立即安裝至手機</button>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><b>📥 安裝「社群護照」App</b></div>
+            <button type="button" id="pwa-dismiss-btn" style="background:none;border:none;color:#166534;font-size:1.1rem;cursor:pointer;padding:0 4px;line-height:1" title="關閉">✕</button>
+          </div>
+          <div style="font-size:0.82rem;line-height:1.4;margin-top:4px">將護照加到手機主畫面，現場離線隨時開啟，並可防止印章資料遭瀏覽器清除。</div>
+          <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+            <button type="button" class="pp-install-btn" id="pwa-install-btn">立即安裝至手機</button>
+            <button type="button" class="pp-btn secondary" id="pwa-later-btn" style="padding:4px 10px;font-size:0.82rem">稍後再說</button>
+          </div>
         `;
         notices.prepend(banner);
+
+        const dismiss = () => {
+          banner.remove();
+          sessionStorage.setItem("pwa_install_dismissed", "true");
+        };
+
+        document.getElementById("pwa-dismiss-btn")?.addEventListener("click", dismiss);
+        document.getElementById("pwa-later-btn")?.addEventListener("click", dismiss);
+
         document.getElementById("pwa-install-btn")?.addEventListener("click", async () => {
           if (!deferredInstallPrompt) return;
           deferredInstallPrompt.prompt();
           const { outcome } = await deferredInstallPrompt.userChoice;
           if (outcome === "accepted") {
             banner.remove();
+          } else {
+            dismiss();
           }
           deferredInstallPrompt = null;
         });
@@ -462,13 +485,16 @@
         } else if (!isStandalone()) {
           if (isIOS()) {
             notice(
-              `📱 <b>建議將社群護照加入 iPhone 主畫面：</b><br />點擊 Safari 底部分享按鈕 ➔ 選擇<b>「加入主畫面 ⊞」</b>，即可如獨立 App 隨時開啟，並大幅降低印章被系統清理的風險。`,
+              `📱 <b>建議將社群護照加入 iPhone 主畫面：</b><br />點擊 Safari 底部分享按鈕 ➔ 選擇<b>「加入主畫面 ⊞」</b>，即可如獨立 App 隨時開啟，並大幅降低印章被系統清理的風險。<br /><span style="font-size:0.8rem;opacity:0.85">（小提示：iOS 的 Safari 與主畫面 App 資料各自獨立，若已加入主畫面，建議都在主畫面 App 中操作）</span>`,
               "info",
             );
           } else if (deferredInstallPrompt) {
             showInstallBanner();
-          } else {
-            notice("📱 建議把這頁<b>加到主畫面</b>或<b>安裝為應用程式</b>，可確保現場離線可用並保護印章資料。", "info");
+          } else if (sessionStorage.getItem("pwa_install_dismissed") !== "true") {
+            notices.insertAdjacentHTML(
+              "beforeend",
+              `<div class="pp-notice info" id="pwa-generic-hint">📱 建議把這頁<b>加到主畫面</b>或<b>安裝為應用程式</b>，可確保現場離線可用並保護印章資料。</div>`,
+            );
           }
         }
         await reload();

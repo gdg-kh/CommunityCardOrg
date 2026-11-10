@@ -64,6 +64,7 @@ assert(swContent.includes("PRECACHE_URLS"), "sw.js 定義了預先快取清單 P
 assert(swContent.includes("install"), "sw.js 註冊了 install 事件");
 assert(swContent.includes("activate"), "sw.js 註冊了 activate 事件");
 assert(swContent.includes("fetch"), "sw.js 註冊了 fetch 事件");
+assert(swContent.includes("networkFirstWithTimeout") || swContent.includes("timeoutMs"), "sw.js 包含防弱網（Lie-Fi）逾時機制");
 
 // 驗證 sw.js 中預先快取的資源在磁碟上都存在
 const matchUrls = swContent.match(/PRECACHE_URLS\s*=\s*\[([\s\S]*?)\];/);
@@ -72,6 +73,10 @@ if (matchUrls) {
     .split("\n")
     .map((line) => line.trim().replace(/[",]/g, ""))
     .filter((line) => line && !line.startsWith("//"));
+
+  assert(rawUrls.includes("./index.html"), "PRECACHE_URLS 包含社群月曆首頁 ./index.html");
+  assert(rawUrls.some((u) => u.includes("logo_gdg_kaohsiung")), "PRECACHE_URLS 包含社群印章圖檔 (GDG Kaohsiung)");
+  assert(rawUrls.some((u) => u.includes("developer_buffet")), "PRECACHE_URLS 包含社群印章圖檔 (Developer Buffet)");
 
   for (const url of rawUrls) {
     const diskPath = path.resolve("2027", url);
@@ -87,6 +92,7 @@ const htmlFiles = [
   "2027/communities.html",
   "2027/sponsors.html",
   "2027/verify.html",
+  "2027/organizer.html",
 ];
 
 for (const file of htmlFiles) {
@@ -133,10 +139,16 @@ try {
     { url: "/2027/manifest.webmanifest", expectedType: "application/manifest+json" },
     { url: "/2027/sw.js", expectedType: "text/javascript" },
     { url: "/2027/passport.html", expectedType: "text/html" },
+    { url: "/2027/index.html", expectedType: "text/html" },
+    { url: "/2027/checkin.html", expectedType: "text/html" },
+    { url: "/2027/organizer.html", expectedType: "text/html" },
+    { url: "/2027/stamps.json", expectedType: "application/json" },
     { url: "/assets/passport/icon-192.png", expectedType: "image/png" },
+    { url: "/assets/passport/icon-maskable-192.png", expectedType: "image/png" },
     { url: "/assets/passport/icon-512.png", expectedType: "image/png" },
     { url: "/assets/passport/icon-maskable-512.png", expectedType: "image/png" },
     { url: "/assets/passport/apple-touch-icon.png", expectedType: "image/png" },
+    { url: "/assets/stamps/seal_developer_buffet_red.png", expectedType: "image/png" },
   ];
 
   for (const { url, expectedType } of testEndpoints) {

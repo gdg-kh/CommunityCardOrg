@@ -134,6 +134,9 @@ def main():
     icon_192 = create_passport_icon(192, is_maskable=False)
     icon_192.save(os.path.join(target_dir, "icon-192.png"), "PNG")
 
+    icon_maskable_192 = create_passport_icon(192, is_maskable=True)
+    icon_maskable_192.save(os.path.join(target_dir, "icon-maskable-192.png"), "PNG")
+
     icon_512 = create_passport_icon(512, is_maskable=False)
     icon_512.save(os.path.join(target_dir, "icon-512.png"), "PNG")
 
