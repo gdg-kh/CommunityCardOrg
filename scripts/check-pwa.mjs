@@ -160,6 +160,26 @@ try {
   server.close();
 }
 
+console.log("\n=== 6. 驗證 2027 四個按鈕底色樣式 ===");
+const indexCss = await readFile(path.resolve("index.css"), "utf8");
+assert(indexCss.includes(".nav-2027"), "index.css 包含 .nav-2027 導覽列樣式");
+assert(indexCss.includes("#4285f4"), "index.css 包含按鈕 1 底色 #4285f4 (社群月曆)");
+assert(indexCss.includes("#34a853"), "index.css 包含按鈕 2 底色 #34a853 (社群護照)");
+assert(indexCss.includes("#f9ab00"), "index.css 包含按鈕 3 底色 #f9ab00 (社群介紹)");
+assert(indexCss.includes("#ea4335"), "index.css 包含按鈕 4 底色 #ea4335 (贊助商)");
+
+const navPages2027 = [
+  "2027/index.html",
+  "2027/passport.html",
+  "2027/communities.html",
+  "2027/sponsors.html",
+  "2027/checkin.html",
+];
+for (const page of navPages2027) {
+  const content = await readFile(path.resolve(page), "utf8");
+  assert(content.includes('nav-2027'), `${page} 包含 nav-2027 樣式類別`);
+}
+
 console.log("\n==================================");
 console.log(`測試摘要: ${passes.length} 通過, ${errors.length} 失敗`);
 if (errors.length > 0) {

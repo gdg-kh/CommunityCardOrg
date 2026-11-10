@@ -1,5 +1,5 @@
 // 護照 PWA 用的 Service Worker：預先快取核心資源與社群印章，靜態資源快取優先，動態頁面與資料網路優先（具備 2.5 秒防弱網逾時回退機制）
-const CACHE = "ccard2027-passport-v3";
+const CACHE = "ccard2027-passport-v4";
 
 const PRECACHE_URLS = [
   "./index.html",
