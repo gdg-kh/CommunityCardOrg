@@ -76,9 +76,34 @@
     background: #e6f4ea;
     border-color: #a8dab5;
   }
+  &.install {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    color: #166534;
+  }
   p:last-child {
     margin-bottom: 0;
   }
+}
+
+.pp-install-btn {
+  margin-top: 6px;
+  background: #14212e;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s ease;
+}
+
+.pp-install-btn:hover {
+  background: #1e3247;
 }
 
 .pp-section-title {

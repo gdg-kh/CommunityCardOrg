@@ -14,8 +14,12 @@
     <link rel="stylesheet" href="passport/passport.css" />
     <link rel="manifest" href="manifest.webmanifest" />
     <meta name="theme-color" content="#14212e" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="社群護照" />
+    <link rel="apple-touch-icon" href="../assets/passport/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/passport/icon-192.png" />
     <meta
       content="2027 高雄社群名牌卡數位護照，掃描活動現場的 QR code 就能集章。"
       name="description"
@@ -82,6 +86,9 @@
         stampRotation,
         inAppBrowserName,
         isStandalone,
+        isIOS,
+        isAndroid,
+        requestPersistentStorage,
         formatDate,
         todayInTaipei,
         escapeHtml,
@@ -411,13 +418,58 @@
         await render();
       }
 
+      let deferredInstallPrompt = null;
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        showInstallBanner();
+      });
+
+      window.addEventListener("appinstalled", () => {
+        document.getElementById("pwa-install-banner")?.remove();
+        notice("🎉 感謝安裝！社群護照已成功加入手機主畫面，印章資料已獲得持久保護。", "success");
+      });
+
+      function showInstallBanner() {
+        if (isStandalone() || document.getElementById("pwa-install-banner")) return;
+        const banner = document.createElement("div");
+        banner.id = "pwa-install-banner";
+        banner.className = "pp-notice install";
+        banner.innerHTML = `
+          <div><b>📥 安裝「社群護照」App</b></div>
+          <div style="font-size:0.82rem;line-height:1.4">將護照加到手機主畫面，現場離線隨時開啟，並可防止印章資料遭瀏覽器清除。</div>
+          <button type="button" class="pp-install-btn" id="pwa-install-btn">立即安裝至手機</button>
+        `;
+        notices.prepend(banner);
+        document.getElementById("pwa-install-btn")?.addEventListener("click", async () => {
+          if (!deferredInstallPrompt) return;
+          deferredInstallPrompt.prompt();
+          const { outcome } = await deferredInstallPrompt.userChoice;
+          if (outcome === "accepted") {
+            banner.remove();
+          }
+          deferredInstallPrompt = null;
+        });
+      }
+
       async function main() {
         registry = await loadRegistry();
+        requestPersistentStorage();
+
         const inApp = inAppBrowserName();
         if (inApp) {
-          notice(`⚠️ 你正在 <b>${inApp}</b> 內建的瀏覽器中開啟，這裡看到的印章跟 Safari／Chrome 裡的是分開的。`);
+          notice(`⚠️ 你正在 <b>${inApp}</b> 內建瀏覽器中開啟。內建瀏覽器在關閉後容易遺失印章資料，請點擊右上角「⋯」選擇<b>「在預設瀏覽器（Safari / Chrome）中開啟」</b>！`, "error");
         } else if (!isStandalone()) {
-          notice("📱 建議把這頁<b>加入主畫面</b>，iPhone 上可以避免瀏覽器自動清除印章。", "info");
+          if (isIOS()) {
+            notice(
+              `📱 <b>建議將社群護照加入 iPhone 主畫面：</b><br />點擊 Safari 底部分享按鈕 ➔ 選擇<b>「加入主畫面 ⊞」</b>，即可如獨立 App 隨時開啟，並大幅降低印章被系統清理的風險。`,
+              "info",
+            );
+          } else if (deferredInstallPrompt) {
+            showInstallBanner();
+          } else {
+            notice("📱 建議把這頁<b>加到主畫面</b>或<b>安裝為應用程式</b>，可確保現場離線可用並保護印章資料。", "info");
+          }
         }
         await reload();
         const m = /^#import=(.+)$/.exec(window.__ppHash || "");

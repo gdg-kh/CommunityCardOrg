@@ -28,6 +28,14 @@
       property="og:image"
     />
     <meta content="高雄社群名牌卡" property="og:site_name" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#14212e" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="社群護照" />
+    <link rel="apple-touch-icon" href="../assets/passport/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/passport/icon-192.png" />
     <title>2027 高雄社群名牌卡 - 社群介紹</title>
     <!-- Google tag (gtag.js) -->
     <script
@@ -97,5 +105,10 @@
         <div class="divider"></div>
       </div>
     </div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js").catch(() => {});
+      }
+    </script>
   </body>
 </html>

@@ -377,6 +377,17 @@ export function isStandalone() {
   );
 }
 
+export function isIOS() {
+  return (
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+  );
+}
+
+export function isAndroid() {
+  return /Android/i.test(navigator.userAgent);
+}
+
 // ---------- 印章圖案 ----------
 
 // 依社群設定（distinct／shared）與簽到方式決定印章外觀；ignoreMode 只用於社群代表圖（社群牆、標題）
