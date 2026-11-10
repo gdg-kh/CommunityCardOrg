@@ -2,6 +2,7 @@
 import { readFile, access } from "node:fs/promises";
 import path from "node:path";
 import http from "node:http";
+import zlib from "node:zlib";
 
 const errors = [];
 const passes = [];
@@ -179,6 +180,130 @@ for (const page of navPages2027) {
   const content = await readFile(path.resolve(page), "utf8");
   assert(content.includes('nav-2027'), `${page} 包含 nav-2027 樣式類別`);
 }
+
+console.log("\n=== 7. 驗證手動輸入還原 UI 存在性與 iOS 提示 ===");
+const passportHtml = await readFile(path.resolve("2027/passport.html"), "utf8");
+assert(passportHtml.includes('id="import-input"'), '2027/passport.html 包含 id="import-input" 輸入框');
+assert(passportHtml.includes('id="import-btn"'), '2027/passport.html 包含 id="import-btn" 按鈕');
+assert(passportHtml.includes("還原印章"), "2027/passport.html 包含「還原印章」按鈕文字");
+assert(passportHtml.includes("showImport"), "2027/passport.html 包含 showImport 呼叫邏輯");
+
+const checkinHtml = await readFile(path.resolve("2027/checkin.html"), "utf8");
+assert(checkinHtml.includes("可複製備份連結，貼至主畫面 App 的備份與還原區塊進行同步"), "2027/checkin.html 包含 iPhone 使用者複製備份至主畫面還原提示");
+
+console.log("\n=== 8. 驗證 10 個社群代表宣傳大圖快取與 Service Worker 強化 ===");
+assert(swContent.includes('const CACHE = "ccard2027-passport-v5"'), 'sw.js 快取版本為 "ccard2027-passport-v5"');
+
+const requiredCommunityLogos = [
+  "../assets/logo_gdg_kaohsiung.png",
+  "../assets/logo_developer_buffet_v2.png",
+  "../assets/logo_kaohsiung_word_press_v2.png",
+  "../assets/logo_second_space.png",
+  "../assets/logo_pyladies_kh.png",
+  "../assets/logo_kimu.png",
+  "../assets/logo_agile_south_taiwan.png",
+  "../assets/logo_k_net.png",
+  "../assets/logo_vscp.png",
+  "../assets/logo_uiux_kaohsiung.png",
+];
+
+for (const logoUrl of requiredCommunityLogos) {
+  assert(swContent.includes(logoUrl), `PRECACHE_URLS 包含宣傳大圖：${logoUrl}`);
+}
+
+assert(swContent.includes("cache.put(req, res.clone()).catch"), "sw.js networkFirstWithTimeout 背景快取寫入加上 .catch 錯誤防護");
+assert(swContent.includes("!res.ok"), "sw.js networkFirstWithTimeout 當 !res.ok 時優先回退快取版本");
+
+const coreJsContent = await readFile(path.resolve("2027/passport/core.js"), "utf8");
+assert(coreJsContent.includes('{ scope: "./" }'), 'core.js 註冊 Service Worker 時明確指定 { scope: "./" }');
+
+const registeredPages = [
+  "2027/communities.html",
+  "2027/index.html",
+  "2027/sponsors.html",
+  "2027/verify.html",
+];
+for (const p of registeredPages) {
+  const c = await readFile(path.resolve(p), "utf8");
+  assert(c.includes('{ scope: "./" }'), `${p} 註冊 Service Worker 時明確指定 { scope: "./" }`);
+}
+
+console.log("\n=== 9. 驗證 Maskable 圖示安全邊界（最遠像素點 <= 204.8px） ===");
+function getPngPixels(buf) {
+  let pos = 8;
+  const idatChunks = [];
+  let width = 0, height = 0;
+  while (pos < buf.length) {
+    const len = buf.readUInt32BE(pos);
+    const type = buf.toString("ascii", pos + 4, pos + 8);
+    if (type === "IHDR") {
+      width = buf.readUInt32BE(pos + 8);
+      height = buf.readUInt32BE(pos + 12);
+    } else if (type === "IDAT") {
+      idatChunks.push(buf.subarray(pos + 8, pos + 8 + len));
+    }
+    pos += 12 + len;
+  }
+  const raw = zlib.inflateSync(Buffer.concat(idatChunks));
+  const bpp = 4;
+  const stride = width * bpp;
+  const pixels = Buffer.alloc(width * height * 4);
+  let rawOffset = 0;
+  let prevRow = Buffer.alloc(stride);
+
+  for (let y = 0; y < height; y++) {
+    const filter = raw[rawOffset++];
+    const currentRow = Buffer.alloc(stride);
+    for (let x = 0; x < stride; x++) {
+      const val = raw[rawOffset++];
+      const left = x >= bpp ? currentRow[x - bpp] : 0;
+      const up = prevRow[x];
+      const upLeft = x >= bpp ? prevRow[x - bpp] : 0;
+      let reconstructed = val;
+      if (filter === 0) reconstructed = val;
+      else if (filter === 1) reconstructed = (val + left) & 0xff;
+      else if (filter === 2) reconstructed = (val + up) & 0xff;
+      else if (filter === 3) reconstructed = (val + Math.floor((left + up) / 2)) & 0xff;
+      else if (filter === 4) {
+        const p = left + up - upLeft;
+        const pa = Math.abs(p - left);
+        const pb = Math.abs(p - up);
+        const pc = Math.abs(p - upLeft);
+        let pr = upLeft;
+        if (pa <= pb && pa <= pc) pr = left;
+        else if (pb <= pc) pr = up;
+        reconstructed = (val + pr) & 0xff;
+      }
+      currentRow[x] = reconstructed;
+    }
+    currentRow.copy(pixels, y * stride);
+    prevRow = currentRow;
+  }
+  return { width, height, pixels };
+}
+
+const maskable512Buf = await readFile(path.resolve("assets/passport/icon-maskable-512.png"));
+const { width: mWidth, height: mHeight, pixels: mPixels } = getPngPixels(maskable512Buf);
+const mcx = mWidth / 2;
+const mcy = mHeight / 2;
+let maxDist512 = 0;
+for (let y = 0; y < mHeight; y++) {
+  for (let x = 0; x < mWidth; x++) {
+    const idx = (y * mWidth + x) * 4;
+    const r = mPixels[idx], g = mPixels[idx + 1], b = mPixels[idx + 2];
+    if (r !== 20 || g !== 33 || b !== 46) {
+      const d = Math.hypot(x - mcx, y - mcy);
+      if (d > maxDist512) maxDist512 = d;
+    }
+  }
+}
+assert(maxDist512 <= 204.8, `icon-maskable-512.png 最遠前景點 (${maxDist512.toFixed(2)}px) <= 204.8px (40% 安全圓半徑)`);
+
+console.log("\n=== 10. 驗證 .nav-2027 的 Grid 四等分與 min-width: 0 ===");
+assert(indexCss.includes("display: grid !important"), "index.css 包含 display: grid !important");
+assert(indexCss.includes("grid-template-columns: repeat(4, 1fr) !important"), "index.css 包含 .nav-2027 之 repeat(4, 1fr) !important");
+assert(indexCss.includes("min-width: 0 !important"), "index.css .nav-2027 .nav-item 包含 min-width: 0 !important");
+assert(indexCss.includes("width: 100% !important"), "index.css .nav-2027 .nav-item 包含 width: 100% !important");
 
 console.log("\n==================================");
 console.log(`測試摘要: ${passes.length} 通過, ${errors.length} 失敗`);

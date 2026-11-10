@@ -109,10 +109,24 @@ ol {
 
 /* 2027 導覽列樣式調整（四個按鈕：社群月曆 #4285f4、社群護照 #34a853、社群介紹 #f9ab00、贊助商 #ea4335） */
 .nav-pills:has(.nav-item:nth-child(4):last-child),
-.nav-pills.nav-2027 {
-  grid-template-columns: repeat(4, 1fr); /* 四等分 */
+.nav-pills.nav-2027,
+.nav.nav-pills.nav-2027,
+.nav.nav-pills.nav-fill.nav-2027 {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  width: 100% !important;
+  overflow-x: hidden;
 
   .nav-item {
+    min-width: 0 !important;
+    width: 100% !important;
+
+    .nav-link {
+      padding: 10px 2px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
     /* 1. 社群月曆 (#4285f4) */
     &:nth-child(1) .nav-link.active {
       background-color: #4285f4;

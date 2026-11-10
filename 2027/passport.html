@@ -307,9 +307,49 @@
           <div class="pp-actions" style="justify-content:flex-start">
             <button class="pp-btn secondary" id="backup" ${stamps.length ? "" : "disabled"}>產生備份連結</button>
           </div>
-          <div id="backup-box"></div>`;
+          <div id="backup-box"></div>
+          <div style="margin-top:14px">
+            <label for="import-input" class="pp-muted" style="display:block;margin-bottom:6px;font-weight:600">手動輸入／貼上備份連結或代碼：</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <input type="text" id="import-input" placeholder="貼上備份連結或代碼（如 https://...#import=z... 或 z...）" style="flex:1;min-width:200px;padding:8px 12px;border:1px solid #ccc;border-radius:8px;font-size:0.85rem" />
+              <button class="pp-btn" id="import-btn">還原印章</button>
+            </div>
+          </div>`;
 
         document.getElementById("backup").onclick = shareBackup;
+        const importBtn = document.getElementById("import-btn");
+        const importInput = document.getElementById("import-input");
+        if (importBtn && importInput) {
+          const doManualImport = async () => {
+            const raw = importInput.value.trim();
+            if (!raw) {
+              notice("請輸入或貼上備份連結或代碼。", "error");
+              return;
+            }
+            let code = raw;
+            const hashIdx = raw.indexOf("#");
+            if (hashIdx >= 0) {
+              code = raw.slice(hashIdx + 1);
+            }
+            const match = /^import=(.+)$/.exec(code);
+            if (match) {
+              code = match[1];
+            }
+            code = code.trim();
+            if (!code.startsWith("z") && !code.startsWith("j")) {
+              notice("備份格式不正確，請輸入完整的備份連結或代碼。", "error");
+              return;
+            }
+            await showImport(code);
+          };
+          importBtn.onclick = doManualImport;
+          importInput.onkeydown = (e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              doManualImport();
+            }
+          };
+        }
         app.querySelectorAll("[data-redeem]").forEach((btn) => {
           btn.onclick = () => openRedeem(registry.byId.get(btn.dataset.redeem));
         });

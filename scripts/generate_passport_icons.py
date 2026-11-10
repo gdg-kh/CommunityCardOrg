@@ -15,12 +15,15 @@ def create_passport_icon(size, is_maskable=False):
     if is_maskable:
         # Full bleed background for maskable icons
         draw.rectangle([0, 0, size, size], fill=bg_color)
-        padding = size * 0.15
+        padding = size * 0.22
+        scale = 0.70
+        corner_radius = size * 0.06
     else:
         # Rounded rectangle for normal icons
         corner_radius = size * 0.22
         draw.rounded_rectangle([0, 0, size, size], radius=int(corner_radius), fill=bg_color)
         padding = size * 0.08
+        scale = 1.0
 
     # Inner passport frame
     card_left = padding
@@ -29,10 +32,10 @@ def create_passport_icon(size, is_maskable=False):
     card_bottom = size - padding
 
     # Gold decorative border
-    border_width = max(2, int(size * 0.015))
+    border_width = max(2, int(size * 0.015 * scale))
     draw.rounded_rectangle(
         [card_left, card_top, card_right, card_bottom],
-        radius=int(size * 0.08),
+        radius=int(corner_radius if is_maskable else size * 0.08),
         outline=gold,
         width=border_width
     )
@@ -47,9 +50,9 @@ def create_passport_icon(size, is_maskable=False):
         "/System/Library/Fonts/HelveticaNeue.ttc"
     ]
     
-    large_size = int(size * 0.11)
-    small_size = int(size * 0.085)
-    year_size = int(size * 0.14)
+    large_size = int(size * 0.11 * scale)
+    small_size = int(size * 0.085 * scale)
+    year_size = int(size * 0.14 * scale)
 
     for p in font_paths:
         if os.path.exists(p):
@@ -69,31 +72,31 @@ def create_passport_icon(size, is_maskable=False):
     year_text = "2027"
     bbox_year = draw.textbbox((0, 0), year_text, font=font_year)
     yw = bbox_year[2] - bbox_year[0]
-    year_y = card_top + (card_bottom - card_top) * 0.08
+    year_y = card_top + (card_bottom - card_top) * (0.07 if is_maskable else 0.08)
     draw.text(((size - yw) / 2, year_y), year_text, fill=gold_soft, font=font_year)
 
     # Draw Central Stamp Badge
     center_x = size / 2
     center_y = size * 0.49
-    outer_r = size * 0.18
-    inner_r = size * 0.15
+    outer_r = size * 0.18 * scale
+    inner_r = size * 0.15 * scale
 
     # Seal outer circle
     draw.ellipse(
         [center_x - outer_r, center_y - outer_r, center_x + outer_r, center_y + outer_r],
         outline=gold,
-        width=max(2, int(size * 0.012))
+        width=max(2, int(size * 0.012 * scale))
     )
 
     # Seal inner dashed-like / secondary circle
     draw.ellipse(
         [center_x - inner_r, center_y - inner_r, center_x + inner_r, center_y + inner_r],
         outline=(56, 189, 248, 180),
-        width=max(1, int(size * 0.008))
+        width=max(1, int(size * 0.008 * scale))
     )
 
     # Four-point star / compass in seal center
-    star_r = size * 0.09
+    star_r = size * 0.09 * scale
     star_points = [
         (center_x, center_y - star_r),                  # Top
         (center_x + star_r * 0.28, center_y - star_r * 0.28),
@@ -107,7 +110,7 @@ def create_passport_icon(size, is_maskable=False):
     draw.polygon(star_points, fill=gold)
 
     # Tiny center dot
-    dot_r = max(2, int(size * 0.02))
+    dot_r = max(2, int(size * 0.02 * scale))
     draw.ellipse([center_x - dot_r, center_y - dot_r, center_x + dot_r, center_y + dot_r], fill=bg_color)
 
     # Draw "社群護照"
@@ -121,7 +124,7 @@ def create_passport_icon(size, is_maskable=False):
     sub_text = "PASSPORT"
     bbox_sub = draw.textbbox((0, 0), sub_text, font=font_sub)
     sw = bbox_sub[2] - bbox_sub[0]
-    sub_y = card_bottom - (card_bottom - card_top) * 0.13
+    sub_y = card_bottom - (card_bottom - card_top) * (0.12 if is_maskable else 0.13)
     draw.text(((size - sw) / 2, sub_y), sub_text, fill=cyan, font=font_sub)
 
     return img

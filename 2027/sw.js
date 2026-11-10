@@ -1,5 +1,5 @@
 // 護照 PWA 用的 Service Worker：預先快取核心資源與社群印章，靜態資源快取優先，動態頁面與資料網路優先（具備 2.5 秒防弱網逾時回退機制）
-const CACHE = "ccard2027-passport-v4";
+const CACHE = "ccard2027-passport-v5";
 
 const PRECACHE_URLS = [
   "./index.html",
@@ -23,6 +23,17 @@ const PRECACHE_URLS = [
   "../assets/passport/icon-512.png",
   "../assets/passport/icon-maskable-512.png",
   "../assets/passport/apple-touch-icon.png",
+  // 社群介紹頁面離線宣傳大圖（data.json 渲染所需）
+  "../assets/logo_gdg_kaohsiung.png",
+  "../assets/logo_developer_buffet_v2.png",
+  "../assets/logo_kaohsiung_word_press_v2.png",
+  "../assets/logo_second_space.png",
+  "../assets/logo_pyladies_kh.png",
+  "../assets/logo_kimu.png",
+  "../assets/logo_agile_south_taiwan.png",
+  "../assets/logo_k_net.png",
+  "../assets/logo_vscp.png",
+  "../assets/logo_uiux_kaohsiung.png",
   // 數位護照所有社群專屬印章與代表圖
   "../assets/stamps/logo_gdg_kaohsiung.png",
   "../assets/stamps/logo_developer_buffet_v2.png",
@@ -78,8 +89,16 @@ async function networkFirstWithTimeout(req, timeoutMs = 2500) {
   const url = new URL(req.url);
 
   try {
-    const fetchPromise = fetch(req).then((res) => {
-      if (res.ok) cache.put(req, res.clone());
+    const fetchPromise = fetch(req).then(async (res) => {
+      if (res.ok) {
+        cache.put(req, res.clone()).catch((err) => {
+          console.warn("[SW] 快取寫入失敗：", req.url, err);
+        });
+        return res;
+      }
+      // 當網路 res 回傳狀態非 200 時（!res.ok，例如伺服器 4xx/5xx），優先檢查並回退快取版本
+      const hit = await caches.match(req, { ignoreSearch: true });
+      if (hit) return hit;
       return res;
     });
 
@@ -117,7 +136,9 @@ async function cacheFirst(req) {
     const res = await fetch(req);
     if (res.ok) {
       const cache = await caches.open(CACHE);
-      cache.put(req, res.clone());
+      cache.put(req, res.clone()).catch((err) => {
+        console.warn("[SW] 快取寫入失敗：", req.url, err);
+      });
     }
     return res;
   } catch {
