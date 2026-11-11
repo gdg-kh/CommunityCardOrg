@@ -306,7 +306,7 @@
                     <div class="events-container">`;
 
                 // If 3+ events on same day, only show community name
-                const showTitleOnly = dayEvents.length >= 3;
+                const showCommunityOnly = dayEvents.length >= 3;
 
                 dayEvents.forEach(event => {
                     const colorStyle = event.color ? `color: ${event.color};` : '';
@@ -315,7 +315,7 @@
 
                     html += `<div class="day-event" style="${borderStyle}">
                         <div class="event-community" style="${colorStyle}">${event.community}</div>
-                        ${(!showTitleOnly && hasTitle) ? `<div class="event-name">${event.title}</div>` : ''}
+                        ${(!showCommunityOnly && hasTitle) ? `<div class="event-name">${event.title}</div>` : ''}
                     </div>`;
                 });
 
