@@ -53,25 +53,131 @@
         <!-- 金鑰管理 -->
         <section id="tab-keys" hidden>
           <div class="pp-section-title">解鎖金鑰</div>
-          <form class="pp-form" id="unlock-form" onsubmit="return false">
+          <form class="pp-form" id="unlock-form" autocomplete="off" onsubmit="return false">
             <div id="saved-key-row" hidden class="pp-notice info">
               這個瀏覽器已儲存 <b id="saved-key-name"></b> 的加密金鑰，輸入密碼即可解鎖。
               <button type="button" class="pp-btn secondary" id="forget-key" style="padding: 2px 10px; margin-left: 6px">移除</button>
             </div>
             <div id="file-row">
               <label for="key-file">金鑰檔（.ccard-key.json）</label>
-              <input id="gen-kid" placeholder="2027a" />
+              <input type="file" id="key-file" accept=".json,application/json" />
+            </div>
+            <div>
+              <label for="unlock-pass">金鑰密碼</label>
+              <div class="pp-pass-wrap">
+                <input
+                  type="text"
+                  id="unlock-pass"
+                  class="pp-secret-input"
+                  autocomplete="off"
+                  data-1p-ignore="true"
+                  data-lpignore="true"
+                  data-bwignore="true"
+                  data-form-type="other"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                />
+                <button
+                  type="button"
+                  class="pp-pass-toggle"
+                  data-target="unlock-pass"
+                  aria-label="顯示密碼"
+                  title="顯示密碼"
+                >
+                  <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+            </div>
+            <label style="font-weight: 400; display: flex; gap: 6px; align-items: center">
+              <input type="checkbox" id="remember" style="width: auto" checked />
+              在這個瀏覽器記住加密後的金鑰檔（仍需密碼才能使用）
+            </label>
+            <div><button class="pp-btn" id="unlock">解鎖</button></div>
+          </form>
+
+          <div class="divider" style="margin-top: 20px"></div>
+          <div class="pp-section-title">產生新金鑰</div>
+          <p class="pp-muted">
+            每個社群只需要產生一次。產生後請下載金鑰檔保存，並把公鑰透過 Pull Request 加到
+            <code>2027/stamps.json</code>，合併後簽到碼才會生效。
+          </p>
+          <form class="pp-form" id="gen-form" autocomplete="off" onsubmit="return false">
+            <div class="row">
+              <div>
+                <label for="gen-kid">金鑰 ID</label>
+                <input
+                  id="gen-kid"
+                  placeholder="2027a"
+                  autocomplete="off"
+                  data-1p-ignore="true"
+                  data-lpignore="true"
+                  data-bwignore="true"
+                  data-form-type="other"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                />
               </div>
               <div></div>
             </div>
             <div class="row">
               <div>
                 <label for="gen-pass">設定密碼（至少 8 個字）</label>
-                <input type="password" id="gen-pass" autocomplete="new-password" />
+                <div class="pp-pass-wrap">
+                  <input
+                    type="text"
+                    id="gen-pass"
+                    class="pp-secret-input"
+                    autocomplete="off"
+                    data-1p-ignore="true"
+                    data-lpignore="true"
+                    data-bwignore="true"
+                    data-form-type="other"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                  />
+                  <button
+                    type="button"
+                    class="pp-pass-toggle"
+                    data-target="gen-pass"
+                    aria-label="顯示密碼"
+                    title="顯示密碼"
+                  >
+                    <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                  </button>
+                </div>
               </div>
               <div>
                 <label for="gen-pass2">再輸入一次</label>
-                <input type="password" id="gen-pass2" autocomplete="new-password" />
+                <div class="pp-pass-wrap">
+                  <input
+                    type="text"
+                    id="gen-pass2"
+                    class="pp-secret-input"
+                    autocomplete="off"
+                    data-1p-ignore="true"
+                    data-lpignore="true"
+                    data-bwignore="true"
+                    data-form-type="other"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                  />
+                  <button
+                    type="button"
+                    class="pp-pass-toggle"
+                    data-target="gen-pass2"
+                    aria-label="顯示密碼"
+                    title="顯示密碼"
+                  >
+                    <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                  </button>
+                </div>
               </div>
             </div>
             <div><button class="pp-btn green" id="generate">產生並下載金鑰檔</button></div>
@@ -475,6 +581,7 @@
           unlocked = await decryptKeyFile(file, $("unlock-pass").value);
           if ($("remember").checked) storeKey(file);
           $("unlock-pass").value = "";
+          $("unlock-pass").classList.remove("revealed");
           syncPassToggle("unlock-pass");
           updateStatus();
           document.querySelector('.pp-tabs button[data-tab="sign"]').click();
@@ -504,6 +611,8 @@
         if ($("remember").checked) storeKey(file);
         unlocked = { communityId: c.id, kid, publicJwk, privateKey: pair.privateKey };
         $("gen-pass").value = $("gen-pass2").value = "";
+        $("gen-pass").classList.remove("revealed");
+        $("gen-pass2").classList.remove("revealed");
         syncPassToggle("gen-pass");
         syncPassToggle("gen-pass2");
 
@@ -524,7 +633,86 @@
         updateStatus();
       };
 
+      // ---------- 金鑰密碼遮罩切換與鍵盤快捷操作 ----------
 
+      function syncPassToggle(targetId) {
+        const target = $(targetId);
+        const btn = document.querySelector(`.pp-pass-toggle[data-target="${targetId}"]`);
+        if (!target || !btn) return;
+        const isRevealed = target.classList.contains("revealed");
+        const openIcon = btn.querySelector(".eye-open");
+        const closedIcon = btn.querySelector(".eye-closed");
+        if (openIcon && closedIcon) {
+          openIcon.style.display = isRevealed ? "none" : "";
+          closedIcon.style.display = isRevealed ? "" : "none";
+        }
+        btn.setAttribute("aria-label", isRevealed ? "隱藏密碼" : "顯示密碼");
+        btn.setAttribute("title", isRevealed ? "隱藏密碼" : "顯示密碼");
+      }
+
+      document.querySelectorAll(".pp-pass-toggle").forEach((btn) => {
+        btn.onclick = () => {
+          const target = $(btn.dataset.target);
+          if (!target) return;
+          target.classList.toggle("revealed");
+          syncPassToggle(btn.dataset.target);
+          target.focus();
+        };
+      });
+
+      $("unlock-pass")?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          $("unlock").click();
+        }
+      });
+
+      $("gen-pass2")?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          $("generate").click();
+        }
+      });
+
+      // 極舊環境不支援 CSS -webkit-text-security 時進行優雅降級
+      if (!window.CSS || !CSS.supports || !CSS.supports("-webkit-text-security", "disc")) {
+        document.querySelectorAll(".pp-secret-input").forEach((inp) => {
+          inp.type = "password";
+        });
+      }
+
+      // ---------- 簽出 QR code ----------
+
+      async function makeToken(mode, rotate) {
+        const c = current();
+        const now = Math.floor(Date.now() / 1000);
+        let nbf;
+        let exp;
+        if (rotate) {
+          nbf = now - 30;
+          exp = now + Math.max(1, +$("rotate-min").value || 5) * 60;
+        } else {
+          nbf = Math.floor(new Date($("nbf").value).getTime() / 1000);
+          exp = Math.floor(new Date($("exp").value).getTime() / 1000);
+        }
+        const payload = {
+          v: 1,
+          c: c.id,
+          k: unlocked.kid,
+          e: $("ev-id").value.trim(),
+          t: $("ev-title").value.trim().slice(0, 60),
+          d: $("ev-date").value,
+          m: mode,
+          iat: now,
+          nbf,
+          exp,
+        };
+        const token = await signPayload(unlocked.privateKey, payload);
+        const url = new URL("checkin.html", location.href);
+        url.search = "openExternalBrowser=1"; // LINE 內開啟時改用預設瀏覽器
+        url.hash = token;
+        return { payload, url: url.toString() };
+      }
 
       // 修正 QRious 套件在指定 padding 時未將 QR code 置中對齊的問題
       // （官方預設 offset 固定等於 padding，導致右側與下側邊距過大而偏向左上）

@@ -570,6 +570,49 @@
   }
 }
 
+.pp-secret-input {
+  -webkit-text-security: disc !important;
+  font-family: inherit;
+}
+
+.pp-secret-input.revealed {
+  -webkit-text-security: none !important;
+}
+
+.pp-pass-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.pp-pass-wrap input {
+  padding-right: 40px !important;
+}
+
+.pp-pass-toggle {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  font-size: 1rem;
+  line-height: 1;
+  color: #64748b;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  &:hover {
+    color: #1e293b;
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
 .pp-qr {
   text-align: center;
   canvas {

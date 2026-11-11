@@ -324,6 +324,21 @@ assert(indexCss.includes("grid-template-columns: repeat(4, 1fr) !important"), "i
 assert(indexCss.includes("min-width: 0 !important"), "index.css .nav-2027 .nav-item 包含 min-width: 0 !important");
 assert(indexCss.includes("width: 100% !important"), "index.css .nav-2027 .nav-item 包含 width: 100% !important");
 
+console.log("\n=== 11. 驗證 2027/organizer.html 金鑰密碼防範瀏覽器與密碼管理員自動填入 ===");
+const orgContent = await readFile(path.resolve("2027/organizer.html"), "utf8");
+const passCssContent = await readFile(path.resolve("2027/passport/passport.css"), "utf8");
+assert(!orgContent.includes('autocomplete="current-password"'), "organizer.html 不得包含 autocomplete=\"current-password\" 以免觸發網站登入密碼自動填入");
+assert(orgContent.includes('id="unlock-pass"'), "organizer.html 包含 id=\"unlock-pass\"");
+assert(!orgContent.includes('id="unlock-pass"\n                type="password"') && !orgContent.includes('id="unlock-pass" type="password"'), "unlock-pass 不使用 type=\"password\"，避免觸發瀏覽器本機帳密庫主動填入銀行帳號");
+assert(!orgContent.includes('id="gen-pass"\n                    type="password"') && !orgContent.includes('id="gen-pass" type="password"'), "gen-pass 不使用 type=\"password\"");
+assert(orgContent.includes('class="pp-secret-input"'), "organizer.html 包含 pp-secret-input 樣式類別進行密碼遮罩");
+assert(passCssContent.includes("-webkit-text-security: disc"), "passport.css 包含 -webkit-text-security: disc 遮罩規則");
+assert(orgContent.includes('class="pp-pass-toggle"'), "organizer.html 包含 pp-pass-toggle 供使用者切換明文/遮罩");
+assert(orgContent.includes('data-1p-ignore="true"'), "organizer.html 包含 1Password 忽略標記 data-1p-ignore=\"true\"");
+assert(orgContent.includes('data-bwignore="true"'), "organizer.html 包含 Bitwarden 忽略標記 data-bwignore=\"true\"");
+assert(orgContent.includes('data-lpignore="true"'), "organizer.html 包含 LastPass 忽略標記 data-lpignore=\"true\"");
+
+
 console.log("\n==================================");
 console.log(`測試摘要: ${passes.length} 通過, ${errors.length} 失敗`);
 if (errors.length > 0) {
