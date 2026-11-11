@@ -912,6 +912,14 @@
     "color": "#4285F4"
   },
   {
+    "date": "2026-11-17",
+    "community": "高雄 WordPress",
+    "title": "高雄 WordPress 小聚 2026/11",
+    "description": "你的網站在 AI 時代如何建立數位軌跡 by KAIROS ENGINE",
+    "link": "https://www.meetup.com/kaohsiung-wordpress-meetup/events/317336764",
+    "color": "#4285F4"
+  },
+  {
     "date": "2026-05-22",
     "community": "vLAB Online",
     "title": "OWASP LLM 安全實作課",
@@ -1733,6 +1741,14 @@
     "title": "GitHub Bootcamp 2026 巡迴工作坊",
     "description": "高手現場帶路！這一次，直接把 AI 實戰成果寫進你的 GitHub Profile",
     "link": "https://seminars.tca.org.tw/D15r01890.aspx",
+    "color": "#808080"
+  },
+  {
+    "date": "2026-11-24",
+    "community": "Claude Community Event",
+    "title": "Claude Meetup",
+    "description": "兩場短講，講者分別在截然不同的情境中運用 Claude：一位在產品團隊，一位在事實查核領域。短講結束後，歡迎和南部的 builder 們交流認識。",
+    "link": "https://luma.com/claude-kaohsiung-1",
     "color": "#808080"
   }
 ]
