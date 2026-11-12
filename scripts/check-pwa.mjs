@@ -142,6 +142,7 @@ try {
     { url: "/2027/sw.js", expectedType: "text/javascript" },
     { url: "/2027/passport.html", expectedType: "text/html" },
     { url: "/2027/index.html", expectedType: "text/html" },
+    { url: "/2027/calendar.html", expectedType: "text/html" },
     { url: "/2027/checkin.html", expectedType: "text/html" },
     { url: "/2027/organizer.html", expectedType: "text/html" },
     { url: "/2027/stamps.json", expectedType: "application/json" },

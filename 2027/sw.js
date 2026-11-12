@@ -3,6 +3,7 @@ const CACHE = "ccard2027-passport-v5";
 
 const PRECACHE_URLS = [
   "./index.html",
+  "./calendar.html",
   "./passport.html",
   "./checkin.html",
   "./verify.html",
@@ -88,8 +89,12 @@ async function getFallbackResponse(req, url) {
   const hit = await caches.match(req, { ignoreSearch: true });
   if (hit) return hit;
 
-  // 若存取目錄根路徑，嘗試以 index.html 回應
-  if (url.pathname.endsWith("/2027/") || url.pathname.endsWith("/2027")) {
+  // 若存取目錄根路徑或社群月曆別名，嘗試以 index.html 回應
+  if (
+    url.pathname.endsWith("/2027/") ||
+    url.pathname.endsWith("/2027") ||
+    url.pathname.endsWith("/calendar.html")
+  ) {
     const indexHit = await caches.match("./index.html");
     if (indexHit) return indexHit;
   }
