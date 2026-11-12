@@ -14,8 +14,12 @@
     <link rel="stylesheet" href="passport/passport.css" />
     <link rel="manifest" href="manifest.webmanifest" />
     <meta name="theme-color" content="#14212e" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="社群護照" />
+    <link rel="apple-touch-icon" href="../assets/passport/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/passport/icon-192.png" />
     <meta
       content="2027 高雄社群名牌卡數位護照，掃描活動現場的 QR code 就能集章。"
       name="description"
@@ -52,7 +56,7 @@
 
   <body>
     <div class="cardWrapper">
-      <ul class="nav nav-pills nav-fill">
+      <ul class="nav nav-pills nav-fill nav-2027">
         <li class="nav-item"><a class="nav-link" href="index.html">社群月曆</a></li>
         <li class="nav-item"><a class="nav-link active" href="passport.html">社群護照</a></li>
         <li class="nav-item"><a class="nav-link" href="communities.html">社群介紹</a></li>
@@ -82,6 +86,9 @@
         stampRotation,
         inAppBrowserName,
         isStandalone,
+        isIOS,
+        isAndroid,
+        requestPersistentStorage,
         formatDate,
         todayInTaipei,
         escapeHtml,
@@ -99,6 +106,7 @@
 
       function notice(html, type = "") {
         notices.insertAdjacentHTML("beforeend", `<div class="pp-notice ${type}">${html}</div>`);
+        notices.lastElementChild?.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
 
       // 印章外觀一律依社群設定（distinct／shared）
@@ -169,6 +177,7 @@
       }
 
       async function showImport(code) {
+        document.getElementById("import-box")?.remove();
         let records;
         try {
           records = await decodeBackup(code);
@@ -194,12 +203,14 @@
             </div>
           </div>`,
         );
-        document.getElementById("import-no").onclick = () => document.getElementById("import-box").remove();
+        const box = document.getElementById("import-box");
+        box?.scrollIntoView({ behavior: "smooth", block: "center" });
+        document.getElementById("import-no").onclick = () => document.getElementById("import-box")?.remove();
         const yes = document.getElementById("import-yes");
         if (yes) {
           yes.onclick = async () => {
             const { added, upgraded, saved } = mergeStampRecords(fresh);
-            document.getElementById("import-box").remove();
+            document.getElementById("import-box")?.remove();
             const msg = `✅ 已匯入 ${added} 個印章${upgraded ? `，${upgraded} 個線上章改為實體章` : ""}`;
             notice(saved ? msg : "無法儲存，請確認不是無痕模式。", saved ? "success" : "error");
             await reload();
@@ -300,9 +311,55 @@
           <div class="pp-actions" style="justify-content:flex-start">
             <button class="pp-btn secondary" id="backup" ${stamps.length ? "" : "disabled"}>產生備份連結</button>
           </div>
-          <div id="backup-box"></div>`;
+          <div id="backup-box"></div>
+          <div style="margin-top:14px">
+            <label for="import-input" class="pp-muted" style="display:block;margin-bottom:6px;font-weight:600">手動輸入／貼上備份連結或代碼：</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <input type="text" id="import-input" placeholder="貼上備份連結或代碼（如 https://...#import=z... 或 z...）" style="flex:1;min-width:200px;padding:8px 12px;border:1px solid #ccc;border-radius:8px;font-size:0.85rem" />
+              <button class="pp-btn" id="import-btn">還原印章</button>
+            </div>
+          </div>`;
 
         document.getElementById("backup").onclick = shareBackup;
+        const importBtn = document.getElementById("import-btn");
+        const importInput = document.getElementById("import-input");
+        if (importBtn && importInput) {
+          const doManualImport = async () => {
+            const raw = importInput.value.trim();
+            if (!raw) {
+              notice("請輸入或貼上備份連結或代碼。", "error");
+              return;
+            }
+            let code = "";
+            const mParam = /(?:#|\?|&|^)import=([A-Za-z0-9_-]+)/i.exec(raw);
+            if (mParam) {
+              code = mParam[1];
+            } else {
+              const mToken = /\b([zj][A-Za-z0-9_-]{10,})\b/.exec(raw);
+              if (mToken) {
+                code = mToken[1];
+              } else {
+                let fallback = raw.replace(/^#/, "").replace(/^import=/i, "").trim();
+                if (fallback.startsWith("z") || fallback.startsWith("j")) {
+                  code = fallback;
+                }
+              }
+            }
+            if (!code || (!code.startsWith("z") && !code.startsWith("j"))) {
+              notice("備份格式不正確，請輸入完整的備份連結或代碼。", "error");
+              return;
+            }
+            await showImport(code);
+            importInput.value = "";
+          };
+          importBtn.onclick = doManualImport;
+          importInput.onkeydown = (e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              doManualImport();
+            }
+          };
+        }
         app.querySelectorAll("[data-redeem]").forEach((btn) => {
           btn.onclick = () => openRedeem(registry.byId.get(btn.dataset.redeem));
         });
@@ -411,13 +468,84 @@
         await render();
       }
 
+      let deferredInstallPrompt = null;
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        showInstallBanner();
+      });
+
+      window.addEventListener("appinstalled", () => {
+        document.getElementById("pwa-install-banner")?.remove();
+        document.getElementById("pwa-generic-hint")?.remove();
+        notice("🎉 感謝安裝！社群護照已成功加入手機主畫面，印章資料已獲得持久保護。", "success");
+      });
+
+      function showInstallBanner() {
+        if (isStandalone() || document.getElementById("pwa-install-banner")) return;
+        if (sessionStorage.getItem("pwa_install_dismissed") === "true") return;
+
+        // 移除通用提示，避免兩層安裝引導重疊
+        document.getElementById("pwa-generic-hint")?.remove();
+
+        const banner = document.createElement("div");
+        banner.id = "pwa-install-banner";
+        banner.className = "pp-notice install";
+        banner.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><b>📥 安裝「社群護照」App</b></div>
+            <button type="button" id="pwa-dismiss-btn" style="background:none;border:none;color:#166534;font-size:1.1rem;cursor:pointer;padding:0 4px;line-height:1" title="關閉">✕</button>
+          </div>
+          <div style="font-size:0.82rem;line-height:1.4;margin-top:4px">將護照加到手機主畫面，現場離線隨時開啟，並可防止印章資料遭瀏覽器清除。</div>
+          <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+            <button type="button" class="pp-install-btn" id="pwa-install-btn">立即安裝至手機</button>
+            <button type="button" class="pp-btn secondary" id="pwa-later-btn" style="padding:4px 10px;font-size:0.82rem">稍後再說</button>
+          </div>
+        `;
+        notices.prepend(banner);
+
+        const dismiss = () => {
+          banner.remove();
+          sessionStorage.setItem("pwa_install_dismissed", "true");
+        };
+
+        document.getElementById("pwa-dismiss-btn")?.addEventListener("click", dismiss);
+        document.getElementById("pwa-later-btn")?.addEventListener("click", dismiss);
+
+        document.getElementById("pwa-install-btn")?.addEventListener("click", async () => {
+          if (!deferredInstallPrompt) return;
+          deferredInstallPrompt.prompt();
+          const { outcome } = await deferredInstallPrompt.userChoice;
+          if (outcome === "accepted") {
+            banner.remove();
+          } else {
+            dismiss();
+          }
+          deferredInstallPrompt = null;
+        });
+      }
+
       async function main() {
         registry = await loadRegistry();
+        requestPersistentStorage();
+
         const inApp = inAppBrowserName();
         if (inApp) {
-          notice(`⚠️ 你正在 <b>${inApp}</b> 內建的瀏覽器中開啟，這裡看到的印章跟 Safari／Chrome 裡的是分開的。`);
+          notice(`⚠️ 你正在 <b>${inApp}</b> 內建瀏覽器中開啟。內建瀏覽器在關閉後容易遺失印章資料，請點擊右上角「⋯」選擇<b>「在預設瀏覽器（Safari / Chrome）中開啟」</b>！`, "error");
         } else if (!isStandalone()) {
-          notice("📱 建議把這頁<b>加入主畫面</b>，iPhone 上可以避免瀏覽器自動清除印章。", "info");
+          if (isIOS()) {
+            notice(
+              `📱 <b>建議將社群護照加入 iPhone 主畫面：</b><br />點擊 Safari 底部分享按鈕 ➔ 選擇<b>「加入主畫面 ⊞」</b>，即可如獨立 App 隨時開啟，並大幅降低印章被系統清理的風險。<br /><span style="font-size:0.8rem;opacity:0.85">（小提示：iOS 的 Safari 與主畫面 App 資料各自獨立，若已加入主畫面，建議都在主畫面 App 中操作）</span>`,
+              "info",
+            );
+          } else if (deferredInstallPrompt) {
+            showInstallBanner();
+          } else if (sessionStorage.getItem("pwa_install_dismissed") !== "true") {
+            notices.insertAdjacentHTML(
+              "beforeend",
+              `<div class="pp-notice info" id="pwa-generic-hint">📱 建議把這頁<b>加到主畫面</b>或<b>安裝為應用程式</b>，可確保現場離線可用並保護印章資料。</div>`,
+            );
+          }
         }
         await reload();
         const m = /^#import=(.+)$/.exec(window.__ppHash || "");

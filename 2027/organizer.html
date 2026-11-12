@@ -7,6 +7,14 @@
     <link href="../bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../index.css" />
     <link rel="stylesheet" href="passport/passport.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#14212e" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="社群護照" />
+    <link rel="apple-touch-icon" href="../assets/passport/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/passport/icon-192.png" />
     <title>主辦方簽到工具 - 2027 高雄社群名牌卡</title>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"
@@ -45,7 +53,7 @@
         <!-- 金鑰管理 -->
         <section id="tab-keys" hidden>
           <div class="pp-section-title">解鎖金鑰</div>
-          <form class="pp-form" id="unlock-form" onsubmit="return false">
+          <form class="pp-form" id="unlock-form" autocomplete="off" onsubmit="return false">
             <div id="saved-key-row" hidden class="pp-notice info">
               這個瀏覽器已儲存 <b id="saved-key-name"></b> 的加密金鑰，輸入密碼即可解鎖。
               <button type="button" class="pp-btn secondary" id="forget-key" style="padding: 2px 10px; margin-left: 6px">移除</button>
@@ -56,7 +64,31 @@
             </div>
             <div>
               <label for="unlock-pass">金鑰密碼</label>
-              <input type="password" id="unlock-pass" autocomplete="current-password" />
+              <div class="pp-pass-wrap">
+                <input
+                  type="text"
+                  id="unlock-pass"
+                  class="pp-secret-input"
+                  autocomplete="off"
+                  data-1p-ignore="true"
+                  data-lpignore="true"
+                  data-bwignore="true"
+                  data-form-type="other"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                />
+                <button
+                  type="button"
+                  class="pp-pass-toggle"
+                  data-target="unlock-pass"
+                  aria-label="顯示密碼"
+                  title="顯示密碼"
+                >
+                  <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
             </div>
             <label style="font-weight: 400; display: flex; gap: 6px; align-items: center">
               <input type="checkbox" id="remember" style="width: auto" checked />
@@ -71,22 +103,81 @@
             每個社群只需要產生一次。產生後請下載金鑰檔保存，並把公鑰透過 Pull Request 加到
             <code>2027/stamps.json</code>，合併後簽到碼才會生效。
           </p>
-          <form class="pp-form" id="gen-form" onsubmit="return false">
+          <form class="pp-form" id="gen-form" autocomplete="off" onsubmit="return false">
             <div class="row">
               <div>
                 <label for="gen-kid">金鑰 ID</label>
-                <input id="gen-kid" placeholder="2027a" />
+                <input
+                  id="gen-kid"
+                  placeholder="2027a"
+                  autocomplete="off"
+                  data-1p-ignore="true"
+                  data-lpignore="true"
+                  data-bwignore="true"
+                  data-form-type="other"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                />
               </div>
               <div></div>
             </div>
             <div class="row">
               <div>
                 <label for="gen-pass">設定密碼（至少 8 個字）</label>
-                <input type="password" id="gen-pass" autocomplete="new-password" />
+                <div class="pp-pass-wrap">
+                  <input
+                    type="text"
+                    id="gen-pass"
+                    class="pp-secret-input"
+                    autocomplete="off"
+                    data-1p-ignore="true"
+                    data-lpignore="true"
+                    data-bwignore="true"
+                    data-form-type="other"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                  />
+                  <button
+                    type="button"
+                    class="pp-pass-toggle"
+                    data-target="gen-pass"
+                    aria-label="顯示密碼"
+                    title="顯示密碼"
+                  >
+                    <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                  </button>
+                </div>
               </div>
               <div>
                 <label for="gen-pass2">再輸入一次</label>
-                <input type="password" id="gen-pass2" autocomplete="new-password" />
+                <div class="pp-pass-wrap">
+                  <input
+                    type="text"
+                    id="gen-pass2"
+                    class="pp-secret-input"
+                    autocomplete="off"
+                    data-1p-ignore="true"
+                    data-lpignore="true"
+                    data-bwignore="true"
+                    data-form-type="other"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                  />
+                  <button
+                    type="button"
+                    class="pp-pass-toggle"
+                    data-target="gen-pass2"
+                    aria-label="顯示密碼"
+                    title="顯示密碼"
+                  >
+                    <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                  </button>
+                </div>
               </div>
             </div>
             <div><button class="pp-btn green" id="generate">產生並下載金鑰檔</button></div>
@@ -215,6 +306,7 @@
         formatDate,
         escapeHtml,
         stripTags,
+        registerServiceWorker,
       } from "./passport/core.js";
 
       const KEY_STORE = "ccard2027.organizerKeys";
@@ -489,6 +581,8 @@
           unlocked = await decryptKeyFile(file, $("unlock-pass").value);
           if ($("remember").checked) storeKey(file);
           $("unlock-pass").value = "";
+          $("unlock-pass").classList.remove("revealed");
+          syncPassToggle("unlock-pass");
           updateStatus();
           document.querySelector('.pp-tabs button[data-tab="sign"]').click();
         } catch (err) {
@@ -517,6 +611,10 @@
         if ($("remember").checked) storeKey(file);
         unlocked = { communityId: c.id, kid, publicJwk, privateKey: pair.privateKey };
         $("gen-pass").value = $("gen-pass2").value = "";
+        $("gen-pass").classList.remove("revealed");
+        $("gen-pass2").classList.remove("revealed");
+        syncPassToggle("gen-pass");
+        syncPassToggle("gen-pass2");
 
         const entry = JSON.stringify({ kid, jwk: publicJwk }, null, 2);
         const section = c.partner ? "partners" : "communities";
@@ -534,6 +632,54 @@
         $("copy-entry").onclick = () => navigator.clipboard.writeText(entry);
         updateStatus();
       };
+
+      // ---------- 金鑰密碼遮罩切換與鍵盤快捷操作 ----------
+
+      function syncPassToggle(targetId) {
+        const target = $(targetId);
+        const btn = document.querySelector(`.pp-pass-toggle[data-target="${targetId}"]`);
+        if (!target || !btn) return;
+        const isRevealed = target.classList.contains("revealed");
+        const openIcon = btn.querySelector(".eye-open");
+        const closedIcon = btn.querySelector(".eye-closed");
+        if (openIcon && closedIcon) {
+          openIcon.style.display = isRevealed ? "none" : "";
+          closedIcon.style.display = isRevealed ? "" : "none";
+        }
+        btn.setAttribute("aria-label", isRevealed ? "隱藏密碼" : "顯示密碼");
+        btn.setAttribute("title", isRevealed ? "隱藏密碼" : "顯示密碼");
+      }
+
+      document.querySelectorAll(".pp-pass-toggle").forEach((btn) => {
+        btn.onclick = () => {
+          const target = $(btn.dataset.target);
+          if (!target) return;
+          target.classList.toggle("revealed");
+          syncPassToggle(btn.dataset.target);
+          target.focus();
+        };
+      });
+
+      $("unlock-pass")?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          $("unlock").click();
+        }
+      });
+
+      $("gen-pass2")?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          $("generate").click();
+        }
+      });
+
+      // 極舊環境不支援 CSS -webkit-text-security 時進行優雅降級
+      if (!window.CSS || !CSS.supports || !CSS.supports("-webkit-text-security", "disc")) {
+        document.querySelectorAll(".pp-secret-input").forEach((inp) => {
+          inp.type = "password";
+        });
+      }
 
       // ---------- 簽出 QR code ----------
 
@@ -568,22 +714,266 @@
         return { payload, url: url.toString() };
       }
 
+      // 修正 QRious 套件在指定 padding 時未將 QR code 置中對齊的問題
+      // （官方預設 offset 固定等於 padding，導致右側與下側邊距過大而偏向左上）
+      (() => {
+        if (typeof QRious === "undefined") return;
+        const dummy = new QRious();
+        const rendererProto = dummy._canvasRenderer ? dummy._canvasRenderer.constructor.prototype : null;
+        if (rendererProto) {
+          rendererProto.getOffset = function (frame) {
+            const moduleSize = this.getModuleSize(frame);
+            const offset = Math.floor((this.qrious.size - moduleSize * frame.width) / 2);
+            return Math.max(0, offset);
+          };
+          const baseProto = Object.getPrototypeOf(rendererProto);
+          if (baseProto && baseProto.getOffset) {
+            baseProto.getOffset = rendererProto.getOffset;
+          }
+        }
+      })();
+
       function drawQr(canvas, value, size) {
         new QRious({ element: canvas, value, size, level: "M", padding: 16 });
       }
 
+      function drawRoundRect(ctx, x, y, w, h, r) {
+        if (typeof ctx.roundRect === "function") {
+          ctx.beginPath();
+          ctx.roundRect(x, y, w, h, r);
+        } else {
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.arcTo(x + w, y, x + w, y + h, r);
+          ctx.arcTo(x + w, y + h, x, y + h, r);
+          ctx.arcTo(x, y + h, x, y, r);
+          ctx.arcTo(x, y, x + w, y, r);
+          ctx.closePath();
+        }
+      }
+
+      function drawPoster(canvas, url, {
+        communityName = "",
+        eventTitle = "",
+        eventDate = "",
+        mode = "onsite",
+        isMakeup = false,
+        makeupCode = "",
+      } = {}) {
+        canvas.width = 800;
+        canvas.height = 1040;
+        const ctx = canvas.getContext("2d");
+
+        // 1. 底色與外框卡片
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, 800, 1040);
+
+        const margin = 20;
+        const cardW = 800 - margin * 2; // 760
+        const cardH = 1040 - margin * 2; // 1000
+        const radius = 24;
+
+        // 卡片底色
+        ctx.save();
+        ctx.fillStyle = "#ffffff";
+        drawRoundRect(ctx, margin, margin, cardW, cardH, radius);
+        ctx.fill();
+
+        // 頂部四色飾條
+        ctx.save();
+        drawRoundRect(ctx, margin, margin, cardW, cardH, radius);
+        ctx.clip();
+        const topGrad = ctx.createLinearGradient(margin, margin, margin + cardW, margin);
+        topGrad.addColorStop(0, "#4285f4");
+        topGrad.addColorStop(0.33, "#34a853");
+        topGrad.addColorStop(0.66, "#f9ab00");
+        topGrad.addColorStop(1, "#ea4335");
+        ctx.fillStyle = topGrad;
+        ctx.fillRect(margin, margin, cardW, 10);
+        ctx.restore();
+
+        // 卡片外框線
+        ctx.strokeStyle = "#14212e";
+        ctx.lineWidth = 3;
+        drawRoundRect(ctx, margin, margin, cardW, cardH, radius);
+        ctx.stroke();
+        ctx.restore();
+
+        // 2. 標頭文字
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        // 副標題橫額
+        ctx.font = '600 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif';
+        ctx.fillStyle = "#64748b";
+        ctx.fillText("2027 高雄社群名牌卡  ‧  數位簽到", 400, 58);
+
+        // 社群名稱
+        let cFont = 36;
+        ctx.font = `bold ${cFont}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif`;
+        while (ctx.measureText(communityName).width > 680 && cFont > 20) {
+          cFont -= 2;
+          ctx.font = `bold ${cFont}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif`;
+        }
+        let displayCommName = communityName;
+        if (ctx.measureText(displayCommName).width > 680) {
+          while (displayCommName.length > 0 && ctx.measureText(displayCommName + "…").width > 680) {
+            displayCommName = displayCommName.slice(0, -1);
+          }
+          displayCommName += "…";
+        }
+        ctx.fillStyle = "#14212e";
+        ctx.fillText(displayCommName, 400, 108);
+
+        // 活動名稱
+        let eFont = 24;
+        ctx.font = `600 ${eFont}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif`;
+        while (ctx.measureText(eventTitle).width > 680 && eFont > 16) {
+          eFont -= 1;
+          ctx.font = `600 ${eFont}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif`;
+        }
+        let displayTitle = eventTitle;
+        if (ctx.measureText(displayTitle).width > 680) {
+          while (displayTitle.length > 0 && ctx.measureText(displayTitle + "…").width > 680) {
+            displayTitle = displayTitle.slice(0, -1);
+          }
+          displayTitle += "…";
+        }
+        ctx.fillStyle = "#334155";
+        ctx.fillText(displayTitle, 400, 156);
+
+        // 日期與簽到方式標籤
+        let modeText = mode === "onsite" ? "📍 實體簽到" : "💻 線上簽到";
+        if (isMakeup) {
+          modeText = mode === "onsite" ? "📍 實體補簽" : "💻 線上補簽";
+          if (makeupCode) modeText += `（代碼 ${makeupCode}）`;
+        }
+        const badgeText = `📅 ${eventDate}  ‧  ${modeText}`;
+        let bFont = 18;
+        ctx.font = `600 ${bFont}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif`;
+        while (ctx.measureText(badgeText).width > 620 && bFont > 13) {
+          bFont -= 1;
+          ctx.font = `600 ${bFont}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif`;
+        }
+        const textW = ctx.measureText(badgeText).width;
+        const pillW = Math.min(680, textW + 36);
+        const pillH = 34;
+        const pillX = 400 - pillW / 2;
+        const pillY = 204 - pillH / 2;
+        ctx.fillStyle = mode === "onsite" ? "#f0fdf4" : "#f0f9ff";
+        ctx.strokeStyle = mode === "onsite" ? "#86efac" : "#bae6fd";
+        ctx.lineWidth = 1.5;
+        drawRoundRect(ctx, pillX, pillY, pillW, pillH, 17);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = mode === "onsite" ? "#166534" : "#0369a1";
+        ctx.fillText(badgeText, 400, 204);
+
+        // 上方分隔線
+        ctx.strokeStyle = "#e2e8f0";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(60, 240);
+        ctx.lineTo(740, 240);
+        ctx.stroke();
+
+        // 3. QR Code 放置框 (540x540)
+        ctx.fillStyle = "#ffffff";
+        ctx.strokeStyle = "#cbd5e1";
+        ctx.lineWidth = 1.5;
+        drawRoundRect(ctx, 130, 265, 540, 540, 16);
+        ctx.fill();
+        ctx.stroke();
+
+        // 生成 QR Code 並繪製置中於框內
+        const tempQr = document.createElement("canvas");
+        drawQr(tempQr, url, 500);
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(tempQr, 150, 285, 500, 500);
+        ctx.imageSmoothingEnabled = true;
+
+        // 4. 下方分隔線
+        ctx.strokeStyle = "#e2e8f0";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(60, 835);
+        ctx.lineTo(740, 835);
+        ctx.stroke();
+
+        // 5. 底部說明文字
+        ctx.font = 'bold 22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif';
+        ctx.fillStyle = "#0f172a";
+        ctx.fillText("📷 開啟手機相機或社群護照掃描即可簽到集章", 400, 875);
+
+        ctx.font = 'normal 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif';
+        ctx.fillStyle = "#64748b";
+        ctx.fillText(
+          isMakeup
+            ? `此為一次性補簽專用碼${makeupCode ? `（編號 ${makeupCode}）` : ""}，掃描後章戳將存入數位護照`
+            : "同一場活動每人簽到一次，章戳將自動存入您的數位護照",
+          400,
+          918,
+        );
+
+        ctx.font = '500 14px ui-monospace, Menlo, Consolas, monospace';
+        ctx.fillStyle = "#94a3b8";
+        ctx.fillText("community-card.org  ‧  2027 Kaohsiung Tech Communities", 400, 958);
+      }
+
       function panelHtml(p) {
+        const isMakeup = p.mode === "makeup";
+        const titleText = isMakeup
+          ? (p.title || "補簽 QR code")
+          : `${p.mode === "onsite" ? "📍" : "💻"} ${MODES[p.mode]}簽到 QR code${p.rotate ? "（輪替）" : ""}`;
+
         return `
-          <div class="pp-qr" data-mode="${p.mode}">
+          <div class="pp-qr pp-qr-panel" data-mode="${p.mode}">
             <div class="divider"></div>
-            <div class="pp-section-title">${p.mode === "onsite" ? "📍" : "💻"} ${MODES[p.mode]}簽到 QR code${p.rotate ? "（輪替）" : ""}</div>
-            <canvas></canvas>
+            <div class="pp-panel-header">
+              <div class="pp-section-title">${titleText}</div>
+              <div class="pp-view-tabs" role="tablist">
+                <button type="button" class="pp-tab-btn active" data-view="both">兩版對照</button>
+                <button type="button" class="pp-tab-btn" data-view="pure">版本 1：單純條碼</button>
+                <button type="button" class="pp-tab-btn" data-view="poster">版本 2：海報邊框</button>
+              </div>
+            </div>
+
             <div class="pp-muted countdown"></div>
+
+            <div class="pp-qr-grid view-both">
+              <!-- 版本 1：單純 QR Code -->
+              <div class="pp-qr-card card-pure" data-card="pure">
+                <div class="pp-card-badge">版本 1：單純 QR Code（置中對齊）</div>
+                <p class="pp-card-desc">純條碼置中無遮擋，適合自由貼入自製簡報、投影片或文宣中</p>
+                <div class="pp-qr-canvas-wrap">
+                  <canvas class="qr-canvas-pure" title="點擊放大全螢幕"></canvas>
+                </div>
+                <div class="pp-card-actions">
+                  <button type="button" class="pp-btn secondary" data-act="download-pure">下載單純 QR Code</button>
+                  <button type="button" class="pp-btn secondary" data-act="fs-pure">全螢幕放大</button>
+                </div>
+              </div>
+
+              <!-- 版本 2：海報邊框設計 -->
+              <div class="pp-qr-card card-poster" data-card="poster">
+                <div class="pp-card-badge">版本 2：活動海報邊框設計</div>
+                <p class="pp-card-desc">含社群名稱、活動名稱、日期與掃描提示，適合直接張貼或投影</p>
+                <div class="pp-qr-canvas-wrap">
+                  <canvas class="qr-canvas-poster" title="點擊放大全螢幕"></canvas>
+                </div>
+                <div class="pp-card-actions">
+                  <button type="button" class="pp-btn secondary" data-act="download-poster">下載海報圖檔</button>
+                  <button type="button" class="pp-btn secondary" data-act="fs-poster">全螢幕投影</button>
+                </div>
+              </div>
+            </div>
+
             <div class="url"></div>
+
             <div class="pp-actions">
-              <button class="pp-btn" data-act="fullscreen">全螢幕顯示</button>
+              <button class="pp-btn" data-act="fullscreen">全螢幕投影海報</button>
+              <button class="pp-btn secondary" data-act="fullscreen-pure">全螢幕單純條碼</button>
               <button class="pp-btn secondary" data-act="copy">複製連結</button>
-              <button class="pp-btn secondary" data-act="download">下載 QR code</button>
               <a class="pp-btn secondary" data-act="test" target="_blank" rel="noopener">開啟簽到頁測試</a>
             </div>
           </div>`;
@@ -592,11 +982,43 @@
       async function refreshPanel(p) {
         const { payload, url } = await makeToken(p.mode, p.rotate);
         p.url = url;
-        p.label = `${current().name} ${MODES[payload.m]}簽到 ${formatDate(payload.d)}`;
-        drawQr(p.el.querySelector("canvas"), url, 640);
+        p.payload = payload;
+        const c = current();
+        const dStr = payload.d;
+        const [y, m, day] = dStr.split("-");
+        const wd = "日一二三四五六"[new Date(Date.UTC(+y, +m - 1, +day)).getUTCDay()];
+        const formattedDate = `${dStr}（${wd}）`;
+        p.label = `${c.name} ${MODES[payload.m]}簽到 ${formatDate(payload.d)}`;
+        p.subtitle = payload.t;
+
+        // 1. 繪製版本 1：單純 QR Code
+        const pureCanvas = p.el.querySelector(".qr-canvas-pure");
+        if (pureCanvas) {
+          drawQr(pureCanvas, url, 640);
+        }
+
+        // 2. 繪製版本 2：活動海報邊框設計
+        const posterCanvas = p.el.querySelector(".qr-canvas-poster");
+        if (posterCanvas) {
+          drawPoster(posterCanvas, url, {
+            communityName: c.name,
+            eventTitle: payload.t,
+            eventDate: formattedDate,
+            mode: payload.m,
+            isMakeup: false,
+          });
+        }
+
+        p.pureFileName = `checkin-${c.id}-${payload.e}-${payload.m}-qrcode.png`;
+        p.posterFileName = `checkin-${c.id}-${payload.e}-${payload.m}-poster.png`;
+        p.fileName = p.posterFileName;
+
         p.el.querySelector(".url").textContent = url;
         p.el.querySelector('[data-act="test"]').href = url;
-        if (fullscreen?.mode === p.mode) drawQr(fullscreen.el.querySelector("canvas"), url, 1000);
+
+        if (fullscreen?.mode === p.mode) {
+          fullscreen.render();
+        }
       }
 
       function setCountdown(p, text) {
@@ -609,41 +1031,160 @@
         rotateTimer = null;
       }
 
-      function openFullscreen(p) {
+      function openFullscreen(p, initialView = "poster") {
         const el = document.createElement("div");
         el.className = "pp-qr-fullscreen";
+        let currentFsView = initialView;
+
         el.innerHTML = `
-          <div class="title">${escapeHtml(p.label)}</div>
-          <div>${escapeHtml(p.subtitle ?? $("ev-title").value)}</div>
-          <canvas></canvas>
-          <div class="pp-muted countdown">${escapeHtml(p.el.querySelector(".countdown").textContent)}</div>
-          <div class="pp-muted">用手機相機掃描即可簽到集章</div>
-          <button class="pp-btn secondary">關閉</button>`;
-        drawQr(el.querySelector("canvas"), p.url, 1000);
-        el.querySelector("button").onclick = () => {
+          <div class="fullscreen-content">
+            <div class="fullscreen-header">
+              <div class="title">${escapeHtml(p.label)}</div>
+              <div>${escapeHtml(p.subtitle ?? $("ev-title").value)}</div>
+              <div class="pp-view-tabs" style="margin-top: 6px">
+                <button type="button" class="pp-tab-btn ${currentFsView === "poster" ? "active" : ""}" data-fs-view="poster">🎨 海報邊框模式</button>
+                <button type="button" class="pp-tab-btn ${currentFsView === "pure" ? "active" : ""}" data-fs-view="pure">📱 單純條碼模式</button>
+              </div>
+            </div>
+            <canvas class="fullscreen-canvas ${currentFsView === "poster" ? "poster-mode" : ""}"></canvas>
+            <div class="pp-muted countdown">${escapeHtml(p.el.querySelector(".countdown")?.textContent || "")}</div>
+            <div class="pp-muted">用手機相機掃描即可簽到集章</div>
+            <button class="pp-btn secondary fs-close-btn">關閉全螢幕</button>
+          </div>`;
+
+        const canvas = el.querySelector(".fullscreen-canvas");
+
+        function renderFullscreen() {
+          if (currentFsView === "poster") {
+            canvas.className = "fullscreen-canvas poster-mode";
+            const sourcePoster = p.el.querySelector(".qr-canvas-poster");
+            if (sourcePoster) {
+              canvas.width = sourcePoster.width;
+              canvas.height = sourcePoster.height;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(sourcePoster, 0, 0);
+            } else {
+              const c = current();
+              const dStr = p.payload?.d || $("ev-date").value;
+              const [y, m, day] = dStr.split("-");
+              const wd = "日一二三四五六"[new Date(Date.UTC(+y, +m - 1, +day)).getUTCDay()];
+              drawPoster(canvas, p.url, {
+                communityName: c?.name || "",
+                eventTitle: p.subtitle || $("ev-title").value,
+                eventDate: `${dStr}（${wd}）`,
+                mode: p.payload?.m || p.mode,
+                isMakeup: p.mode === "makeup",
+                makeupCode: p.payload?.n,
+              });
+            }
+          } else {
+            canvas.className = "fullscreen-canvas";
+            drawQr(canvas, p.url, 1000);
+          }
+          if (p.isExpired) {
+            canvas.style.opacity = "0.2";
+          }
+        }
+
+        renderFullscreen();
+
+        el.querySelectorAll("[data-fs-view]").forEach((btn) => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            currentFsView = btn.dataset.fsView;
+            el.querySelectorAll("[data-fs-view]").forEach((b) => b.classList.toggle("active", b === btn));
+            renderFullscreen();
+          };
+        });
+
+        const close = () => {
+          window.removeEventListener("keydown", onKeyDown);
+          document.removeEventListener("fullscreenchange", onFsChange);
           fullscreen = null;
           el.remove();
-          document.exitFullscreen?.().catch(() => {});
+          if (document.fullscreenElement) {
+            document.exitFullscreen?.().catch(() => {});
+          }
         };
+
+        const onKeyDown = (e) => {
+          if (e.key === "Escape") {
+            close();
+          }
+        };
+
+        let wasNativeFs = false;
+        const onFsChange = () => {
+          if (document.fullscreenElement) {
+            wasNativeFs = true;
+          } else if (wasNativeFs) {
+            close();
+          }
+        };
+
+        window.addEventListener("keydown", onKeyDown);
+        document.addEventListener("fullscreenchange", onFsChange);
+
+        el.querySelector(".fs-close-btn").onclick = (e) => {
+          e.stopPropagation();
+          close();
+        };
+
+        el.onclick = (e) => {
+          if (e.target === el) {
+            close();
+          }
+        };
+
         document.body.appendChild(el);
-        fullscreen = { mode: p.mode, el };
+        fullscreen = { mode: p.mode, el, render: renderFullscreen, close };
         el.requestFullscreen?.().catch(() => {});
       }
 
       function bindPanel(p) {
         const btn = (act) => p.el.querySelector(`[data-act="${act}"]`);
-        btn("fullscreen").onclick = () => openFullscreen(p);
-        btn("copy").onclick = async () => {
+
+        // 分頁切換：兩版對照 / 版本 1 / 版本 2
+        const grid = p.el.querySelector(".pp-qr-grid");
+        p.el.querySelectorAll(".pp-view-tabs button").forEach((tabBtn) => {
+          tabBtn.onclick = () => {
+            p.el.querySelectorAll(".pp-view-tabs button").forEach((b) => b.classList.toggle("active", b === tabBtn));
+            grid.className = `pp-qr-grid view-${tabBtn.dataset.view}`;
+          };
+        });
+
+        // 全螢幕按鈕與畫布點擊
+        btn("fullscreen")?.addEventListener("click", () => openFullscreen(p, "poster"));
+        btn("fullscreen-pure")?.addEventListener("click", () => openFullscreen(p, "pure"));
+        btn("fs-pure")?.addEventListener("click", () => openFullscreen(p, "pure"));
+        btn("fs-poster")?.addEventListener("click", () => openFullscreen(p, "poster"));
+        p.el.querySelector(".qr-canvas-pure")?.addEventListener("click", () => openFullscreen(p, "pure"));
+        p.el.querySelector(".qr-canvas-poster")?.addEventListener("click", () => openFullscreen(p, "poster"));
+
+        // 複製連結
+        btn("copy")?.addEventListener("click", async () => {
           await navigator.clipboard.writeText(p.url);
+          const orig = btn("copy").textContent;
           btn("copy").textContent = "已複製 ✓";
-          setTimeout(() => (btn("copy").textContent = "複製連結"), 1500);
-        };
-        btn("download").onclick = () => {
+          setTimeout(() => (btn("copy").textContent = orig), 1500);
+        });
+
+        // 下載版本 1：單純 QR Code
+        btn("download-pure")?.addEventListener("click", () => {
           const a = document.createElement("a");
-          a.download = p.fileName || `checkin-${current().id}-${$("ev-id").value}-${p.mode}.png`;
-          a.href = p.el.querySelector("canvas").toDataURL("image/png");
+          a.download = p.pureFileName || `checkin-${current()?.id || "community"}-${$("ev-id").value}-${p.mode}-qrcode.png`;
+          a.href = p.el.querySelector(".qr-canvas-pure").toDataURL("image/png");
           a.click();
-        };
+        });
+
+        // 下載版本 2：活動海報圖檔
+        const dlPosterBtn = btn("download-poster") || btn("download");
+        dlPosterBtn?.addEventListener("click", () => {
+          const a = document.createElement("a");
+          a.download = p.posterFileName || p.fileName || `checkin-${current()?.id || "community"}-${$("ev-id").value}-${p.mode}-poster.png`;
+          a.href = p.el.querySelector(".qr-canvas-poster").toDataURL("image/png");
+          a.click();
+        });
       }
 
       $("sign").onclick = async () => {
@@ -795,18 +1336,41 @@
 
         stopMakeup();
         const area = $("mk-area");
-        area.innerHTML = panelHtml({ mode: "makeup" })
-          .replace(/<div class="pp-section-title">.*?<\/div>/, `<div class="pp-section-title">${mode === "onsite" ? "📍" : "💻"} ${MODES[mode]}補簽 QR code（編號 ${payload.n}）</div>`);
+        area.innerHTML = panelHtml({
+          mode: "makeup",
+          title: `${mode === "onsite" ? "📍" : "💻"} ${MODES[mode]}補簽 QR code（編號 ${payload.n}）`,
+        });
         area.hidden = false;
+
+        const [y, m, day] = d.split("-");
+        const wd = "日一二三四五六"[new Date(Date.UTC(+y, +m - 1, +day)).getUTCDay()];
+        const formattedDate = `${d}（${wd}）`;
+
         const p = {
           mode: "makeup",
           url: url.toString(),
+          payload,
           label: `${c.name} ${MODES[mode]}補簽 ${formatDate(d)}`,
           subtitle: `${payload.t}｜一次性補簽碼 ${payload.n}`,
-          fileName: `makeup-${c.id}-${payload.e}-${payload.n}.png`,
-          el: area.querySelector(".pp-qr"),
+          pureFileName: `makeup-${c.id}-${payload.e}-${payload.n}-qrcode.png`,
+          posterFileName: `makeup-${c.id}-${payload.e}-${payload.n}-poster.png`,
+          fileName: `makeup-${c.id}-${payload.e}-${payload.n}-poster.png`,
+          el: area.querySelector(".pp-qr-panel"),
         };
-        drawQr(p.el.querySelector("canvas"), p.url, 640);
+
+        // 1. 繪製版本 1：單純 QR Code
+        drawQr(p.el.querySelector(".qr-canvas-pure"), p.url, 640);
+
+        // 2. 繪製版本 2：活動海報邊框設計
+        drawPoster(p.el.querySelector(".qr-canvas-poster"), p.url, {
+          communityName: c.name,
+          eventTitle: payload.t,
+          eventDate: formattedDate,
+          mode,
+          isMakeup: true,
+          makeupCode: payload.n,
+        });
+
         p.el.querySelector(".url").textContent = p.url;
         p.el.querySelector('[data-act="test"]').href = p.url;
         bindPanel(p);
@@ -814,8 +1378,12 @@
         const tick = () => {
           const left = payload.exp - Math.floor(Date.now() / 1000);
           if (left <= 0) {
+            p.isExpired = true;
             setCountdown(p, "⌛ 這張補簽碼已過期，需要的話請重新產生");
-            p.el.querySelector("canvas").style.opacity = "0.2";
+            p.el.querySelectorAll("canvas").forEach((c) => (c.style.opacity = "0.2"));
+            if (fullscreen?.mode === p.mode) {
+              fullscreen.el.querySelectorAll("canvas").forEach((c) => (c.style.opacity = "0.2"));
+            }
             stopMakeup();
             return;
           }
@@ -828,6 +1396,7 @@
 
       communitySel.addEventListener("change", renderMakeupLog);
 
+      registerServiceWorker();
       updateStatus();
       await fillEvents();
       renderMakeupLog();

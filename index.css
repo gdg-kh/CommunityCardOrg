@@ -69,11 +69,11 @@ ol {
   }
 }
 
-/* 導覽列樣式調整 - 使用 Grid 強制四等分 */
+/* 導覽列樣式調整 */
 .nav-pills {
   margin-bottom: 20px;
   display: grid !important; /* 強制使用 Grid */
-  grid-template-columns: repeat(5, 1fr); /* 嚴格五等分 */
+  grid-template-columns: repeat(5, 1fr); /* 2026 五等分 */
   gap: 10px; /* 按鈕間距 */
   width: 100%;
 }
@@ -85,25 +85,88 @@ ol {
     background-color: #4285f4;
     color: #fff;
   }
-  /* 2. 社群月曆 */
+  /* 2. 2026 社群月曆 */
   &:nth-child(2) .nav-link.active {
     background-color: #a142f4; /* Purple for calendar */
     color: #fff;
   }
-  /* 3. 集章獎勵 */
+  /* 3. 2026 集章獎勵 */
   &:nth-child(3) .nav-link.active {
     background-color: #34a853;
     color: #fff;
   }
-  /* 4. 社群介紹 */
+  /* 4. 2026 社群介紹 */
   &:nth-child(4) .nav-link.active {
     background-color: #f9ab00;
     color: #fff;
   }
-  /* 5. 贊助商 */
+  /* 5. 2026 贊助商 */
   &:nth-child(5) .nav-link.active {
     background-color: #ea4335;
     color: #fff;
+  }
+}
+
+/* 2027 導覽列樣式調整（四個按鈕：社群月曆 #4285f4、社群護照 #34a853、社群介紹 #f9ab00、贊助商 #ea4335） */
+.nav-pills:has(.nav-item:nth-child(4):last-child),
+.nav-pills.nav-2027,
+.nav.nav-pills.nav-2027,
+.nav.nav-pills.nav-fill.nav-2027 {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+
+  .nav-item {
+    min-width: 0 !important;
+    width: 100% !important;
+    flex: 1 1 0 !important;
+
+    .nav-link {
+      padding: 10px 2px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    /* 1. 社群月曆 (#4285f4) */
+    &:nth-child(1) .nav-link.active {
+      background-color: #4285f4;
+      color: #fff;
+    }
+    &:nth-child(1) .nav-link:hover:not(.active) {
+      background-color: rgba(66, 133, 244, 0.12);
+      color: #1a73e8;
+    }
+
+    /* 2. 社群護照 (#34a853) */
+    &:nth-child(2) .nav-link.active {
+      background-color: #34a853;
+      color: #fff;
+    }
+    &:nth-child(2) .nav-link:hover:not(.active) {
+      background-color: rgba(52, 168, 83, 0.12);
+      color: #1e7e34;
+    }
+
+    /* 3. 社群介紹 (#f9ab00) */
+    &:nth-child(3) .nav-link.active {
+      background-color: #f9ab00;
+      color: #fff;
+    }
+    &:nth-child(3) .nav-link:hover:not(.active) {
+      background-color: rgba(249, 171, 0, 0.15);
+      color: #b06000;
+    }
+
+    /* 4. 贊助商 (#ea4335) */
+    &:nth-child(4) .nav-link.active {
+      background-color: #ea4335;
+      color: #fff;
+    }
+    &:nth-child(4) .nav-link:hover:not(.active) {
+      background-color: rgba(234, 67, 53, 0.12);
+      color: #d93025;
+    }
   }
 }
 .nav-pills .nav-link {

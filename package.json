@@ -6,7 +6,9 @@
   "scripts": {
     "generate-og": "node scripts/generate-og-images.js",
     "build:tracking": "node scripts/add-tracking.mjs",
-    "check:data": "node scripts/check-data.mjs"
+    "check:data": "node scripts/check-data.mjs",
+    "check:pwa": "node scripts/check-pwa.mjs",
+    "test": "node scripts/check-data.mjs && node scripts/check-pwa.mjs"
   },
   "dependencies": {
     "puppeteer": "^23.0.0"

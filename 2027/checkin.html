@@ -9,12 +9,18 @@
     <link rel="stylesheet" href="passport/passport.css" />
     <link rel="manifest" href="manifest.webmanifest" />
     <meta name="theme-color" content="#14212e" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="社群護照" />
+    <link rel="apple-touch-icon" href="../assets/passport/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/passport/icon-192.png" />
     <title>活動簽到 - 2027 高雄社群名牌卡</title>
   </head>
 
   <body>
     <div class="cardWrapper">
-      <ul class="nav nav-pills nav-fill">
+      <ul class="nav nav-pills nav-fill nav-2027">
         <li class="nav-item"><a class="nav-link" href="index.html">社群月曆</a></li>
         <li class="nav-item"><a class="nav-link active" href="passport.html">社群護照</a></li>
         <li class="nav-item"><a class="nav-link" href="communities.html">社群介紹</a></li>
@@ -44,6 +50,7 @@
         requestPersistentStorage,
         inAppBrowserName,
         isStandalone,
+        isIOS,
         formatDate,
         escapeHtml,
         registerServiceWorker,
@@ -154,11 +161,17 @@
           </div>`;
 
         if (!isStandalone() && !inApp) {
-          notice(
-            `📱 簽到記錄存在這支手機的瀏覽器裡。建議<b>加入主畫面</b>（iPhone：分享 → 加入主畫面；Android：選單 → 加到主畫面），
-            並偶爾到護照頁<b>備份</b>，避免記錄被瀏覽器清除。`,
-            "info",
-          );
+          if (isIOS()) {
+            notice(
+              `📱 <b>iPhone 參加者提示</b>：印章已儲存在此 Safari 瀏覽器中。若你先前已將護照「加入主畫面」，因 iOS 系統限制，主畫面 App 與 Safari 的資料不互通。你可以直接在 Safari 繼續使用護照（加入書籤），或在「我的綜合護照」點擊產生備份連結，可複製備份連結，貼至主畫面 App 的備份與還原區塊進行同步。`,
+              "info",
+            );
+          } else {
+            notice(
+              `📱 簽到記錄存在這支手機的瀏覽器裡。建議<b>安裝為應用程式</b>或<b>加入主畫面</b>，並偶爾到護照頁<b>備份</b>，避免記錄被瀏覽器清除。`,
+              "info",
+            );
+          }
         }
       }
 

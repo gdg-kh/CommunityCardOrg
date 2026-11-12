@@ -325,11 +325,11 @@ export function rewardStamps(community, stamps) {
 
 export async function requestPersistentStorage() {
   try {
-    if (navigator.storage?.persist && !(await navigator.storage.persisted())) {
-      await navigator.storage.persist();
-    }
+    if (!navigator.storage?.persist) return false;
+    if (await navigator.storage.persisted()) return true;
+    return await navigator.storage.persist();
   } catch {
-    // 不支援就算了
+    return false;
   }
 }
 
@@ -373,8 +373,23 @@ export function inAppBrowserName() {
 
 export function isStandalone() {
   return (
-    window.matchMedia?.("(display-mode: standalone)").matches || navigator.standalone === true
+    window.matchMedia?.("(display-mode: standalone)").matches ||
+    window.matchMedia?.("(display-mode: minimal-ui)").matches ||
+    window.matchMedia?.("(display-mode: fullscreen)").matches ||
+    window.matchMedia?.("(display-mode: window-controls-overlay)").matches ||
+    navigator.standalone === true
   );
+}
+
+export function isIOS() {
+  return (
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+  );
+}
+
+export function isAndroid() {
+  return /Android/i.test(navigator.userAgent);
 }
 
 // ---------- 印章圖案 ----------
@@ -509,5 +524,5 @@ export function stripTags(s) {
 }
 
 export function registerServiceWorker() {
-  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js", { scope: "./" }).catch(() => {});
 }

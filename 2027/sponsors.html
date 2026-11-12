@@ -22,6 +22,14 @@
       property="og:image"
     />
     <meta content="高雄社群名牌卡" property="og:site_name" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#14212e" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="社群護照" />
+    <link rel="apple-touch-icon" href="../assets/passport/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/passport/icon-192.png" />
     <title>2027 高雄社群名牌卡 - 贊助商</title>
     <!-- Google tag (gtag.js) -->
     <script
@@ -40,7 +48,7 @@
   </head>
   <body>
     <div class="cardWrapper">
-      <ul class="nav nav-pills nav-fill">
+      <ul class="nav nav-pills nav-fill nav-2027">
         <li class="nav-item"><a class="nav-link" href="index.html">社群月曆</a></li>
         <li class="nav-item"><a class="nav-link" href="passport.html">社群護照</a></li>
         <li class="nav-item"><a class="nav-link" href="communities.html">社群介紹</a></li>
@@ -101,5 +109,10 @@
         </p>
       </div>
     </div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js", { scope: "./" }).catch(() => {});
+      }
+    </script>
   </body>
 </html>

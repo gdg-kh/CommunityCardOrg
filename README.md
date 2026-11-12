@@ -41,7 +41,7 @@
 
 *   每個社群有一組 ECDSA P-256 金鑰。**私鑰**只在 organizer 手上（加密成金鑰檔保存），**公鑰**登錄在 `2027/stamps.json`。
 *   簽到 QR code 內容是「社群、活動、日期、實體/線上、有效時間」加上簽章，簽到頁用公鑰驗證，所以只有持有私鑰的人能簽出該社群的簽到碼。
-*   印章存在參加者瀏覽器的 localStorage。護照頁提供備份連結，並建議「加入主畫面」避免 iOS Safari 清除資料。
+*   印章存在參加者瀏覽器的 localStorage。護照頁提供備份連結，並支援完整漸進式網頁應用程式（Progressive Web App, PWA）規範與 Service Worker 離線快取，建議「加入主畫面」以啟用 Android 持久性儲存（Persistent Storage）並降低 iOS Safari 自動清除資料的風險。
 
 ### 社群 organizer：開通數位簽到
 
