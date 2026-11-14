@@ -168,7 +168,17 @@
         "image": "../assets/logo_vlab.png",
         "mode": "shared"
       },
-      "publicKeys": [],
+      "publicKeys": [
+        {
+          "kid": "2027a",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "0wXuzamB0XrEEZsk1yTkBzrHEd3R7BOdmITf7E1ssBg",
+            "y": "h7xzdPlT6zh00JpxZg4NhL6i-7OwwZsVqEF59XEp-0k"
+          }
+        }
+      ],
       "short": "vLAB"
     },
     {
