@@ -159,7 +159,17 @@
         "image": "../assets/stamps/logo_uiux_kaohsiung.png",
         "mode": "shared"
       },
-      "publicKeys": []
+      "publicKeys": [
+        {
+          "kid": "2027a",
+          "jwk": {
+            "kty": "EC",
+            "crv": "P-256",
+            "x": "S9MOfphUI8ol83ivsn0CE9KT0wshL0ARNZ3oxK18lK4",
+            "y": "1YqjQOYs3u7TgBnQj5XtnRpMONAKo-9Qk4sEKqtcGhk"
+          }
+        }
+      ]
     },
     {
       "id": "vlab",
