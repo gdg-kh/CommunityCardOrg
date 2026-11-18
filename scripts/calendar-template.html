@@ -230,6 +230,10 @@
         const holidays = {{HOLIDAYS_JSON}};
         const holidayMap = new Map(holidays.map(h => [h.date, h.name]));
 
+        const escapeHtml = (s) =>
+            String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
+        const safeColor = (c) => (/^#[0-9a-fA-F]{3,8}$/.test(c || '') ? c : '');
+
         function renderCalendar() {
             const grid = document.getElementById('calendar-grid');
             const firstDay = new Date(year, month - 1, 1);
@@ -285,20 +289,21 @@
                 html += `<div class="calendar-day${weekendClass}${topBorderClass}${holidayClass}">
                     <div class="date-col">
                         <span class="date-number">${day}</span>
-                        ${isHoliday ? `<span class="holiday-label">${holidayName}</span>` : ''}
+                        ${isHoliday ? `<span class="holiday-label">${escapeHtml(holidayName)}</span>` : ''}
                     </div>
                     <div class="events-container">`;
 
                 const showCommunityOnly = dayEvents.length >= 3;
 
                 dayEvents.forEach(event => {
-                    const colorStyle = event.color ? `color: ${event.color};` : '';
-                    const borderStyle = event.color ? `border-left-color: ${event.color};` : '';
+                    const colorHex = safeColor(event.color);
+                    const colorStyle = colorHex ? `color: ${colorHex};` : '';
+                    const borderStyle = colorHex ? `border-left-color: ${colorHex};` : '';
                     const hasTitle = event.title && event.title.trim();
 
                     html += `<div class="day-event" style="${borderStyle}">
-                        <div class="event-community" style="${colorStyle}">${event.community}</div>
-                        ${(!showCommunityOnly && hasTitle) ? `<div class="event-name">${event.title}</div>` : ''}
+                        <div class="event-community" style="${colorStyle}">${escapeHtml(event.community)}</div>
+                        ${(!showCommunityOnly && hasTitle) ? `<div class="event-name">${escapeHtml(event.title)}</div>` : ''}
                     </div>`;
                 });
 

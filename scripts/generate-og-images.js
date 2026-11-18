@@ -44,6 +44,9 @@ async function generateOGImage() {
             const parts = argDate.split('-').map(Number);
             currentYear = parts[0];
             currentMonth = parts[1];
+            if (!Number.isInteger(currentMonth) || currentMonth < 1 || currentMonth > 12) {
+                throw new Error(`無效的目標月份：「${argDate}」（月份必須介於 1 到 12）`);
+            }
         } else {
             const taipeiNow = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Taipei' }).format(new Date());
             const [y, m] = taipeiNow.split('-').map(Number);
@@ -85,10 +88,11 @@ async function generateOGImage() {
         const templatePath = path.join(__dirname, 'calendar-template.html');
         let template = fs.readFileSync(templatePath, 'utf-8');
 
-        template = template.replace(/\{\{YEAR\}\}/g, currentYear);
-        template = template.replace(/\{\{MONTH\}\}/g, currentMonth);
-        template = template.replace(/\{\{EVENTS_JSON\}\}/g, JSON.stringify(currentMonthEvents));
-        template = template.replace(/\{\{HOLIDAYS_JSON\}\}/g, JSON.stringify(holidaysData));
+        const safeJsonForScript = (data) => JSON.stringify(data).replace(/</g, '\\u003c');
+        template = template.replace(/\{\{YEAR\}\}/g, () => String(currentYear));
+        template = template.replace(/\{\{MONTH\}\}/g, () => String(currentMonth));
+        template = template.replace(/\{\{EVENTS_JSON\}\}/g, () => safeJsonForScript(currentMonthEvents));
+        template = template.replace(/\{\{HOLIDAYS_JSON\}\}/g, () => safeJsonForScript(holidaysData));
 
         console.log('✅ 模板處理完成');
 
