@@ -248,6 +248,47 @@ if (compressedResult.isCompressed) {
 }
 
 // ----------------------------------------------------
+// 測試區塊 4: 2027 社群分組格式與 2026 扁平格式雙向正規化
+// ----------------------------------------------------
+console.log("\n--- [測試 4] 2027 分組格式與 2026 扁平格式正規化驗證 ---");
+
+const normalizeEventsCode = indexJsContent.match(/function normalizeEvents[\s\S]+?return out\.sort\([^\n]+\n\}/)[0];
+const normalizeEvents = new Function(
+    "raw",
+    `const VALID_EVENT_MODES = new Set(["onsite", "online", "hybrid"]);\n${normalizeEventsCode}\nreturn normalizeEvents(raw);`
+);
+
+try {
+    const flatNormalized = normalizeEvents(events);
+    assert(
+        flatNormalized.length === events.length && flatNormalized.every(e => e.mode === "onsite"),
+        `2026 扁平格式（${flatNormalized.length} 筆）無 mode 欄位時全部自動預設為 "onsite"。`
+    );
+
+    const groupedSample = [
+        {
+            community: "GDG Kaohsiung",
+            color: "#EA4335",
+            events: [
+                { date: "2027-02-10", title: "線上講座", link: "https://gdg.community.dev/", mode: "online" },
+                { date: "2027-01-15", title: "實體聚會", link: "https://gdg.community.dev/" }
+            ]
+        }
+    ];
+    const groupedNormalized = normalizeEvents(groupedSample);
+    assert(
+        groupedNormalized.length === 2 &&
+        groupedNormalized[0].date === "2027-01-15" &&
+        groupedNormalized[0].mode === "onsite" &&
+        groupedNormalized[0].community === "GDG Kaohsiung" &&
+        groupedNormalized[1].mode === "online",
+        "2027 社群分組格式成功展開、繼承外層社群屬性、預設 onsite 並依日期排序。"
+    );
+} catch (err) {
+    assert(false, `正規化測試失敗: ${err.message}`);
+}
+
+// ----------------------------------------------------
 // 測試總結
 // ----------------------------------------------------
 console.log("\n=== 🏁 測試執行完畢 ===");

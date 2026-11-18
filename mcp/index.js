@@ -155,6 +155,7 @@ server.resource(
 * **活動標題 (title)**：活動的主標題（例如 "TOOCON #42"）。**強烈約束：必須精確、一字不漏地使用使用者提供的原始標題，絕對不能進行任何翻譯、擴充、修飾或改寫！**
 * **簡短描述 (description)**：**強烈約束：描述內容絕對不可超過 50 個字**！若超過 50 個字，提案將會失敗。
 * **報名連結 (link)**：必須是有效的 \`http://\` 或 \`https://\` 網址。
+* **活動形式 (mode)**：選填，可為 \`onsite\`（現場）、\`online\`（線上）或 \`hybrid\`（混合），未提供時預設為 \`onsite\`。
 
 ## 2. 官方註冊之社群清單（自 data.json 即時同步）
 ${communityListMd}
@@ -184,6 +185,37 @@ server.tool(
     }
 );
 
+const VALID_EVENT_MODES = new Set(["onsite", "online", "hybrid"]);
+
+function normalizeEvents(raw) {
+    if (!Array.isArray(raw)) return [];
+    const out = [];
+    for (const item of raw) {
+        if (!item || typeof item !== "object") continue;
+        if (Array.isArray(item.events)) {
+            for (const ev of item.events) {
+                if (!ev || typeof ev.date !== "string") continue;
+                const rawMode = ev.mode || item.mode;
+                out.push({
+                    date: ev.date,
+                    community: item.community || ev.community || "",
+                    title: ev.title ?? item.title ?? "",
+                    description: ev.description ?? item.description ?? "",
+                    link: ev.link ?? item.link ?? "#",
+                    color: ev.color || item.color || "",
+                    mode: VALID_EVENT_MODES.has(rawMode) ? rawMode : "onsite",
+                });
+            }
+        } else if (typeof item.date === "string") {
+            out.push({
+                ...item,
+                mode: VALID_EVENT_MODES.has(item.mode) ? item.mode : "onsite",
+            });
+        }
+    }
+    return out.sort((a, b) => a.date.localeCompare(b.date));
+}
+
 server.tool(
     "get_events",
     "取得社群活動行事曆",
@@ -192,7 +224,7 @@ server.tool(
     },
     async ({ month }) => {
         try {
-            const events = await fetchData("events.json");
+            const events = normalizeEvents(await fetchData("events.json"));
             
             if (month) {
                 // 使用者有指定月份，回傳完整無刪減的資料
@@ -244,7 +276,8 @@ server.tool(
                         date: e.date,
                         community: e.community,
                         title: e.title,
-                        color: e.color
+                        color: e.color,
+                        mode: e.mode || "onsite"
                         // 剔除 description 和 link 欄位
                       }))
                     : filteredEvents;
@@ -321,8 +354,9 @@ server.tool(
         community: z.string().min(1, "社群名稱不能為空").describe("主辦社群名稱 (例如: GDG Kaohsiung)"),
         description: z.string().max(50, "活動介紹最多 50 個字").optional().default("").describe("活動簡短介紹，絕對不能超過 50 個字"),
         link: z.string().url("必須是有效的 URL").optional().default("").describe("活動報名或詳細資訊連結"),
+        mode: z.enum(["onsite", "online", "hybrid"]).optional().default("onsite").describe("活動形式：onsite (現場)、online (線上)、hybrid (混合)，未提供時預設為 onsite"),
     },
-    async ({ date, title, community, description, link }) => {
+    async ({ date, title, community, description, link, mode }) => {
         const token = process.env.GITHUB_TOKEN;
         if (!token) {
             return {
@@ -380,14 +414,7 @@ server.tool(
                 };
             }
 
-            const newEvent = {
-                date,
-                community: officialCommunityName,
-                title,
-                description,
-                link,
-                color: communityColor
-            };
+            const eventMode = VALID_EVENT_MODES.has(mode) ? mode : "onsite";
 
             const octokit = new Octokit({ auth: token });
             const owner = process.env.GITHUB_REPO_OWNER;
@@ -412,12 +439,13 @@ server.tool(
             }
 
             const currentEvents = JSON.parse(Buffer.from(fileContent.data.content, "base64").toString("utf-8"));
+            const flatExisting = normalizeEvents(currentEvents);
 
             // 🛡️ 防護檢查 4：攔截重複活動提案
-            const isDuplicate = currentEvents.some(e => 
+            const isDuplicate = flatExisting.some(e => 
                 e.date === date && 
                 e.community === officialCommunityName && 
-                e.title.trim().toLowerCase() === title.trim().toLowerCase()
+                (e.title || "").trim().toLowerCase() === title.trim().toLowerCase()
             );
             if (isDuplicate) {
                 return {
@@ -426,8 +454,42 @@ server.tool(
                 };
             }
 
-            currentEvents.push(newEvent);
-            currentEvents.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+            const isGroupedFormat =
+                currentEvents.some(item => item && Array.isArray(item.events)) ||
+                (currentEvents.length === 0 && SUB_PATH !== "2026");
+
+            if (isGroupedFormat) {
+                let group = currentEvents.find(
+                    item => item && Array.isArray(item.events) && item.community === officialCommunityName
+                );
+                if (!group) {
+                    group = {
+                        community: officialCommunityName,
+                        color: communityColor,
+                        events: []
+                    };
+                    currentEvents.push(group);
+                }
+                group.events.push({
+                    date,
+                    title,
+                    description,
+                    link,
+                    mode: eventMode
+                });
+                group.events.sort((a, b) => a.date.localeCompare(b.date));
+            } else {
+                currentEvents.push({
+                    date,
+                    community: officialCommunityName,
+                    title,
+                    description,
+                    link,
+                    color: communityColor,
+                    mode: eventMode
+                });
+                currentEvents.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+            }
 
             const updatedContentBase64 = Buffer.from(JSON.stringify(currentEvents, null, 2)).toString("base64");
 
@@ -462,7 +524,7 @@ server.tool(
                 title: `[自動新增活動] ${title} (${officialCommunityName})`,
                 head: branchName,
                 base: "main",
-                body: `由 MCP AI 助理發起的活動新增請求：\n\n- 日期：${date}\n- 社群：${officialCommunityName}\n- 標題：${title}\n- 介紹：${description}\n- 顏色：${communityColor}`
+                body: `由 MCP AI 助理發起的活動新增請求：\n\n- 日期：${date}\n- 社群：${officialCommunityName}\n- 標題：${title}\n- 形式：${eventMode}\n- 介紹：${description}\n- 顏色：${communityColor}`
             });
 
             return {

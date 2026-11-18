@@ -23,9 +23,9 @@ paths:
 
   /2026/events.json:
     get:
-      summary: 取得活動行事曆
-      description: 回傳各社群舉辦的活動清單。
-      operationId: getEvents
+      summary: 取得 2026 活動行事曆（扁平格式）
+      description: 回傳 2026 年各社群舉辦的活動清單。
+      operationId: getEvents2026
       responses:
         '200':
           description: 成功取得活動資料
@@ -35,6 +35,21 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Event'
+
+  /2027/events.json:
+    get:
+      summary: 取得 2027 活動行事曆（社群分組格式）
+      description: 回傳 2027 年依社群分組的活動清單。
+      operationId: getEvents2027
+      responses:
+        '200':
+          description: 成功取得活動資料
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommunityEventGroup'
 
 components:
   schemas:
@@ -104,3 +119,54 @@ components:
         color:
           type: string
           description: 顯示在行事曆上的顏色，需對應該社群的代表色
+        mode:
+          type: string
+          enum: [onsite, online, hybrid]
+          default: onsite
+          description: 活動形式（onsite 現場、online 線上、hybrid 混合，未填時預設為 onsite）
+
+    CommunityEventGroup:
+      type: object
+      required:
+        - community
+        - color
+        - events
+      properties:
+        community:
+          type: string
+          description: 主辦社群名稱
+        color:
+          type: string
+          description: 該社群代表色的 Hex 色碼，例如 #EA4335
+        mode:
+          type: string
+          enum: [onsite, online, hybrid]
+          description: 該社群的預設活動形式（選填）
+        events:
+          type: array
+          items:
+            type: object
+            required:
+              - date
+              - title
+              - link
+            properties:
+              date:
+                type: string
+                format: date
+                description: 活動日期 (YYYY-MM-DD)
+              title:
+                type: string
+                description: 活動標題
+              description:
+                type: string
+                maxLength: 50
+                description: 活動介紹 (不超過 50 個字)
+              link:
+                type: string
+                description: 活動報名或宣傳連結
+              mode:
+                type: string
+                enum: [onsite, online, hybrid]
+                default: onsite
+                description: 單場活動形式（未填時繼承外層或預設為 onsite）
