@@ -156,20 +156,52 @@ if (stamps) {
 }
 
 // ---------- events.json ----------
+const EVENT_MODES = new Set(["onsite", "online", "hybrid"]);
+let totalEventCount = 0;
 if (Array.isArray(events)) {
   const known = [...members, ...partners];
   const reported = new Set();
-  for (const [i, ev] of events.entries()) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(ev.date || "") || Number.isNaN(Date.parse(ev.date))) {
-      error(eventsFile, `[${i}] 日期格式不正確：「${ev.date}」`);
-    }
-    if (!known.includes(ev.community) && !reported.has(ev.community)) {
-      reported.add(ev.community);
-      const count = events.filter((e) => e.community === ev.community).length;
-      error(
-        eventsFile,
-        `社群「${ev.community}」（${count} 場）不在 data.json communities 或 stamps.json partners 中${suggest(ev.community, known)}`,
-      );
+  for (const [i, item] of events.entries()) {
+    if (item && Array.isArray(item.events)) {
+      if (!known.includes(item.community) && !reported.has(item.community)) {
+        reported.add(item.community);
+        error(
+          eventsFile,
+          `[${i}] 社群「${item.community}」不在 data.json communities 或 stamps.json partners 中${suggest(item.community, known)}`,
+        );
+      }
+      if (item.color && !/^#[0-9a-fA-F]{6}$/.test(item.color)) {
+        error(eventsFile, `[${i}]「${item.community}」color 格式不正確：「${item.color}」`);
+      }
+      if (item.mode && !EVENT_MODES.has(item.mode)) {
+        error(eventsFile, `[${i}]「${item.community}」mode 只能是 onsite、online 或 hybrid：「${item.mode}」`);
+      }
+      for (const [j, ev] of item.events.entries()) {
+        totalEventCount++;
+        const where = `[${i}]「${item.community}」events[${j}]`;
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(ev.date || "") || Number.isNaN(Date.parse(ev.date))) {
+          error(eventsFile, `${where} 日期格式不正確：「${ev.date}」`);
+        }
+        if (ev.mode && !EVENT_MODES.has(ev.mode)) {
+          error(eventsFile, `${where} mode 只能是 onsite、online 或 hybrid：「${ev.mode}」`);
+        }
+      }
+    } else if (item && typeof item === "object") {
+      totalEventCount++;
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(item.date || "") || Number.isNaN(Date.parse(item.date))) {
+        error(eventsFile, `[${i}] 日期格式不正確：「${item.date}」`);
+      }
+      if (item.mode && !EVENT_MODES.has(item.mode)) {
+        error(eventsFile, `[${i}] mode 只能是 onsite、online 或 hybrid：「${item.mode}」`);
+      }
+      if (!known.includes(item.community) && !reported.has(item.community)) {
+        reported.add(item.community);
+        const count = events.filter((e) => e.community === item.community).length;
+        error(
+          eventsFile,
+          `社群「${item.community}」（${count} 場）不在 data.json communities 或 stamps.json partners 中${suggest(item.community, known)}`,
+        );
+      }
     }
   }
 } else if (events) {
@@ -188,4 +220,4 @@ if (errors.length) {
   console.log(`\n${DIR} 檢查失敗：${errors.length} 個錯誤，${warnings.length} 個提醒`);
   process.exit(1);
 }
-console.log(`${DIR} 檢查通過：${members.length} 個社群、${partners.length} 個合作社群、${events?.length ?? 0} 場活動（${warnings.length} 個提醒）`);
+console.log(`${DIR} 檢查通過：${members.length} 個社群、${partners.length} 個合作社群、${totalEventCount} 場活動（${warnings.length} 個提醒）`);

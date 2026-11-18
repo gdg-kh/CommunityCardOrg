@@ -488,6 +488,15 @@
         $("ev-date").value = date;
         $("ev-title").value = ev ? (ev.title || stripTags(ev.description)).slice(0, 60) : "";
         $("ev-id").value = date;
+        if (ev?.mode) {
+          const targetMode = ev.mode === "hybrid" ? "both" : ev.mode;
+          const radio = document.querySelector(`input[name="mode"][value="${targetMode}"]`);
+          if (radio) {
+            radio.checked = true;
+            $("rotate").checked = targetMode !== "onsite";
+            applyMode();
+          }
+        }
         applyWindow();
       }
 

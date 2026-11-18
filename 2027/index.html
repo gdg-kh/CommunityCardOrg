@@ -24,7 +24,7 @@
       property="og:url"
     />
     <meta
-      content="https://community-card.org/2026/og-images/calendar.png"
+      content="https://community-card.org/2027/og-images/calendar.png"
       property="og:image"
     />
     <meta content="高雄社群名牌卡" property="og:site_name" />
@@ -106,6 +106,13 @@
           </button>
         </div>
 
+        <div class="btn-group mode-btn-group" id="mode-filter-bar" role="group" aria-label="活動形式篩選">
+          <button type="button" class="btn btn-outline-secondary active" data-mode="all">全部</button>
+          <button type="button" class="btn btn-outline-secondary" data-mode="onsite">現場</button>
+          <button type="button" class="btn btn-outline-secondary" data-mode="online">線上</button>
+          <button type="button" class="btn btn-outline-secondary" data-mode="hybrid">混合</button>
+        </div>
+
         <div id="calendar-layout">
           <div class="calendar-nav">
             <button id="prev-month" class="btn btn-outline-secondary">
@@ -176,16 +183,79 @@
                 currentYear = 2027;
                 currentMonth = 0;
               }
+              const EVENT_MODES = { onsite: "現場", online: "線上", hybrid: "混合" };
+              let activeMode = "all";
+              const modeFilterBar = document.getElementById("mode-filter-bar");
+
+              function normalizeEvents(raw) {
+                if (!Array.isArray(raw)) return [];
+                const out = [];
+                for (const item of raw) {
+                  if (!item || typeof item !== "object") continue;
+                  if (Array.isArray(item.events)) {
+                    for (const ev of item.events) {
+                      if (!ev || typeof ev.date !== "string") continue;
+                      const rawMode = ev.mode || item.mode;
+                      out.push({
+                        date: ev.date,
+                        community: item.community || ev.community || "",
+                        color: ev.color || item.color || "",
+                        title: ev.title ?? item.title ?? "",
+                        description: ev.description ?? item.description ?? "",
+                        link: ev.link ?? item.link ?? "#",
+                        mode: rawMode in EVENT_MODES ? rawMode : "onsite",
+                      });
+                    }
+                  } else if (typeof item.date === "string") {
+                    out.push({
+                      ...item,
+                      link: item.link ?? "#",
+                      mode: item.mode in EVENT_MODES ? item.mode : "onsite",
+                    });
+                  }
+                }
+                return out;
+              }
+
+              function getFilteredEvents() {
+                if (activeMode === "all") return allEvents;
+                return allEvents.filter((e) => (e.mode || "onsite") === activeMode);
+              }
+
+              function getModeBadgeHtml(mode) {
+                if (mode === "online") return '<span class="event-mode-badge online">線上</span>';
+                if (mode === "hybrid") return '<span class="event-mode-badge hybrid">混合</span>';
+                return "";
+              }
+
+              if (modeFilterBar) {
+                modeFilterBar.querySelectorAll("button[data-mode]").forEach((btn) => {
+                  btn.addEventListener("click", () => {
+                    activeMode = btn.dataset.mode || "all";
+                    modeFilterBar.querySelectorAll("button[data-mode]").forEach((b) => {
+                      b.classList.toggle("active", b === btn);
+                    });
+                    renderCalendar();
+                  });
+                });
+              }
+
               let allEvents = [];
               let holidayMap = new Map(); // date → name
 
-              // Fetch events and holidays
+              // Fetch 2026 + 2027 events and holidays
               Promise.all([
+                fetch("../2026/events.json")
+                  .then((r) => (r.ok ? r.json() : []))
+                  .catch(() => []),
                 fetch("events.json").then((r) => r.json()),
                 fetch("holidays.json").then((r) => r.json()),
               ])
-                .then(([events, holidays]) => {
-                  allEvents = events;
+                .then(([events2026, events2027, holidays]) => {
+                  allEvents = [
+                    ...normalizeEvents(events2026),
+                    ...normalizeEvents(events2027),
+                  ].sort((a, b) => a.date.localeCompare(b.date));
                   holidayMap = new Map(holidays.map((h) => [h.date, h.name]));
                   renderCalendar();
                 })
@@ -249,7 +319,8 @@
                 const now = new Date();
                 const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 
-                const futureEvents = allEvents
+                const visibleEvents = getFilteredEvents();
+                const futureEvents = visibleEvents
                   .filter((e) => e.date > todayStr)
                   .sort((a, b) => a.date.localeCompare(b.date));
                 if (futureEvents.length > 0) {
@@ -354,7 +425,7 @@
                   }
 
                   // Find events for this day
-                  const dayEvents = allEvents.filter((e) => e.date === dateStr);
+                  const dayEvents = visibleEvents.filter((e) => e.date === dateStr);
 
                   html += `<div class="calendar-day${weekendClass}${topBorderClass}${holidayClass}${rowClass}">
                                 ${isHoliday
@@ -376,10 +447,14 @@
                       const borderStyle = event.color
                         ? `style="border-left-color: ${event.color};"`
                         : "";
+                      const badgeHtml = getModeBadgeHtml(event.mode);
 
                       html += `<div class="day-event" ${borderStyle}>
                                         ${linkStart}
-                                            <div class="event-community" ${colorStyle}>${event.community}</div>
+                                            <div class="event-head">
+                                                <div class="event-community" ${colorStyle}>${event.community}</div>
+                                                ${badgeHtml}
+                                            </div>
                                             <div class="event-name">${event.title}</div>
                                             ${event.description ? `<div class="event-details-small">${event.description}</div>` : ""}
                                         ${linkEnd}
@@ -419,6 +494,8 @@
                     : event.community,
                 );
                 const descParts = [];
+                if (event.mode && EVENT_MODES[event.mode])
+                  descParts.push("活動形式：" + EVENT_MODES[event.mode]);
                 if (event.description)
                   descParts.push(
                     event.description.replace(/<br\s*\/?>/gi, "\n"),
@@ -439,6 +516,8 @@
                   ? `${event.community} - ${event.title}`
                   : event.community;
                 const descParts = [];
+                if (event.mode && EVENT_MODES[event.mode])
+                  descParts.push("活動形式：" + EVENT_MODES[event.mode]);
                 if (event.description)
                   descParts.push(
                     event.description.replace(/<br\s*\/?>/gi, "\\n"),
@@ -475,7 +554,7 @@
 
               function renderEventList() {
                 const listRoot = document.getElementById("event-list-root");
-                const monthEvents = allEvents
+                const monthEvents = getFilteredEvents()
                   .filter((e) => {
                     const [y, m] = e.date.split("-").map(Number);
                     return y === currentYear && m === currentMonth + 1;
@@ -531,7 +610,7 @@
                                 <td style="white-space:nowrap;color:#999;">${i + 1}</td>
                                 <td style="white-space:nowrap;">${dateLabel}<span class="weekday-mobile" style="${dateColor}">週${weekNames[dayOfWeek]}</span></td>
                                 <td class="col-weekday" style="white-space:nowrap;">${weekLabel}</td>
-                                <td><div style="display:flex;align-items:flex-start;gap:6px;">${dot}<div><strong>${event.community}</strong>${event.title ? `<div style="color:#555;margin-top:2px;">${eventLinkStart}${event.title}${eventLinkEnd}</div>` : ""}${event.description ? `<div style="font-size:0.8rem;color:#777;margin-top:4px;line-height:1.4;">${event.description}</div>` : ""}</div></div></td>
+                                <td><div style="display:flex;align-items:flex-start;gap:6px;">${dot}<div><div class="event-list-community-row"><strong>${event.community}</strong>${getModeBadgeHtml(event.mode)}</div>${event.title ? `<div style="color:#555;margin-top:2px;">${eventLinkStart}${event.title}${eventLinkEnd}</div>` : ""}${event.description ? `<div style="font-size:0.8rem;color:#777;margin-top:4px;line-height:1.4;">${event.description}</div>` : ""}</div></div></td>
                                 <td style="white-space:nowrap;">
                                     <div class="btn-cal-group">
                                         <a href="${googleURL}" target="_blank" class="btn btn-outline-primary btn-cal">Google</a>
