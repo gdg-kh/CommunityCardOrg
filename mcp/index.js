@@ -3,122 +3,30 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { Octokit } from "@octokit/rest";
 import { z } from "zod";
+import {
+    DEFAULT_SUB_PATH,
+    VALID_EVENT_MODES,
+    findAndValidateCommunity,
+    insertEventIntoEvents,
+    isDuplicateEvent,
+    normalizeEvents,
+    queryEvents,
+    resolveBaseUrl,
+    validateProposeEventInput,
+} from "./lib.js";
 
 const server = new McpServer({
     name: "community-card-mcp",
     version: "2.0.0",
 });
 
-const SUB_PATH = process.env.COMMUNITY_CARD_SUB_PATH || "2026";
-const DATA_BASE_URL = process.env.COMMUNITY_CARD_DATA_URL || `https://community-card.org/${SUB_PATH}`;
-
-async function fetchData(filename) {
-    const url = `${DATA_BASE_URL}/${filename}`;
+async function fetchData(filename, year = DEFAULT_SUB_PATH) {
+    const url = `${resolveBaseUrl(year)}/${filename}`;
     const res = await fetch(url);
     if (!res.ok) {
         throw new Error(`HTTP ${res.status} fetching ${url}`);
     }
     return res.json();
-}
-
-// 🌐 Levenshtein 距離計算，用於模糊糾錯
-function getLevenshteinDistance(a, b) {
-    const matrix = [];
-    for (let i = 0; i <= b.length; i++) matrix[i] = [i];
-    for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
-    for (let i = 1; i <= b.length; i++) {
-        for (let j = 1; j <= a.length; j++) {
-            if (b.charAt(i - 1) === a.charAt(j - 1)) {
-                matrix[i][j] = matrix[i - 1][j - 1];
-            } else {
-                matrix[i][j] = Math.min(
-                    matrix[i - 1][j - 1] + 1, // 替換 (substitution)
-                    Math.min(
-                        matrix[i][j - 1] + 1, // 插入 (insertion)
-                        matrix[i - 1][j] + 1  // 刪除 (deletion)
-                    )
-                );
-            }
-        }
-    }
-    return matrix[b.length][a.length];
-}
-
-// 標準化字串，去除空格與特殊符號，全部轉小寫以進行精準語義匹配
-function normalizeStr(str) {
-    return str.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]/g, "");
-}
-
-// 模糊糾錯社群名稱，回傳官方標準社群物件
-function findAndValidateCommunity(inputName, communities) {
-    if (!inputName || typeof inputName !== "string") {
-        throw new Error("主辦社群名稱必須是有效的字串。");
-    }
-
-    const trimmedInput = inputName.trim();
-    const normalizedInput = normalizeStr(trimmedInput);
-
-    // 1. 精確匹配 (忽略大小寫、空格與符號)
-    for (const c of communities) {
-        if (normalizeStr(c.name) === normalizedInput) {
-            return c;
-        }
-    }
-
-    // 2. 包含比對與同義詞特徵交集比對 (例如 "高雄 GDG" 匹配 "GDG Kaohsiung")
-    const cleanInput = trimmedInput.toLowerCase()
-        .replace(/高雄/g, "kaohsiung")
-        .replace(/kh/g, "kaohsiung");
-    const inputWords = cleanInput.match(/[a-z0-9]+/g) || [];
-
-    for (const c of communities) {
-        const cleanCommunityName = c.name.toLowerCase()
-            .replace(/高雄/g, "kaohsiung")
-            .replace(/kh/g, "kaohsiung");
-        const normalizedCommunityName = normalizeStr(cleanCommunityName);
-
-        // 2.1 雙向直接包含
-        if (
-            normalizedCommunityName.includes(normalizedInput) ||
-            normalizedInput.includes(normalizedCommunityName)
-        ) {
-            return c;
-        }
-
-        // 2.2 特徵單字交集比對 (確保輸入的每個單字都存在於社群名稱中)
-        if (inputWords.length > 0) {
-            const allWordsMatched = inputWords.every(w => normalizedCommunityName.includes(w));
-            if (allWordsMatched) {
-                return c;
-            }
-        }
-    }
-
-    // 3. 模糊比對 (Levenshtein 編輯距離)
-    let bestMatch = null;
-    let minDistance = Infinity;
-    const distanceThreshold = 3; // 容許最多 3 個字元的編輯誤差
-
-    for (const c of communities) {
-        const dist = getLevenshteinDistance(
-            normalizeStr(c.name),
-            normalizedInput
-        );
-        if (dist < minDistance && dist <= distanceThreshold) {
-            minDistance = dist;
-            bestMatch = c;
-        }
-    }
-
-    if (bestMatch) {
-        return bestMatch;
-    }
-
-    // 4. 若完全匹配失敗，拋出明確錯誤，引導 AI 修正
-    const availableCommunities = communities.map(c => `"${c.name}"`).join(", ");
-    throw new Error(
-        `找不到對應的社群 "${trimmedInput}"。請確保主辦社群名稱正確。\n目前合法的社群清單包括：[ ${availableCommunities} ]。`
-    );
 }
 
 // 📖 註冊 MCP 唯讀資源 (Resources)，提供提案與貢獻指南小抄
@@ -133,7 +41,7 @@ server.resource(
     async () => {
         let communityListMd;
         try {
-            const data = await fetchData("data.json");
+            const data = await fetchData("data.json", DEFAULT_SUB_PATH);
             communityListMd = data.communities
                 .map(c => `* **${c.name}** (代表色: ${c.color || "#808080"})`)
                 .join("\n");
@@ -172,7 +80,7 @@ server.tool(
     {},
     async () => {
         try {
-            const data = await fetchData("data.json");
+            const data = await fetchData("data.json", DEFAULT_SUB_PATH);
             return {
                 content: [{ type: "text", text: JSON.stringify(data.communities, null, 2) }]
             };
@@ -185,37 +93,6 @@ server.tool(
     }
 );
 
-const VALID_EVENT_MODES = new Set(["onsite", "online", "hybrid"]);
-
-function normalizeEvents(raw) {
-    if (!Array.isArray(raw)) return [];
-    const out = [];
-    for (const item of raw) {
-        if (!item || typeof item !== "object") continue;
-        if (Array.isArray(item.events)) {
-            for (const ev of item.events) {
-                if (!ev || typeof ev.date !== "string") continue;
-                const rawMode = ev.mode || item.mode;
-                out.push({
-                    date: ev.date,
-                    community: item.community || ev.community || "",
-                    title: ev.title ?? item.title ?? "",
-                    description: ev.description ?? item.description ?? "",
-                    link: ev.link ?? item.link ?? "#",
-                    color: ev.color || item.color || "",
-                    mode: VALID_EVENT_MODES.has(rawMode) ? rawMode : "onsite",
-                });
-            }
-        } else if (typeof item.date === "string") {
-            out.push({
-                ...item,
-                mode: VALID_EVENT_MODES.has(item.mode) ? item.mode : "onsite",
-            });
-        }
-    }
-    return out.sort((a, b) => a.date.localeCompare(b.date));
-}
-
 server.tool(
     "get_events",
     "取得社群活動行事曆",
@@ -224,79 +101,36 @@ server.tool(
     },
     async ({ month }) => {
         try {
-            const events = normalizeEvents(await fetchData("events.json"));
-            
-            if (month) {
-                // 使用者有指定月份，回傳完整無刪減的資料
-                const filteredEvents = events.filter(e => e.date.startsWith(month));
+            const result = await queryEvents({
+                month,
+                defaultYear: DEFAULT_SUB_PATH,
+                fetchEventsByYear: (year) => fetchData("events.json", year),
+            });
+
+            if (result.mode === "month") {
                 return {
-                    content: [{ 
-                        type: "text", 
-                        text: `已為您篩選出 ${month} 月份的完整活動資料（共 ${filteredEvents.length} 筆）：\n` + 
-                              JSON.stringify(filteredEvents, null, 2) 
+                    content: [{
+                        type: "text",
+                        text: `已為您篩選出 ${result.month} 月份的完整活動資料（共 ${result.events.length} 筆）：\n` +
+                              JSON.stringify(result.events, null, 2)
                     }]
                 };
-            } else {
-                // 使用者未指定月份，啟動智慧精簡機制
-                // 1. 取得當前基準月份 (格式 YYYY-MM)
-                let baseDate = new Date();
-                let year = baseDate.getFullYear();
-                let monthStr = String(baseDate.getMonth() + 1).padStart(2, "0");
-                let baseYearMonth = `${year}-${monthStr}`;
-
-                // 如果本機年份與 events.json 的年份相差太大（例如開發時是 2026 年，但專案資料為其他年度），
-                // 則取 events.json 第一筆資料的年份作為基準年份
-                if (events.length > 0) {
-                    const firstEventYear = events[0].date.split("-")[0];
-                    if (year !== parseInt(firstEventYear)) {
-                        baseYearMonth = `${firstEventYear}-01`; // fallback 至該年度的 1 月
-                    }
-                }
-
-                // 2. 計算包含上個月起共四個月的月份陣列（對齊 propose_new_event 允許的補登範圍）
-                const monthsToInclude = [];
-                const [baseYr, baseMo] = baseYearMonth.split("-").map(Number);
-                for (let i = -1; i < 3; i++) {
-                    const d = new Date(baseYr, baseMo - 1 + i, 1);
-                    const yr = d.getFullYear();
-                    const mo = String(d.getMonth() + 1).padStart(2, "0");
-                    monthsToInclude.push(`${yr}-${mo}`);
-                }
-
-                // 3. 篩選活動
-                const filteredEvents = events.filter(e => 
-                    monthsToInclude.some(m => e.date.startsWith(m))
-                );
-
-                // 4. 智慧裁減長欄位 (以節省 Token)
-                // 閾值 12 對應約 3KB 完整 JSON / ~1000 tokens，符合單一 tool response 的合理預算
-                const shouldCompress = filteredEvents.length > 12;
-                const finalEvents = shouldCompress 
-                    ? filteredEvents.map(e => ({
-                        date: e.date,
-                        community: e.community,
-                        title: e.title,
-                        color: e.color,
-                        mode: e.mode || "onsite"
-                        // 剔除 description 和 link 欄位
-                      }))
-                    : filteredEvents;
-
-                let responseText = "";
-                if (shouldCompress) {
-                    responseText += `ℹ️ [已啟動 Token 精簡與摘要機制]\n`;
-                    responseText += `本次查詢未提供特定月份 (month) 參數，伺服器已自動篩選當月起四個月（${monthsToInclude[0]} 至 ${monthsToInclude[3]}）的活動，並隱藏了詳細描述 (description) 與連結 (link) 欄位以節省您的記號 (Token) 消耗並提升回應速度。\n`;
-                    responseText += `💡 若您需要某個月份的完整詳細活動與報名連結，請重新呼叫 'get_events' 並傳入參數，例如: { "month": "${monthsToInclude[1]}" }。\n\n`;
-                } else {
-                    responseText += `已為您自動篩選 ${monthsToInclude[0]} 至 ${monthsToInclude[3]} 的活動清單（共 ${filteredEvents.length} 筆）：\n`;
-                }
-
-                responseText += JSON.stringify(finalEvents, null, 2);
-                
-                return {
-                    content: [{ type: "text", text: responseText }]
-                };
             }
+
+            let responseText = "";
+            if (result.shouldCompress) {
+                responseText += `ℹ️ [已啟動 Token 精簡與摘要機制]\n`;
+                responseText += `本次查詢未提供特定月份 (month) 參數，伺服器已自動篩選當月起四個月（${result.monthsToInclude[0]} 至 ${result.monthsToInclude[3]}）的活動，並隱藏了詳細描述 (description) 與連結 (link) 欄位以節省您的記號 (Token) 消耗並提升回應速度。\n`;
+                responseText += `💡 若您需要某個月份的完整詳細活動與報名連結，請重新呼叫 'get_events' 並傳入參數，例如: { "month": "${result.monthsToInclude[1]}" }。\n\n`;
+            } else {
+                responseText += `已為您自動篩選 ${result.monthsToInclude[0]} 至 ${result.monthsToInclude[3]} 的活動清單（共 ${result.totalCount} 筆）：\n`;
+            }
+
+            responseText += JSON.stringify(result.events, null, 2);
+
+            return {
+                content: [{ type: "text", text: responseText }]
+            };
         } catch (error) {
             return {
                 content: [{ type: "text", text: `讀取活動資料失敗: ${error.message}` }],
@@ -312,7 +146,7 @@ server.tool(
     {},
     async () => {
         try {
-            const data = await fetchData("data.json");
+            const data = await fetchData("data.json", DEFAULT_SUB_PATH);
             return {
                 content: [{ type: "text", text: JSON.stringify(data.sponsors, null, 2) }]
             };
@@ -331,7 +165,7 @@ server.tool(
     {},
     async () => {
         try {
-            const data = await fetchData("data.json");
+            const data = await fetchData("data.json", DEFAULT_SUB_PATH);
             return {
                 content: [{ type: "text", text: JSON.stringify(data.rewards, null, 2) }]
             };
@@ -344,16 +178,15 @@ server.tool(
     }
 );
 
-
 server.tool(
     "propose_new_event",
     "建立一個 Pull Request 來新增一個社群活動",
     {
-        date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "日期格式必須為 YYYY-MM-DD").describe("活動日期 (例如: 2026-12-25)"),
+        date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "日期格式必須為 YYYY-MM-DD").describe("活動日期 (例如: 2027-01-15)"),
         title: z.string().min(1, "標題不能為空").describe("活動標題。強烈約束：必須精確、一字不漏地使用使用者提供的原始標題，絕對不能進行任何翻譯、擴充、修飾或改寫！"),
         community: z.string().min(1, "社群名稱不能為空").describe("主辦社群名稱 (例如: GDG Kaohsiung)"),
-        description: z.string().max(50, "活動介紹最多 50 個字").optional().default("").describe("活動簡短介紹，絕對不能超過 50 個字"),
-        link: z.string().url("必須是有效的 URL").optional().default("").describe("活動報名或詳細資訊連結"),
+        description: z.string().optional().default("").describe("活動簡短介紹，絕對不能超過 50 個字（不含換行）"),
+        link: z.string().optional().default("#").describe("活動報名或詳細資訊連結（無連結時填 #）"),
         mode: z.enum(["onsite", "online", "hybrid"]).optional().default("onsite").describe("活動形式：onsite (現場)、online (線上)、hybrid (混合)，未提供時預設為 onsite"),
     },
     async ({ date, title, community, description, link, mode }) => {
@@ -365,46 +198,43 @@ server.tool(
             };
         }
 
-        // 🛡️ 安全合規檢查 1：動態滑動窗口驗證 (與年份脫鉤，完美支援未來 v2 演進)
-        // 允許範圍：當前月份的前一個月 (允許補登) 至當前月份的未來十二個月 (支援跨年排程與長期預告)
-        const eventDateObj = new Date(date);
-        if (isNaN(eventDateObj.getTime())) {
+        // 🛡️ 安全合規檢查 1 & 2：日期窗口、標題不可全空白、HTML 標籤、簡介正規化與字數、連結安全、跨年度路由
+        let validatedInput;
+        try {
+            validatedInput = validateProposeEventInput({
+                date,
+                title,
+                community,
+                description,
+                link,
+                mode,
+            });
+        } catch (err) {
             return {
-                content: [{ type: "text", text: `拒絕提案: 非法的日期格式 "${date}"，請使用 YYYY-MM-DD。` }],
+                content: [{ type: "text", text: `拒絕提案: ${err.message}` }],
                 isError: true
             };
         }
 
-        const now = new Date();
-        // 計算允許起點：上個月的 1 號 (例如 5/22 時，起點為 4/1)
-        const minAllowedDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-        // 計算允許終點：十二個月後的月底 (例如 5/22 時，終點為隔年 5/31)
-        const maxAllowedDate = new Date(now.getFullYear(), now.getMonth() + 13, 0);
-
-        if (eventDateObj < minAllowedDate || eventDateObj > maxAllowedDate) {
-            const minStr = minAllowedDate.toISOString().split("T")[0];
-            const maxStr = maxAllowedDate.toISOString().split("T")[0];
-            return {
-                content: [{ type: "text", text: `拒絕提案: 活動日期 ${date} 超出合理範圍。\n基於維護資料整潔與防範注入風險，目前僅接受自 ${minStr} 至 ${maxStr} 之間（即當前月份前一個月至未來十二個月內）的活動提案。` }],
-                isError: true
-            };
-        }
-
-        // 🛡️ 安全合規檢查 2：確保連結網址使用安全通訊協定
-        if (link && !/^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(link)) {
-            return {
-                content: [{ type: "text", text: `拒絕提案: 連結 (link) 必須是有效的 http:// 或 https:// 網址，以防止潛在的安全風險。` }],
-                isError: true
-            };
-        }
+        const {
+            title: cleanTitle,
+            description: cleanDescription,
+            link: cleanLink,
+            mode: eventMode,
+            targetYear,
+        } = validatedInput;
 
         try {
-            // 🛡️ 語義糾錯與驗證 3：社群名稱模糊糾錯
+            // 🛡️ 語義糾錯與驗證 3：依活動年份讀取對應年度社群名冊與合作社群
             let officialCommunityName = community;
             let communityColor = "#808080";
             try {
-                const data = await fetchData("data.json");
-                const validatedCommunity = findAndValidateCommunity(community, data.communities);
+                const [data, stamps] = await Promise.all([
+                    fetchData("data.json", targetYear),
+                    fetchData("stamps.json", targetYear).catch(() => ({})),
+                ]);
+                const allCommunities = [...(data.communities || []), ...(stamps.partners || [])];
+                const validatedCommunity = findAndValidateCommunity(community, allCommunities);
                 officialCommunityName = validatedCommunity.name;
                 communityColor = validatedCommunity.color || "#808080";
             } catch (err) {
@@ -414,84 +244,55 @@ server.tool(
                 };
             }
 
-            const eventMode = VALID_EVENT_MODES.has(mode) ? mode : "onsite";
-
             const octokit = new Octokit({ auth: token });
             const owner = process.env.GITHUB_REPO_OWNER;
             const repo = process.env.GITHUB_REPO_NAME || "CommunityCardOrg";
 
             if (!owner) {
-               return {
-                   content: [{ type: "text", text: "請設定 GITHUB_REPO_OWNER 環境變數來指定發送 PR 的目標倉庫。" }],
-                   isError: true,
-               };
+                return {
+                    content: [{ type: "text", text: "請設定 GITHUB_REPO_OWNER 環境變數來指定發送 PR 的目標倉庫。" }],
+                    isError: true,
+                };
             }
 
+            const eventsPath = `${targetYear}/events.json`;
             const fileContent = await octokit.repos.getContent({
                 owner,
                 repo,
-                path: `${SUB_PATH}/events.json`,
+                path: eventsPath,
                 ref: "main"
             });
 
             if (!("content" in fileContent.data)) {
-                throw new Error("Unable to read events.json from repository");
+                throw new Error(`Unable to read ${eventsPath} from repository`);
             }
 
             const currentEvents = JSON.parse(Buffer.from(fileContent.data.content, "base64").toString("utf-8"));
             const flatExisting = normalizeEvents(currentEvents);
 
             // 🛡️ 防護檢查 4：攔截重複活動提案
-            const isDuplicate = flatExisting.some(e => 
-                e.date === date && 
-                e.community === officialCommunityName && 
-                (e.title || "").trim().toLowerCase() === title.trim().toLowerCase()
-            );
-            if (isDuplicate) {
+            if (isDuplicateEvent(flatExisting, { date, community: officialCommunityName, title: cleanTitle })) {
                 return {
-                    content: [{ type: "text", text: `拒絕提案：在 ${date} 已經存在一筆主辦社群為 "${officialCommunityName}" 且標題為 "${title}" 的活動，請勿重複提交。` }],
+                    content: [{ type: "text", text: `拒絕提案：在 ${date} 已經存在一筆主辦社群為 "${officialCommunityName}" 且標題為 "${cleanTitle}" 的活動，請勿重複提交。` }],
                     isError: true
                 };
             }
 
-            const isGroupedFormat =
-                currentEvents.some(item => item && Array.isArray(item.events)) ||
-                (currentEvents.length === 0 && SUB_PATH !== "2026");
-
-            if (isGroupedFormat) {
-                let group = currentEvents.find(
-                    item => item && Array.isArray(item.events) && item.community === officialCommunityName
-                );
-                if (!group) {
-                    group = {
-                        community: officialCommunityName,
-                        color: communityColor,
-                        events: []
-                    };
-                    currentEvents.push(group);
-                }
-                group.events.push({
-                    date,
-                    title,
-                    description,
-                    link,
-                    mode: eventMode
-                });
-                group.events.sort((a, b) => a.date.localeCompare(b.date));
-            } else {
-                currentEvents.push({
+            insertEventIntoEvents(
+                currentEvents,
+                {
                     date,
                     community: officialCommunityName,
-                    title,
-                    description,
-                    link,
+                    title: cleanTitle,
+                    description: cleanDescription,
+                    link: cleanLink,
                     color: communityColor,
-                    mode: eventMode
-                });
-                currentEvents.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-            }
+                    mode: VALID_EVENT_MODES.has(eventMode) ? eventMode : "onsite",
+                },
+                targetYear
+            );
 
-            const updatedContentBase64 = Buffer.from(JSON.stringify(currentEvents, null, 2)).toString("base64");
+            const updatedContentBase64 = Buffer.from(JSON.stringify(currentEvents, null, 2) + "\n").toString("base64");
 
             const mainRef = await octokit.git.getRef({
                 owner,
@@ -511,8 +312,8 @@ server.tool(
             await octokit.repos.createOrUpdateFileContents({
                 owner,
                 repo,
-                path: `${SUB_PATH}/events.json`,
-                message: `Add event: ${title} (${officialCommunityName})`,
+                path: eventsPath,
+                message: `Add event: ${cleanTitle} (${officialCommunityName})`,
                 content: updatedContentBase64,
                 sha: fileContent.data.sha,
                 branch: branchName
@@ -521,14 +322,14 @@ server.tool(
             const pr = await octokit.pulls.create({
                 owner,
                 repo,
-                title: `[自動新增活動] ${title} (${officialCommunityName})`,
+                title: `[自動新增活動] ${cleanTitle} (${officialCommunityName})`,
                 head: branchName,
                 base: "main",
-                body: `由 MCP AI 助理發起的活動新增請求：\n\n- 日期：${date}\n- 社群：${officialCommunityName}\n- 標題：${title}\n- 形式：${eventMode}\n- 介紹：${description}\n- 顏色：${communityColor}`
+                body: `由 MCP AI 助理發起的活動新增請求：\n\n- 年度：${targetYear}\n- 日期：${date}\n- 社群：${officialCommunityName}\n- 標題：${cleanTitle}\n- 形式：${eventMode}\n- 介紹：${cleanDescription}\n- 顏色：${communityColor}`
             });
 
             return {
-                content: [{ type: "text", text: `成功！已建立 Pull Request: ${pr.data.html_url}` }]
+                content: [{ type: "text", text: `成功！已建立 Pull Request (${eventsPath}): ${pr.data.html_url}` }]
             };
 
         } catch (error) {
@@ -543,7 +344,7 @@ server.tool(
 async function main() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    console.error(`Community Card MCP Server running on stdio (data: ${DATA_BASE_URL})`);
+    console.error(`Community Card MCP Server running on stdio (default data: ${resolveBaseUrl(DEFAULT_SUB_PATH)})`);
 }
 
 main().catch((error) => {

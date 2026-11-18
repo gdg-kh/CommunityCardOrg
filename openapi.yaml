@@ -36,6 +36,32 @@ paths:
                 items:
                   $ref: '#/components/schemas/Event'
 
+  /2027/data.json:
+    get:
+      summary: 取得 2027 社群清單與介紹
+      description: 回傳 2027 年參與的高雄技術社群清單、贊助商與集點獎勵資訊。
+      operationId: getCommunities2027
+      responses:
+        '200':
+          description: 成功取得資料
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommunityData'
+
+  /2027/stamps.json:
+    get:
+      summary: 取得 2027 數位集章與公鑰設定
+      description: 回傳 2027 年各社群數位集章樣式、兌換門檻、合作社群與簽到驗證公鑰設定。
+      operationId: getStamps2027
+      responses:
+        '200':
+          description: 成功取得集章設定
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StampsData'
+
   /2027/events.json:
     get:
       summary: 取得 2027 活動行事曆（社群分組格式）
@@ -111,8 +137,8 @@ components:
           description: 活動標題
         description:
           type: string
-          maxLength: 20
-          description: 活動介紹 (不超過 20 個字)
+          maxLength: 50
+          description: 活動介紹 (不超過 50 個字)
         link:
           type: string
           description: 活動報名或宣傳連結
@@ -170,3 +196,124 @@ components:
                 enum: [onsite, online, hybrid]
                 default: onsite
                 description: 單場活動形式（未填時繼承外層或預設為 onsite）
+
+    StampsData:
+      type: object
+      required:
+        - communities
+      properties:
+        communities:
+          type: array
+          items:
+            $ref: '#/components/schemas/StampCommunity'
+        partners:
+          type: array
+          items:
+            $ref: '#/components/schemas/StampCommunity'
+
+    StampCommunity:
+      type: object
+      required:
+        - id
+        - name
+        - publicKeys
+      properties:
+        id:
+          type: string
+          pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
+          description: 簽到碼與網址使用的社群代號
+        name:
+          type: string
+          description: 社群名稱（需與 data.json 一致）
+        short:
+          type: string
+          description: 印章簡稱（選填）
+        color:
+          type: string
+          description: 合作社群代表色 Hex 色碼（partners 選填）
+        stamp:
+          $ref: '#/components/schemas/StampConfig'
+        reward:
+          $ref: '#/components/schemas/StampReward'
+        publicKeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicKeyEntry'
+
+    StampVariant:
+      type: object
+      required:
+        - variant
+      properties:
+        variant:
+          type: string
+          enum: [color, grayscale, tint, image]
+        src:
+          type: string
+          description: variant 為 image 時指定圖檔路徑
+        color:
+          type: string
+          description: variant 為 tint 時指定色碼 (#RRGGBB)
+
+    StampConfig:
+      type: object
+      properties:
+        image:
+          type: string
+          description: 印章底圖路徑
+        mode:
+          type: string
+          enum: [distinct, shared]
+          default: shared
+        onsite:
+          $ref: '#/components/schemas/StampVariant'
+        online:
+          $ref: '#/components/schemas/StampVariant'
+        shared:
+          $ref: '#/components/schemas/StampVariant'
+
+    StampReward:
+      type: object
+      required:
+        - scope
+        - required
+        - text
+      properties:
+        scope:
+          type: string
+          enum: [community, others, all]
+        required:
+          type: integer
+          minimum: 1
+        text:
+          type: string
+
+    PublicKeyEntry:
+      type: object
+      required:
+        - kid
+        - jwk
+      properties:
+        kid:
+          type: string
+        jwk:
+          type: object
+          required:
+            - kty
+            - crv
+            - x
+            - y
+          properties:
+            kty:
+              type: string
+              enum: [EC]
+            crv:
+              type: string
+              enum: [P-256]
+            x:
+              type: string
+            y:
+              type: string
+        revokedAt:
+          type: string
+          format: date-time
