@@ -177,6 +177,48 @@
               let allEvents = [];
               let holidayMap = new Map(); // date → name
 
+              function escapeHtml(s) {
+                return String(s ?? "").replace(/[&<>"']/g, (ch) => ({
+                  "&": "&amp;",
+                  "<": "&lt;",
+                  ">": "&gt;",
+                  '"': "&quot;",
+                  "'": "&#39;",
+                })[ch]);
+              }
+
+              function formatSafeDescription(s) {
+                return String(s ?? "")
+                  .split(/<br\s*\/?>/i)
+                  .map(escapeHtml)
+                  .join("<br>");
+              }
+
+              function safeHttpUrl(url) {
+                if (!url || url === "#") return "";
+                const trimmed = String(url).trim();
+                if (!trimmed || /[\s"'<>]/.test(trimmed)) return "";
+                try {
+                  const u = new URL(trimmed);
+                  return u.protocol === "http:" || u.protocol === "https:" ? u.href : "";
+                } catch {
+                  return "";
+                }
+              }
+
+              function safeHexColor(color) {
+                return /^#[0-9a-fA-F]{3,8}$/.test(color || "") ? color : "";
+              }
+
+              function escapeIcsText(s, { allowNewlines = false } = {}) {
+                const str = String(s ?? "").replace(/\r\n|\r|\n/g, allowNewlines ? "\n" : " ");
+                return str
+                  .replace(/\\/g, "\\\\")
+                  .replace(/;/g, "\\;")
+                  .replace(/,/g, "\\,")
+                  .replace(/\n/g, "\\n");
+              }
+
               // Fetch events and holidays
               Promise.all([
                 fetch("events.json").then((r) => r.json()),
@@ -356,30 +398,30 @@
 
                   html += `<div class="calendar-day${weekendClass}${topBorderClass}${holidayClass}${rowClass}">
                                 ${isHoliday
-                                  ? `<div class="date-row"><span class="date-number">${day}</span><span class="holiday-label">${holidayName}</span></div>`
+                                  ? `<div class="date-row"><span class="date-number">${day}</span><span class="holiday-label">${escapeHtml(holidayName)}</span></div>`
                                   : `<span class="date-number">${day}</span>`
                                 }`;
 
                   if (dayEvents.length > 0) {
                     dayEvents.forEach((event) => {
-                      const linkStart =
-                        event.link && event.link !== "#"
-                          ? `<a href="${event.link}" target="_blank">`
-                          : "<div>";
-                      const linkEnd =
-                        event.link && event.link !== "#" ? "</a>" : "</div>";
-                      const colorStyle = event.color
-                        ? `style="color: ${event.color};"`
+                      const safeHref = safeHttpUrl(event.link);
+                      const linkStart = safeHref
+                        ? `<a href="${escapeHtml(safeHref)}" target="_blank" rel="noopener noreferrer">`
+                        : "<div>";
+                      const linkEnd = safeHref ? "</a>" : "</div>";
+                      const colorHex = safeHexColor(event.color);
+                      const colorStyle = colorHex
+                        ? `style="color: ${colorHex};"`
                         : "";
-                      const borderStyle = event.color
-                        ? `style="border-left-color: ${event.color};"`
+                      const borderStyle = colorHex
+                        ? `style="border-left-color: ${colorHex};"`
                         : "";
 
                       html += `<div class="day-event" ${borderStyle}>
                                         ${linkStart}
-                                            <div class="event-community" ${colorStyle}>${event.community}</div>
-                                            <div class="event-name">${event.title}</div>
-                                            ${event.description ? `<div class="event-details-small">${event.description}</div>` : ""}
+                                            <div class="event-community" ${colorStyle}>${escapeHtml(event.community)}</div>
+                                            <div class="event-name">${escapeHtml(event.title)}</div>
+                                            ${event.description ? `<div class="event-details-small">${formatSafeDescription(event.description)}</div>` : ""}
                                         ${linkEnd}
                                     </div>`;
                     });
@@ -421,8 +463,9 @@
                   descParts.push(
                     event.description.replace(/<br\s*\/?>/gi, "\n"),
                   );
-                if (event.link && event.link !== "#")
-                  descParts.push("活動連結：" + event.link);
+                const safeLink = safeHttpUrl(event.link);
+                if (safeLink)
+                  descParts.push("活動連結：" + safeLink);
                 const details = encodeURIComponent(descParts.join("\n"));
                 return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${end}&details=${details}`;
               }
@@ -436,27 +479,29 @@
                 const summary = event.title
                   ? `${event.community} - ${event.title}`
                   : event.community;
+                const safeLink = safeHttpUrl(event.link);
                 const descParts = [];
                 if (event.description)
                   descParts.push(
-                    event.description.replace(/<br\s*\/?>/gi, "\\n"),
+                    escapeIcsText(event.description.replace(/<br\s*\/?>/gi, "\n"), { allowNewlines: true }),
                   );
-                if (event.link && event.link !== "#")
-                  descParts.push("活動連結：" + event.link);
+                if (safeLink)
+                  descParts.push(escapeIcsText("活動連結：" + safeLink));
+                const cleanCommunity = String(event.community || "").replace(/[\r\n]/g, "");
                 const lines = [
                   "BEGIN:VCALENDAR",
                   "VERSION:2.0",
                   "PRODID:-//Community Card Org//高雄社群活動//ZH",
                   "BEGIN:VEVENT",
-                  `UID:${event.date}-${encodeURIComponent(event.community)}@community-card.org`,
+                  `UID:${event.date}-${encodeURIComponent(cleanCommunity)}@community-card.org`,
                   `DTSTART;VALUE=DATE:${start}`,
                   `DTEND;VALUE=DATE:${end}`,
-                  `SUMMARY:${summary}`,
+                  `SUMMARY:${escapeIcsText(summary)}`,
                 ];
                 if (descParts.length)
                   lines.push(`DESCRIPTION:${descParts.join("\\n")}`);
-                if (event.link && event.link !== "#")
-                  lines.push(`URL:${event.link}`);
+                if (safeLink)
+                  lines.push(`URL:${safeLink}`);
                 lines.push("END:VEVENT", "END:VCALENDAR");
                 const blob = new Blob([lines.join("\r\n")], {
                   type: "text/calendar;charset=utf-8",
@@ -464,7 +509,7 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement("a");
                 a.href = url;
-                a.download = `${event.date}-${event.community}.ics`;
+                a.download = `${event.date}-${cleanCommunity.replace(/[\\/:*?"<>|]/g, "_")}.ics`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -513,15 +558,15 @@
                   const dateColor = (isWeekend || isHoliday) ? "color:#e53e3e;" : "";
                   const dateLabel = `<span style="${dateColor}">${m}/${d}</span>`;
                   const weekLabel = `<span style="${dateColor}">週${weekNames[dayOfWeek]}</span>`;
-                  const dot = `<span class="community-dot" style="background:${event.color || "#666"};"></span>`;
+                  const dotColor = safeHexColor(event.color) || "#666";
+                  const dot = `<span class="community-dot" style="background:${dotColor};"></span>`;
                   const googleURL = getGoogleCalendarURL(event);
 
-                  const eventLinkStart =
-                    event.link && event.link !== "#"
-                      ? `<a href="${event.link}" target="_blank" style="text-decoration:none;color:inherit;font-weight:bold;text-decoration:underline;">`
-                      : "";
-                  const eventLinkEnd =
-                    event.link && event.link !== "#" ? `</a>` : "";
+                  const safeHref = safeHttpUrl(event.link);
+                  const eventLinkStart = safeHref
+                    ? `<a href="${escapeHtml(safeHref)}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;font-weight:bold;text-decoration:underline;">`
+                    : "";
+                  const eventLinkEnd = safeHref ? `</a>` : "";
 
                   const rowClass = getEventDateClass(event.date);
 
@@ -529,10 +574,10 @@
                                 <td style="white-space:nowrap;color:#999;">${i + 1}</td>
                                 <td style="white-space:nowrap;">${dateLabel}<span class="weekday-mobile" style="${dateColor}">週${weekNames[dayOfWeek]}</span></td>
                                 <td class="col-weekday" style="white-space:nowrap;">${weekLabel}</td>
-                                <td><div style="display:flex;align-items:flex-start;gap:6px;">${dot}<div><strong>${event.community}</strong>${event.title ? `<div style="color:#555;margin-top:2px;">${eventLinkStart}${event.title}${eventLinkEnd}</div>` : ""}${event.description ? `<div style="font-size:0.8rem;color:#777;margin-top:4px;line-height:1.4;">${event.description}</div>` : ""}</div></div></td>
+                                <td><div style="display:flex;align-items:flex-start;gap:6px;">${dot}<div><strong>${escapeHtml(event.community)}</strong>${event.title ? `<div style="color:#555;margin-top:2px;">${eventLinkStart}${escapeHtml(event.title)}${eventLinkEnd}</div>` : ""}${event.description ? `<div style="font-size:0.8rem;color:#777;margin-top:4px;line-height:1.4;">${formatSafeDescription(event.description)}</div>` : ""}</div></div></td>
                                 <td style="white-space:nowrap;">
                                     <div class="btn-cal-group">
-                                        <a href="${googleURL}" target="_blank" class="btn btn-outline-primary btn-cal">Google</a>
+                                        <a href="${escapeHtml(googleURL)}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-cal">Google</a>
                                         <button class="btn btn-outline-secondary btn-cal" onclick="downloadICS(${i})">下載</button>
                                     </div>
                                 </td>

@@ -1,5 +1,5 @@
 // 護照 PWA 用的 Service Worker：預先快取核心資源與社群印章，靜態資源快取優先，動態頁面與資料網路優先（具備 2.5 秒防弱網逾時回退機制）
-const CACHE = "ccard2027-passport-v5";
+const CACHE = "ccard2027-passport-v6";
 
 const PRECACHE_URLS = [
   "./index.html",
@@ -11,7 +11,7 @@ const PRECACHE_URLS = [
   "./sponsors.html",
   "./organizer.html",
   "./manifest.webmanifest",
-  "./passport/core.js",
+  "./passport/core-v2.js",
   "./passport/passport.css",
   "./stamps.json",
   "./data.json",
@@ -19,6 +19,7 @@ const PRECACHE_URLS = [
   "./holidays.json",
   "../bootstrap.min.css",
   "../index.css",
+  "./calendar-modes.css",
   "../assets/passport/icon-192.png",
   "../assets/passport/icon-maskable-192.png",
   "../assets/passport/icon-512.png",
@@ -63,7 +64,8 @@ self.addEventListener("install", (event) => {
         await Promise.allSettled(
           PRECACHE_URLS.map(async (url) => {
             try {
-              const res = await fetch(url);
+              // 升版安裝時強制略過瀏覽器 HTTP 快取，避免抓到 max-age 內的舊檔
+              const res = await fetch(url, { cache: "reload" });
               if (res.ok) await cache.put(url, res);
             } catch (err) {
               console.warn("[SW] 預先快取失敗：", url, err);
@@ -130,6 +132,8 @@ async function networkFirstWithTimeout(req, timeoutMs = 2500) {
     const timeoutPromise = new Promise((_, reject) =>
       setTimeout(() => reject(new Error("NetworkTimeout")), timeoutMs),
     );
+    // 避免逾時後背景 fetchPromise 發生未捕捉的拒絕錯誤
+    fetchPromise.catch(() => {});
 
     return await Promise.race([fetchPromise, timeoutPromise]);
   } catch {
@@ -139,9 +143,9 @@ async function networkFirstWithTimeout(req, timeoutMs = 2500) {
   }
 }
 
-// 靜態資源：快取優先，若無快取才連網並寫入快取
+// 靜態資源：快取優先，若無快取才連網並寫入快取（保留查詢字串比對以支援版本參數）
 async function cacheFirst(req) {
-  const hit = await caches.match(req, { ignoreSearch: true });
+  const hit = await caches.match(req);
   if (hit) return hit;
 
   try {
