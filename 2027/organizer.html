@@ -275,6 +275,9 @@
                 <label><input type="radio" name="mk-mode" value="onsite" checked /> 📍 實體</label>
                 <label><input type="radio" name="mk-mode" value="online" /> 💻 線上</label>
               </div>
+              <p class="pp-muted" id="mk-hybrid-hint" hidden style="margin: 6px 0 0">
+                此活動為實體＋線上（hybrid）形式，請依該參加者實際參與方式選擇補簽「實體」或「線上」。
+              </p>
             </div>
             <div class="row">
               <div>
@@ -307,7 +310,7 @@
         escapeHtml,
         stripTags,
         registerServiceWorker,
-      } from "./passport/core.js";
+      } from "./passport/core-v2.js";
 
       const KEY_STORE = "ccard2027.organizerKeys";
       const MAKEUP_LOG = "ccard2027.makeupLog";
@@ -488,14 +491,14 @@
         $("ev-date").value = date;
         $("ev-title").value = ev ? (ev.title || stripTags(ev.description)).slice(0, 60) : "";
         $("ev-id").value = date;
-        if (ev?.mode) {
-          const targetMode = ev.mode === "hybrid" ? "both" : ev.mode;
-          const radio = document.querySelector(`input[name="mode"][value="${targetMode}"]`);
-          if (radio) {
-            radio.checked = true;
-            $("rotate").checked = targetMode !== "onsite";
-            applyMode();
-          }
+        const targetMode = ev?.mode === "hybrid" ? "both" : (ev?.mode || "onsite");
+        const radio =
+          document.querySelector(`input[name="mode"][value="${targetMode}"]`) ||
+          document.querySelector('input[name="mode"][value="onsite"]');
+        if (radio) {
+          radio.checked = true;
+          $("rotate").checked = radio.value !== "onsite";
+          applyMode();
         }
         applyWindow();
       }
@@ -1259,6 +1262,10 @@
         $("mk-date").value = ev?.date || "";
         $("mk-id").value = ev?.date || "";
         $("mk-title").value = ev ? (ev.title || stripTags(ev.description)).slice(0, 60) : "";
+        const targetMode = ev?.mode === "online" ? "online" : "onsite";
+        const radio = document.querySelector(`input[name="mk-mode"][value="${targetMode}"]`);
+        if (radio) radio.checked = true;
+        $("mk-hybrid-hint").hidden = ev?.mode !== "hybrid";
       }
 
       $("mk-event").onchange = applyMakeupEvent;

@@ -96,14 +96,14 @@ export function normalizeEvents(raw) {
           title: ev.title ?? item.title ?? "",
           description: ev.description ?? item.description ?? "",
           link: ev.link ?? item.link ?? "#",
-          mode: rawMode in EVENT_MODES ? rawMode : "onsite",
+          mode: Object.hasOwn(EVENT_MODES, rawMode) ? rawMode : "onsite",
         });
       }
     } else if (typeof item.date === "string") {
       out.push({
         ...item,
         link: item.link ?? "#",
-        mode: item.mode in EVENT_MODES ? item.mode : "onsite",
+        mode: Object.hasOwn(EVENT_MODES, item.mode) ? item.mode : "onsite",
       });
     }
   }

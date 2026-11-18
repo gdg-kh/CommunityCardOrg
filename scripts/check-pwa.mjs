@@ -104,12 +104,12 @@ for (const file of htmlFiles) {
   assert(content.includes('apple-mobile-web-app-capable'), `${file} 包含 apple-mobile-web-app-capable`);
 }
 
-console.log("\n=== 4. 驗證 core.js 裝置偵測與持久性儲存函式 ===");
-const coreContent = await readFile(path.resolve("2027/passport/core.js"), "utf8");
-assert(coreContent.includes("export function isIOS()"), "core.js 匯出 isIOS()");
-assert(coreContent.includes("export function isAndroid()"), "core.js 匯出 isAndroid()");
-assert(coreContent.includes("export function isStandalone()"), "core.js 匯出 isStandalone()");
-assert(coreContent.includes("export async function requestPersistentStorage()"), "core.js 匯出 requestPersistentStorage()");
+console.log("\n=== 4. 驗證 core-v2.js 裝置偵測與持久性儲存函式 ===");
+const coreContent = await readFile(path.resolve("2027/passport/core-v2.js"), "utf8");
+assert(coreContent.includes("export function isIOS()"), "core-v2.js 匯出 isIOS()");
+assert(coreContent.includes("export function isAndroid()"), "core-v2.js 匯出 isAndroid()");
+assert(coreContent.includes("export function isStandalone()"), "core-v2.js 匯出 isStandalone()");
+assert(coreContent.includes("export async function requestPersistentStorage()"), "core-v2.js 匯出 requestPersistentStorage()");
 
 console.log("\n=== 5. 啟動本機 HTTP 伺服器進行端點連線與 MIME 測試 ===");
 const server = http.createServer(async (req, res) => {
@@ -140,6 +140,8 @@ try {
   const testEndpoints = [
     { url: "/2027/manifest.webmanifest", expectedType: "application/manifest+json" },
     { url: "/2027/sw.js", expectedType: "text/javascript" },
+    { url: "/2027/passport/core-v2.js", expectedType: "text/javascript" },
+    { url: "/2027/calendar-modes.css", expectedType: "text/css" },
     { url: "/2027/passport.html", expectedType: "text/html" },
     { url: "/2027/index.html", expectedType: "text/html" },
     { url: "/2027/calendar.html", expectedType: "text/html" },
@@ -195,7 +197,8 @@ const checkinHtml = await readFile(path.resolve("2027/checkin.html"), "utf8");
 assert(checkinHtml.includes("可複製備份連結，貼至主畫面 App 的備份與還原區塊進行同步"), "2027/checkin.html 包含 iPhone 使用者複製備份至主畫面還原提示");
 
 console.log("\n=== 8. 驗證 10 個社群代表宣傳大圖快取與 Service Worker 強化 ===");
-assert(swContent.includes('const CACHE = "ccard2027-passport-v5"'), 'sw.js 快取版本為 "ccard2027-passport-v5"');
+assert(swContent.includes('const CACHE = "ccard2027-passport-v6"'), 'sw.js 快取版本為 "ccard2027-passport-v6"');
+assert(swContent.includes('cache: "reload"'), 'sw.js install 預先快取時使用 { cache: "reload" } 略過 HTTP 快取');
 
 const requiredCommunityLogos = [
   "../assets/logo_gdg_kaohsiung.png",
@@ -217,8 +220,8 @@ for (const logoUrl of requiredCommunityLogos) {
 assert(swContent.includes("cache.put(req, res.clone()).catch"), "sw.js networkFirstWithTimeout 背景快取寫入加上 .catch 錯誤防護");
 assert(swContent.includes("!res.ok"), "sw.js networkFirstWithTimeout 當 !res.ok 時優先回退快取版本");
 
-const coreJsContent = await readFile(path.resolve("2027/passport/core.js"), "utf8");
-assert(coreJsContent.includes('{ scope: "./" }'), 'core.js 註冊 Service Worker 時明確指定 { scope: "./" }');
+const coreJsContent = await readFile(path.resolve("2027/passport/core-v2.js"), "utf8");
+assert(coreJsContent.includes('{ scope: "./" }'), 'core-v2.js 註冊 Service Worker 時明確指定 { scope: "./" }');
 
 const registeredPages = [
   "2027/communities.html",
