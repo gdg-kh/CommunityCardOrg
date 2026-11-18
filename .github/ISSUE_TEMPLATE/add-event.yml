@@ -1,7 +1,6 @@
 name: 新增社群活動（AI 懶人包）
 description: 貼上活動網址或活動貼文內容，AI 會自動讀取網頁、提取欄位並建立 Pull Request 供管理員審核
 title: "[新增活動] "
-labels: ["add-event"]
 body:
   - type: textarea
     id: content
@@ -17,6 +16,7 @@ body:
     attributes:
       label: 目標年度 (Year)
       options:
+        - "自動判斷 (依活動日期)"
         - "2027"
         - "2026"
       default: 0

@@ -9,18 +9,44 @@ permissions:
   pull-requests: write
   issues: write
 
+concurrency:
+  group: issue-to-pr-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
 jobs:
   create-event-pr:
     if: >
       contains(github.event.issue.labels.*.name, 'add-event') &&
       (
-        github.event.issue.author_association == 'OWNER' ||
-        github.event.issue.author_association == 'MEMBER' ||
-        github.event.issue.author_association == 'COLLABORATOR' ||
-        github.event.action == 'labeled'
+        (
+          github.event.action != 'labeled' &&
+          (
+            github.event.issue.author_association == 'OWNER' ||
+            github.event.issue.author_association == 'MEMBER' ||
+            github.event.issue.author_association == 'COLLABORATOR'
+          )
+        ) ||
+        (
+          github.event.action == 'labeled' &&
+          github.event.label.name == 'add-event'
+        )
       )
     runs-on: ubuntu-latest
     steps:
+      - name: 驗證貼標操作者是否具備維護權限
+        if: github.event.action == 'labeled'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.payload.sender.login,
+            });
+            if (!["admin", "maintain", "write"].includes(data.permission)) {
+              core.setFailed(`操作者 @${context.payload.sender.login} 權限不足（${data.permission}），已攔截執行。`);
+            }
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
@@ -39,9 +65,10 @@ jobs:
           OUTPUT=$(node scripts/add-event.mjs 2>&1)
           CODE=$?
           echo "$OUTPUT"
-          echo "result<<EOF" >> "$GITHUB_OUTPUT"
+          DELIM="gh_out_$(openssl rand -hex 12)"
+          echo "result<<${DELIM}" >> "$GITHUB_OUTPUT"
           echo "$OUTPUT" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "${DELIM}" >> "$GITHUB_OUTPUT"
           echo "exit_code=$CODE" >> "$GITHUB_OUTPUT"
           exit $CODE
         continue-on-error: true
@@ -53,26 +80,32 @@ jobs:
           ERROR_MSG: ${{ steps.add_event.outputs.result }}
         with:
           script: |
+            const msg = process.env.ERROR_MSG || "";
+            const maxTicks = Math.max(3, ...[...msg.matchAll(/`+/g)].map((m) => m[0].length + 1));
+            const fence = "`".repeat(maxTicks);
+            const isCollaborator = ["OWNER", "MEMBER", "COLLABORATOR"].includes(
+              context.payload.issue.author_association,
+            );
+            const retryHint = isCollaborator
+              ? "請直接點選此 Issue 右上角的「Edit」補充或修正內容，儲存後系統會自動重新執行。"
+              : "請點選此 Issue 右上角的「Edit」補充或修正內容後，通知維護者移除並重新加上 `add-event` 標籤以重新觸發執行。";
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `### ⚠️ 活動自動解析或驗證未通過\n\n\`\`\`\n${process.env.ERROR_MSG}\n\`\`\`\n\n請直接點選此 Issue 右上角的「Edit」補充或修正內容，儲存後系統會自動重新執行。`
+              body: `### ⚠️ 活動自動解析或驗證未通過\n\n${fence}\n${msg}\n${fence}\n\n${retryHint}`
             });
-            core.setFailed(process.env.ERROR_MSG);
+            core.setFailed(msg);
 
       - name: 執行資料一致性檢查 (check-data.mjs)
-        run: |
-          node scripts/check-data.mjs 2026
-          node scripts/check-data.mjs 2027
-
-      - name: 重新產生 og-image 縮圖 (calendar.png)
         env:
-          OG_TARGET_DATE: ${{ steps.add_event.outputs.added_date }}
+          ADDED_YEAR: ${{ steps.add_event.outputs.added_year }}
         run: |
-          npm ci
-          npx puppeteer browsers install chrome
-          node scripts/generate-og-images.js
+          if [ "$ADDED_YEAR" = "2026" ]; then
+            node scripts/check-data.mjs 2026 --events-structure
+          else
+            node scripts/check-data.mjs "${ADDED_YEAR:-2027}"
+          fi
 
       - name: 建立分支並發起 Pull Request
         uses: actions/github-script@v7
@@ -88,8 +121,15 @@ jobs:
             execSync('git config user.name "github-actions[bot]"');
             execSync('git config user.email "41898282+github-actions[bot]@users.noreply.github.com"');
             execSync(`git checkout -B ${branchName}`);
-            execSync("git add 2026/events.json 2027/events.json 2026/og-images/ 2027/og-images/");
-            execSync(`git commit -m "chore(events): add event from issue #${issueNumber} and update og-image"`);
+            execSync("git add 2026/events.json 2027/events.json");
+            try {
+              execSync("git diff --cached --quiet");
+              console.log("工作區無新增變更，略過建立提交。");
+              return;
+            } catch {
+              // exit 1 表示有 staged 變更，繼續 commit 與建立 PR
+            }
+            execSync(`git commit -m "chore(events): add event from issue #${issueNumber}"`);
             execSync(`git push -f origin ${branchName}`);
 
             const { data: existingPrs } = await github.rest.pulls.list({
@@ -98,6 +138,11 @@ jobs:
               head: `${context.repo.owner}:${branchName}`,
               state: "open",
             });
+
+            const rawIssueTitle = (context.payload.issue.title || "").trim();
+            const prTitle = (!rawIssueTitle || rawIssueTitle === "[新增活動]")
+              ? `[新增活動] Issue #${issueNumber}`
+              : rawIssueTitle;
 
             let prUrl;
             if (existingPrs.length > 0) {
@@ -112,9 +157,7 @@ jobs:
               const { data: pr } = await github.rest.pulls.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                title: context.payload.issue.title === "[新增活動] "
-                  ? `[新增活動] Issue #${issueNumber}`
-                  : context.payload.issue.title,
+                title: prTitle,
                 head: branchName,
                 base: "main",
                 body: `${process.env.SUCCESS_MSG}\n\nCloses #${issueNumber}`,
@@ -122,10 +165,10 @@ jobs:
               prUrl = pr.html_url;
             }
 
-            const ogYear = process.env.ADDED_YEAR || "2027";
+            const targetYear = process.env.ADDED_YEAR || "2027";
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber,
-              body: `${process.env.SUCCESS_MSG}\n\n🖼️ 已同步重新產生 \`${ogYear}/og-images/calendar.png\` 滿版縮圖\n➡️ 已自動建立（或更新）Pull Request：${prUrl}\n待管理員審核 Merge 後即會自動上線。`,
+              body: `${process.env.SUCCESS_MSG}\n\n➡️ 已自動建立（或更新）Pull Request（更新 \`${targetYear}/events.json\`）：${prUrl}\n待管理員審核 Merge 後即會自動上線（月曆 OG 縮圖將於部署時自動更新）。`,
             });

@@ -22,6 +22,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: "npm"
+      - name: Generate current-month OG image
+        run: |
+          npm ci
+          npx puppeteer browsers install chrome
+          node scripts/generate-og-images.js
+          CURRENT_YM=$(TZ=Asia/Taipei date +%Y-%m)
+          if [[ "$CURRENT_YM" == 2026-* ]]; then
+            OG_TARGET_DATE="$CURRENT_YM" node scripts/generate-og-images.js
+          fi
       - name: Inject UTM tracking into events.json / data.json
         run: node scripts/add-tracking.mjs
       - name: Strip node_modules before upload
