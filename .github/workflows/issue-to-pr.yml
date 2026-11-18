@@ -1,0 +1,131 @@
+name: Issue to Event PR
+
+on:
+  issues:
+    types: [opened, edited, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  create-event-pr:
+    if: >
+      contains(github.event.issue.labels.*.name, 'add-event') &&
+      (
+        github.event.issue.author_association == 'OWNER' ||
+        github.event.issue.author_association == 'MEMBER' ||
+        github.event.issue.author_association == 'COLLABORATOR' ||
+        github.event.action == 'labeled'
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: 自動讀取網頁、AI 提取欄位並寫入 events.json
+        id: add_event
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          set +e
+          OUTPUT=$(node scripts/add-event.mjs 2>&1)
+          CODE=$?
+          echo "$OUTPUT"
+          echo "result<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$OUTPUT" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "exit_code=$CODE" >> "$GITHUB_OUTPUT"
+          exit $CODE
+        continue-on-error: true
+
+      - name: 若驗證或解析失敗則於 Issue 留言提示原因
+        if: steps.add_event.outputs.exit_code != '0'
+        uses: actions/github-script@v7
+        env:
+          ERROR_MSG: ${{ steps.add_event.outputs.result }}
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `### ⚠️ 活動自動解析或驗證未通過\n\n\`\`\`\n${process.env.ERROR_MSG}\n\`\`\`\n\n請直接點選此 Issue 右上角的「Edit」補充或修正內容，儲存後系統會自動重新執行。`
+            });
+            core.setFailed(process.env.ERROR_MSG);
+
+      - name: 執行資料一致性檢查 (check-data.mjs)
+        run: |
+          node scripts/check-data.mjs 2026
+          node scripts/check-data.mjs 2027
+
+      - name: 重新產生 og-image 縮圖 (calendar.png)
+        env:
+          OG_TARGET_DATE: ${{ steps.add_event.outputs.added_date }}
+        run: |
+          npm ci
+          npx puppeteer browsers install chrome
+          node scripts/generate-og-images.js
+
+      - name: 建立分支並發起 Pull Request
+        uses: actions/github-script@v7
+        env:
+          SUCCESS_MSG: ${{ steps.add_event.outputs.result }}
+          ADDED_YEAR: ${{ steps.add_event.outputs.added_year }}
+        with:
+          script: |
+            const { execSync } = require("child_process");
+            const issueNumber = context.issue.number;
+            const branchName = `event/issue-${issueNumber}`;
+
+            execSync('git config user.name "github-actions[bot]"');
+            execSync('git config user.email "41898282+github-actions[bot]@users.noreply.github.com"');
+            execSync(`git checkout -B ${branchName}`);
+            execSync("git add 2026/events.json 2027/events.json 2026/og-images/ 2027/og-images/");
+            execSync(`git commit -m "chore(events): add event from issue #${issueNumber} and update og-image"`);
+            execSync(`git push -f origin ${branchName}`);
+
+            const { data: existingPrs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `${context.repo.owner}:${branchName}`,
+              state: "open",
+            });
+
+            let prUrl;
+            if (existingPrs.length > 0) {
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: existingPrs[0].number,
+                body: `${process.env.SUCCESS_MSG}\n\nCloses #${issueNumber}`,
+              });
+              prUrl = existingPrs[0].html_url;
+            } else {
+              const { data: pr } = await github.rest.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: context.payload.issue.title === "[新增活動] "
+                  ? `[新增活動] Issue #${issueNumber}`
+                  : context.payload.issue.title,
+                head: branchName,
+                base: "main",
+                body: `${process.env.SUCCESS_MSG}\n\nCloses #${issueNumber}`,
+              });
+              prUrl = pr.html_url;
+            }
+
+            const ogYear = process.env.ADDED_YEAR || "2027";
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: `${process.env.SUCCESS_MSG}\n\n🖼️ 已同步重新產生 \`${ogYear}/og-images/calendar.png\` 滿版縮圖\n➡️ 已自動建立（或更新）Pull Request：${prUrl}\n待管理員審核 Merge 後即會自動上線。`,
+            });

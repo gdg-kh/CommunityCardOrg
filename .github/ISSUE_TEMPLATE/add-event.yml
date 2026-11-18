@@ -1,0 +1,62 @@
+name: 新增社群活動（AI 懶人包）
+description: 貼上活動網址或活動貼文內容，AI 會自動讀取網頁、提取欄位並建立 Pull Request 供管理員審核
+title: "[新增活動] "
+labels: ["add-event"]
+body:
+  - type: textarea
+    id: content
+    attributes:
+      label: 活動網址或內容 (Content)
+      description: 請直接貼上活動報名網址（如 KKTIX、Luma、Accupass、Bevy、Meetup），或直接複製貼上社群活動貼文全文＋網址，AI 會自動讀取網頁並整理成 50 字內簡介與對應欄位。
+      placeholder: "https://...\n或直接貼上活動宣傳文案"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: year
+    attributes:
+      label: 目標年度 (Year)
+      options:
+        - "2027"
+        - "2026"
+      default: 0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: community
+    attributes:
+      label: 主辦社群 (Community)
+      description: 預設由 AI 根據網頁內容自動判斷；也可直接下拉指定
+      options:
+        - 自動判斷 (由 AI 依內容識別)
+        - GDG Kaohsiung
+        - 開發者 Buffet
+        - 高雄 WordPress
+        - Second Space
+        - KaLUG
+        - PyLadies Kaohsiung
+        - KIMU - 高雄獨立遊戲開發者聚會
+        - 南台灣敏捷社群
+        - K.NET
+        - VSCP 粉鳥趴
+        - UIUX Kaohsiung
+        - vLAB Online
+        - KSDG
+      default: 0
+    validations:
+      required: false
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: 活動形式 (Mode)
+      description: 預設由 AI 自動判斷；也可直接指定
+      options:
+        - 自動判斷 (預設現場)
+        - onsite (現場)
+        - online (線上)
+        - hybrid (混合)
+      default: 0
+    validations:
+      required: false
