@@ -1,1 +1,67 @@
-[]
+[
+  {
+    "community": "GDG Kaohsiung",
+    "color": "#EA4335",
+    "events": []
+  },
+  {
+    "community": "開發者 Buffet",
+    "color": "#4285F4",
+    "events": []
+  },
+  {
+    "community": "高雄 WordPress",
+    "color": "#4285F4",
+    "events": []
+  },
+  {
+    "community": "Second Space",
+    "color": "#F9AB00",
+    "events": []
+  },
+  {
+    "community": "KaLUG",
+    "color": "#4285F4",
+    "events": []
+  },
+  {
+    "community": "PyLadies Kaohsiung",
+    "color": "#FA3C0A",
+    "events": []
+  },
+  {
+    "community": "KIMU - 高雄獨立遊戲開發者聚會",
+    "color": "#34A853",
+    "events": []
+  },
+  {
+    "community": "南台灣敏捷社群",
+    "color": "#4285F4",
+    "events": []
+  },
+  {
+    "community": "K.NET",
+    "color": "#F9AB00",
+    "events": []
+  },
+  {
+    "community": "VSCP 粉鳥趴",
+    "color": "#F9AB00",
+    "events": []
+  },
+  {
+    "community": "UIUX Kaohsiung",
+    "color": "#34A853",
+    "events": []
+  },
+  {
+    "community": "vLAB Online",
+    "color": "#4285F4",
+    "events": []
+  },
+  {
+    "community": "KSDG",
+    "color": "#4285F4",
+    "events": []
+  }
+]

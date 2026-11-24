@@ -8,7 +8,9 @@
     "build:tracking": "node scripts/add-tracking.mjs",
     "check:data": "node scripts/check-data.mjs",
     "check:pwa": "node scripts/check-pwa.mjs",
-    "test": "node scripts/check-data.mjs && node scripts/check-pwa.mjs"
+    "test:unit": "node --test tests/*.test.mjs",
+    "test:mcp": "node mcp/test.js",
+    "test": "node scripts/check-data.mjs && node scripts/check-pwa.mjs && npm run test:unit && npm run test:mcp"
   },
   "dependencies": {
     "puppeteer": "^23.0.0"

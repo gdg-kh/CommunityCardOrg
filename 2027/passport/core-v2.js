@@ -78,6 +78,38 @@ const COMMUNITY_ALIASES = {
   "vLAB Online 台灣路由網路實驗中心": "vLAB Online",
 };
 
+export const EVENT_MODES = { onsite: "現場", online: "線上", hybrid: "混合" };
+
+export function normalizeEvents(raw) {
+  if (!Array.isArray(raw)) return [];
+  const out = [];
+  for (const item of raw) {
+    if (!item || typeof item !== "object") continue;
+    if (Array.isArray(item.events)) {
+      for (const ev of item.events) {
+        if (!ev || typeof ev.date !== "string") continue;
+        const rawMode = ev.mode || item.mode;
+        out.push({
+          date: ev.date,
+          community: item.community || ev.community || "",
+          color: ev.color || item.color || "",
+          title: ev.title ?? item.title ?? "",
+          description: ev.description ?? item.description ?? "",
+          link: ev.link ?? item.link ?? "#",
+          mode: Object.hasOwn(EVENT_MODES, rawMode) ? rawMode : "onsite",
+        });
+      }
+    } else if (typeof item.date === "string") {
+      out.push({
+        ...item,
+        link: item.link ?? "#",
+        mode: Object.hasOwn(EVENT_MODES, item.mode) ? item.mode : "onsite",
+      });
+    }
+  }
+  return out;
+}
+
 export function loadEvents() {
   eventsPromise ??= Promise.all([
     fetch("../2026/events.json", { cache: "no-cache" })
@@ -89,8 +121,8 @@ export function loadEvents() {
   ])
     .then(([e2026, e2027]) => {
       const combined = [
-        ...(Array.isArray(e2026) ? e2026 : []),
-        ...(Array.isArray(e2027) ? e2027 : []),
+        ...normalizeEvents(e2026),
+        ...normalizeEvents(e2027),
       ];
       return combined.sort((a, b) => a.date.localeCompare(b.date));
     })

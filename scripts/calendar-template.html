@@ -6,7 +6,7 @@
     <title>{{YEAR}} 年 {{MONTH}} 月高雄社群活動月曆</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,11 +18,11 @@
             width: 1200px;
             height: 630px;
             font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-            background: #f5f5f5;
+            background: #ffffff;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            align-items: stretch;
+            justify-content: stretch;
+            padding: 6px;
             overflow: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -31,23 +31,22 @@
         .og-container {
             width: 100%;
             height: 100%;
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #ffffff;
+            padding: 2px 4px 4px 4px;
             display: flex;
             flex-direction: column;
         }
 
         .og-header {
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 6px;
         }
 
         .og-title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #333;
+            font-size: 26px;
+            font-weight: 700;
+            color: #222;
+            line-height: 1.2;
         }
 
         .calendar-wrapper {
@@ -55,18 +54,21 @@
             display: flex;
             flex-direction: column;
             min-height: 0;
+            border: 1px solid #d0d5dd;
+            border-radius: 6px;
+            overflow: hidden;
         }
 
         .calendar-header {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            background: #f8f9fa;
-            border-radius: 8px 8px 0 0;
+            background: #f1f5f9;
+            border-bottom: 1px solid #d0d5dd;
             text-align: center;
-            font-weight: bold;
-            padding: 8px 0;
-            font-size: 15px;
-            color: #495057;
+            font-weight: 700;
+            padding: 6px 0;
+            font-size: 16px;
+            color: #334155;
         }
 
         .calendar-grid {
@@ -75,23 +77,22 @@
             grid-template-columns: repeat(7, 1fr);
             grid-auto-rows: 1fr;
             gap: 1px;
-            background: #ddd;
-            border-radius: 0 0 8px 8px;
+            background: #dfe3e8;
             overflow: hidden;
         }
 
         .calendar-day {
-            background: white;
-            padding: 8px 8px 0 8px;
+            background: #ffffff;
+            padding: 6px 6px 2px 6px;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: row;
-            align-items: baseline;
+            align-items: flex-start;
         }
 
         .calendar-day.empty {
-            background: #fcfcfc;
+            background: #fafafa;
         }
 
         /* Weekend borders */
@@ -139,42 +140,31 @@
             border-right: none;
         }
 
-        .date-number {
-            width: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            color: #333;
+        .date-col {
+            width: 24px;
             flex-shrink: 0;
-            margin-left: -10px;
-            margin-right: 4px;
-            margin-bottom: 0;
-            text-align: right;
-            padding-top: 0;
-        }
-
-        .date-row {
+            margin-right: 5px;
             display: flex;
-            align-items: baseline;
-            gap: 4px;
-            margin-bottom: 0;
-            margin-left: -10px;
-            min-width: 0;
-            overflow: hidden;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .date-row .date-number {
-            margin-bottom: 0;
-            margin-left: 0;
+        .date-number {
+            font-size: 15px;
+            font-weight: 700;
+            color: #222;
+            line-height: 1.15;
+            text-align: center;
         }
 
         .holiday-label {
             font-size: 11px;
             color: #e53e3e;
-            font-weight: bold;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            min-width: 0;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-top: 2px;
+            text-align: center;
+            word-break: break-all;
         }
 
         .events-container {
@@ -186,16 +176,16 @@
         }
 
         .day-event {
-            font-size: 11px;
-            line-height: 1.3;
-            border-left: 3px solid #0d6efd;
-            padding-left: 4px;
-            margin-bottom: 3px;
+            font-size: 13.5px;
+            line-height: 1.26;
+            border-left: 3.5px solid #0d6efd;
+            padding-left: 5px;
+            margin-bottom: 4px;
             overflow: hidden;
         }
 
         .event-community {
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 1px;
             white-space: nowrap;
             overflow: hidden;
@@ -203,13 +193,12 @@
         }
 
         .event-name {
-            color: #333;
+            color: #222;
             font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
     </style>
 </head>
 <body>
@@ -235,12 +224,15 @@
     </div>
 
     <script>
-        // Injected data
         const year = {{YEAR}};
         const month = {{MONTH}};
         const events = {{EVENTS_JSON}};
         const holidays = {{HOLIDAYS_JSON}};
         const holidayMap = new Map(holidays.map(h => [h.date, h.name]));
+
+        const escapeHtml = (s) =>
+            String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
+        const safeColor = (c) => (/^#[0-9a-fA-F]{3,8}$/.test(c || '') ? c : '');
 
         function renderCalendar() {
             const grid = document.getElementById('calendar-grid');
@@ -251,23 +243,18 @@
             const daysInMonth = new Date(year, month, 0).getDate();
             let html = '';
 
-            // Empty cells before start
             for (let i = 0; i < startDay; i++) {
                 html += '<div class="calendar-day empty"></div>';
             }
 
-            // Days
             for (let day = 1; day <= daysInMonth; day++) {
                 const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-
-                // Calculate day of week (0=Sunday, 6=Saturday)
                 const currentDateObj = new Date(year, month - 1, day);
                 const dayOfWeek = currentDateObj.getDay();
                 const isSaturday = (dayOfWeek === 6);
                 const isSunday = (dayOfWeek === 0);
                 const isWeekend = isSaturday || isSunday;
 
-                // Check if we need top border
                 let needTopBorder = false;
                 if (isWeekend) {
                     if (day <= 7) {
@@ -300,29 +287,29 @@
                 const dayEvents = events.filter(e => e.date === dateStr);
 
                 html += `<div class="calendar-day${weekendClass}${topBorderClass}${holidayClass}">
-                    ${isHoliday
-                    ? `<div class="date-row"><span class="date-number">${day}</span><span class="holiday-label">${holidayName}</span></div>`
-                    : `<span class="date-number">${day}</span>`}
+                    <div class="date-col">
+                        <span class="date-number">${day}</span>
+                        ${isHoliday ? `<span class="holiday-label">${escapeHtml(holidayName)}</span>` : ''}
+                    </div>
                     <div class="events-container">`;
 
-                // If 3+ events on same day, only show community name
                 const showCommunityOnly = dayEvents.length >= 3;
 
                 dayEvents.forEach(event => {
-                    const colorStyle = event.color ? `color: ${event.color};` : '';
-                    const borderStyle = event.color ? `border-left-color: ${event.color};` : '';
+                    const colorHex = safeColor(event.color);
+                    const colorStyle = colorHex ? `color: ${colorHex};` : '';
+                    const borderStyle = colorHex ? `border-left-color: ${colorHex};` : '';
                     const hasTitle = event.title && event.title.trim();
 
                     html += `<div class="day-event" style="${borderStyle}">
-                        <div class="event-community" style="${colorStyle}">${event.community}</div>
-                        ${(!showCommunityOnly && hasTitle) ? `<div class="event-name">${event.title}</div>` : ''}
+                        <div class="event-community" style="${colorStyle}">${escapeHtml(event.community)}</div>
+                        ${(!showCommunityOnly && hasTitle) ? `<div class="event-name">${escapeHtml(event.title)}</div>` : ''}
                     </div>`;
                 });
 
                 html += '</div></div>';
             }
 
-            // Fill remaining grid
             const totalCells = startDay + daysInMonth;
             const remaining = 7 - (totalCells % 7);
             if (remaining < 7) {
@@ -334,7 +321,6 @@
             grid.innerHTML = html;
         }
 
-        // Execute rendering
         renderCalendar();
     </script>
 </body>

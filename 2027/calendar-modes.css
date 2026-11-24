@@ -1,0 +1,48 @@
+/* 2027 社群月曆活動形式篩選與線上／混合徽章樣式（獨立檔案以避開 v5 Service Worker 的 index.css 快取） */
+
+.mode-btn-group {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 12px;
+  .btn {
+    min-height: 36px;
+    padding: 0 12px;
+    touch-action: manipulation;
+    font-size: 0.85rem;
+  }
+}
+
+.event-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.event-list-community-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.event-mode-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  flex-shrink: 0;
+  &.online {
+    background: #e8f0fe;
+    color: #1967d2;
+  }
+  &.hybrid {
+    background: #f3e8fd;
+    color: #7627bb;
+  }
+}
