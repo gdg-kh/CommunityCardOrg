@@ -70,8 +70,8 @@ export function loadRegistry() {
   return registryPromise;
 }
 
-// 容錯別名對照（相容歷史資料或全銜寫法）
-const COMMUNITY_ALIASES = {
+// 容錯別名對照（相容歷史資料或全銜寫法；須與 mcp/lib.js 保持同步）
+export const COMMUNITY_ALIASES = {
   "KIMU 高雄獨立遊戲開發者聚會": "KIMU - 高雄獨立遊戲開發者聚會",
   "UIUX.Kaohsiung": "UIUX Kaohsiung",
   "高雄 WordPress 小聚": "高雄 WordPress",

@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import {
     DEFAULT_SUB_PATH,
+    canonicalizeCommunityName,
     findAndValidateCommunity,
     hasDisallowedHtmlTags,
     insertEventIntoEvents,
@@ -76,6 +77,15 @@ try {
 
     const c6 = findAndValidateCommunity("高雄 WordPress", communities2027);
     assert(c6.name === "高雄 WordPress", `2027 社群名冊匹配 "高雄 WordPress" -> ${c6.name}`);
+
+    const c7 = findAndValidateCommunity("高雄 WordPress 小聚", communities2027);
+    assert(c7.name === "高雄 WordPress", `2026 舊全銜可精確對齊 2027 名冊 "高雄 WordPress" -> ${c7.name}`);
+
+    const c8 = findAndValidateCommunity("UIUX.Kaohsiung", communities2027);
+    assert(c8.name === "UIUX Kaohsiung", `2026 舊全銜可精確對齊 2027 名冊 "UIUX Kaohsiung" -> ${c8.name}`);
+
+    const c9 = findAndValidateCommunity("vLAB Online", communities);
+    assert(c9.name === "vLAB Online 台灣路由網路實驗中心", `2027 標準名可雙向對齊 2026 名冊 -> ${c9.name}`);
 
     assertThrows(
         () => findAndValidateCommunity("台北 Android 社群", communities),
@@ -199,6 +209,18 @@ assert(
     !isDuplicateEvent(existingEvents, { date: "2027-01-16", community: "GDG Kaohsiung", title: "TOOCON #42" }),
     "不同日期不誤判為重複活動"
 );
+assert(
+    canonicalizeCommunityName("高雄 WordPress 小聚") === "高雄 WordPress" &&
+    canonicalizeCommunityName("UIUX.Kaohsiung") === "UIUX Kaohsiung",
+    "canonicalizeCommunityName 可將 2026 舊全銜對齊至現行標準社群名稱"
+);
+assert(
+    isDuplicateEvent(
+        [{ date: "2026-12-10", community: "高雄 WordPress", title: "年底小聚" }],
+        { date: "2026-12-10", community: "高雄 WordPress 小聚", title: "年底小聚" }
+    ),
+    "isDuplicateEvent 可跨別名攔截 2026 重複活動"
+);
 
 // ----------------------------------------------------
 // 測試區塊 3: 跨年度路由與實際 queryEvents 邏輯驗證
@@ -211,6 +233,34 @@ assert(resolveEventYear("2027-01-15") === "2027", "2027-01-15 路由至 2027");
 assert(
     resolveBaseUrl("2026", { customBaseUrl: "https://community-card.org/2027" }) === "https://community-card.org/2026",
     "resolveBaseUrl 支援跨年度切換基底網址"
+);
+assert(
+    resolveBaseUrl("2027", { customBaseUrl: "https://community-card.org/2028" }) === "https://community-card.org/2027",
+    "resolveBaseUrl 支援任意四位數年份基底網址切換（例如 2028 -> 2027）"
+);
+assert(
+    resolveBaseUrl("2027", { customBaseUrl: "https://community-card.org" }) === "https://community-card.org/2027" &&
+    resolveBaseUrl("2026", { customBaseUrl: "https://taipei-card.org/" }) === "https://taipei-card.org/2026" &&
+    resolveBaseUrl("2026", { customBaseUrl: "http://localhost:8080/data" }) === "http://localhost:8080/data",
+    "resolveBaseUrl 支援網域根路徑自動補上年度子目錄，並保留非年份自訂子目錄"
+);
+
+// 驗證無年份後綴的自訂位址不會在跨年度視窗重複抓取合併
+let singleEndpointCalls = 0;
+const dedupedRes = await queryEvents({
+    now: new Date("2026-11-18T12:00:00+08:00"),
+    defaultYear: "2027",
+    resolveYearKey: (y) => resolveBaseUrl(y, { customBaseUrl: "http://localhost:8080/data" }),
+    fetchEventsByYear: async () => {
+        singleEndpointCalls++;
+        return [
+            { date: "2026-12-01", community: "GDG Kaohsiung", title: "單一來源活動", link: "#" },
+        ];
+    },
+});
+assert(
+    singleEndpointCalls === 1 && dedupedRes.events.length === 1,
+    "無年份後綴的自訂基底網址在跨年視窗僅抓取一次且不重複活動"
 );
 
 const sample2027Grouped = [
@@ -240,8 +290,23 @@ const crossYearRes = await queryEvents({
 assert(
     fetchedYears.includes("2026") && fetchedYears.includes("2027") &&
     crossYearRes.events.some(e => e.date.startsWith("2026-")) &&
-    crossYearRes.events.some(e => e.date === "2027-01-10"),
+    crossYearRes.events.some(e => e.date === "2027-01-10") &&
+    crossYearRes.usedFallbackWindow === false,
     "queryEvents 未指定月份時可跨年度合併 2026 與 2027 活動"
+);
+
+// 3A-2. 當年無活動時觸發回退視窗並標記 usedFallbackWindow
+const fallbackWindowRes = await queryEvents({
+    now: new Date("2025-06-15T12:00:00+08:00"),
+    defaultYear: "2027",
+    fetchEventsByYear: async (yr) => (yr === "2027" ? sample2027Grouped : []),
+});
+assert(
+    fallbackWindowRes.usedFallbackWindow === true &&
+    fallbackWindowRes.monthsToInclude[0] === "2027-01" &&
+    fallbackWindowRes.monthsToInclude[3] === "2027-04" &&
+    fallbackWindowRes.events.length === 1,
+    "queryEvents 當年無活動時會回退至首個有活動年度的 1-4 月並設定 usedFallbackWindow"
 );
 
 // 3B. 超過 12 筆時啟動 Token 精簡
@@ -328,6 +393,20 @@ try {
     assert(
         flatTarget.length === 1 && !Array.isArray(flatTarget[0].events) && flatTarget[0].date === "2026-12-20",
         "insertEventIntoEvents 在 2026 空陣列時正確寫入扁平格式。"
+    );
+
+    const aliasGroupedTarget = [{ community: "UIUX.Kaohsiung", color: "#34A853", events: [{ date: "2027-01-10", title: "設計小聚 #1", description: "", link: "#", mode: "onsite" }] }];
+    insertEventIntoEvents(aliasGroupedTarget, { date: "2027-02-10", community: "UIUX Kaohsiung", title: "設計小聚 #2", description: "", link: "https://example.com", color: "#34A853", mode: "onsite" }, "2027");
+    assert(
+        aliasGroupedTarget.length === 1 && aliasGroupedTarget[0].events.length === 2,
+        "insertEventIntoEvents 可跨別名合併至既有社群分組不重複建組。"
+    );
+
+    const newAliasGroupedTarget = [];
+    insertEventIntoEvents(newAliasGroupedTarget, { date: "2027-03-01", community: "高雄 WordPress 小聚", title: "WP 聚會", description: "", link: "#", color: "#4285F4", mode: "onsite" }, "2027");
+    assert(
+        newAliasGroupedTarget.length === 1 && newAliasGroupedTarget[0].community === "高雄 WordPress",
+        "insertEventIntoEvents 新增分組時會將社群別名正規化為標準名稱。"
     );
 } catch (err) {
     assert(false, `正規化測試失敗: ${err.message}`);

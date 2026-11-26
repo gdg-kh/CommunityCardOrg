@@ -6,6 +6,7 @@ import { z } from "zod";
 import {
     DEFAULT_SUB_PATH,
     VALID_EVENT_MODES,
+    canonicalizeCommunityName,
     findAndValidateCommunity,
     insertEventIntoEvents,
     isDuplicateEvent,
@@ -97,13 +98,14 @@ server.tool(
     "get_events",
     "取得社群活動行事曆",
     {
-        month: z.string().optional().describe("過濾特定月份的活動 (格式: YYYY-MM)，若未提供則自動進行 Token 精簡，回傳當前月份與未來三個月活動"),
+        month: z.string().optional().describe("過濾特定月份的活動 (格式: YYYY-MM)，若未提供則自動進行 Token 精簡，回傳上個月起共四個月（含前一個月、當月與未來兩個月）的活動"),
     },
     async ({ month }) => {
         try {
             const result = await queryEvents({
                 month,
                 defaultYear: DEFAULT_SUB_PATH,
+                resolveYearKey: (year) => resolveBaseUrl(year),
                 fetchEventsByYear: (year) => fetchData("events.json", year),
             });
 
@@ -119,8 +121,11 @@ server.tool(
 
             let responseText = "";
             if (result.shouldCompress) {
+                const windowLabel = result.usedFallbackWindow
+                    ? `${result.monthsToInclude[0]} 至 ${result.monthsToInclude[3]}（共四個月）`
+                    : `上個月起四個月（${result.monthsToInclude[0]} 至 ${result.monthsToInclude[3]}）`;
                 responseText += `ℹ️ [已啟動 Token 精簡與摘要機制]\n`;
-                responseText += `本次查詢未提供特定月份 (month) 參數，伺服器已自動篩選當月起四個月（${result.monthsToInclude[0]} 至 ${result.monthsToInclude[3]}）的活動，並隱藏了詳細描述 (description) 與連結 (link) 欄位以節省您的記號 (Token) 消耗並提升回應速度。\n`;
+                responseText += `本次查詢未提供特定月份 (month) 參數，伺服器已自動篩選${windowLabel}的活動，並隱藏了詳細描述 (description) 與連結 (link) 欄位以節省您的記號 (Token) 消耗並提升回應速度。\n`;
                 responseText += `💡 若您需要某個月份的完整詳細活動與報名連結，請重新呼叫 'get_events' 並傳入參數，例如: { "month": "${result.monthsToInclude[1]}" }。\n\n`;
             } else {
                 responseText += `已為您自動篩選 ${result.monthsToInclude[0]} 至 ${result.monthsToInclude[3]} 的活動清單（共 ${result.totalCount} 筆）：\n`;
@@ -235,7 +240,7 @@ server.tool(
                 ]);
                 const allCommunities = [...(data.communities || []), ...(stamps.partners || [])];
                 const validatedCommunity = findAndValidateCommunity(community, allCommunities);
-                officialCommunityName = validatedCommunity.name;
+                officialCommunityName = canonicalizeCommunityName(validatedCommunity.name);
                 communityColor = validatedCommunity.color || "#808080";
             } catch (err) {
                 return {
@@ -325,7 +330,7 @@ server.tool(
                 title: `[自動新增活動] ${cleanTitle} (${officialCommunityName})`,
                 head: branchName,
                 base: "main",
-                body: `由 MCP AI 助理發起的活動新增請求：\n\n- 年度：${targetYear}\n- 日期：${date}\n- 社群：${officialCommunityName}\n- 標題：${cleanTitle}\n- 形式：${eventMode}\n- 介紹：${cleanDescription}\n- 顏色：${communityColor}`
+                body: `由 MCP AI 助理發起的活動新增請求：\n\n- 年度：${targetYear}\n- 日期：${date}\n- 社群：${officialCommunityName}\n- 標題：${cleanTitle}\n- 形式：${eventMode}\n- 介紹：${cleanDescription}\n- 連結：${cleanLink}\n- 顏色：${communityColor}`
             });
 
             return {

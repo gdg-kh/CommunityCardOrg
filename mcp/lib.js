@@ -1,6 +1,19 @@
 export const DEFAULT_SUB_PATH = process.env.COMMUNITY_CARD_SUB_PATH || "2027";
 export const VALID_EVENT_MODES = new Set(["onsite", "online", "hybrid"]);
 
+// 容錯別名對照（將 2026 舊全銜對齊至 2027 與 events.json 現行標準名稱；須與 2027/passport/core-v2.js 保持同步）
+export const COMMUNITY_ALIASES = {
+    "KIMU 高雄獨立遊戲開發者聚會": "KIMU - 高雄獨立遊戲開發者聚會",
+    "UIUX.Kaohsiung": "UIUX Kaohsiung",
+    "高雄 WordPress 小聚": "高雄 WordPress",
+    "vLAB Online 台灣路由網路實驗中心": "vLAB Online",
+};
+
+export function canonicalizeCommunityName(name) {
+    const trimmed = String(name ?? "").trim();
+    return COMMUNITY_ALIASES[trimmed] || trimmed;
+}
+
 const HTML_TAG_RE = /<(?:\/?[a-z]|!|\?)/i;
 const VALID_BR_RE = /<br\s*\/?>/gi;
 
@@ -14,8 +27,16 @@ export function resolveBaseUrl(
     const targetYear = String(year || defaultSubPath);
     if (customBaseUrl) {
         const trimmed = customBaseUrl.replace(/\/+$/, "");
-        if (/\/(2025|2026|2027)$/.test(trimmed)) {
-            return trimmed.replace(/\/(2025|2026|2027)$/, `/${targetYear}`);
+        if (/\/\d{4}$/.test(trimmed)) {
+            return trimmed.replace(/\/\d{4}$/, `/${targetYear}`);
+        }
+        try {
+            const parsed = new URL(trimmed);
+            if (parsed.pathname === "/" && !parsed.search && !parsed.hash) {
+                return `${trimmed}/${targetYear}`;
+            }
+        } catch {
+            // 非標準 URL 格式時維持原樣
         }
         return trimmed;
     }
@@ -67,9 +88,16 @@ export function findAndValidateCommunity(inputName, communities) {
         throw new Error("主辦社群名稱不能為空。");
     }
 
-    // 1. 精確匹配 (忽略大小寫、空格與符號)
+    // 1. 精確匹配 (忽略大小寫、空格、符號，並支援新舊別名雙向對齊)
+    const normalizedCanonicalInput = normalizeStr(canonicalizeCommunityName(trimmedInput));
     for (const c of communities) {
-        if (normalizeStr(c.name) === normalizedInput) {
+        const normName = normalizeStr(c.name);
+        const normCanonicalName = normalizeStr(canonicalizeCommunityName(c.name));
+        if (
+            normName === normalizedInput ||
+            normName === normalizedCanonicalInput ||
+            normCanonicalName === normalizedCanonicalInput
+        ) {
             return c;
         }
     }
@@ -223,27 +251,29 @@ export function validateProposeEventInput(
 }
 
 export function isDuplicateEvent(flatExisting, { date, community, title }) {
+    const targetCommunity = canonicalizeCommunityName(community);
     const targetTitle = String(title ?? "").trim().toLowerCase();
     return flatExisting.some(
         e =>
             e.date === date &&
-            e.community === community &&
+            canonicalizeCommunityName(e.community) === targetCommunity &&
             String(e.title ?? "").trim().toLowerCase() === targetTitle
     );
 }
 
 export function insertEventIntoEvents(currentEvents, { date, community, title, description, link, color, mode }, subPath = "2027") {
+    const canonicalCommunity = canonicalizeCommunityName(community);
     const isGroupedFormat =
         currentEvents.some(item => item && Array.isArray(item.events)) ||
         (currentEvents.length === 0 && subPath !== "2026");
 
     if (isGroupedFormat) {
         let group = currentEvents.find(
-            item => item && Array.isArray(item.events) && item.community === community
+            item => item && Array.isArray(item.events) && canonicalizeCommunityName(item.community) === canonicalCommunity
         );
         if (!group) {
             group = {
-                community,
+                community: canonicalCommunity,
                 color,
                 events: []
             };
@@ -260,7 +290,7 @@ export function insertEventIntoEvents(currentEvents, { date, community, title, d
     } else {
         currentEvents.push({
             date,
-            community,
+            community: canonicalCommunity,
             title,
             description,
             link,
@@ -306,6 +336,7 @@ export async function queryEvents({
     now = new Date(),
     defaultYear = DEFAULT_SUB_PATH,
     fetchEventsByYear,
+    resolveYearKey = (y) => String(y),
 }) {
     const cleanMonth = String(month ?? "").trim();
     if (cleanMonth) {
@@ -339,7 +370,18 @@ export async function queryEvents({
         yearsToFetch.push(defaultYear);
     }
 
-    const settled = await Promise.allSettled(yearsToFetch.map(y => fetchEventsByYear(y)));
+    // 避免當自訂基底網址不含年份後綴時，重複抓取同一份 events.json 造成活動重複
+    const seenSourceKeys = new Set();
+    const uniqueYearsToFetch = [];
+    for (const y of yearsToFetch) {
+        const key = resolveYearKey(y);
+        if (!seenSourceKeys.has(key)) {
+            seenSourceKeys.add(key);
+            uniqueYearsToFetch.push(y);
+        }
+    }
+
+    const settled = await Promise.allSettled(uniqueYearsToFetch.map(y => fetchEventsByYear(y)));
     const fulfilled = settled.filter(r => r.status === "fulfilled");
     if (fulfilled.length === 0) {
         const firstErr = settled[0]?.reason;
@@ -351,6 +393,7 @@ export async function queryEvents({
         .sort((a, b) => a.date.localeCompare(b.date));
 
     let effectiveMonths = monthsToInclude;
+    let usedFallbackWindow = false;
     let filteredEvents = allEvents.filter(e =>
         effectiveMonths.some(m => e.date.startsWith(m))
     );
@@ -358,6 +401,7 @@ export async function queryEvents({
     if (filteredEvents.length === 0 && allEvents.length > 0) {
         const hasCurrentYearEvents = allEvents.some(e => e.date.startsWith(`${baseYr}-`));
         if (!hasCurrentYearEvents) {
+            usedFallbackWindow = true;
             const firstEventYear = Number(allEvents[0].date.slice(0, 4));
             effectiveMonths = [0, 1, 2, 3].map(offset => {
                 const d = new Date(Date.UTC(firstEventYear, offset, 1));
@@ -386,5 +430,6 @@ export async function queryEvents({
         totalCount: filteredEvents.length,
         shouldCompress,
         monthsToInclude: effectiveMonths,
+        usedFallbackWindow,
     };
 }

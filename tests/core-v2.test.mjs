@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  COMMUNITY_ALIASES as CORE_COMMUNITY_ALIASES,
   EVENT_MODES,
   MODES,
   communityIdOf,
@@ -13,6 +14,7 @@ import {
   stripTags,
   verifyToken,
 } from "../2027/passport/core-v2.js";
+import { COMMUNITY_ALIASES as MCP_COMMUNITY_ALIASES } from "../mcp/lib.js";
 
 test("normalizeEvents handles 2026 flat format, 2027 grouped format, and malformed entries", () => {
   assert.deepEqual(normalizeEvents(null), []);
@@ -126,4 +128,8 @@ test("signPayload and verifyToken validate ECDSA P-256 tokens and time windows",
     () => verifyToken(token, registry, { checkTime: true, now: (nowSec + 1000) * 1000 }),
     /過期/,
   );
+});
+
+test("COMMUNITY_ALIASES in core-v2.js and mcp/lib.js stay in sync", () => {
+  assert.deepEqual(CORE_COMMUNITY_ALIASES, MCP_COMMUNITY_ALIASES);
 });
