@@ -132,6 +132,33 @@ for (const file of ["2026/calendar.html", "2027/index.html"]) {
   });
 }
 
+test("2026/calendar.html and 2027/index.html do not highlight empty future cells as bg-upcoming when closestUpcomingDate is null", async () => {
+  for (const file of ["2026/calendar.html", "2027/index.html"]) {
+    const html = await readFile(file, "utf8");
+    const getEventDateClassSrc = extractFunction(html, "getEventDateClass");
+
+    const runWithClosest = (closest) =>
+      new Function(
+        "closestUpcomingDate",
+        `${getEventDateClassSrc}
+         return {
+           firstFuture: getEventDateClass("2099-01-01"),
+           secondFuture: getEventDateClass("2099-01-02"),
+           closestAfter: closestUpcomingDate,
+         };`,
+      )(closest);
+
+    const noUpcoming = runWithClosest(null);
+    assert.equal(noUpcoming.firstFuture, "", `${file} should not highlight 2099-01-01 when no upcoming events`);
+    assert.equal(noUpcoming.secondFuture, "", `${file} should not highlight 2099-01-02 when no upcoming events`);
+    assert.equal(noUpcoming.closestAfter, null, `${file} must not mutate closestUpcomingDate`);
+
+    const withUpcoming = runWithClosest("2099-01-02");
+    assert.equal(withUpcoming.firstFuture, "");
+    assert.equal(withUpcoming.secondFuture, " bg-upcoming");
+  }
+});
+
 test("2027/organizer.html handles hybrid events with explicit makeup mode hint", async () => {
   const org = await readFile("2027/organizer.html", "utf8");
   assert.ok(org.includes('id="mk-hybrid-hint"'));

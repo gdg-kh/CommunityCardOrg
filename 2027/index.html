@@ -342,14 +342,9 @@
                 );
                 if (diffDays === 0) return " bg-today";
 
-                // only the closest upcoming event date
-                if (diffDays > 0) {
-                  if (!closestUpcomingDate) {
-                    closestUpcomingDate = dateStr;
-                    return " bg-upcoming";
-                  } else if (dateStr === closestUpcomingDate) {
-                    return " bg-upcoming";
-                  }
+                // only the closest upcoming event date (pre-calculated in renderCalendar)
+                if (diffDays > 0 && closestUpcomingDate && dateStr === closestUpcomingDate) {
+                  return " bg-upcoming";
                 }
 
                 return "";

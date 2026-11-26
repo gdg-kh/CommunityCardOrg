@@ -12,14 +12,14 @@
 | `get_events` | `month`（選填，`YYYY-MM`） | 唯讀 | 取得活動行事曆，可依月份過濾 |
 | `get_sponsors` | 無 | 唯讀 | 取得贊助商清單 |
 | `get_rewards` | 無 | 唯讀 | 取得集章獎勵清單 |
-| `propose_new_event` | `date`、`title`、`community`、`description`（≤50 字）、`link` | 需 GitHub Token | 在指定 repo 自動建立 PR 新增活動 |
+| `propose_new_event` | `date`、`title`、`community`、`description`（≤50 字）、`link`、`mode`（選填） | 需 GitHub Token | 在指定 repo 自動建立 PR 新增活動 |
 
 ## 環境變數
 
 | 變數 | 必填 | 預設 | 說明 |
 |---|---|---|---|
-| `COMMUNITY_CARD_DATA_URL` | – | `https://community-card.org` | 資料來源基底 URL；fork 至其他城市時改成自己的網址 |
-| `COMMUNITY_CARD_SUB_PATH` | – | `2026` | 年度/版本子目錄路徑（例如當前為 2026；年底可改成 v2 以實現年份脫鉤） |
+| `COMMUNITY_CARD_DATA_URL` | – | `https://community-card.org` | 資料來源基底 URL：填網域根路徑（例 `https://taipei-card.org`）會自動接年度子目錄；填含四位數年份路徑（例 `https://taipei-card.org/2027`）可自動跨年切換；填其他自訂子目錄（例 `http://localhost:8080/data`）則直接讀取該目錄 |
+| `COMMUNITY_CARD_SUB_PATH` | – | `2027` | 預設年度/版本子目錄路徑（例如當前為 2027；轉移版本時可改為對應路徑） |
 | `GITHUB_TOKEN` | 僅 `propose_new_event` 工具需要 | – | 對目標 repo 有 `repo` 權限的 Personal Access Token |
 | `GITHUB_REPO_OWNER` | 僅 `propose_new_event` 工具需要 | – | 目標 repo 擁有者（例：`gdg-kh`） |
 | `GITHUB_REPO_NAME` | 僅 `propose_new_event` 工具需要 | `CommunityCardOrg` | 目標 repo 名稱 |
@@ -36,7 +36,7 @@
       "args": ["-y", "community-card-mcp"],
       "env": {
         "COMMUNITY_CARD_DATA_URL": "https://community-card.org",
-        "COMMUNITY_CARD_SUB_PATH": "2026",
+        "COMMUNITY_CARD_SUB_PATH": "2027",
         "GITHUB_TOKEN": "（選填）若希望 AI 能發 PR 新增活動，請填入 Personal Access Token",
         "GITHUB_REPO_OWNER": "gdg-kh",
         "GITHUB_REPO_NAME": "CommunityCardOrg"
