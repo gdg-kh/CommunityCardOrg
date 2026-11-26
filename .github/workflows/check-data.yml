@@ -3,6 +3,9 @@ name: Check community data
 on:
   pull_request:
     paths:
+      - "2026/calendar.html"
+      - "2026/data.json"
+      - "2026/events.json"
       - "2027/data.json"
       - "2027/events.json"
       - "2027/stamps.json"
@@ -12,12 +15,17 @@ on:
       - "2027/*.html"
       - "2027/passport/**"
       - "assets/**"
-      - "scripts/check-data.mjs"
-      - "scripts/check-pwa.mjs"
+      - "scripts/**"
+      - "mcp/**"
+      - "tests/**"
+      - "package.json"
       - ".github/workflows/check-data.yml"
   push:
     branches: [main]
     paths:
+      - "2026/calendar.html"
+      - "2026/data.json"
+      - "2026/events.json"
       - "2027/data.json"
       - "2027/events.json"
       - "2027/stamps.json"
@@ -27,8 +35,10 @@ on:
       - "2027/*.html"
       - "2027/passport/**"
       - "assets/**"
-      - "scripts/check-data.mjs"
-      - "scripts/check-pwa.mjs"
+      - "scripts/**"
+      - "mcp/**"
+      - "tests/**"
+      - "package.json"
       - ".github/workflows/check-data.yml"
   workflow_dispatch:
 
@@ -43,7 +53,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: 檢查社群名稱與簽到設定是否一致
+      - name: 檢查 2027 社群名稱與簽到設定是否一致
         run: node scripts/check-data.mjs 2027
+      - name: 檢查 2026 活動資料結構
+        run: node scripts/check-data.mjs 2026 --events-structure
       - name: 檢查 PWA 與離線支援規格
         run: node scripts/check-pwa.mjs
+      - name: 執行單元測試
+        run: npm run test:unit
+      - name: 執行 MCP 驗證測試
+        run: npm run test:mcp

@@ -11,30 +11,21 @@ permissions:
 
 concurrency:
   group: issue-to-pr-${{ github.event.issue.number }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   create-event-pr:
     if: >
+      github.event.issue.state == 'open' &&
       contains(github.event.issue.labels.*.name, 'add-event') &&
       (
-        (
-          github.event.action != 'labeled' &&
-          (
-            github.event.issue.author_association == 'OWNER' ||
-            github.event.issue.author_association == 'MEMBER' ||
-            github.event.issue.author_association == 'COLLABORATOR'
-          )
-        ) ||
-        (
-          github.event.action == 'labeled' &&
-          github.event.label.name == 'add-event'
-        )
+        github.event.action != 'labeled' ||
+        github.event.label.name == 'add-event'
       )
     runs-on: ubuntu-latest
     steps:
-      - name: 驗證貼標操作者是否具備維護權限
-        if: github.event.action == 'labeled'
+      - name: 驗證操作者是否具備寫入權限
+        id: auth
         uses: actions/github-script@v7
         with:
           script: |
@@ -43,19 +34,29 @@ jobs:
               repo: context.repo.repo,
               username: context.payload.sender.login,
             });
-            if (!["admin", "maintain", "write"].includes(data.permission)) {
-              core.setFailed(`操作者 @${context.payload.sender.login} 權限不足（${data.permission}），已攔截執行。`);
+            const authorized = ["admin", "maintain", "write"].includes(data.permission);
+            core.setOutput("authorized", authorized ? "true" : "false");
+            if (!authorized) {
+              const msg = `操作者 @${context.payload.sender.login} 權限不足（${data.permission}），已攔截執行。`;
+              if (context.payload.action === "labeled") {
+                core.setFailed(msg);
+              } else {
+                core.info(msg);
+              }
             }
 
       - uses: actions/checkout@v4
+        if: steps.auth.outputs.authorized == 'true'
 
       - uses: actions/setup-node@v4
+        if: steps.auth.outputs.authorized == 'true'
         with:
           node-version: "22"
           cache: "npm"
 
       - name: 自動讀取網頁、AI 提取欄位並寫入 events.json
         id: add_event
+        if: steps.auth.outputs.authorized == 'true'
         env:
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
@@ -74,7 +75,7 @@ jobs:
         continue-on-error: true
 
       - name: 若驗證或解析失敗則於 Issue 留言提示原因
-        if: steps.add_event.outputs.exit_code != '0'
+        if: steps.auth.outputs.authorized == 'true' && steps.add_event.outputs.exit_code != '0'
         uses: actions/github-script@v7
         env:
           ERROR_MSG: ${{ steps.add_event.outputs.result }}
@@ -83,10 +84,18 @@ jobs:
             const msg = process.env.ERROR_MSG || "";
             const maxTicks = Math.max(3, ...[...msg.matchAll(/`+/g)].map((m) => m[0].length + 1));
             const fence = "`".repeat(maxTicks);
-            const isCollaborator = ["OWNER", "MEMBER", "COLLABORATOR"].includes(
-              context.payload.issue.author_association,
-            );
-            const retryHint = isCollaborator
+            let authorCanWrite = false;
+            try {
+              const { data: authorPerm } = await github.rest.repos.getCollaboratorPermissionLevel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                username: context.payload.issue.user.login,
+              });
+              authorCanWrite = ["admin", "maintain", "write"].includes(authorPerm.permission);
+            } catch {
+              authorCanWrite = false;
+            }
+            const retryHint = authorCanWrite
               ? "請直接點選此 Issue 右上角的「Edit」補充或修正內容，儲存後系統會自動重新執行。"
               : "請點選此 Issue 右上角的「Edit」補充或修正內容後，通知維護者移除並重新加上 `add-event` 標籤以重新觸發執行。";
             await github.rest.issues.createComment({
@@ -98,6 +107,7 @@ jobs:
             core.setFailed(msg);
 
       - name: 執行資料一致性檢查 (check-data.mjs)
+        if: steps.auth.outputs.authorized == 'true'
         env:
           ADDED_YEAR: ${{ steps.add_event.outputs.added_year }}
         run: |
@@ -108,6 +118,7 @@ jobs:
           fi
 
       - name: 建立分支並發起 Pull Request
+        if: steps.auth.outputs.authorized == 'true'
         uses: actions/github-script@v7
         env:
           SUCCESS_MSG: ${{ steps.add_event.outputs.result }}
@@ -150,6 +161,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: existingPrs[0].number,
+                title: prTitle,
                 body: `${process.env.SUCCESS_MSG}\n\nCloses #${issueNumber}`,
               });
               prUrl = existingPrs[0].html_url;
