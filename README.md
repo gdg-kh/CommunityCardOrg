@@ -146,6 +146,7 @@ npm run generate-og
 | 6 | `2026/data.json` | `communities`、`sponsors`、`rewards` | 你的城市的社群資料 |
 | 7 | `2026/events.json` | 全部 | 你的城市的活動資料 |
 | 8 | `assets/stamps/` | PNG 檔 | 你的城市的印章設計 |
+| 9 | `assets/analytics.js`（選填） | `DEFAULT_GA_ID`、`DEFAULT_ALLOWED_HOSTS` | 已內建網域白名單保護（非 `community-card.org` 不會送出資料）；Fork 後可修改為自己的 GA4 評估 ID 與網域白名單，或移除各頁面 `<script src="../assets/analytics.js">` 引用 |
 
 > 💡 **MCP 伺服器不需要 fork**：fork 後只需在 AI 工具的 MCP 設定中把 `COMMUNITY_CARD_DATA_URL` 環境變數指向你的 GitHub Pages 網址（例 `https://taipei-card.org/2026`），就能直接使用發佈在 npm 上的 [`community-card-mcp`](https://www.npmjs.com/package/community-card-mcp) 套件，不必修改 `mcp/` 內任何檔案或重新發佈 npm。詳見下方「2. 透過 MCP 伺服器」章節。
 

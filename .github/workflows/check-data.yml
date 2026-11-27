@@ -3,7 +3,9 @@ name: Check community data
 on:
   pull_request:
     paths:
-      - "2026/calendar.html"
+      - "index.html"
+      - "2025/*.html"
+      - "2026/*.html"
       - "2026/data.json"
       - "2026/events.json"
       - "2027/data.json"
@@ -23,7 +25,9 @@ on:
   push:
     branches: [main]
     paths:
-      - "2026/calendar.html"
+      - "index.html"
+      - "2025/*.html"
+      - "2026/*.html"
       - "2026/data.json"
       - "2026/events.json"
       - "2027/data.json"

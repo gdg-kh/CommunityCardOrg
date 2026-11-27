@@ -41,7 +41,8 @@
        <meta charset="utf-8">
        <title>高雄社群名牌卡 - 網頁搬家導向中</title>
        <script>
-           window.location.replace("../v2/index.html");
+           try { sessionStorage.setItem("ccard_redirect_from", "/2026/index.html"); } catch (e) {}
+           window.location.replace("../v2/index.html" + window.location.search + window.location.hash);
        </script>
        <meta http-equiv="refresh" content="0;url=../v2/index.html">
    </head>
@@ -60,7 +61,8 @@
        <meta charset="utf-8">
        <title>高雄社群名牌卡 - 網頁搬家導向中</title>
        <script>
-           window.location.replace("../v2/calendar.html");
+           try { sessionStorage.setItem("ccard_redirect_from", "/2026/calendar.html"); } catch (e) {}
+           window.location.replace("../v2/calendar.html" + window.location.search + window.location.hash);
        </script>
        <meta http-equiv="refresh" content="0;url=../v2/calendar.html">
    </head>
@@ -80,7 +82,8 @@
 2. 將所有指向 `2026/index.html` 的代碼，全部替換為 `v2/index.html`。
    * 修改關鍵跳轉（約第 18 行）：
      ```javascript
-     window.location.replace("v2/index.html");
+     try { sessionStorage.setItem("ccard_redirect_from", "/"); } catch (e) {}
+     window.location.replace("v2/index.html" + window.location.search + window.location.hash);
      ```
    * 修改 Meta Refresh（約第 21 行）：
      ```html
