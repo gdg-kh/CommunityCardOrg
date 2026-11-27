@@ -9,16 +9,33 @@ import {
   addTrackingParams,
   createStats,
   processTrackingFiles,
+  resolveCampaign,
   walk,
 } from "../scripts/add-tracking.mjs";
 
-test("TARGETS includes 2026 and 2027 events.json and data.json", () => {
+test("TARGETS includes 2026 and 2027 events.json, data.json, and 2027/stamps.json", () => {
   assert.deepEqual(TARGETS, [
     "2026/events.json",
     "2026/data.json",
     "2027/events.json",
     "2027/data.json",
+    "2027/stamps.json",
   ]);
+});
+
+test("resolveCampaign maps files and sections to specific utm_campaign values", () => {
+  assert.equal(resolveCampaign("2026/events.json[0].link"), "calendar_2026");
+  assert.equal(resolveCampaign("2027/events.json[0].events[0].link"), "calendar_2027");
+  assert.equal(resolveCampaign("2026/data.json.communities[0].link"), "communities_2026");
+  assert.equal(resolveCampaign("2026/data.json.sponsors[0].link"), "sponsors_2026");
+  assert.equal(resolveCampaign("2026/data.json.rewards[0].link"), "rewards_2026");
+  assert.equal(resolveCampaign("2027/data.json.communities[0].link"), "communities_2027");
+  assert.equal(resolveCampaign("2027/data.json.sponsors[0].link"), "sponsors_2027");
+  assert.equal(resolveCampaign("2027/data.json.rewards[0].link"), "rewards_2027");
+  assert.equal(resolveCampaign("2027/stamps.json.partners[0].link"), "partners_2027");
+  assert.equal(resolveCampaign("/tmp/ccard-tracking-xyz/2027/events.json[0].events[0].link"), "calendar_2027");
+  assert.equal(resolveCampaign("C:\\repo\\2027\\data.json.communities[0].link"), "communities_2027");
+  assert.equal(resolveCampaign("unknown.link"), UTM.utm_campaign);
 });
 
 test("walk transforms 2027 grouped events.json and preserves existing query/hash/utm_source", () => {
@@ -68,7 +85,7 @@ test("walk transforms 2027 grouped events.json and preserves existing query/hash
   assert.equal(u.searchParams.get("ref"), "home");
   assert.equal(u.searchParams.get("utm_source"), UTM.utm_source);
   assert.equal(u.searchParams.get("utm_medium"), UTM.utm_medium);
-  assert.equal(u.searchParams.get("utm_campaign"), UTM.utm_campaign);
+  assert.equal(u.searchParams.get("utm_campaign"), "calendar_2027");
 
   // Idempotent on second pass
   const stats2 = createStats();
@@ -105,7 +122,9 @@ test("processTrackingFiles updates temp 2026 & 2027 JSON files cleanly", async (
     const updatedEv = JSON.parse(await readFile(evPath, "utf8"));
     const updatedData = JSON.parse(await readFile(dataPath, "utf8"));
     assert.match(updatedEv[0].events[0].link, /utm_source=community-card\.org/);
+    assert.match(updatedEv[0].events[0].link, /utm_campaign=calendar_2027/);
     assert.match(updatedData.communities[0].link, /utm_source=community-card\.org/);
+    assert.match(updatedData.communities[0].link, /utm_campaign=communities_2027/);
   } finally {
     await rm(tmpDir, { recursive: true, force: true });
   }

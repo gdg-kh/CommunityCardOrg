@@ -35,6 +35,32 @@ function isSafeHttpUrl(urlStr) {
   }
 }
 
+const TRACKING_NOISE_PARAMS = new Set([
+  "fbclid",
+  "gclid",
+  "dclid",
+  "igshid",
+  "mc_cid",
+  "mc_eid",
+  "si",
+  "openExternalBrowser",
+]);
+
+function checkLinkTrackingHygiene(urlStr, where, warn) {
+  if (!isSafeHttpUrl(urlStr)) return;
+  try {
+    const u = new URL(urlStr);
+    const noiseKeys = [...u.searchParams.keys()].filter((k) => TRACKING_NOISE_PARAMS.has(k));
+    if (noiseKeys.length > 0) {
+      warn(where.file, `${where.label} link 含有追蹤雜訊參數（${noiseKeys.join(", ")}），建議移除`);
+    }
+    const utmSource = u.searchParams.get("utm_source");
+    if (utmSource && utmSource !== "community-card.org") {
+      warn(where.file, `${where.label} link 已含外部 utm_source=${utmSource}，部署時將保留原參數而不注入 community-card.org`);
+    }
+  } catch {}
+}
+
 async function exists(file) {
   try {
     await access(file);
@@ -241,6 +267,8 @@ export async function validateYearData(dir = "2027", { eventsStructureOnly = fal
           const effectiveLink = ev.link ?? item.link;
           if (!effectiveLink || (effectiveLink !== "#" && !isSafeHttpUrl(effectiveLink))) {
             error(eventsFile, `${where} link 必須是有效的 http:// 或 https:// 網址（或 #）：「${effectiveLink ?? ""}」`);
+          } else if (effectiveLink !== "#") {
+            checkLinkTrackingHygiene(effectiveLink, { file: eventsFile, label: where }, warn);
           }
           if (ev.mode && !EVENT_MODES.has(ev.mode)) {
             error(eventsFile, `${where} mode 只能是 onsite、online 或 hybrid：「${ev.mode}」`);
@@ -263,8 +291,11 @@ export async function validateYearData(dir = "2027", { eventsStructureOnly = fal
             if (trimmedLink !== item.link) {
               warn(eventsFile, `[${i}] link 含有多餘前後空白：「${item.link}」`);
             }
+            checkLinkTrackingHygiene(trimmedLink, { file: eventsFile, label: `[${i}]` }, warn);
           } else if (!isSafeHttpUrl(item.link)) {
             error(eventsFile, `[${i}] link 必須是有效的 http:// 或 https:// 網址（或 #）：「${item.link}」`);
+          } else {
+            checkLinkTrackingHygiene(item.link, { file: eventsFile, label: `[${i}]` }, warn);
           }
         }
         if (item.mode && !EVENT_MODES.has(item.mode)) {

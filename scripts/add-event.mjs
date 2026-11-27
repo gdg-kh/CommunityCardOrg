@@ -11,8 +11,35 @@ const MAX_FETCH_BYTES = 1024 * 1024;
 const GEMINI_TIMEOUT_MS = 30_000;
 const HTML_TAG_RE = /<(?:\/?[a-z]|!|\?)/i;
 const VALID_BR_RE = /<br\s*\/?>/gi;
+const TRACKING_NOISE_PARAMS = new Set([
+  "fbclid",
+  "gclid",
+  "dclid",
+  "igshid",
+  "mc_cid",
+  "mc_eid",
+  "si",
+  "openExternalBrowser",
+]);
 const ISSUE_FORM_HEADING_RE =
   /^###\s+(活動網址或內容 \(Content\)|目標年度 \(Year\)|主辦社群 \(Community\)|活動形式 \(Mode\)|活動日期 \(Date\)|活動標題 \(Title\)|活動簡介 \(Description\)|報名連結 \(Link\))\s*$/gm;
+
+export function stripTrackingNoiseParams(urlStr) {
+  const s = String(urlStr || "").trim();
+  if (!s || s === "#") return s;
+  try {
+    const u = new URL(s);
+    if (u.protocol !== "http:" && u.protocol !== "https:") return s;
+    for (const key of [...u.searchParams.keys()]) {
+      if (TRACKING_NOISE_PARAMS.has(key)) {
+        u.searchParams.delete(key);
+      }
+    }
+    return u.toString();
+  } catch {
+    return s;
+  }
+}
 
 function isValidCalendarDate(dateStr) {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr || "");
@@ -542,10 +569,11 @@ export function validateEventInput({ year, community, mode = "onsite", date, tit
   }
   const truncatedDesc = truncateDescriptionWithLineBreaks(description, 50);
 
-  const cleanLink = (link || "#").trim();
-  if (cleanLink !== "#" && !isSafeHttpUrl(cleanLink)) {
-    throw new Error(`報名連結必須是有效的 http:// 或 https:// 網址且不可包含引號或空白（或填 #）：「${cleanLink}」`);
+  const rawLink = (link || "#").trim();
+  if (rawLink !== "#" && !isSafeHttpUrl(rawLink)) {
+    throw new Error(`報名連結必須是有效的 http:// 或 https:// 網址且不可包含引號或空白（或填 #）：「${rawLink}」`);
   }
+  const cleanLink = rawLink === "#" ? "#" : stripTrackingNoiseParams(rawLink);
   return {
     year: resolvedYear,
     community: matchedCommunity.name,

@@ -7,6 +7,7 @@ export const TARGETS = [
   "2026/data.json",
   "2027/events.json",
   "2027/data.json",
+  "2027/stamps.json",
 ];
 
 export const UTM = {
@@ -16,6 +17,20 @@ export const UTM = {
 };
 
 const UTM_KEYS = new Set(Object.keys(UTM));
+
+export function resolveCampaign(context = "") {
+  const c = String(context || "").replace(/\\/g, "/");
+  if (/(?:^|\/)2026\/events\.json\b/.test(c)) return "calendar_2026";
+  if (/(?:^|\/)2027\/events\.json\b/.test(c)) return "calendar_2027";
+  if (/(?:^|\/)2026\/data\.json\.communities\b/.test(c)) return "communities_2026";
+  if (/(?:^|\/)2026\/data\.json\.sponsors\b/.test(c)) return "sponsors_2026";
+  if (/(?:^|\/)2026\/data\.json\.rewards\b/.test(c)) return "rewards_2026";
+  if (/(?:^|\/)2027\/data\.json\.communities\b/.test(c)) return "communities_2027";
+  if (/(?:^|\/)2027\/data\.json\.sponsors\b/.test(c)) return "sponsors_2027";
+  if (/(?:^|\/)2027\/data\.json\.rewards\b/.test(c)) return "rewards_2027";
+  if (/(?:^|\/)2027\/stamps\.json\.partners\b/.test(c)) return "partners_2027";
+  return UTM.utm_campaign;
+}
 
 export function verify(original, transformed, context, errors = []) {
   const a = new URL(original);
@@ -70,6 +85,7 @@ export function addTrackingParams(link, context, stats = createStats()) {
     return link;
   }
   for (const [k, v] of Object.entries(UTM)) url.searchParams.set(k, v);
+  url.searchParams.set("utm_campaign", resolveCampaign(context));
   const result = url.toString();
   verify(link, result, context, stats.errors);
   stats.added++;
