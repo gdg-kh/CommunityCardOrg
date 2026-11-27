@@ -14,20 +14,12 @@
     <title>高雄社群名牌卡 - 導向中</title>
     <script>
         (function() {
+            try { sessionStorage.setItem("ccard_redirect_from", "/"); } catch (e) {}
             // 目前專案架構已包含 2026 資料夾
-            window.location.replace("2026/index.html");
+            window.location.replace("2026/index.html" + window.location.search + window.location.hash);
         })();
     </script>
     <meta content="0;url=2026/index.html" http-equiv="refresh">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-KCNJBYW13R');
-    </script>
 </head>
 <body>
     <p>正在為您導向至 2026 年版高雄社群名牌卡...</p>
