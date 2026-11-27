@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
+    <script>
+      // 簽到碼放在網址 # 後面；先取出再清掉，避免進入瀏覽紀錄與分析工具
+      window.__checkinHash = location.hash;
+      if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+    </script>
     <link href="../bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../index.css" />
     <link rel="stylesheet" href="passport/passport.css" />
@@ -15,7 +20,8 @@
     <meta name="apple-mobile-web-app-title" content="社群護照" />
     <link rel="apple-touch-icon" href="../assets/passport/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/passport/icon-192.png" />
-    <title>活動簽到 - 2027 高雄社群名牌卡</title>
+    <title>2027 高雄社群名牌卡 - 活動簽到</title>
+    <script src="../assets/analytics.js" data-year="2027" data-page-type="checkin"></script>
   </head>
 
   <body>
@@ -58,7 +64,7 @@
 
       const result = document.getElementById("result");
       const notices = document.getElementById("notices");
-      const token = decodeURIComponent(location.hash.slice(1));
+      const token = decodeURIComponent((window.__checkinHash || location.hash).slice(1));
 
       function notice(html, type = "") {
         notices.insertAdjacentHTML("beforeend", `<div class="pp-notice ${type}">${html}</div>`);
@@ -83,10 +89,16 @@
 
       async function run() {
         if (!token) {
+          globalThis.trackEvent?.("checkin_result", {
+            status: "error",
+            error_code: "no_token",
+            in_app_browser: inAppBrowserName() || "none",
+            is_standalone: isStandalone(),
+          });
           result.innerHTML = `
             <h2>沒有簽到碼</h2>
             <p class="pp-muted">請用手機相機掃描活動現場的簽到 QR code。</p>
-            <a class="pp-btn" href="passport.html">查看我的護照</a>`;
+            <a class="pp-btn" href="passport.html" data-ga-event="checkin_next_step" data-ga-target="overview_passport">查看我的護照</a>`;
           return;
         }
 
@@ -103,11 +115,17 @@
           verified = await verifyToken(token, registry, { checkTime: true });
         } catch (err) {
           if (!(err instanceof CheckinError)) throw err;
+          globalThis.trackEvent?.("checkin_result", {
+            status: "error",
+            error_code: err.code,
+            in_app_browser: inApp || "none",
+            is_standalone: isStandalone(),
+          });
           result.innerHTML = `
             <h2>簽到失敗</h2>
             <p>${escapeHtml(err.message)}</p>
             <p class="pp-muted">${ERROR_HINTS[err.code] || ""}</p>
-            <a class="pp-btn secondary" href="passport.html">查看我的護照</a>`;
+            <a class="pp-btn secondary" href="passport.html" data-ga-event="checkin_next_step" data-ga-target="overview_passport">查看我的護照</a>`;
           return;
         }
 
@@ -129,6 +147,18 @@
         const stamps = (await loadVerifiedStamps(registry)).filter((s) => s.valid);
         const total = stamps.length;
         const ofCommunity = stamps.filter((s) => s.payload.c === community.id).length;
+        globalThis.trackEvent?.("checkin_result", {
+          status,
+          community_id: community.id,
+          event_date: payload.d,
+          mode,
+          is_makeup: payload.r === 1,
+          storage_saved: saved,
+          total_stamps: total,
+          community_stamps: ofCommunity,
+          in_app_browser: inApp || "none",
+          is_standalone: isStandalone(),
+        });
         const src = await renderStamp(stampSpec(community, mode), 360);
         // 只提示這個章有計算到的獎勵（例如 PyLadies 的獎勵只算其他社群的章）
         const rewardHtml = registry.communities
@@ -136,8 +166,14 @@
           .map((c) => {
             const have = rewardStamps(c, stamps).length;
             const link = `passport.html?c=${encodeURIComponent(c.id)}`;
+            if (status === "added" && have === c.reward.required) {
+              globalThis.trackEvent?.("reward_unlocked", {
+                community_id: c.id,
+                trigger_community_id: community.id,
+              });
+            }
             return have >= c.reward.required
-              ? `<div class="pp-notice success">🎁 已達成 ${escapeHtml(c.name)} 的集章獎勵！到<a href="${c.reward.scope === "others" ? "passport.html" : link}">護照頁</a>可以開啟兌換畫面。</div>`
+              ? `<div class="pp-notice success">🎁 已達成 ${escapeHtml(c.name)} 的集章獎勵！到<a href="${c.reward.scope === "others" ? "passport.html" : link}" data-ga-event="checkin_next_step" data-ga-target="reward_passport">護照頁</a>可以開啟兌換畫面。</div>`
               : `<div class="pp-notice info">🎁 再 ${c.reward.required - have} 個章就能兌換 ${escapeHtml(c.name)} 的獎勵</div>`;
           })
           .join("");
@@ -156,8 +192,8 @@
           </div>
           ${rewardHtml}
           <div class="pp-actions">
-            <a class="pp-btn" href="passport.html?c=${encodeURIComponent(community.id)}">${escapeHtml(community.short || community.name)} 護照</a>
-            <a class="pp-btn green" href="passport.html">我的綜合護照</a>
+            <a class="pp-btn" href="passport.html?c=${encodeURIComponent(community.id)}" data-ga-event="checkin_next_step" data-ga-target="community_passport">${escapeHtml(community.short || community.name)} 護照</a>
+            <a class="pp-btn green" href="passport.html" data-ga-event="checkin_next_step" data-ga-target="overview_passport">我的綜合護照</a>
           </div>`;
 
         if (!isStandalone() && !inApp) {
@@ -180,6 +216,7 @@
       addEventListener("hashchange", () => location.reload());
       run().catch((err) => {
         console.error(err);
+        globalThis.trackError?.("checkin_run", "unexpected_error");
         result.innerHTML = `<h2>發生錯誤</h2><p class="pp-muted">${escapeHtml(err.message)}</p>`;
       });
     </script>

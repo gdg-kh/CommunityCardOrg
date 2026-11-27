@@ -38,20 +38,7 @@
       property="og:image"
     />
     <title>2027 高雄社群名牌卡 - 社群護照</title>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-KCNJBYW13R");
-    </script>
+    <script src="../assets/analytics.js" data-year="2027" data-page-type="passport" data-keep-params="c" data-auto-page-view="false"></script>
   </head>
 
   <body>
@@ -65,6 +52,9 @@
       <div class="card">
         <div id="notices"></div>
         <div id="app"><p class="pp-muted text-center">載入中…</p></div>
+        <p style="font-size: 0.75rem; color: #888; margin-top: 16px; margin-bottom: 0;">
+          本網站僅使用關閉廣告個人化的匿名流量統計（Google Analytics）改善社群體驗，不蒐集個人識別資料。
+        </p>
       </div>
     </div>
 
@@ -103,6 +93,7 @@
 
       let registry;
       let stamps = [];
+      let initialPageViewSent = false;
 
       function notice(html, type = "") {
         notices.insertAdjacentHTML("beforeend", `<div class="pp-notice ${type}">${html}</div>`);
@@ -126,6 +117,12 @@
 
       async function openRedeem(community) {
         const prog = rewardProgress(community);
+        globalThis.trackEvent?.("reward_redeem_open", {
+          community_id: community.id,
+          have: prog.have,
+          required: prog.required,
+          done: prog.done,
+        });
         const thumbs = await Promise.all(
           prog.list.map(async (s) => `<img src="${await stampImage(s.community, s.payload.m, 120)}" alt="" />`),
         );
@@ -167,21 +164,38 @@
         if (navigator.share) {
           try {
             await navigator.share({ title: "我的社群護照備份", url: text });
+            globalThis.trackEvent?.("passport_backup", {
+              stamp_count: stamps.length,
+              method: "web_share",
+            });
             return;
           } catch {}
         }
         try {
           await navigator.clipboard.writeText(text);
           box.insertAdjacentHTML("beforeend", `<p class="pp-muted">✅ 已複製到剪貼簿</p>`);
-        } catch {}
+          globalThis.trackEvent?.("passport_backup", {
+            stamp_count: stamps.length,
+            method: "clipboard",
+          });
+        } catch {
+          globalThis.trackEvent?.("passport_backup", {
+            stamp_count: stamps.length,
+            method: "manual",
+          });
+        }
       }
 
-      async function showImport(code) {
+      async function showImport(code, trigger = "hash_link") {
         document.getElementById("import-box")?.remove();
         let records;
         try {
           records = await decodeBackup(code);
         } catch {
+          globalThis.trackEvent?.("passport_import", {
+            trigger,
+            status: "decode_error",
+          });
           notice("備份連結無法解析，請確認連結是否完整。", "error");
           return;
         }
@@ -211,6 +225,14 @@
           yes.onclick = async () => {
             const { added, upgraded, saved } = mergeStampRecords(fresh);
             document.getElementById("import-box")?.remove();
+            globalThis.trackEvent?.("passport_import", {
+              trigger,
+              status: saved ? "success" : "storage_error",
+              valid_count: valid.length,
+              invalid_count: invalid,
+              added_count: added,
+              upgraded_count: upgraded,
+            });
             const msg = `✅ 已匯入 ${added} 個印章${upgraded ? `，${upgraded} 個線上章改為實體章` : ""}`;
             notice(saved ? msg : "無法儲存，請確認不是無痕模式。", saved ? "success" : "error");
             await reload();
@@ -236,7 +258,7 @@
             .map(async (c) => {
               if (isInactive(c)) {
                 return `
-                  <a class="pp-community inactive" href="?c=${encodeURIComponent(c.id)}" title="尚未參與數位集章，仍歡迎參加活動">
+                  <a class="pp-community inactive" href="?c=${encodeURIComponent(c.id)}" title="尚未參與數位集章，仍歡迎參加活動" data-ga-event="passport_community_click" data-ga-community-id="${escapeHtml(c.id)}" data-ga-state="inactive" data-ga-stamp-count="0">
                     <img src="${await baseImage(c)}" alt="" />
                     <div class="name">${escapeHtml(c.short || c.name)}</div>
                     <div class="count">尚未開放集章</div>
@@ -249,7 +271,7 @@
                 ? `<div class="pp-progress" title="獎勵進度 ${prog.have} / ${prog.required}"><div style="width:${Math.min(100, (prog.have / prog.required) * 100)}%"></div></div>`
                 : "";
               return `
-                <a class="pp-community ${count ? "got" : "empty"}" href="?c=${encodeURIComponent(c.id)}">
+                <a class="pp-community ${count ? "got" : "empty"}" href="?c=${encodeURIComponent(c.id)}" data-ga-event="passport_community_click" data-ga-community-id="${escapeHtml(c.id)}" data-ga-state="active" data-ga-stamp-count="${count}">
                   ${count ? `<span class="check" aria-label="已收集">✓</span>` : ""}
                   <img src="${await baseImage(c)}" alt="" />
                   <div class="name">${escapeHtml(c.short || c.name)}</div>
@@ -346,10 +368,14 @@
               }
             }
             if (!code || (!code.startsWith("z") && !code.startsWith("j"))) {
+              globalThis.trackEvent?.("passport_import", {
+                trigger: "manual_input",
+                status: "format_error",
+              });
               notice("備份格式不正確，請輸入完整的備份連結或代碼。", "error");
               return;
             }
-            await showImport(code);
+            await showImport(code, "manual_input");
             importInput.value = "";
           };
           importBtn.onclick = doManualImport;
@@ -418,7 +444,7 @@
             </div>`
           : "";
         const keyless = !canCheckin(community)
-          ? `<div class="pp-notice">這個社群尚未參與數位集章，目前無法掃碼簽到，但仍然非常歡迎參加他們的活動！${community.link ? ` <a href="${escapeHtml(community.link)}" target="_blank" rel="noopener">看看社群動態 →</a>` : ""}</div>`
+          ? `<div class="pp-notice">這個社群尚未參與數位集章，目前無法掃碼簽到，但仍然非常歡迎參加他們的活動！${community.link ? ` <a href="${escapeHtml(community.link)}" target="_blank" rel="noopener" data-ga-event="outbound_partner_click" data-ga-category="community" data-ga-partner-name="${escapeHtml(community.name)}" data-ga-community-id="${escapeHtml(community.id)}">看看社群動態 →</a>` : ""}</div>`
           : "";
 
         app.innerHTML = `
@@ -427,7 +453,7 @@
             <img src="${await baseImage(community, 200)}" alt="" />
             <div>
               <h1>${escapeHtml(community.name)}</h1>
-              <div class="pp-muted">${community.link ? `<a href="${escapeHtml(community.link)}" target="_blank" rel="noopener">社群連結</a>` : ""}</div>
+              <div class="pp-muted">${community.link ? `<a href="${escapeHtml(community.link)}" target="_blank" rel="noopener" data-ga-event="outbound_partner_click" data-ga-category="community" data-ga-partner-name="${escapeHtml(community.name)}" data-ga-community-id="${escapeHtml(community.id)}">社群連結</a>` : ""}</div>
             </div>
           </div>
           <div class="pp-stats">
@@ -451,12 +477,35 @@
           const community = registry.byId.get(communityId);
           if (!community) {
             app.innerHTML = `<p>找不到這個社群。</p><a class="pp-btn" href="passport.html">回到我的護照</a>`;
+            if (!initialPageViewSent) {
+              initialPageViewSent = true;
+              globalThis.trackPageView?.({
+                passport_view: "community_not_found",
+                community_id: communityId,
+              });
+            }
             return;
           }
-          document.title = `${community.name} 護照 - 高雄社群名牌卡`;
+          document.title = `2027 高雄社群名牌卡 - ${community.name} 護照`;
           await renderCommunity(community);
+          if (!initialPageViewSent) {
+            initialPageViewSent = true;
+            globalThis.trackPageView?.({
+              page_title: document.title,
+              passport_view: "community",
+              community_id: community.id,
+              stamp_count: stamps.filter((s) => s.payload.c === community.id).length,
+            });
+          }
         } else {
           await renderOverview();
+          if (!initialPageViewSent) {
+            initialPageViewSent = true;
+            globalThis.trackPageView?.({
+              passport_view: "overview",
+              stamp_count: stamps.length,
+            });
+          }
         }
       }
 
@@ -478,6 +527,7 @@
       window.addEventListener("appinstalled", () => {
         document.getElementById("pwa-install-banner")?.remove();
         document.getElementById("pwa-generic-hint")?.remove();
+        globalThis.trackEvent?.("pwa_installed");
         notice("🎉 感謝安裝！社群護照已成功加入手機主畫面，印章資料已獲得持久保護。", "success");
       });
 
@@ -503,19 +553,27 @@
           </div>
         `;
         notices.prepend(banner);
+        globalThis.trackEvent?.("pwa_install_prompt");
 
         const dismiss = () => {
           banner.remove();
           sessionStorage.setItem("pwa_install_dismissed", "true");
         };
 
-        document.getElementById("pwa-dismiss-btn")?.addEventListener("click", dismiss);
-        document.getElementById("pwa-later-btn")?.addEventListener("click", dismiss);
+        document.getElementById("pwa-dismiss-btn")?.addEventListener("click", () => {
+          globalThis.trackEvent?.("pwa_install_choice", { outcome: "banner_dismissed" });
+          dismiss();
+        });
+        document.getElementById("pwa-later-btn")?.addEventListener("click", () => {
+          globalThis.trackEvent?.("pwa_install_choice", { outcome: "banner_dismissed" });
+          dismiss();
+        });
 
         document.getElementById("pwa-install-btn")?.addEventListener("click", async () => {
           if (!deferredInstallPrompt) return;
           deferredInstallPrompt.prompt();
           const { outcome } = await deferredInstallPrompt.userChoice;
+          globalThis.trackEvent?.("pwa_install_choice", { outcome });
           if (outcome === "accepted") {
             banner.remove();
           } else {
@@ -531,6 +589,7 @@
 
         const inApp = inAppBrowserName();
         if (inApp) {
+          globalThis.trackEvent?.("in_app_browser_warning", { in_app_browser: inApp });
           notice(`⚠️ 你正在 <b>${inApp}</b> 內建瀏覽器中開啟。內建瀏覽器在關閉後容易遺失印章資料，請點擊右上角「⋯」選擇<b>「在預設瀏覽器（Safari / Chrome）中開啟」</b>！`, "error");
         } else if (!isStandalone()) {
           if (isIOS()) {
@@ -555,6 +614,7 @@
       registerServiceWorker();
       main().catch((err) => {
         console.error(err);
+        globalThis.trackError?.("passport_main", "init_failed");
         app.innerHTML = `<p class="pp-muted">載入失敗：${escapeHtml(err.message)}</p>`;
       });
     </script>
