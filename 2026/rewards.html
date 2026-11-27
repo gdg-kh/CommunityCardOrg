@@ -29,20 +29,7 @@
     />
     <meta content="高雄社群名牌卡" property="og:site_name" />
     <title>2026 高雄社群名牌卡 - 集章獎勵</title>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-KCNJBYW13R");
-    </script>
+    <script src="../assets/analytics.js" data-year="2026" data-page-type="rewards"></script>
   </head>
   <body>
     <div class="cardWrapper">
@@ -98,22 +85,29 @@
                   const li = document.createElement("div");
                   li.className = "communityItem";
                   li.innerHTML = `
-                                    <a href="${item.link}" target="_blank">
+                                    <a href="${item.link}" target="_blank" rel="noopener" data-ga-event="outbound_partner_click" data-ga-category="reward" data-ga-click-area="logo">
                                         <img src="${item.logo}" alt="${item.name}">
                                     </a>
-                                    <a class="communityItemTitle" href="${item.link}" target="_blank">${item.name}</a>
+                                    <a class="communityItemTitle" href="${item.link}" target="_blank" rel="noopener" data-ga-event="outbound_partner_click" data-ga-category="reward" data-ga-click-area="title">${item.name}</a>
                                     <div class="description">${item.description}</div>
                                 `;
+                  li.querySelectorAll("[data-ga-event]").forEach((a) => {
+                    a.dataset.gaPartnerName = item.name || "";
+                  });
                   list.appendChild(li);
                 });
               })
               .catch((error) => {
                 console.error("Error loading data:", error);
+                globalThis.trackError?.("rewards_fetch", "data_load_failed");
                 document.getElementById("rewards-list").innerHTML =
                   '<p style="text-align: center; color: red;">無法載入資料</p>';
               });
           });
         </script>
+        <p style="font-size: 0.75rem; color: #888; margin-top: 8px; margin-bottom: 0;">
+          本網站僅使用關閉廣告個人化的匿名流量統計（Google Analytics）改善社群體驗，不蒐集個人識別資料。
+        </p>
       </div>
     </div>
   </body>
