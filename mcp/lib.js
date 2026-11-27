@@ -16,6 +16,59 @@ export function canonicalizeCommunityName(name) {
 
 const HTML_TAG_RE = /<(?:\/?[a-z]|!|\?)/i;
 const VALID_BR_RE = /<br\s*\/?>/gi;
+const TRACKING_NOISE_PARAMS = new Set([
+    "fbclid",
+    "gclid",
+    "dclid",
+    "igshid",
+    "mc_cid",
+    "mc_eid",
+    "si",
+    "openExternalBrowser",
+]);
+
+export function stripTrackingNoiseParams(urlStr) {
+    const s = String(urlStr ?? "").trim();
+    if (!s || s === "#") return s;
+    try {
+        const u = new URL(s);
+        if (u.protocol !== "http:" && u.protocol !== "https:") return s;
+        for (const key of [...u.searchParams.keys()]) {
+            if (TRACKING_NOISE_PARAMS.has(key)) {
+                u.searchParams.delete(key);
+            }
+        }
+        return u.toString();
+    } catch {
+        return s;
+    }
+}
+
+export function tagLinkForMcp(urlStr) {
+    const s = String(urlStr ?? "").trim();
+    if (!s || s === "#") return urlStr;
+    try {
+        const u = new URL(s);
+        if (u.searchParams.get("utm_source") === "community-card.org") {
+            u.searchParams.set("utm_medium", "mcp");
+            return u.toString();
+        }
+        return urlStr;
+    } catch {
+        return urlStr;
+    }
+}
+
+export function tagCollectionForMcp(items) {
+    if (!Array.isArray(items)) return items;
+    return items.map((item) => {
+        if (!item || typeof item !== "object") return item;
+        if (typeof item.link === "string") {
+            return { ...item, link: tagLinkForMcp(item.link) };
+        }
+        return item;
+    });
+}
 
 export function resolveBaseUrl(
     year = DEFAULT_SUB_PATH,
@@ -229,12 +282,13 @@ export function validateProposeEventInput(
         throw new Error(`活動介紹不可超過 50 個字（目前 ${visibleLength} 字）。`);
     }
 
-    const cleanLink = String(link ?? "#").trim() || "#";
-    if (cleanLink !== "#" && !isSafeHttpUrl(cleanLink)) {
+    const rawLink = String(link ?? "#").trim() || "#";
+    if (rawLink !== "#" && !isSafeHttpUrl(rawLink)) {
         throw new Error(
             "連結 (link) 必須是有效的 http:// 或 https:// 網址且不可包含引號或空白，以防止潛在的安全風險。"
         );
     }
+    const cleanLink = rawLink === "#" ? "#" : stripTrackingNoiseParams(rawLink);
 
     const eventMode = VALID_EVENT_MODES.has(mode) ? mode : "onsite";
     const targetYear = resolveEventYear(date, defaultSubPath);

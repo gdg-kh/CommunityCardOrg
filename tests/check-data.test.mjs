@@ -108,3 +108,44 @@ test("validateYearData handles null entries in flat events format with unknown c
     await rm(tmpDir, { recursive: true, force: true });
   }
 });
+
+test("validateYearData warns on tracking noise params and external utm_source without failing", async () => {
+  const tmpDir = await mkdtemp(path.join(os.tmpdir(), "ccard-check-utm-"));
+  try {
+    await writeFile(
+      path.join(tmpDir, "data.json"),
+      JSON.stringify({
+        communities: [{ name: "GDG Kaohsiung", color: "#EA4335" }],
+        rewards: [],
+      }),
+    );
+    await writeFile(
+      path.join(tmpDir, "stamps.json"),
+      JSON.stringify({
+        communities: [{ id: "gdg-kaohsiung", name: "GDG Kaohsiung", publicKeys: [] }],
+        partners: [],
+      }),
+    );
+    await writeFile(
+      path.join(tmpDir, "events.json"),
+      JSON.stringify([
+        {
+          community: "GDG Kaohsiung",
+          color: "#EA4335",
+          events: [
+            { date: "2027-01-10", title: "FB Link", link: "https://example.com/a?fbclid=123" },
+            { date: "2027-01-11", title: "External UTM", link: "https://example.com/b?utm_source=other" },
+          ],
+        },
+      ]),
+    );
+
+    const res = await validateYearData(tmpDir);
+    assert.equal(res.errors.length, 0);
+    const warnMsgs = res.warnings.map((w) => w.msg);
+    assert.ok(warnMsgs.some((m) => m.includes("追蹤雜訊參數")));
+    assert.ok(warnMsgs.some((m) => m.includes("外部 utm_source=other")));
+  } finally {
+    await rm(tmpDir, { recursive: true, force: true });
+  }
+});

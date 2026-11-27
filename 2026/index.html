@@ -28,21 +28,8 @@
       property="og:image"
     />
     <meta content="高雄社群名牌卡" property="og:site_name" />
-    <title>高雄社群名牌卡</title>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-KCNJBYW13R");
-    </script>
+    <title>2026 高雄社群名牌卡 - 卡片與守則</title>
+    <script src="../assets/analytics.js" data-year="2026" data-page-type="card"></script>
   </head>
 
   <body>
@@ -156,6 +143,9 @@
                   .forEach((el) => el.classList.remove("selected"));
                 this.classList.add("selected");
                 currentStampSrc = src;
+                globalThis.trackEvent?.("card_stamp_select", {
+                  stamp_name: img.title,
+                });
               });
 
               toolbar.appendChild(img);
@@ -206,6 +196,11 @@
               );
 
               cardArea.appendChild(stamp);
+              const selectedOption = document.querySelector(".stamp-option.selected");
+              globalThis.trackEvent?.("card_stamp_place", {
+                stamp_name: selectedOption ? selectedOption.title : currentStampSrc.split("/").pop(),
+                stamp_count: cardArea.querySelectorAll(".stamp-mark").length,
+              });
             });
 
             // 3. 清除印章
@@ -213,7 +208,11 @@
               .getElementById("clear-stamps")
               .addEventListener("click", function () {
                 const marks = document.querySelectorAll(".stamp-mark");
+                const clearedCount = marks.length;
                 marks.forEach((mark) => mark.remove());
+                globalThis.trackEvent?.("card_clear", {
+                  cleared_count: clearedCount,
+                });
               });
 
             // 4. 下載圖片功能 (使用原生 Canvas 重繪，支援 Mix-Blend-Mode 與高解析度)
@@ -313,8 +312,15 @@
                   link.download = "My_Community_Card_2026.png";
                   link.href = canvas.toDataURL("image/png");
                   link.click();
+                  globalThis.trackEvent?.("card_download", {
+                    stamp_count: stampElements.length,
+                    unique_stamps: new Set(
+                      Array.from(stampElements).map((el) => el.src),
+                    ).size,
+                  });
                 } catch (err) {
                   console.error("圖片生成失敗:", err);
+                  globalThis.trackError?.("card_download", "canvas_export_failed");
                   alert(
                     "圖片生成失敗，請檢查 Console 錯誤。請確保您是在 Local Server 環境下執行。",
                   );
@@ -343,6 +349,9 @@
 
                 if (clickCount === 5) {
                   hiddenSection.style.display = "block";
+                  globalThis.trackEvent?.("easter_egg_unlock", {
+                    target: "print_download_section",
+                  });
                   alert("🎉 已開啟隱藏下載區！");
                   clickCount = 0;
                   hiddenSection.scrollIntoView({ behavior: "smooth" });
@@ -372,6 +381,9 @@
                 正面：<a
                   href="../assets/print_community_card_forward_2026.pdf"
                   target="_blank"
+                  rel="noopener"
+                  data-ga-event="print_pdf_download"
+                  data-ga-side="front"
                   >點我下載</a
                 >
               </li>
@@ -397,8 +409,11 @@
           想要在這裡顯示你的社群嗎？歡迎
           <a
             class="minorLink"
-            href="https://github.com/AndyAWD/CommunityCardOrg"
+            href="https://github.com/gdg-kh/CommunityCardOrg"
             target="_blank"
+            rel="noopener"
+            data-ga-event="cta_click"
+            data-ga-cta-type="github"
             >參與協作</a
           >
           或
@@ -406,9 +421,15 @@
             class="minorLink"
             href="https://forms.gle/38EgveLNs8WdKT5v7"
             target="_blank"
+            rel="noopener"
+            data-ga-event="cta_click"
+            data-ga-cta-type="form"
             >填寫表單</a
           >
           吧
+        </p>
+        <p style="font-size: 0.75rem; color: #888; margin-top: 8px; margin-bottom: 0;">
+          本網站僅使用關閉廣告個人化的匿名流量統計（Google Analytics）改善社群體驗，不蒐集個人識別資料。
         </p>
       </div>
     </div>

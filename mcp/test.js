@@ -16,6 +16,8 @@ import {
     queryEvents,
     resolveBaseUrl,
     resolveEventYear,
+    stripTrackingNoiseParams,
+    tagLinkForMcp,
     validateEventDateWindow,
     validateProposeEventInput,
 } from "./lib.js";
@@ -407,6 +409,20 @@ try {
     assert(
         newAliasGroupedTarget.length === 1 && newAliasGroupedTarget[0].community === "高雄 WordPress",
         "insertEventIntoEvents 新增分組時會將社群別名正規化為標準名稱。"
+    );
+
+    assert(
+        stripTrackingNoiseParams("https://example.com/ev?id=1&fbclid=abc&openExternalBrowser=1") === "https://example.com/ev?id=1",
+        "stripTrackingNoiseParams 移除 fbclid 與 openExternalBrowser 並保留業務參數。"
+    );
+    assert(
+        tagLinkForMcp("https://example.com/ev?utm_source=community-card.org&utm_medium=referral&utm_campaign=calendar_2027") ===
+            "https://example.com/ev?utm_source=community-card.org&utm_medium=mcp&utm_campaign=calendar_2027",
+        "tagLinkForMcp 將 community-card.org 來源連結的 utm_medium 改寫為 mcp。"
+    );
+    assert(
+        tagLinkForMcp("https://example.com/ev?utm_source=kalug.tw") === "https://example.com/ev?utm_source=kalug.tw",
+        "tagLinkForMcp 保留非 community-card.org 的既有 utm_source。"
     );
 } catch (err) {
     assert(false, `正規化測試失敗: ${err.message}`);

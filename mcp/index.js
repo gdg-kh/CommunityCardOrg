@@ -13,6 +13,7 @@ import {
     normalizeEvents,
     queryEvents,
     resolveBaseUrl,
+    tagCollectionForMcp,
     validateProposeEventInput,
 } from "./lib.js";
 
@@ -83,7 +84,7 @@ server.tool(
         try {
             const data = await fetchData("data.json", DEFAULT_SUB_PATH);
             return {
-                content: [{ type: "text", text: JSON.stringify(data.communities, null, 2) }]
+                content: [{ type: "text", text: JSON.stringify(tagCollectionForMcp(data.communities), null, 2) }]
             };
         } catch (error) {
             return {
@@ -114,7 +115,7 @@ server.tool(
                     content: [{
                         type: "text",
                         text: `已為您篩選出 ${result.month} 月份的完整活動資料（共 ${result.events.length} 筆）：\n` +
-                              JSON.stringify(result.events, null, 2)
+                              JSON.stringify(tagCollectionForMcp(result.events), null, 2)
                     }]
                 };
             }
@@ -131,7 +132,7 @@ server.tool(
                 responseText += `已為您自動篩選 ${result.monthsToInclude[0]} 至 ${result.monthsToInclude[3]} 的活動清單（共 ${result.totalCount} 筆）：\n`;
             }
 
-            responseText += JSON.stringify(result.events, null, 2);
+            responseText += JSON.stringify(tagCollectionForMcp(result.events), null, 2);
 
             return {
                 content: [{ type: "text", text: responseText }]
@@ -153,7 +154,7 @@ server.tool(
         try {
             const data = await fetchData("data.json", DEFAULT_SUB_PATH);
             return {
-                content: [{ type: "text", text: JSON.stringify(data.sponsors, null, 2) }]
+                content: [{ type: "text", text: JSON.stringify(tagCollectionForMcp(data.sponsors), null, 2) }]
             };
         } catch (error) {
             return {
@@ -172,7 +173,7 @@ server.tool(
         try {
             const data = await fetchData("data.json", DEFAULT_SUB_PATH);
             return {
-                content: [{ type: "text", text: JSON.stringify(data.rewards, null, 2) }]
+                content: [{ type: "text", text: JSON.stringify(tagCollectionForMcp(data.rewards), null, 2) }]
             };
         } catch (error) {
             return {

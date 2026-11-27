@@ -66,20 +66,7 @@
             min-width: 0;
         }
     </style>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-KCNJBYW13R"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-KCNJBYW13R");
-    </script>
+    <script src="../assets/analytics.js" data-year="2027" data-page-type="calendar"></script>
   </head>
   <body>
     <div class="cardWrapper">
@@ -165,11 +152,19 @@
               viewCalendarBtn.addEventListener("click", () => {
                 showCalendar = true;
                 updateView();
+                globalThis.trackEvent?.("calendar_interact", {
+                  action: "view_switch",
+                  value: "calendar",
+                });
               });
 
               viewListBtn.addEventListener("click", () => {
                 showCalendar = false;
                 updateView();
+                globalThis.trackEvent?.("calendar_interact", {
+                  action: "view_switch",
+                  value: "list",
+                });
               });
 
               // Apply initial view
@@ -279,6 +274,10 @@
                       b.classList.toggle("active", b === btn);
                     });
                     renderCalendar();
+                    globalThis.trackEvent?.("calendar_interact", {
+                      action: "mode_filter",
+                      value: activeMode,
+                    });
                   });
                 });
               }
@@ -304,6 +303,7 @@
                 })
                 .catch((error) => {
                   console.error("Error loading events:", error);
+                  globalThis.trackError?.("calendar_fetch", "events_load_failed");
                   calendarRoot.innerHTML =
                     '<div class="text-center p-3 text-danger">無法載入活動資料</div>';
                 });
@@ -316,6 +316,11 @@
                   currentYear--;
                 }
                 renderCalendar();
+                globalThis.trackEvent?.("calendar_interact", {
+                  action: "month_change",
+                  direction: "prev",
+                  target_month: `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`,
+                });
               });
 
               nextBtn.addEventListener("click", () => {
@@ -325,6 +330,11 @@
                   currentYear++;
                 }
                 renderCalendar();
+                globalThis.trackEvent?.("calendar_interact", {
+                  action: "month_change",
+                  direction: "next",
+                  target_month: `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}`,
+                });
               });
 
               let closestUpcomingDate = null;
@@ -475,7 +485,7 @@
                     dayEvents.forEach((event) => {
                       const safeHref = safeHttpUrl(event.link);
                       const linkStart = safeHref
-                        ? `<a href="${escapeHtml(safeHref)}" target="_blank" rel="noopener noreferrer">`
+                        ? `<a href="${escapeHtml(safeHref)}" target="_blank" rel="noopener" data-ga-event="outbound_event_click" data-ga-community-name="${escapeHtml(event.community)}" data-ga-event-title="${escapeHtml(event.title)}" data-ga-event-date="${escapeHtml(event.date)}" data-ga-event-mode="${escapeHtml(event.mode || "onsite")}" data-ga-view-type="calendar">`
                         : "<div>";
                       const linkEnd = safeHref ? "</a>" : "</div>";
                       const colorHex = safeHexColor(event.color);
@@ -591,6 +601,13 @@
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
+                globalThis.trackEvent?.("add_to_calendar", {
+                  method: "ics",
+                  community_name: event.community,
+                  event_title: event.title,
+                  event_date: event.date,
+                  event_mode: event.mode || "onsite",
+                });
               }
 
               function renderEventList() {
@@ -641,7 +658,7 @@
 
                   const safeHref = safeHttpUrl(event.link);
                   const eventLinkStart = safeHref
-                    ? `<a href="${escapeHtml(safeHref)}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;font-weight:bold;text-decoration:underline;">`
+                    ? `<a href="${escapeHtml(safeHref)}" target="_blank" rel="noopener" data-ga-event="outbound_event_click" data-ga-community-name="${escapeHtml(event.community)}" data-ga-event-title="${escapeHtml(event.title)}" data-ga-event-date="${escapeHtml(event.date)}" data-ga-event-mode="${escapeHtml(event.mode || "onsite")}" data-ga-view-type="list" style="text-decoration:none;color:inherit;font-weight:bold;text-decoration:underline;">`
                     : "";
                   const eventLinkEnd = safeHref ? `</a>` : "";
 
@@ -654,7 +671,7 @@
                                 <td><div style="display:flex;align-items:flex-start;gap:6px;">${dot}<div><div class="event-list-community-row"><strong>${escapeHtml(event.community)}</strong>${getModeBadgeHtml(event.mode)}</div>${event.title ? `<div style="color:#555;margin-top:2px;">${eventLinkStart}${escapeHtml(event.title)}${eventLinkEnd}</div>` : ""}${event.description ? `<div style="font-size:0.8rem;color:#777;margin-top:4px;line-height:1.4;">${formatSafeDescription(event.description)}</div>` : ""}</div></div></td>
                                 <td style="white-space:nowrap;">
                                     <div class="btn-cal-group">
-                                        <a href="${escapeHtml(googleURL)}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-cal">Google</a>
+                                        <a href="${escapeHtml(googleURL)}" target="_blank" rel="noopener" data-ga-event="add_to_calendar" data-ga-method="google" data-ga-community-name="${escapeHtml(event.community)}" data-ga-event-title="${escapeHtml(event.title)}" data-ga-event-date="${escapeHtml(event.date)}" data-ga-event-mode="${escapeHtml(event.mode || "onsite")}" class="btn btn-outline-primary btn-cal">Google</a>
                                         <button class="btn btn-outline-secondary btn-cal" onclick="downloadICS(${i})">下載</button>
                                     </div>
                                 </td>
@@ -694,6 +711,9 @@
             * 實際活動資訊依照主辦單位提供<br class="d-sm-none" />資訊為準
           </p>
         </div>
+        <p style="font-size: 0.75rem; color: #888; margin-top: 8px; margin-bottom: 0;">
+          本網站僅使用關閉廣告個人化的匿名流量統計（Google Analytics）改善社群體驗，不蒐集個人識別資料。
+        </p>
       </div>
     </div>
     <script>

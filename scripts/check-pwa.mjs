@@ -141,6 +141,7 @@ try {
     { url: "/2027/manifest.webmanifest", expectedType: "application/manifest+json" },
     { url: "/2027/sw.js", expectedType: "text/javascript" },
     { url: "/2027/passport/core-v2.js", expectedType: "text/javascript" },
+    { url: "/assets/analytics.js", expectedType: "text/javascript" },
     { url: "/2027/calendar-modes.css", expectedType: "text/css" },
     { url: "/2027/passport.html", expectedType: "text/html" },
     { url: "/2027/index.html", expectedType: "text/html" },
@@ -197,7 +198,8 @@ const checkinHtml = await readFile(path.resolve("2027/checkin.html"), "utf8");
 assert(checkinHtml.includes("可複製備份連結，貼至主畫面 App 的備份與還原區塊進行同步"), "2027/checkin.html 包含 iPhone 使用者複製備份至主畫面還原提示");
 
 console.log("\n=== 8. 驗證 10 個社群代表宣傳大圖快取與 Service Worker 強化 ===");
-assert(swContent.includes('const CACHE = "ccard2027-passport-v6"'), 'sw.js 快取版本為 "ccard2027-passport-v6"');
+assert(swContent.includes('const CACHE = "ccard2027-passport-v7"'), 'sw.js 快取版本為 "ccard2027-passport-v7"');
+assert(swContent.includes("../assets/analytics.js"), "PRECACHE_URLS 包含共用分析模組 ../assets/analytics.js");
 assert(swContent.includes('cache: "reload"'), 'sw.js install 預先快取時使用 { cache: "reload" } 略過 HTTP 快取');
 
 const requiredCommunityLogos = [

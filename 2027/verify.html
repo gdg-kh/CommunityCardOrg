@@ -21,7 +21,8 @@
     <meta name="apple-mobile-web-app-title" content="社群護照" />
     <link rel="apple-touch-icon" href="../assets/passport/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/passport/icon-192.png" />
-    <title>驗證護照備份 - 2027 高雄社群名牌卡</title>
+    <title>2027 高雄社群名牌卡 - 驗證護照備份</title>
+    <script src="../assets/analytics.js" data-year="2027" data-page-type="verify" data-content-group="tools"></script>
   </head>
 
   <body>
@@ -42,7 +43,7 @@
             <label for="input">備份連結</label>
             <textarea id="input" rows="3" placeholder="https://community-card.org/2027/passport.html#import=..."></textarea>
           </div>
-          <div><button class="pp-btn" id="check">驗證</button></div>
+          <div><button type="button" class="pp-btn" id="check">驗證</button></div>
         </form>
 
         <div id="result" style="margin-top: 16px"></div>
@@ -251,21 +252,35 @@
           <ul class="pp-timeline">${items.join("")}</ul>`;
       }
 
-      async function run(text) {
+      async function run(text, trigger = "manual") {
         $("result").innerHTML = `<p class="pp-muted">驗證中…</p>`;
         try {
-          await render(await verify(extractCode(text)));
+          const data = await verify(extractCode(text));
+          await render(data);
+          const warnedCount = data.counted.filter((s) => hasWarning(data.byToken.get(s.token))).length;
+          const invalidCount = data.rows.filter((r) => !r.valid).length;
+          globalThis.trackEvent?.("verify_backup", {
+            trigger,
+            status: "ok",
+            counted_stamps: data.counted.length,
+            warned_count: warnedCount,
+            invalid_count: invalidCount,
+          });
         } catch (err) {
+          globalThis.trackEvent?.("verify_backup", {
+            trigger,
+            status: "error",
+          });
           $("result").innerHTML = `<div class="pp-notice error">${escapeHtml(err.message || "備份連結無法解析")}</div>`;
         }
       }
 
-      $("check").onclick = () => run($("input").value);
+      $("check").onclick = () => run($("input").value, "manual");
 
       const m = /^#import=(.+)$/.exec(window.__ppHash || "");
       if (m) {
         $("input").value = `#import=${m[1]}`;
-        run(m[1]);
+        run(m[1], "hash");
       }
 
       if ("serviceWorker" in navigator) {

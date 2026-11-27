@@ -15,7 +15,8 @@
     <meta name="apple-mobile-web-app-title" content="社群護照" />
     <link rel="apple-touch-icon" href="../assets/passport/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="../assets/passport/icon-192.png" />
-    <title>主辦方簽到工具 - 2027 高雄社群名牌卡</title>
+    <title>2027 高雄社群名牌卡 - 主辦方簽到工具</title>
+    <script src="../assets/analytics.js" data-year="2027" data-page-type="organizer" data-content-group="tools"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"
       integrity="sha384-Dr98ddmUw2QkdCarNQ+OL7xLty7cSxgR0T7v1tq4UErS/qLV0132sBYTolRAFuOV"
@@ -45,9 +46,9 @@
         </form>
 
         <div class="pp-tabs" style="margin-top: 16px">
-          <button class="active" data-tab="sign">簽出 QR code</button>
-          <button data-tab="makeup">過去活動補簽</button>
-          <button data-tab="keys">金鑰管理</button>
+          <button type="button" class="active" data-tab="sign">簽出 QR code</button>
+          <button type="button" data-tab="makeup">過去活動補簽</button>
+          <button type="button" data-tab="keys">金鑰管理</button>
         </div>
 
         <!-- 金鑰管理 -->
@@ -94,7 +95,7 @@
               <input type="checkbox" id="remember" style="width: auto" checked />
               在這個瀏覽器記住加密後的金鑰檔（仍需密碼才能使用）
             </label>
-            <div><button class="pp-btn" id="unlock">解鎖</button></div>
+            <div><button type="button" class="pp-btn" id="unlock">解鎖</button></div>
           </form>
 
           <div class="divider" style="margin-top: 20px"></div>
@@ -180,7 +181,7 @@
                 </div>
               </div>
             </div>
-            <div><button class="pp-btn green" id="generate">產生並下載金鑰檔</button></div>
+            <div><button type="button" class="pp-btn green" id="generate">產生並下載金鑰檔</button></div>
           </form>
           <div id="gen-result"></div>
         </section>
@@ -238,7 +239,7 @@
               </div>
               <div></div>
             </div>
-            <div><button class="pp-btn" id="sign">產生簽到 QR code</button></div>
+            <div><button type="button" class="pp-btn" id="sign">產生簽到 QR code</button></div>
           </form>
 
           <div id="qr-area" hidden style="margin-top: 16px"></div>
@@ -289,7 +290,7 @@
                 <input id="mk-note" placeholder="例如：暱稱" />
               </div>
             </div>
-            <div><button class="pp-btn" id="mk-sign">產生補簽 QR code</button></div>
+            <div><button type="button" class="pp-btn" id="mk-sign">產生補簽 QR code</button></div>
           </form>
           <div id="mk-area" hidden style="margin-top: 16px"></div>
           <div id="mk-log" style="margin-top: 16px"></div>
@@ -557,13 +558,20 @@
 
       // ---------- 分頁 ----------
 
+      function switchTab(tabName, { track = true } = {}) {
+        document.querySelectorAll(".pp-tabs button").forEach((b) => b.classList.toggle("active", b.dataset.tab === tabName));
+        $("tab-sign").hidden = tabName !== "sign";
+        $("tab-makeup").hidden = tabName !== "makeup";
+        $("tab-keys").hidden = tabName !== "keys";
+        if (track) {
+          globalThis.trackEvent?.("organizer_tab_switch", {
+            tab: tabName,
+          });
+        }
+      }
+
       document.querySelectorAll(".pp-tabs button").forEach((btn) => {
-        btn.onclick = () => {
-          document.querySelectorAll(".pp-tabs button").forEach((b) => b.classList.toggle("active", b === btn));
-          $("tab-sign").hidden = btn.dataset.tab !== "sign";
-          $("tab-makeup").hidden = btn.dataset.tab !== "makeup";
-          $("tab-keys").hidden = btn.dataset.tab !== "keys";
-        };
+        btn.onclick = () => switchTab(btn.dataset.tab, { track: true });
       });
 
       // ---------- 解鎖 ----------
@@ -596,8 +604,16 @@
           $("unlock-pass").classList.remove("revealed");
           syncPassToggle("unlock-pass");
           updateStatus();
-          document.querySelector('.pp-tabs button[data-tab="sign"]').click();
+          globalThis.trackEvent?.("organizer_key_unlock", {
+            community_id: c.id,
+            status: "success",
+          });
+          switchTab("sign", { track: false });
         } catch (err) {
+          globalThis.trackEvent?.("organizer_key_unlock", {
+            community_id: c.id,
+            status: "error",
+          });
           alert(`解鎖失敗：${err.message}`);
         }
       };
@@ -643,6 +659,9 @@
           </div>`;
         $("copy-entry").onclick = () => navigator.clipboard.writeText(entry);
         updateStatus();
+        globalThis.trackEvent?.("organizer_key_generate", {
+          community_id: c.id,
+        });
       };
 
       // ---------- 金鑰密碼遮罩切換與鍵盤快捷操作 ----------
@@ -983,9 +1002,9 @@
             <div class="url"></div>
 
             <div class="pp-actions">
-              <button class="pp-btn" data-act="fullscreen">全螢幕投影海報</button>
-              <button class="pp-btn secondary" data-act="fullscreen-pure">全螢幕單純條碼</button>
-              <button class="pp-btn secondary" data-act="copy">複製連結</button>
+              <button type="button" class="pp-btn" data-act="fullscreen">全螢幕投影海報</button>
+              <button type="button" class="pp-btn secondary" data-act="fullscreen-pure">全螢幕單純條碼</button>
+              <button type="button" class="pp-btn secondary" data-act="copy">複製連結</button>
               <a class="pp-btn secondary" data-act="test" target="_blank" rel="noopener">開啟簽到頁測試</a>
             </div>
           </div>`;
@@ -1044,6 +1063,11 @@
       }
 
       function openFullscreen(p, initialView = "poster") {
+        globalThis.trackEvent?.("organizer_fullscreen_open", {
+          community_id: current()?.id || "",
+          variant: initialView,
+          panel_mode: p.mode,
+        });
         const el = document.createElement("div");
         el.className = "pp-qr-fullscreen";
         let currentFsView = initialView;
@@ -1061,7 +1085,7 @@
             <canvas class="fullscreen-canvas ${currentFsView === "poster" ? "poster-mode" : ""}"></canvas>
             <div class="pp-muted countdown">${escapeHtml(p.el.querySelector(".countdown")?.textContent || "")}</div>
             <div class="pp-muted">用手機相機掃描即可簽到集章</div>
-            <button class="pp-btn secondary fs-close-btn">關閉全螢幕</button>
+            <button type="button" class="pp-btn secondary fs-close-btn">關閉全螢幕</button>
           </div>`;
 
         const canvas = el.querySelector(".fullscreen-canvas");
@@ -1187,6 +1211,11 @@
           a.download = p.pureFileName || `checkin-${current()?.id || "community"}-${$("ev-id").value}-${p.mode}-qrcode.png`;
           a.href = p.el.querySelector(".qr-canvas-pure").toDataURL("image/png");
           a.click();
+          globalThis.trackEvent?.("organizer_qr_download", {
+            community_id: current()?.id || "",
+            variant: "pure",
+            panel_mode: p.mode,
+          });
         });
 
         // 下載版本 2：活動海報圖檔
@@ -1196,6 +1225,11 @@
           a.download = p.posterFileName || p.fileName || `checkin-${current()?.id || "community"}-${$("ev-id").value}-${p.mode}-poster.png`;
           a.href = p.el.querySelector(".qr-canvas-poster").toDataURL("image/png");
           a.click();
+          globalThis.trackEvent?.("organizer_qr_download", {
+            community_id: current()?.id || "",
+            variant: "poster",
+            panel_mode: p.mode,
+          });
         });
       }
 
@@ -1216,6 +1250,12 @@
           await refreshPanel(panel);
           bindPanel(panel);
         }
+        globalThis.trackEvent?.("organizer_qr_sign", {
+          community_id: c.id,
+          mode: selectedMode(),
+          rotate: $("rotate").checked,
+          event_date: $("ev-date").value,
+        });
 
         const rotating = panels.filter((x) => x.rotate);
         if (rotating.length) {
@@ -1390,6 +1430,12 @@
         p.el.querySelector(".url").textContent = p.url;
         p.el.querySelector('[data-act="test"]').href = p.url;
         bindPanel(p);
+        globalThis.trackEvent?.("organizer_makeup_sign", {
+          community_id: c.id,
+          mode,
+          event_date: d,
+          valid_minutes: minutes,
+        });
 
         const tick = () => {
           const left = payload.exp - Math.floor(Date.now() / 1000);

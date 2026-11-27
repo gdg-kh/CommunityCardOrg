@@ -9,6 +9,7 @@ import {
   isPrivateOrLocalHost,
   isSafeHttpUrl,
   parseIssueForm,
+  stripTrackingNoiseParams,
   truncateDescriptionWithLineBreaks,
   validateEventInput,
 } from "../scripts/add-event.mjs";
@@ -352,6 +353,23 @@ test("validateEventInput rejects unclosed tags, attributed <br>, bad dates, and 
 
   assert.equal(truncateDescriptionWithLineBreaks("  甲\r\n乙<br />丙  ", 50), "甲<br>乙<br>丙");
   assert.equal(isSafeHttpUrl("javascript:alert(1)"), false);
+
+  assert.equal(
+    stripTrackingNoiseParams("https://kktix.cc/events/abc?id=42&fbclid=xyz&openExternalBrowser=1"),
+    "https://kktix.cc/events/abc?id=42",
+  );
+  const cleaned = validateEventInput(
+    {
+      year: "2027",
+      community: "GDG Kaohsiung",
+      mode: "onsite",
+      date: "2027-04-02",
+      title: "Clean URL Test",
+      link: "https://example.com/e?ref=mail&fbclid=abc123&gclid=def456",
+    },
+    SAMPLE_COMMUNITIES,
+  );
+  assert.equal(cleaned.link, "https://example.com/e?ref=mail");
 });
 
 test("insertEventIntoData supports 2027 grouped and 2026 flat formats and rejects duplicates", () => {
